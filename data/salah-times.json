@@ -1,0 +1,8398 @@
+{
+  "_comment": "Aldershot Islamic Centre \u2014 using Camberley Mosque (M.A. Al-Kharafi Islamic Centre) 2026 annual timetable. Parsed from data/msj-2026-cal.pdf. Times in Europe/London local time (GMT/BST). Regenerate with: python tools/parse-camberley-pdf.py",
+  "2026-01-01": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:07",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:20",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:06",
+      "iqamah": "16:11"
+    },
+    "isha": {
+      "azan": "17:38",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-02": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:08",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:21",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:07",
+      "iqamah": "16:12"
+    },
+    "isha": {
+      "azan": "17:39",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-03": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:08",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:22",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:08",
+      "iqamah": "16:13"
+    },
+    "isha": {
+      "azan": "17:40",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-04": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:08",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:23",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:09",
+      "iqamah": "16:14"
+    },
+    "isha": {
+      "azan": "17:41",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-05": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:09",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:24",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:11",
+      "iqamah": "16:16"
+    },
+    "isha": {
+      "azan": "17:42",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-06": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:06",
+    "zuhr": {
+      "azan": "12:09",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:26",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:12",
+      "iqamah": "16:17"
+    },
+    "isha": {
+      "azan": "17:43",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-07": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:06",
+    "zuhr": {
+      "azan": "12:10",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:27",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:13",
+      "iqamah": "16:18"
+    },
+    "isha": {
+      "azan": "17:44",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-08": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:05",
+    "zuhr": {
+      "azan": "12:10",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:28",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:15",
+      "iqamah": "16:20"
+    },
+    "isha": {
+      "azan": "17:45",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-09": {
+    "fajr": {
+      "azan": "06:22",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:05",
+    "zuhr": {
+      "azan": "12:11",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:29",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:16",
+      "iqamah": "16:21"
+    },
+    "isha": {
+      "azan": "17:46",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-10": {
+    "fajr": {
+      "azan": "06:22",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:04",
+    "zuhr": {
+      "azan": "12:11",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:31",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:17",
+      "iqamah": "16:22"
+    },
+    "isha": {
+      "azan": "17:47",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-11": {
+    "fajr": {
+      "azan": "06:22",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:04",
+    "zuhr": {
+      "azan": "12:11",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:32",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:19",
+      "iqamah": "16:24"
+    },
+    "isha": {
+      "azan": "17:49",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-12": {
+    "fajr": {
+      "azan": "06:21",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:03",
+    "zuhr": {
+      "azan": "12:12",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:34",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:20",
+      "iqamah": "16:25"
+    },
+    "isha": {
+      "azan": "17:50",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-13": {
+    "fajr": {
+      "azan": "06:21",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:02",
+    "zuhr": {
+      "azan": "12:12",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:35",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:22",
+      "iqamah": "16:27"
+    },
+    "isha": {
+      "azan": "17:51",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-14": {
+    "fajr": {
+      "azan": "06:20",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:01",
+    "zuhr": {
+      "azan": "12:13",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:36",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:23",
+      "iqamah": "16:28"
+    },
+    "isha": {
+      "azan": "17:53",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-15": {
+    "fajr": {
+      "azan": "06:20",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:01",
+    "zuhr": {
+      "azan": "12:13",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:38",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:25",
+      "iqamah": "16:30"
+    },
+    "isha": {
+      "azan": "17:54",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-16": {
+    "fajr": {
+      "azan": "06:19",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:00",
+    "zuhr": {
+      "azan": "12:13",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:39",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:26",
+      "iqamah": "16:31"
+    },
+    "isha": {
+      "azan": "17:55",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-17": {
+    "fajr": {
+      "azan": "06:19",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:59",
+    "zuhr": {
+      "azan": "12:14",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:41",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:28",
+      "iqamah": "16:33"
+    },
+    "isha": {
+      "azan": "17:56",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-18": {
+    "fajr": {
+      "azan": "06:18",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:58",
+    "zuhr": {
+      "azan": "12:14",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:42",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:29",
+      "iqamah": "16:34"
+    },
+    "isha": {
+      "azan": "17:58",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-19": {
+    "fajr": {
+      "azan": "06:17",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:57",
+    "zuhr": {
+      "azan": "12:14",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:44",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:31",
+      "iqamah": "16:36"
+    },
+    "isha": {
+      "azan": "17:59",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-20": {
+    "fajr": {
+      "azan": "06:16",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:56",
+    "zuhr": {
+      "azan": "12:15",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:46",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:33",
+      "iqamah": "16:38"
+    },
+    "isha": {
+      "azan": "18:01",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-21": {
+    "fajr": {
+      "azan": "06:15",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:56",
+    "zuhr": {
+      "azan": "12:15",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:46",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:33",
+      "iqamah": "16:38"
+    },
+    "isha": {
+      "azan": "18:02",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-22": {
+    "fajr": {
+      "azan": "06:14",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:54",
+    "zuhr": {
+      "azan": "12:15",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:49",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:36",
+      "iqamah": "16:41"
+    },
+    "isha": {
+      "azan": "18:03",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-23": {
+    "fajr": {
+      "azan": "06:14",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:52",
+    "zuhr": {
+      "azan": "12:15",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:51",
+      "iqamah": "15:15"
+    },
+    "maghrib": {
+      "azan": "16:38",
+      "iqamah": "16:43"
+    },
+    "isha": {
+      "azan": "18:04",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-24": {
+    "fajr": {
+      "azan": "06:13",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:51",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:52",
+      "iqamah": "15:15"
+    },
+    "maghrib": {
+      "azan": "16:39",
+      "iqamah": "16:44"
+    },
+    "isha": {
+      "azan": "18:06",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-25": {
+    "fajr": {
+      "azan": "06:12",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:50",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:54",
+      "iqamah": "15:15"
+    },
+    "maghrib": {
+      "azan": "16:41",
+      "iqamah": "16:46"
+    },
+    "isha": {
+      "azan": "18:07",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-26": {
+    "fajr": {
+      "azan": "06:11",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:49",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:55",
+      "iqamah": "15:15"
+    },
+    "maghrib": {
+      "azan": "16:43",
+      "iqamah": "16:48"
+    },
+    "isha": {
+      "azan": "18:09",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-27": {
+    "fajr": {
+      "azan": "06:10",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:47",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:57",
+      "iqamah": "15:15"
+    },
+    "maghrib": {
+      "azan": "16:45",
+      "iqamah": "16:50"
+    },
+    "isha": {
+      "azan": "18:10",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-28": {
+    "fajr": {
+      "azan": "06:08",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:46",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:59",
+      "iqamah": "15:15"
+    },
+    "maghrib": {
+      "azan": "16:47",
+      "iqamah": "16:52"
+    },
+    "isha": {
+      "azan": "18:12",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-29": {
+    "fajr": {
+      "azan": "06:07",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:45",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:01",
+      "iqamah": "15:15"
+    },
+    "maghrib": {
+      "azan": "16:48",
+      "iqamah": "16:53"
+    },
+    "isha": {
+      "azan": "18:13",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-30": {
+    "fajr": {
+      "azan": "06:06",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:43",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:02",
+      "iqamah": "15:15"
+    },
+    "maghrib": {
+      "azan": "16:50",
+      "iqamah": "16:55"
+    },
+    "isha": {
+      "azan": "18:15",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-01-31": {
+    "fajr": {
+      "azan": "06:05",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:42",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:04",
+      "iqamah": "15:15"
+    },
+    "maghrib": {
+      "azan": "16:52",
+      "iqamah": "16:57"
+    },
+    "isha": {
+      "azan": "18:17",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-02-01": {
+    "fajr": {
+      "azan": "06:04",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:42",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:06",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:54",
+      "iqamah": "16:59"
+    },
+    "isha": {
+      "azan": "18:20",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-02": {
+    "fajr": {
+      "azan": "06:02",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:39",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:07",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:55",
+      "iqamah": "17:00"
+    },
+    "isha": {
+      "azan": "18:21",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-03": {
+    "fajr": {
+      "azan": "06:01",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:37",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:09",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:57",
+      "iqamah": "17:02"
+    },
+    "isha": {
+      "azan": "18:22",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-04": {
+    "fajr": {
+      "azan": "06:00",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:35",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:11",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:59",
+      "iqamah": "17:04"
+    },
+    "isha": {
+      "azan": "18:23",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-05": {
+    "fajr": {
+      "azan": "05:58",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:35",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:11",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:59",
+      "iqamah": "17:04"
+    },
+    "isha": {
+      "azan": "18:24",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-06": {
+    "fajr": {
+      "azan": "05:57",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:32",
+    "zuhr": {
+      "azan": "12:18",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:14",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "17:03",
+      "iqamah": "17:08"
+    },
+    "isha": {
+      "azan": "18:26",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-07": {
+    "fajr": {
+      "azan": "05:55",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:30",
+    "zuhr": {
+      "azan": "12:18",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:16",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "17:05",
+      "iqamah": "17:10"
+    },
+    "isha": {
+      "azan": "18:28",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-08": {
+    "fajr": {
+      "azan": "05:54",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:29",
+    "zuhr": {
+      "azan": "12:18",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:18",
+      "iqamah": "15:45"
+    },
+    "maghrib": {
+      "azan": "17:06",
+      "iqamah": "17:11"
+    },
+    "isha": {
+      "azan": "18:29",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-09": {
+    "fajr": {
+      "azan": "05:52",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:27",
+    "zuhr": {
+      "azan": "12:18",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:19",
+      "iqamah": "15:45"
+    },
+    "maghrib": {
+      "azan": "17:08",
+      "iqamah": "17:13"
+    },
+    "isha": {
+      "azan": "18:30",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-10": {
+    "fajr": {
+      "azan": "05:51",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:25",
+    "zuhr": {
+      "azan": "12:18",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:21",
+      "iqamah": "15:45"
+    },
+    "maghrib": {
+      "azan": "17:10",
+      "iqamah": "17:15"
+    },
+    "isha": {
+      "azan": "18:31",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-11": {
+    "fajr": {
+      "azan": "05:49",
+      "iqamah": "06:35"
+    },
+    "shuruq": "07:23",
+    "zuhr": {
+      "azan": "12:18",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:23",
+      "iqamah": "15:45"
+    },
+    "maghrib": {
+      "azan": "17:12",
+      "iqamah": "17:17"
+    },
+    "isha": {
+      "azan": "18:33",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-12": {
+    "fajr": {
+      "azan": "05:48",
+      "iqamah": "06:35"
+    },
+    "shuruq": "07:23",
+    "zuhr": {
+      "azan": "12:18",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:23",
+      "iqamah": "15:45"
+    },
+    "maghrib": {
+      "azan": "17:12",
+      "iqamah": "17:17"
+    },
+    "isha": {
+      "azan": "18:34",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-13": {
+    "fajr": {
+      "azan": "05:46",
+      "iqamah": "06:35"
+    },
+    "shuruq": "07:20",
+    "zuhr": {
+      "azan": "12:18",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:26",
+      "iqamah": "15:45"
+    },
+    "maghrib": {
+      "azan": "17:15",
+      "iqamah": "17:20"
+    },
+    "isha": {
+      "azan": "18:35",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-14": {
+    "fajr": {
+      "azan": "05:44",
+      "iqamah": "06:35"
+    },
+    "shuruq": "07:18",
+    "zuhr": {
+      "azan": "12:18",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:28",
+      "iqamah": "15:45"
+    },
+    "maghrib": {
+      "azan": "17:17",
+      "iqamah": "17:22"
+    },
+    "isha": {
+      "azan": "18:37",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-15": {
+    "fajr": {
+      "azan": "05:42",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:16",
+    "zuhr": {
+      "azan": "12:18",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:30",
+      "iqamah": "16:00"
+    },
+    "maghrib": {
+      "azan": "17:19",
+      "iqamah": "17:24"
+    },
+    "isha": {
+      "azan": "18:39",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-16": {
+    "fajr": {
+      "azan": "05:41",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:14",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:31",
+      "iqamah": "16:00"
+    },
+    "maghrib": {
+      "azan": "17:21",
+      "iqamah": "17:26"
+    },
+    "isha": {
+      "azan": "18:40",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-17": {
+    "fajr": {
+      "azan": "05:39",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:12",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:33",
+      "iqamah": "16:00"
+    },
+    "maghrib": {
+      "azan": "17:23",
+      "iqamah": "17:28"
+    },
+    "isha": {
+      "azan": "18:41",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-18": {
+    "fajr": {
+      "azan": "05:37",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:10",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:34",
+      "iqamah": "16:00"
+    },
+    "maghrib": {
+      "azan": "17:25",
+      "iqamah": "17:30"
+    },
+    "isha": {
+      "azan": "18:43",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-19": {
+    "fajr": {
+      "azan": "05:35",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:08",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:36",
+      "iqamah": "16:00"
+    },
+    "maghrib": {
+      "azan": "17:26",
+      "iqamah": "17:31"
+    },
+    "isha": {
+      "azan": "18:44",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-20": {
+    "fajr": {
+      "azan": "05:33",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:06",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:38",
+      "iqamah": "16:00"
+    },
+    "maghrib": {
+      "azan": "17:28",
+      "iqamah": "17:33"
+    },
+    "isha": {
+      "azan": "18:45",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-21": {
+    "fajr": {
+      "azan": "05:31",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:04",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:39",
+      "iqamah": "16:00"
+    },
+    "maghrib": {
+      "azan": "17:30",
+      "iqamah": "17:35"
+    },
+    "isha": {
+      "azan": "18:47",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-22": {
+    "fajr": {
+      "azan": "05:29",
+      "iqamah": "06:10"
+    },
+    "shuruq": "07:02",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:41",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:32",
+      "iqamah": "17:37"
+    },
+    "isha": {
+      "azan": "18:48",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-23": {
+    "fajr": {
+      "azan": "05:28",
+      "iqamah": "06:10"
+    },
+    "shuruq": "07:00",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:43",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:33",
+      "iqamah": "17:38"
+    },
+    "isha": {
+      "azan": "18:50",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-24": {
+    "fajr": {
+      "azan": "05:27",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:58",
+    "zuhr": {
+      "azan": "12:17",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:44",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:35",
+      "iqamah": "17:40"
+    },
+    "isha": {
+      "azan": "18:52",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-25": {
+    "fajr": {
+      "azan": "05:24",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:56",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:46",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:37",
+      "iqamah": "17:42"
+    },
+    "isha": {
+      "azan": "18:54",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-26": {
+    "fajr": {
+      "azan": "05:22",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:54",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:47",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:39",
+      "iqamah": "17:44"
+    },
+    "isha": {
+      "azan": "18:56",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-27": {
+    "fajr": {
+      "azan": "05:19",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:54",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:47",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:39",
+      "iqamah": "17:44"
+    },
+    "isha": {
+      "azan": "19:00",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-02-28": {
+    "fajr": {
+      "azan": "05:17",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:49",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:51",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:42",
+      "iqamah": "17:47"
+    },
+    "isha": {
+      "azan": "19:02",
+      "iqamah": "19:15"
+    }
+  },
+  "2026-03-01": {
+    "fajr": {
+      "azan": "05:15",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:47",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:52",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:44",
+      "iqamah": "17:49"
+    },
+    "isha": {
+      "azan": "19:06",
+      "iqamah": "19:30"
+    }
+  },
+  "2026-03-02": {
+    "fajr": {
+      "azan": "05:13",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:45",
+    "zuhr": {
+      "azan": "12:16",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:54",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:46",
+      "iqamah": "17:51"
+    },
+    "isha": {
+      "azan": "19:08",
+      "iqamah": "19:30"
+    }
+  },
+  "2026-03-03": {
+    "fajr": {
+      "azan": "05:11",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:43",
+    "zuhr": {
+      "azan": "12:15",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:55",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:48",
+      "iqamah": "17:53"
+    },
+    "isha": {
+      "azan": "19:09",
+      "iqamah": "19:30"
+    }
+  },
+  "2026-03-04": {
+    "fajr": {
+      "azan": "05:08",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:41",
+    "zuhr": {
+      "azan": "12:15",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:57",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:49",
+      "iqamah": "17:54"
+    },
+    "isha": {
+      "azan": "19:10",
+      "iqamah": "19:30"
+    }
+  },
+  "2026-03-05": {
+    "fajr": {
+      "azan": "05:06",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:39",
+    "zuhr": {
+      "azan": "12:15",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "15:58",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:51",
+      "iqamah": "17:56"
+    },
+    "isha": {
+      "azan": "19:11",
+      "iqamah": "19:30"
+    }
+  },
+  "2026-03-06": {
+    "fajr": {
+      "azan": "05:04",
+      "iqamah": "05:45"
+    },
+    "shuruq": "06:36",
+    "zuhr": {
+      "azan": "12:15",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:00",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:53",
+      "iqamah": "17:58"
+    },
+    "isha": {
+      "azan": "19:12",
+      "iqamah": "19:30"
+    }
+  },
+  "2026-03-07": {
+    "fajr": {
+      "azan": "05:03",
+      "iqamah": "05:45"
+    },
+    "shuruq": "06:34",
+    "zuhr": {
+      "azan": "12:14",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:01",
+      "iqamah": "16:15"
+    },
+    "maghrib": {
+      "azan": "17:55",
+      "iqamah": "18:00"
+    },
+    "isha": {
+      "azan": "19:12",
+      "iqamah": "19:30"
+    }
+  },
+  "2026-03-08": {
+    "fajr": {
+      "azan": "05:00",
+      "iqamah": "05:45"
+    },
+    "shuruq": "06:32",
+    "zuhr": {
+      "azan": "12:14",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:03",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "17:56",
+      "iqamah": "18:01"
+    },
+    "isha": {
+      "azan": "19:15",
+      "iqamah": "19:30"
+    }
+  },
+  "2026-03-09": {
+    "fajr": {
+      "azan": "04:57",
+      "iqamah": "05:45"
+    },
+    "shuruq": "06:30",
+    "zuhr": {
+      "azan": "12:14",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:04",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "17:58",
+      "iqamah": "18:03"
+    },
+    "isha": {
+      "azan": "19:16",
+      "iqamah": "19:30"
+    }
+  },
+  "2026-03-10": {
+    "fajr": {
+      "azan": "04:55",
+      "iqamah": "05:35"
+    },
+    "shuruq": "06:28",
+    "zuhr": {
+      "azan": "12:14",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:06",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:00",
+      "iqamah": "18:05"
+    },
+    "isha": {
+      "azan": "19:18",
+      "iqamah": "19:45"
+    }
+  },
+  "2026-03-11": {
+    "fajr": {
+      "azan": "04:53",
+      "iqamah": "05:35"
+    },
+    "shuruq": "06:25",
+    "zuhr": {
+      "azan": "12:13",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:07",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:01",
+      "iqamah": "18:06"
+    },
+    "isha": {
+      "azan": "19:20",
+      "iqamah": "19:45"
+    }
+  },
+  "2026-03-12": {
+    "fajr": {
+      "azan": "04:50",
+      "iqamah": "05:35"
+    },
+    "shuruq": "06:23",
+    "zuhr": {
+      "azan": "12:13",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:08",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:03",
+      "iqamah": "18:08"
+    },
+    "isha": {
+      "azan": "19:22",
+      "iqamah": "19:45"
+    }
+  },
+  "2026-03-13": {
+    "fajr": {
+      "azan": "04:48",
+      "iqamah": "05:35"
+    },
+    "shuruq": "06:21",
+    "zuhr": {
+      "azan": "12:13",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:10",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:05",
+      "iqamah": "18:10"
+    },
+    "isha": {
+      "azan": "19:24",
+      "iqamah": "19:45"
+    }
+  },
+  "2026-03-14": {
+    "fajr": {
+      "azan": "04:46",
+      "iqamah": "05:35"
+    },
+    "shuruq": "06:19",
+    "zuhr": {
+      "azan": "12:13",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:11",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:07",
+      "iqamah": "18:12"
+    },
+    "isha": {
+      "azan": "19:26",
+      "iqamah": "19:45"
+    }
+  },
+  "2026-03-15": {
+    "fajr": {
+      "azan": "04:43",
+      "iqamah": "05:25"
+    },
+    "shuruq": "06:16",
+    "zuhr": {
+      "azan": "12:12",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:13",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:08",
+      "iqamah": "18:13"
+    },
+    "isha": {
+      "azan": "19:28",
+      "iqamah": "19:45"
+    }
+  },
+  "2026-03-16": {
+    "fajr": {
+      "azan": "04:41",
+      "iqamah": "05:25"
+    },
+    "shuruq": "06:14",
+    "zuhr": {
+      "azan": "12:12",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:14",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:10",
+      "iqamah": "18:15"
+    },
+    "isha": {
+      "azan": "19:30",
+      "iqamah": "19:45"
+    }
+  },
+  "2026-03-17": {
+    "fajr": {
+      "azan": "04:38",
+      "iqamah": "05:25"
+    },
+    "shuruq": "06:12",
+    "zuhr": {
+      "azan": "12:12",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:15",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:12",
+      "iqamah": "18:17"
+    },
+    "isha": {
+      "azan": "19:32",
+      "iqamah": "20:00"
+    }
+  },
+  "2026-03-18": {
+    "fajr": {
+      "azan": "04:36",
+      "iqamah": "05:25"
+    },
+    "shuruq": "06:10",
+    "zuhr": {
+      "azan": "12:11",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:17",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:13",
+      "iqamah": "18:18"
+    },
+    "isha": {
+      "azan": "19:34",
+      "iqamah": "20:00"
+    }
+  },
+  "2026-03-19": {
+    "fajr": {
+      "azan": "04:34",
+      "iqamah": "05:15"
+    },
+    "shuruq": "06:07",
+    "zuhr": {
+      "azan": "12:11",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:18",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:15",
+      "iqamah": "18:20"
+    },
+    "isha": {
+      "azan": "19:36",
+      "iqamah": "20:00"
+    }
+  },
+  "2026-03-20": {
+    "fajr": {
+      "azan": "04:31",
+      "iqamah": "05:15"
+    },
+    "shuruq": "06:05",
+    "zuhr": {
+      "azan": "12:11",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:19",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:17",
+      "iqamah": "18:22"
+    },
+    "isha": {
+      "azan": "19:38",
+      "iqamah": "20:00"
+    }
+  },
+  "2026-03-21": {
+    "fajr": {
+      "azan": "04:29",
+      "iqamah": "05:15"
+    },
+    "shuruq": "05:05",
+    "zuhr": {
+      "azan": "12:11",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:19",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "18:17",
+      "iqamah": "18:22"
+    },
+    "isha": {
+      "azan": "19:40",
+      "iqamah": "20:00"
+    }
+  },
+  "2026-03-22": {
+    "fajr": {
+      "azan": "04:26",
+      "iqamah": "05:15"
+    },
+    "shuruq": "06:01",
+    "zuhr": {
+      "azan": "12:10",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:22",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:20",
+      "iqamah": "18:25"
+    },
+    "isha": {
+      "azan": "19:42",
+      "iqamah": "20:00"
+    }
+  },
+  "2026-03-23": {
+    "fajr": {
+      "azan": "04:24",
+      "iqamah": "05:15"
+    },
+    "shuruq": "05:58",
+    "zuhr": {
+      "azan": "12:10",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:23",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:22",
+      "iqamah": "18:27"
+    },
+    "isha": {
+      "azan": "19:44",
+      "iqamah": "20:00"
+    }
+  },
+  "2026-03-24": {
+    "fajr": {
+      "azan": "04:21",
+      "iqamah": "05:15"
+    },
+    "shuruq": "05:56",
+    "zuhr": {
+      "azan": "12:10",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:25",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:23",
+      "iqamah": "18:28"
+    },
+    "isha": {
+      "azan": "19:46",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-03-25": {
+    "fajr": {
+      "azan": "04:19",
+      "iqamah": "05:15"
+    },
+    "shuruq": "05:54",
+    "zuhr": {
+      "azan": "12:09",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:26",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:25",
+      "iqamah": "18:30"
+    },
+    "isha": {
+      "azan": "19:48",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-03-26": {
+    "fajr": {
+      "azan": "04:16",
+      "iqamah": "05:15"
+    },
+    "shuruq": "05:51",
+    "zuhr": {
+      "azan": "12:09",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:27",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:27",
+      "iqamah": "18:32"
+    },
+    "isha": {
+      "azan": "19:50",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-03-27": {
+    "fajr": {
+      "azan": "04:13",
+      "iqamah": "05:15"
+    },
+    "shuruq": "05:47",
+    "zuhr": {
+      "azan": "12:09",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:28",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:28",
+      "iqamah": "18:33"
+    },
+    "isha": {
+      "azan": "19:52",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-03-28": {
+    "fajr": {
+      "azan": "04:11",
+      "iqamah": "05:15"
+    },
+    "shuruq": "05:47",
+    "zuhr": {
+      "azan": "12:09",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "16:30",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:30",
+      "iqamah": "18:35"
+    },
+    "isha": {
+      "azan": "19:54",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-03-29": {
+    "fajr": {
+      "azan": "05:08",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:45",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:30",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:32",
+      "iqamah": "19:37"
+    },
+    "isha": {
+      "azan": "20:55",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-03-30": {
+    "fajr": {
+      "azan": "05:05",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:42",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:32",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:33",
+      "iqamah": "19:38"
+    },
+    "isha": {
+      "azan": "20:56",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-03-31": {
+    "fajr": {
+      "azan": "05:02",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:42",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:32",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:33",
+      "iqamah": "19:38"
+    },
+    "isha": {
+      "azan": "20:58",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-01": {
+    "fajr": {
+      "azan": "04:59",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:40",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:33",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:35",
+      "iqamah": "19:40"
+    },
+    "isha": {
+      "azan": "21:01",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-02": {
+    "fajr": {
+      "azan": "04:58",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:36",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:36",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:38",
+      "iqamah": "19:43"
+    },
+    "isha": {
+      "azan": "21:03",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-03": {
+    "fajr": {
+      "azan": "04:55",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:33",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:37",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:40",
+      "iqamah": "19:45"
+    },
+    "isha": {
+      "azan": "21:05",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-04": {
+    "fajr": {
+      "azan": "04:53",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:31",
+    "zuhr": {
+      "azan": "13:06",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:38",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:42",
+      "iqamah": "19:47"
+    },
+    "isha": {
+      "azan": "21:07",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-05": {
+    "fajr": {
+      "azan": "04:50",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:29",
+    "zuhr": {
+      "azan": "13:06",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:39",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:43",
+      "iqamah": "19:48"
+    },
+    "isha": {
+      "azan": "21:09",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-06": {
+    "fajr": {
+      "azan": "04:47",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:27",
+    "zuhr": {
+      "azan": "13:06",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:41",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:45",
+      "iqamah": "19:50"
+    },
+    "isha": {
+      "azan": "21:11",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-07": {
+    "fajr": {
+      "azan": "04:45",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:24",
+    "zuhr": {
+      "azan": "13:06",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:42",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:47",
+      "iqamah": "19:52"
+    },
+    "isha": {
+      "azan": "21:13",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-08": {
+    "fajr": {
+      "azan": "04:42",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:24",
+    "zuhr": {
+      "azan": "13:06",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:42",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:47",
+      "iqamah": "19:52"
+    },
+    "isha": {
+      "azan": "21:15",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-09": {
+    "fajr": {
+      "azan": "04:39",
+      "iqamah": "05:30"
+    },
+    "shuruq": "06:20",
+    "zuhr": {
+      "azan": "13:05",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:44",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:50",
+      "iqamah": "19:55"
+    },
+    "isha": {
+      "azan": "21:17",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-10": {
+    "fajr": {
+      "azan": "04:37",
+      "iqamah": "05:30"
+    },
+    "shuruq": "06:18",
+    "zuhr": {
+      "azan": "13:05",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:45",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:52",
+      "iqamah": "19:57"
+    },
+    "isha": {
+      "azan": "21:19",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-04-11": {
+    "fajr": {
+      "azan": "04:34",
+      "iqamah": "05:30"
+    },
+    "shuruq": "06:16",
+    "zuhr": {
+      "azan": "13:04",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:46",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "19:53",
+      "iqamah": "19:58"
+    },
+    "isha": {
+      "azan": "21:21",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-04-12": {
+    "fajr": {
+      "azan": "04:31",
+      "iqamah": "05:30"
+    },
+    "shuruq": "06:13",
+    "zuhr": {
+      "azan": "13:04",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:47",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "19:55",
+      "iqamah": "20:00"
+    },
+    "isha": {
+      "azan": "21:23",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-04-13": {
+    "fajr": {
+      "azan": "04:28",
+      "iqamah": "05:15"
+    },
+    "shuruq": "06:11",
+    "zuhr": {
+      "azan": "13:04",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:49",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "19:57",
+      "iqamah": "20:02"
+    },
+    "isha": {
+      "azan": "21:25",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-04-14": {
+    "fajr": {
+      "azan": "04:25",
+      "iqamah": "05:15"
+    },
+    "shuruq": "06:09",
+    "zuhr": {
+      "azan": "13:04",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:50",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "19:58",
+      "iqamah": "20:03"
+    },
+    "isha": {
+      "azan": "21:27",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-04-15": {
+    "fajr": {
+      "azan": "04:23",
+      "iqamah": "05:15"
+    },
+    "shuruq": "06:09",
+    "zuhr": {
+      "azan": "13:04",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:50",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "19:58",
+      "iqamah": "20:02"
+    },
+    "isha": {
+      "azan": "21:29",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-04-16": {
+    "fajr": {
+      "azan": "04:20",
+      "iqamah": "05:15"
+    },
+    "shuruq": "06:05",
+    "zuhr": {
+      "azan": "13:03",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:52",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "20:02",
+      "iqamah": "20:07"
+    },
+    "isha": {
+      "azan": "21:31",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-04-17": {
+    "fajr": {
+      "azan": "04:17",
+      "iqamah": "05:15"
+    },
+    "shuruq": "06:03",
+    "zuhr": {
+      "azan": "13:03",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:53",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "20:03",
+      "iqamah": "20:08"
+    },
+    "isha": {
+      "azan": "21:34",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-04-18": {
+    "fajr": {
+      "azan": "04:14",
+      "iqamah": "05:15"
+    },
+    "shuruq": "06:01",
+    "zuhr": {
+      "azan": "13:03",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:54",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "20:05",
+      "iqamah": "20:10"
+    },
+    "isha": {
+      "azan": "21:36",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-04-19": {
+    "fajr": {
+      "azan": "04:12",
+      "iqamah": "05:15"
+    },
+    "shuruq": "05:59",
+    "zuhr": {
+      "azan": "13:03",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:55",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "20:07",
+      "iqamah": "20:12"
+    },
+    "isha": {
+      "azan": "21:38",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-04-20": {
+    "fajr": {
+      "azan": "04:10",
+      "iqamah": "05:05"
+    },
+    "shuruq": "05:55",
+    "zuhr": {
+      "azan": "13:02",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:56",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "20:08",
+      "iqamah": "20:13"
+    },
+    "isha": {
+      "azan": "21:40",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-04-21": {
+    "fajr": {
+      "azan": "04:08",
+      "iqamah": "05:05"
+    },
+    "shuruq": "05:54",
+    "zuhr": {
+      "azan": "13:02",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:57",
+      "iqamah": "18:15"
+    },
+    "maghrib": {
+      "azan": "20:10",
+      "iqamah": "20:15"
+    },
+    "isha": {
+      "azan": "21:42",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-04-22": {
+    "fajr": {
+      "azan": "04:06",
+      "iqamah": "05:05"
+    },
+    "shuruq": "05:54",
+    "zuhr": {
+      "azan": "13:02",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:57",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:10",
+      "iqamah": "20:15"
+    },
+    "isha": {
+      "azan": "21:44",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-04-23": {
+    "fajr": {
+      "azan": "04:04",
+      "iqamah": "05:05"
+    },
+    "shuruq": "05:52",
+    "zuhr": {
+      "azan": "13:02",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:58",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:12",
+      "iqamah": "20:17"
+    },
+    "isha": {
+      "azan": "21:46",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-04-24": {
+    "fajr": {
+      "azan": "04:02",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:48",
+    "zuhr": {
+      "azan": "13:02",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:01",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:15",
+      "iqamah": "20:20"
+    },
+    "isha": {
+      "azan": "21:48",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-04-25": {
+    "fajr": {
+      "azan": "04:00",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:46",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:02",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:17",
+      "iqamah": "20:22"
+    },
+    "isha": {
+      "azan": "21:50",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-04-26": {
+    "fajr": {
+      "azan": "03:58",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:42",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:03",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:18",
+      "iqamah": "20:23"
+    },
+    "isha": {
+      "azan": "21:52",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-04-27": {
+    "fajr": {
+      "azan": "03:56",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:42",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:04",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:20",
+      "iqamah": "20:25"
+    },
+    "isha": {
+      "azan": "21:54",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-04-28": {
+    "fajr": {
+      "azan": "03:54",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:40",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:05",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:22",
+      "iqamah": "20:27"
+    },
+    "isha": {
+      "azan": "21:56",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-04-29": {
+    "fajr": {
+      "azan": "03:52",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:39",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:06",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:23",
+      "iqamah": "20:28"
+    },
+    "isha": {
+      "azan": "21:57",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-04-30": {
+    "fajr": {
+      "azan": "03:50",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:39",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:06",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:23",
+      "iqamah": "20:28"
+    },
+    "isha": {
+      "azan": "21:58",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-05-01": {
+    "fajr": {
+      "azan": "03:48",
+      "iqamah": "04:45"
+    },
+    "shuruq": "05:35",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:08",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:26",
+      "iqamah": "20:31"
+    },
+    "isha": {
+      "azan": "22:02",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-02": {
+    "fajr": {
+      "azan": "03:46",
+      "iqamah": "04:45"
+    },
+    "shuruq": "05:33",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:09",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:28",
+      "iqamah": "20:33"
+    },
+    "isha": {
+      "azan": "22:04",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-03": {
+    "fajr": {
+      "azan": "03:44",
+      "iqamah": "04:45"
+    },
+    "shuruq": "05:31",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:10",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:30",
+      "iqamah": "20:35"
+    },
+    "isha": {
+      "azan": "22:06",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-04": {
+    "fajr": {
+      "azan": "03:42",
+      "iqamah": "04:45"
+    },
+    "shuruq": "05:29",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:11",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:31",
+      "iqamah": "20:36"
+    },
+    "isha": {
+      "azan": "22:07",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-05": {
+    "fajr": {
+      "azan": "03:41",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:27",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:12",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:33",
+      "iqamah": "20:38"
+    },
+    "isha": {
+      "azan": "22:08",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-06": {
+    "fajr": {
+      "azan": "03:39",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:26",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:13",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:34",
+      "iqamah": "20:39"
+    },
+    "isha": {
+      "azan": "22:09",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-07": {
+    "fajr": {
+      "azan": "03:37",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:26",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:13",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:34",
+      "iqamah": "20:39"
+    },
+    "isha": {
+      "azan": "22:10",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-08": {
+    "fajr": {
+      "azan": "03:36",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:24",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:13",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:36",
+      "iqamah": "20:41"
+    },
+    "isha": {
+      "azan": "22:11",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-09": {
+    "fajr": {
+      "azan": "03:34",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:21",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:15",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:39",
+      "iqamah": "20:44"
+    },
+    "isha": {
+      "azan": "22:12",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-10": {
+    "fajr": {
+      "azan": "03:32",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:19",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:16",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:41",
+      "iqamah": "20:46"
+    },
+    "isha": {
+      "azan": "22:13",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-11": {
+    "fajr": {
+      "azan": "03:31",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:19",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:17",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:42",
+      "iqamah": "20:47"
+    },
+    "isha": {
+      "azan": "22:14",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-12": {
+    "fajr": {
+      "azan": "03:29",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:16",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:18",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:44",
+      "iqamah": "20:49"
+    },
+    "isha": {
+      "azan": "22:15",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-13": {
+    "fajr": {
+      "azan": "03:26",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:14",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:19",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:45",
+      "iqamah": "20:50"
+    },
+    "isha": {
+      "azan": "22:16",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-14": {
+    "fajr": {
+      "azan": "03:24",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:14",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:19",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:45",
+      "iqamah": "20:50"
+    },
+    "isha": {
+      "azan": "22:17",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-15": {
+    "fajr": {
+      "azan": "03:21",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:13",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:20",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:47",
+      "iqamah": "20:52"
+    },
+    "isha": {
+      "azan": "22:18",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-16": {
+    "fajr": {
+      "azan": "03:19",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:10",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:22",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:50",
+      "iqamah": "20:55"
+    },
+    "isha": {
+      "azan": "22:19",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-17": {
+    "fajr": {
+      "azan": "03:16",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:08",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:22",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:51",
+      "iqamah": "20:56"
+    },
+    "isha": {
+      "azan": "22:20",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-18": {
+    "fajr": {
+      "azan": "03:14",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:07",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:23",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:53",
+      "iqamah": "20:58"
+    },
+    "isha": {
+      "azan": "22:21",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-05-19": {
+    "fajr": {
+      "azan": "03:12",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:06",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:24",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:54",
+      "iqamah": "20:59"
+    },
+    "isha": {
+      "azan": "22:22",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-20": {
+    "fajr": {
+      "azan": "03:09",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:04",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:25",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:56",
+      "iqamah": "21:01"
+    },
+    "isha": {
+      "azan": "22:23",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-21": {
+    "fajr": {
+      "azan": "03:07",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:03",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:26",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:57",
+      "iqamah": "21:02"
+    },
+    "isha": {
+      "azan": "22:24",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-22": {
+    "fajr": {
+      "azan": "03:06",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:03",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:26",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:57",
+      "iqamah": "21:02"
+    },
+    "isha": {
+      "azan": "22:24",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-23": {
+    "fajr": {
+      "azan": "03:05",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:01",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:27",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "21:00",
+      "iqamah": "21:05"
+    },
+    "isha": {
+      "azan": "22:24",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-24": {
+    "fajr": {
+      "azan": "03:04",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:59",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:28",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "21:01",
+      "iqamah": "21:06"
+    },
+    "isha": {
+      "azan": "22:25",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-25": {
+    "fajr": {
+      "azan": "03:03",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:58",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:29",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "21:02",
+      "iqamah": "21:07"
+    },
+    "isha": {
+      "azan": "22:25",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-26": {
+    "fajr": {
+      "azan": "03:02",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:57",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:30",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:04",
+      "iqamah": "21:09"
+    },
+    "isha": {
+      "azan": "22:26",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-27": {
+    "fajr": {
+      "azan": "03:01",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:56",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:30",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:05",
+      "iqamah": "21:10"
+    },
+    "isha": {
+      "azan": "22:26",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-28": {
+    "fajr": {
+      "azan": "03:01",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:55",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:31",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:06",
+      "iqamah": "21:11"
+    },
+    "isha": {
+      "azan": "22:26",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-29": {
+    "fajr": {
+      "azan": "03:00",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:55",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:31",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:06",
+      "iqamah": "21:11"
+    },
+    "isha": {
+      "azan": "22:26",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-30": {
+    "fajr": {
+      "azan": "02:59",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:54",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:32",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:07",
+      "iqamah": "21:12"
+    },
+    "isha": {
+      "azan": "22:26",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-05-31": {
+    "fajr": {
+      "azan": "02:59",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:53",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:33",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:09",
+      "iqamah": "21:14"
+    },
+    "isha": {
+      "azan": "22:26",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-01": {
+    "fajr": {
+      "azan": "02:57",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:52",
+    "zuhr": {
+      "azan": "13:06",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:34",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:11",
+      "iqamah": "21:16"
+    },
+    "isha": {
+      "azan": "22:27",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-02": {
+    "fajr": {
+      "azan": "02:56",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:51",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:34",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:12",
+      "iqamah": "21:17"
+    },
+    "isha": {
+      "azan": "22:27",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-03": {
+    "fajr": {
+      "azan": "02:54",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:50",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:35",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:13",
+      "iqamah": "21:18"
+    },
+    "isha": {
+      "azan": "22:28",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-04": {
+    "fajr": {
+      "azan": "02:52",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:50",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:36",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:14",
+      "iqamah": "21:19"
+    },
+    "isha": {
+      "azan": "22:28",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-05": {
+    "fajr": {
+      "azan": "02:51",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:50",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:36",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:14",
+      "iqamah": "21:19"
+    },
+    "isha": {
+      "azan": "22:28",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-06": {
+    "fajr": {
+      "azan": "02:50",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:49",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:36",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:15",
+      "iqamah": "21:20"
+    },
+    "isha": {
+      "azan": "22:28",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-07": {
+    "fajr": {
+      "azan": "02:49",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:48",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:37",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:16",
+      "iqamah": "21:21"
+    },
+    "isha": {
+      "azan": "22:29",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-08": {
+    "fajr": {
+      "azan": "02:48",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:47",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:38",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:17",
+      "iqamah": "21:22"
+    },
+    "isha": {
+      "azan": "22:29",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-09": {
+    "fajr": {
+      "azan": "02:46",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:47",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:38",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:18",
+      "iqamah": "21:23"
+    },
+    "isha": {
+      "azan": "22:29",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-10": {
+    "fajr": {
+      "azan": "02:45",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:47",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:39",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:19",
+      "iqamah": "21:24"
+    },
+    "isha": {
+      "azan": "22:30",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-11": {
+    "fajr": {
+      "azan": "02:44",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:46",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:39",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:19",
+      "iqamah": "21:24"
+    },
+    "isha": {
+      "azan": "22:30",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-12": {
+    "fajr": {
+      "azan": "02:44",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:46",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:40",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:20",
+      "iqamah": "21:25"
+    },
+    "isha": {
+      "azan": "22:30",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-13": {
+    "fajr": {
+      "azan": "02:42",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:46",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:40",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:20",
+      "iqamah": "21:25"
+    },
+    "isha": {
+      "azan": "22:30",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-14": {
+    "fajr": {
+      "azan": "02:42",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:46",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:40",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:21",
+      "iqamah": "21:26"
+    },
+    "isha": {
+      "azan": "22:30",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-15": {
+    "fajr": {
+      "azan": "02:42",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:46",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:41",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:22",
+      "iqamah": "21:27"
+    },
+    "isha": {
+      "azan": "22:31",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-16": {
+    "fajr": {
+      "azan": "02:41",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:45",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:41",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:22",
+      "iqamah": "21:27"
+    },
+    "isha": {
+      "azan": "22:31",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-17": {
+    "fajr": {
+      "azan": "02:41",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:45",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:41",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:22",
+      "iqamah": "21:27"
+    },
+    "isha": {
+      "azan": "22:31",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-18": {
+    "fajr": {
+      "azan": "02:41",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:45",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:42",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:23",
+      "iqamah": "21:28"
+    },
+    "isha": {
+      "azan": "22:31",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-19": {
+    "fajr": {
+      "azan": "02:41",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:46",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:42",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:23",
+      "iqamah": "21:28"
+    },
+    "isha": {
+      "azan": "22:31",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-20": {
+    "fajr": {
+      "azan": "02:41",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:46",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:42",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:23",
+      "iqamah": "21:28"
+    },
+    "isha": {
+      "azan": "22:31",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-21": {
+    "fajr": {
+      "azan": "02:41",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:46",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:42",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:23",
+      "iqamah": "21:28"
+    },
+    "isha": {
+      "azan": "22:32",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-22": {
+    "fajr": {
+      "azan": "02:41",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:46",
+    "zuhr": {
+      "azan": "13:11",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:23",
+      "iqamah": "21:28"
+    },
+    "isha": {
+      "azan": "22:32",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-23": {
+    "fajr": {
+      "azan": "02:41",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:46",
+    "zuhr": {
+      "azan": "13:11",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:24",
+      "iqamah": "21:29"
+    },
+    "isha": {
+      "azan": "22:32",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-24": {
+    "fajr": {
+      "azan": "02:42",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:47",
+    "zuhr": {
+      "azan": "13:11",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:24",
+      "iqamah": "21:29"
+    },
+    "isha": {
+      "azan": "22:32",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-25": {
+    "fajr": {
+      "azan": "02:42",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:47",
+    "zuhr": {
+      "azan": "13:11",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:24",
+      "iqamah": "21:29"
+    },
+    "isha": {
+      "azan": "22:33",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-26": {
+    "fajr": {
+      "azan": "02:43",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:48",
+    "zuhr": {
+      "azan": "13:11",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:24",
+      "iqamah": "21:29"
+    },
+    "isha": {
+      "azan": "22:33",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-27": {
+    "fajr": {
+      "azan": "02:44",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:48",
+    "zuhr": {
+      "azan": "13:12",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:24",
+      "iqamah": "21:29"
+    },
+    "isha": {
+      "azan": "22:33",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-28": {
+    "fajr": {
+      "azan": "02:45",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:48",
+    "zuhr": {
+      "azan": "13:12",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:24",
+      "iqamah": "21:29"
+    },
+    "isha": {
+      "azan": "22:34",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-29": {
+    "fajr": {
+      "azan": "02:46",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:49",
+    "zuhr": {
+      "azan": "13:12",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:23",
+      "iqamah": "21:28"
+    },
+    "isha": {
+      "azan": "22:34",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-06-30": {
+    "fajr": {
+      "azan": "02:47",
+      "iqamah": "03:55"
+    },
+    "shuruq": "04:50",
+    "zuhr": {
+      "azan": "13:12",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:23",
+      "iqamah": "21:28"
+    },
+    "isha": {
+      "azan": "22:35",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-01": {
+    "fajr": {
+      "azan": "02:48",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:50",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:23",
+      "iqamah": "21:28"
+    },
+    "isha": {
+      "azan": "22:34",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-02": {
+    "fajr": {
+      "azan": "02:49",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:51",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:23",
+      "iqamah": "21:28"
+    },
+    "isha": {
+      "azan": "22:34",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-03": {
+    "fajr": {
+      "azan": "02:50",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:52",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:22",
+      "iqamah": "21:27"
+    },
+    "isha": {
+      "azan": "22:33",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-04": {
+    "fajr": {
+      "azan": "02:51",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:53",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:22",
+      "iqamah": "21:27"
+    },
+    "isha": {
+      "azan": "22:33",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-05": {
+    "fajr": {
+      "azan": "02:52",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:53",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:43",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:22",
+      "iqamah": "21:27"
+    },
+    "isha": {
+      "azan": "22:33",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-06": {
+    "fajr": {
+      "azan": "02:53",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:55",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:42",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:21",
+      "iqamah": "21:26"
+    },
+    "isha": {
+      "azan": "22:32",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-07": {
+    "fajr": {
+      "azan": "02:54",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:55",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:42",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:20",
+      "iqamah": "21:25"
+    },
+    "isha": {
+      "azan": "22:32",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-08": {
+    "fajr": {
+      "azan": "02:55",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:56",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:42",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:19",
+      "iqamah": "21:24"
+    },
+    "isha": {
+      "azan": "22:31",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-09": {
+    "fajr": {
+      "azan": "02:56",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:57",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:41",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:19",
+      "iqamah": "21:24"
+    },
+    "isha": {
+      "azan": "22:31",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-10": {
+    "fajr": {
+      "azan": "02:57",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:58",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:41",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:18",
+      "iqamah": "21:23"
+    },
+    "isha": {
+      "azan": "22:31",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-11": {
+    "fajr": {
+      "azan": "02:58",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:59",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:41",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:17",
+      "iqamah": "21:22"
+    },
+    "isha": {
+      "azan": "22:30",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-12": {
+    "fajr": {
+      "azan": "02:59",
+      "iqamah": "04:05"
+    },
+    "shuruq": "04:59",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:41",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:17",
+      "iqamah": "21:22"
+    },
+    "isha": {
+      "azan": "22:30",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-13": {
+    "fajr": {
+      "azan": "03:00",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:00",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:40",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:16",
+      "iqamah": "21:21"
+    },
+    "isha": {
+      "azan": "22:29",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-14": {
+    "fajr": {
+      "azan": "03:02",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:03",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:39",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:14",
+      "iqamah": "21:19"
+    },
+    "isha": {
+      "azan": "22:29",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-15": {
+    "fajr": {
+      "azan": "03:03",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:04",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:39",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:13",
+      "iqamah": "21:18"
+    },
+    "isha": {
+      "azan": "22:28",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-16": {
+    "fajr": {
+      "azan": "03:04",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:05",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:38",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:12",
+      "iqamah": "21:17"
+    },
+    "isha": {
+      "azan": "22:28",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-17": {
+    "fajr": {
+      "azan": "03:05",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:06",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:38",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:11",
+      "iqamah": "21:16"
+    },
+    "isha": {
+      "azan": "22:27",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-18": {
+    "fajr": {
+      "azan": "03:07",
+      "iqamah": "04:15"
+    },
+    "shuruq": "05:07",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:37",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:10",
+      "iqamah": "21:15"
+    },
+    "isha": {
+      "azan": "22:26",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-19": {
+    "fajr": {
+      "azan": "03:09",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:09",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:37",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:09",
+      "iqamah": "21:14"
+    },
+    "isha": {
+      "azan": "22:25",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-20": {
+    "fajr": {
+      "azan": "03:11",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:09",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:37",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:09",
+      "iqamah": "21:14"
+    },
+    "isha": {
+      "azan": "22:24",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-21": {
+    "fajr": {
+      "azan": "03:13",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:11",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:35",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:07",
+      "iqamah": "21:12"
+    },
+    "isha": {
+      "azan": "22:23",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-22": {
+    "fajr": {
+      "azan": "03:15",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:13",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:35",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:05",
+      "iqamah": "21:10"
+    },
+    "isha": {
+      "azan": "22:22",
+      "iqamah": "22:45"
+    }
+  },
+  "2026-07-23": {
+    "fajr": {
+      "azan": "03:17",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:14",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:34",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:04",
+      "iqamah": "21:09"
+    },
+    "isha": {
+      "azan": "22:21",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-07-24": {
+    "fajr": {
+      "azan": "03:20",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:15",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:33",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:03",
+      "iqamah": "21:08"
+    },
+    "isha": {
+      "azan": "22:20",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-07-25": {
+    "fajr": {
+      "azan": "03:22",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:17",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:32",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:01",
+      "iqamah": "21:06"
+    },
+    "isha": {
+      "azan": "22:19",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-07-26": {
+    "fajr": {
+      "azan": "03:24",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:18",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:32",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:00",
+      "iqamah": "21:05"
+    },
+    "isha": {
+      "azan": "22:18",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-07-27": {
+    "fajr": {
+      "azan": "03:27",
+      "iqamah": "04:25"
+    },
+    "shuruq": "05:18",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:32",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "21:00",
+      "iqamah": "21:05"
+    },
+    "isha": {
+      "azan": "22:17",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-07-28": {
+    "fajr": {
+      "azan": "03:29",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:21",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:29",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:57",
+      "iqamah": "21:02"
+    },
+    "isha": {
+      "azan": "22:16",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-07-29": {
+    "fajr": {
+      "azan": "03:32",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:22",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:29",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:55",
+      "iqamah": "21:00"
+    },
+    "isha": {
+      "azan": "22:15",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-07-30": {
+    "fajr": {
+      "azan": "03:34",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:24",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:28",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:54",
+      "iqamah": "20:59"
+    },
+    "isha": {
+      "azan": "22:14",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-07-31": {
+    "fajr": {
+      "azan": "03:37",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:25",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:27",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:52",
+      "iqamah": "20:57"
+    },
+    "isha": {
+      "azan": "22:13",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-08-01": {
+    "fajr": {
+      "azan": "03:39",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:27",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:26",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:51",
+      "iqamah": "20:56"
+    },
+    "isha": {
+      "azan": "22:12",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-08-02": {
+    "fajr": {
+      "azan": "03:41",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:28",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:25",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:49",
+      "iqamah": "20:54"
+    },
+    "isha": {
+      "azan": "22:10",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-08-03": {
+    "fajr": {
+      "azan": "03:43",
+      "iqamah": "04:35"
+    },
+    "shuruq": "05:28",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:25",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:49",
+      "iqamah": "20:54"
+    },
+    "isha": {
+      "azan": "22:08",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-08-04": {
+    "fajr": {
+      "azan": "03:44",
+      "iqamah": "04:45"
+    },
+    "shuruq": "05:30",
+    "zuhr": {
+      "azan": "13:10",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:24",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:47",
+      "iqamah": "20:52"
+    },
+    "isha": {
+      "azan": "22:06",
+      "iqamah": "22:30"
+    }
+  },
+  "2026-08-05": {
+    "fajr": {
+      "azan": "03:45",
+      "iqamah": "04:45"
+    },
+    "shuruq": "05:33",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:22",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:44",
+      "iqamah": "20:49"
+    },
+    "isha": {
+      "azan": "22:04",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-08-06": {
+    "fajr": {
+      "azan": "03:47",
+      "iqamah": "04:45"
+    },
+    "shuruq": "05:34",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:21",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:42",
+      "iqamah": "20:47"
+    },
+    "isha": {
+      "azan": "22:02",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-08-07": {
+    "fajr": {
+      "azan": "03:49",
+      "iqamah": "04:45"
+    },
+    "shuruq": "05:36",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:19",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:40",
+      "iqamah": "20:45"
+    },
+    "isha": {
+      "azan": "22:01",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-08-08": {
+    "fajr": {
+      "azan": "03:50",
+      "iqamah": "04:45"
+    },
+    "shuruq": "05:37",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:18",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:39",
+      "iqamah": "20:44"
+    },
+    "isha": {
+      "azan": "21:58",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-08-09": {
+    "fajr": {
+      "azan": "03:52",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:39",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:17",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:37",
+      "iqamah": "20:42"
+    },
+    "isha": {
+      "azan": "21:56",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-08-10": {
+    "fajr": {
+      "azan": "03:53",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:40",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:16",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:35",
+      "iqamah": "20:40"
+    },
+    "isha": {
+      "azan": "21:54",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-08-11": {
+    "fajr": {
+      "azan": "03:55",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:41",
+    "zuhr": {
+      "azan": "13:09",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:16",
+      "iqamah": "19:00"
+    },
+    "maghrib": {
+      "azan": "20:35",
+      "iqamah": "20:40"
+    },
+    "isha": {
+      "azan": "21:52",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-08-12": {
+    "fajr": {
+      "azan": "03:57",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:44",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:13",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:31",
+      "iqamah": "20:36"
+    },
+    "isha": {
+      "azan": "21:50",
+      "iqamah": "22:15"
+    }
+  },
+  "2026-08-13": {
+    "fajr": {
+      "azan": "03:58",
+      "iqamah": "04:55"
+    },
+    "shuruq": "05:45",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:12",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:29",
+      "iqamah": "20:34"
+    },
+    "isha": {
+      "azan": "21:48",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-14": {
+    "fajr": {
+      "azan": "04:00",
+      "iqamah": "05:00"
+    },
+    "shuruq": "05:47",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:11",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:27",
+      "iqamah": "20:32"
+    },
+    "isha": {
+      "azan": "21:46",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-15": {
+    "fajr": {
+      "azan": "04:01",
+      "iqamah": "05:00"
+    },
+    "shuruq": "05:48",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:09",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:25",
+      "iqamah": "20:30"
+    },
+    "isha": {
+      "azan": "21:43",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-16": {
+    "fajr": {
+      "azan": "04:03",
+      "iqamah": "05:00"
+    },
+    "shuruq": "05:50",
+    "zuhr": {
+      "azan": "13:08",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:08",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:23",
+      "iqamah": "20:28"
+    },
+    "isha": {
+      "azan": "21:41",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-17": {
+    "fajr": {
+      "azan": "04:04",
+      "iqamah": "05:00"
+    },
+    "shuruq": "05:52",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:06",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:21",
+      "iqamah": "20:26"
+    },
+    "isha": {
+      "azan": "21:39",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-18": {
+    "fajr": {
+      "azan": "04:06",
+      "iqamah": "05:00"
+    },
+    "shuruq": "05:52",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:06",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:21",
+      "iqamah": "20:26"
+    },
+    "isha": {
+      "azan": "21:37",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-19": {
+    "fajr": {
+      "azan": "04:08",
+      "iqamah": "05:00"
+    },
+    "shuruq": "05:53",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:05",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:19",
+      "iqamah": "20:24"
+    },
+    "isha": {
+      "azan": "21:35",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-20": {
+    "fajr": {
+      "azan": "04:09",
+      "iqamah": "05:10"
+    },
+    "shuruq": "05:56",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:02",
+      "iqamah": "18:45"
+    },
+    "maghrib": {
+      "azan": "20:15",
+      "iqamah": "20:20"
+    },
+    "isha": {
+      "azan": "21:33",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-21": {
+    "fajr": {
+      "azan": "04:11",
+      "iqamah": "05:10"
+    },
+    "shuruq": "05:58",
+    "zuhr": {
+      "azan": "13:07",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "18:01",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:13",
+      "iqamah": "20:18"
+    },
+    "isha": {
+      "azan": "21:31",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-22": {
+    "fajr": {
+      "azan": "04:12",
+      "iqamah": "05:10"
+    },
+    "shuruq": "06:00",
+    "zuhr": {
+      "azan": "13:06",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:59",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:11",
+      "iqamah": "20:16"
+    },
+    "isha": {
+      "azan": "21:28",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-23": {
+    "fajr": {
+      "azan": "04:14",
+      "iqamah": "05:10"
+    },
+    "shuruq": "06:01",
+    "zuhr": {
+      "azan": "13:06",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:57",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:09",
+      "iqamah": "20:14"
+    },
+    "isha": {
+      "azan": "21:26",
+      "iqamah": "22:00"
+    }
+  },
+  "2026-08-24": {
+    "fajr": {
+      "azan": "04:16",
+      "iqamah": "05:10"
+    },
+    "shuruq": "06:03",
+    "zuhr": {
+      "azan": "13:06",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:56",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:07",
+      "iqamah": "20:12"
+    },
+    "isha": {
+      "azan": "21:25",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-08-25": {
+    "fajr": {
+      "azan": "04:17",
+      "iqamah": "05:10"
+    },
+    "shuruq": "06:03",
+    "zuhr": {
+      "azan": "13:06",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:56",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:07",
+      "iqamah": "20:12"
+    },
+    "isha": {
+      "azan": "21:24",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-08-26": {
+    "fajr": {
+      "azan": "04:19",
+      "iqamah": "05:20"
+    },
+    "shuruq": "06:04",
+    "zuhr": {
+      "azan": "13:05",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:54",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:05",
+      "iqamah": "20:07"
+    },
+    "isha": {
+      "azan": "21:23",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-08-27": {
+    "fajr": {
+      "azan": "04:23",
+      "iqamah": "05:20"
+    },
+    "shuruq": "06:07",
+    "zuhr": {
+      "azan": "13:05",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:51",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "20:00",
+      "iqamah": "20:05"
+    },
+    "isha": {
+      "azan": "21:22",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-08-28": {
+    "fajr": {
+      "azan": "04:24",
+      "iqamah": "05:20"
+    },
+    "shuruq": "06:09",
+    "zuhr": {
+      "azan": "13:05",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:49",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "19:58",
+      "iqamah": "20:03"
+    },
+    "isha": {
+      "azan": "21:21",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-08-29": {
+    "fajr": {
+      "azan": "04:26",
+      "iqamah": "05:20"
+    },
+    "shuruq": "06:11",
+    "zuhr": {
+      "azan": "13:04",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:48",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "19:56",
+      "iqamah": "20:01"
+    },
+    "isha": {
+      "azan": "21:20",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-08-30": {
+    "fajr": {
+      "azan": "04:28",
+      "iqamah": "05:20"
+    },
+    "shuruq": "06:12",
+    "zuhr": {
+      "azan": "13:04",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:46",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "19:54",
+      "iqamah": "19:59"
+    },
+    "isha": {
+      "azan": "21:18",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-08-31": {
+    "fajr": {
+      "azan": "04:30",
+      "iqamah": "05:20"
+    },
+    "shuruq": "06:14",
+    "zuhr": {
+      "azan": "13:04",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:44",
+      "iqamah": "18:30"
+    },
+    "maghrib": {
+      "azan": "19:52",
+      "iqamah": "19:57"
+    },
+    "isha": {
+      "azan": "21:16",
+      "iqamah": "21:45"
+    }
+  },
+  "2026-09-01": {
+    "fajr": {
+      "azan": "04:32",
+      "iqamah": "05:30"
+    },
+    "shuruq": "06:15",
+    "zuhr": {
+      "azan": "13:03",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:43",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:49",
+      "iqamah": "19:54"
+    },
+    "isha": {
+      "azan": "21:14",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-09-02": {
+    "fajr": {
+      "azan": "04:35",
+      "iqamah": "05:30"
+    },
+    "shuruq": "06:15",
+    "zuhr": {
+      "azan": "13:03",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:43",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:49",
+      "iqamah": "19:54"
+    },
+    "isha": {
+      "azan": "21:12",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-09-03": {
+    "fajr": {
+      "azan": "04:37",
+      "iqamah": "05:30"
+    },
+    "shuruq": "06:19",
+    "zuhr": {
+      "azan": "13:03",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:39",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:45",
+      "iqamah": "19:50"
+    },
+    "isha": {
+      "azan": "21:09",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-09-04": {
+    "fajr": {
+      "azan": "04:39",
+      "iqamah": "05:30"
+    },
+    "shuruq": "06:20",
+    "zuhr": {
+      "azan": "13:02",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:37",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:43",
+      "iqamah": "19:48"
+    },
+    "isha": {
+      "azan": "21:07",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-09-05": {
+    "fajr": {
+      "azan": "04:41",
+      "iqamah": "05:30"
+    },
+    "shuruq": "06:22",
+    "zuhr": {
+      "azan": "13:02",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:36",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:40",
+      "iqamah": "19:45"
+    },
+    "isha": {
+      "azan": "21:05",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-09-06": {
+    "fajr": {
+      "azan": "04:42",
+      "iqamah": "05:30"
+    },
+    "shuruq": "06:23",
+    "zuhr": {
+      "azan": "13:02",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:34",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:38",
+      "iqamah": "19:43"
+    },
+    "isha": {
+      "azan": "21:02",
+      "iqamah": "21:30"
+    }
+  },
+  "2026-09-07": {
+    "fajr": {
+      "azan": "04:45",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:25",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:32",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:36",
+      "iqamah": "19:41"
+    },
+    "isha": {
+      "azan": "21:00",
+      "iqamah": "21:15"
+    }
+  },
+  "2026-09-08": {
+    "fajr": {
+      "azan": "04:46",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:26",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:30",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:34",
+      "iqamah": "19:39"
+    },
+    "isha": {
+      "azan": "20:58",
+      "iqamah": "21:15"
+    }
+  },
+  "2026-09-09": {
+    "fajr": {
+      "azan": "04:49",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:26",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:30",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:34",
+      "iqamah": "19:39"
+    },
+    "isha": {
+      "azan": "20:57",
+      "iqamah": "21:15"
+    }
+  },
+  "2026-09-10": {
+    "fajr": {
+      "azan": "04:51",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:28",
+    "zuhr": {
+      "azan": "13:01",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:28",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:31",
+      "iqamah": "19:36"
+    },
+    "isha": {
+      "azan": "20:55",
+      "iqamah": "21:15"
+    }
+  },
+  "2026-09-11": {
+    "fajr": {
+      "azan": "04:53",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:31",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:25",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:27",
+      "iqamah": "19:32"
+    },
+    "isha": {
+      "azan": "20:53",
+      "iqamah": "21:15"
+    }
+  },
+  "2026-09-12": {
+    "fajr": {
+      "azan": "04:55",
+      "iqamah": "05:40"
+    },
+    "shuruq": "06:33",
+    "zuhr": {
+      "azan": "13:00",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:23",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:25",
+      "iqamah": "19:30"
+    },
+    "isha": {
+      "azan": "20:51",
+      "iqamah": "21:15"
+    }
+  },
+  "2026-09-13": {
+    "fajr": {
+      "azan": "04:57",
+      "iqamah": "05:50"
+    },
+    "shuruq": "06:34",
+    "zuhr": {
+      "azan": "12:59",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:21",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:22",
+      "iqamah": "19:27"
+    },
+    "isha": {
+      "azan": "20:48",
+      "iqamah": "21:15"
+    }
+  },
+  "2026-09-14": {
+    "fajr": {
+      "azan": "04:59",
+      "iqamah": "05:50"
+    },
+    "shuruq": "06:36",
+    "zuhr": {
+      "azan": "12:59",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:19",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:20",
+      "iqamah": "19:25"
+    },
+    "isha": {
+      "azan": "20:46",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-15": {
+    "fajr": {
+      "azan": "05:01",
+      "iqamah": "05:50"
+    },
+    "shuruq": "06:37",
+    "zuhr": {
+      "azan": "12:59",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:17",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:18",
+      "iqamah": "19:23"
+    },
+    "isha": {
+      "azan": "20:43",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-16": {
+    "fajr": {
+      "azan": "05:02",
+      "iqamah": "05:50"
+    },
+    "shuruq": "06:37",
+    "zuhr": {
+      "azan": "12:59",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:17",
+      "iqamah": "18:00"
+    },
+    "maghrib": {
+      "azan": "19:18",
+      "iqamah": "19:23"
+    },
+    "isha": {
+      "azan": "20:41",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-17": {
+    "fajr": {
+      "azan": "05:04",
+      "iqamah": "05:50"
+    },
+    "shuruq": "06:39",
+    "zuhr": {
+      "azan": "12:58",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:15",
+      "iqamah": "17:45"
+    },
+    "maghrib": {
+      "azan": "19:15",
+      "iqamah": "19:20"
+    },
+    "isha": {
+      "azan": "20:39",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-18": {
+    "fajr": {
+      "azan": "05:06",
+      "iqamah": "05:50"
+    },
+    "shuruq": "06:42",
+    "zuhr": {
+      "azan": "12:58",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:11",
+      "iqamah": "17:45"
+    },
+    "maghrib": {
+      "azan": "19:11",
+      "iqamah": "19:16"
+    },
+    "isha": {
+      "azan": "20:36",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-19": {
+    "fajr": {
+      "azan": "05:08",
+      "iqamah": "06:00"
+    },
+    "shuruq": "06:44",
+    "zuhr": {
+      "azan": "12:57",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:10",
+      "iqamah": "17:45"
+    },
+    "maghrib": {
+      "azan": "19:09",
+      "iqamah": "19:14"
+    },
+    "isha": {
+      "azan": "20:33",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-20": {
+    "fajr": {
+      "azan": "05:10",
+      "iqamah": "06:00"
+    },
+    "shuruq": "06:45",
+    "zuhr": {
+      "azan": "12:57",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:08",
+      "iqamah": "17:45"
+    },
+    "maghrib": {
+      "azan": "19:06",
+      "iqamah": "19:11"
+    },
+    "isha": {
+      "azan": "20:31",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-21": {
+    "fajr": {
+      "azan": "05:12",
+      "iqamah": "06:00"
+    },
+    "shuruq": "06:47",
+    "zuhr": {
+      "azan": "12:56",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:06",
+      "iqamah": "17:45"
+    },
+    "maghrib": {
+      "azan": "19:04",
+      "iqamah": "19:09"
+    },
+    "isha": {
+      "azan": "20:29",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-22": {
+    "fajr": {
+      "azan": "05:14",
+      "iqamah": "06:00"
+    },
+    "shuruq": "06:49",
+    "zuhr": {
+      "azan": "12:56",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:04",
+      "iqamah": "17:45"
+    },
+    "maghrib": {
+      "azan": "19:02",
+      "iqamah": "19:07"
+    },
+    "isha": {
+      "azan": "20:26",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-23": {
+    "fajr": {
+      "azan": "05:15",
+      "iqamah": "06:00"
+    },
+    "shuruq": "06:50",
+    "zuhr": {
+      "azan": "12:56",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:02",
+      "iqamah": "17:30"
+    },
+    "maghrib": {
+      "azan": "18:59",
+      "iqamah": "19:04"
+    },
+    "isha": {
+      "azan": "20:24",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-24": {
+    "fajr": {
+      "azan": "05:17",
+      "iqamah": "06:00"
+    },
+    "shuruq": "06:51",
+    "zuhr": {
+      "azan": "12:56",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "17:02",
+      "iqamah": "17:30"
+    },
+    "maghrib": {
+      "azan": "18:59",
+      "iqamah": "19:04"
+    },
+    "isha": {
+      "azan": "20:21",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-25": {
+    "fajr": {
+      "azan": "05:19",
+      "iqamah": "06:00"
+    },
+    "shuruq": "06:52",
+    "zuhr": {
+      "azan": "12:55",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:58",
+      "iqamah": "17:30"
+    },
+    "maghrib": {
+      "azan": "18:55",
+      "iqamah": "19:00"
+    },
+    "isha": {
+      "azan": "20:18",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-26": {
+    "fajr": {
+      "azan": "05:21",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:55",
+    "zuhr": {
+      "azan": "12:55",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:56",
+      "iqamah": "17:30"
+    },
+    "maghrib": {
+      "azan": "18:52",
+      "iqamah": "18:57"
+    },
+    "isha": {
+      "azan": "20:16",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-27": {
+    "fajr": {
+      "azan": "05:22",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:57",
+    "zuhr": {
+      "azan": "12:54",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:54",
+      "iqamah": "17:30"
+    },
+    "maghrib": {
+      "azan": "18:50",
+      "iqamah": "18:55"
+    },
+    "isha": {
+      "azan": "20:14",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-28": {
+    "fajr": {
+      "azan": "05:24",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:58",
+    "zuhr": {
+      "azan": "12:54",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:52",
+      "iqamah": "17:30"
+    },
+    "maghrib": {
+      "azan": "18:48",
+      "iqamah": "18:53"
+    },
+    "isha": {
+      "azan": "20:12",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-29": {
+    "fajr": {
+      "azan": "05:26",
+      "iqamah": "06:10"
+    },
+    "shuruq": "07:00",
+    "zuhr": {
+      "azan": "12:54",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:50",
+      "iqamah": "17:30"
+    },
+    "maghrib": {
+      "azan": "18:46",
+      "iqamah": "18:51"
+    },
+    "isha": {
+      "azan": "20:09",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-09-30": {
+    "fajr": {
+      "azan": "05:28",
+      "iqamah": "06:10"
+    },
+    "shuruq": "07:01",
+    "zuhr": {
+      "azan": "12:53",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:48",
+      "iqamah": "17:30"
+    },
+    "maghrib": {
+      "azan": "18:43",
+      "iqamah": "18:48"
+    },
+    "isha": {
+      "azan": "20:07",
+      "iqamah": "21:00"
+    }
+  },
+  "2026-10-01": {
+    "fajr": {
+      "azan": "05:29",
+      "iqamah": "06:15"
+    },
+    "shuruq": "07:01",
+    "zuhr": {
+      "azan": "12:53",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:48",
+      "iqamah": "17:15"
+    },
+    "maghrib": {
+      "azan": "18:43",
+      "iqamah": "18:48"
+    },
+    "isha": {
+      "azan": "20:01",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-02": {
+    "fajr": {
+      "azan": "05:31",
+      "iqamah": "06:15"
+    },
+    "shuruq": "07:03",
+    "zuhr": {
+      "azan": "12:53",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:46",
+      "iqamah": "17:15"
+    },
+    "maghrib": {
+      "azan": "18:41",
+      "iqamah": "18:46"
+    },
+    "isha": {
+      "azan": "20:02",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-03": {
+    "fajr": {
+      "azan": "05:33",
+      "iqamah": "06:15"
+    },
+    "shuruq": "07:06",
+    "zuhr": {
+      "azan": "12:52",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:42",
+      "iqamah": "17:15"
+    },
+    "maghrib": {
+      "azan": "18:37",
+      "iqamah": "18:42"
+    },
+    "isha": {
+      "azan": "20:00",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-04": {
+    "fajr": {
+      "azan": "05:34",
+      "iqamah": "06:15"
+    },
+    "shuruq": "07:08",
+    "zuhr": {
+      "azan": "12:52",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:40",
+      "iqamah": "17:15"
+    },
+    "maghrib": {
+      "azan": "18:34",
+      "iqamah": "18:39"
+    },
+    "isha": {
+      "azan": "19:58",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-05": {
+    "fajr": {
+      "azan": "05:36",
+      "iqamah": "06:25"
+    },
+    "shuruq": "07:10",
+    "zuhr": {
+      "azan": "12:52",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:38",
+      "iqamah": "17:15"
+    },
+    "maghrib": {
+      "azan": "18:32",
+      "iqamah": "18:37"
+    },
+    "isha": {
+      "azan": "19:56",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-06": {
+    "fajr": {
+      "azan": "05:38",
+      "iqamah": "06:25"
+    },
+    "shuruq": "07:11",
+    "zuhr": {
+      "azan": "12:52",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:36",
+      "iqamah": "17:15"
+    },
+    "maghrib": {
+      "azan": "18:30",
+      "iqamah": "18:35"
+    },
+    "isha": {
+      "azan": "19:54",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-07": {
+    "fajr": {
+      "azan": "05:40",
+      "iqamah": "06:25"
+    },
+    "shuruq": "07:13",
+    "zuhr": {
+      "azan": "12:51",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:34",
+      "iqamah": "17:15"
+    },
+    "maghrib": {
+      "azan": "18:28",
+      "iqamah": "18:33"
+    },
+    "isha": {
+      "azan": "19:52",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-08": {
+    "fajr": {
+      "azan": "05:41",
+      "iqamah": "06:25"
+    },
+    "shuruq": "07:15",
+    "zuhr": {
+      "azan": "12:51",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:32",
+      "iqamah": "17:15"
+    },
+    "maghrib": {
+      "azan": "18:25",
+      "iqamah": "18:30"
+    },
+    "isha": {
+      "azan": "19:49",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-09": {
+    "fajr": {
+      "azan": "05:43",
+      "iqamah": "06:25"
+    },
+    "shuruq": "07:15",
+    "zuhr": {
+      "azan": "12:51",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:32",
+      "iqamah": "17:00"
+    },
+    "maghrib": {
+      "azan": "18:25",
+      "iqamah": "18:30"
+    },
+    "isha": {
+      "azan": "19:47",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-10": {
+    "fajr": {
+      "azan": "05:45",
+      "iqamah": "06:25"
+    },
+    "shuruq": "07:18",
+    "zuhr": {
+      "azan": "12:50",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:28",
+      "iqamah": "17:00"
+    },
+    "maghrib": {
+      "azan": "18:21",
+      "iqamah": "18:26"
+    },
+    "isha": {
+      "azan": "19:45",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-11": {
+    "fajr": {
+      "azan": "05:46",
+      "iqamah": "06:35"
+    },
+    "shuruq": "07:20",
+    "zuhr": {
+      "azan": "12:50",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:26",
+      "iqamah": "17:00"
+    },
+    "maghrib": {
+      "azan": "18:19",
+      "iqamah": "18:24"
+    },
+    "isha": {
+      "azan": "19:43",
+      "iqamah": "20:30"
+    }
+  },
+  "2026-10-12": {
+    "fajr": {
+      "azan": "05:48",
+      "iqamah": "06:35"
+    },
+    "shuruq": "07:21",
+    "zuhr": {
+      "azan": "12:50",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:24",
+      "iqamah": "17:00"
+    },
+    "maghrib": {
+      "azan": "18:17",
+      "iqamah": "18:22"
+    },
+    "isha": {
+      "azan": "19:41",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-13": {
+    "fajr": {
+      "azan": "05:50",
+      "iqamah": "06:35"
+    },
+    "shuruq": "07:23",
+    "zuhr": {
+      "azan": "12:50",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:22",
+      "iqamah": "17:00"
+    },
+    "maghrib": {
+      "azan": "18:15",
+      "iqamah": "18:20"
+    },
+    "isha": {
+      "azan": "19:39",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-14": {
+    "fajr": {
+      "azan": "05:51",
+      "iqamah": "06:35"
+    },
+    "shuruq": "07:25",
+    "zuhr": {
+      "azan": "12:49",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:20",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:12",
+      "iqamah": "18:17"
+    },
+    "isha": {
+      "azan": "19:36",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-15": {
+    "fajr": {
+      "azan": "05:53",
+      "iqamah": "06:35"
+    },
+    "shuruq": "07:26",
+    "zuhr": {
+      "azan": "12:49",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:18",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:10",
+      "iqamah": "18:15"
+    },
+    "isha": {
+      "azan": "19:34",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-16": {
+    "fajr": {
+      "azan": "05:55",
+      "iqamah": "06:35"
+    },
+    "shuruq": "07:26",
+    "zuhr": {
+      "azan": "12:49",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:18",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:10",
+      "iqamah": "18:15"
+    },
+    "isha": {
+      "azan": "19:32",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-17": {
+    "fajr": {
+      "azan": "05:56",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:30",
+    "zuhr": {
+      "azan": "12:49",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:14",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:06",
+      "iqamah": "18:11"
+    },
+    "isha": {
+      "azan": "19:30",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-18": {
+    "fajr": {
+      "azan": "05:58",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:31",
+    "zuhr": {
+      "azan": "12:49",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:12",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:04",
+      "iqamah": "18:09"
+    },
+    "isha": {
+      "azan": "19:28",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-19": {
+    "fajr": {
+      "azan": "05:59",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:33",
+    "zuhr": {
+      "azan": "12:48",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:10",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:02",
+      "iqamah": "18:07"
+    },
+    "isha": {
+      "azan": "19:26",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-20": {
+    "fajr": {
+      "azan": "06:01",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:35",
+    "zuhr": {
+      "azan": "12:48",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:09",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "18:00",
+      "iqamah": "18:05"
+    },
+    "isha": {
+      "azan": "19:24",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-21": {
+    "fajr": {
+      "azan": "06:03",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:37",
+    "zuhr": {
+      "azan": "12:48",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:07",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "17:58",
+      "iqamah": "18:03"
+    },
+    "isha": {
+      "azan": "19:22",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-22": {
+    "fajr": {
+      "azan": "06:04",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:38",
+    "zuhr": {
+      "azan": "12:48",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:05",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "17:56",
+      "iqamah": "18:01"
+    },
+    "isha": {
+      "azan": "19:20",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-23": {
+    "fajr": {
+      "azan": "06:06",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:38",
+    "zuhr": {
+      "azan": "12:48",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:05",
+      "iqamah": "16:45"
+    },
+    "maghrib": {
+      "azan": "17:56",
+      "iqamah": "18:01"
+    },
+    "isha": {
+      "azan": "19:18",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-24": {
+    "fajr": {
+      "azan": "06:07",
+      "iqamah": "06:55"
+    },
+    "shuruq": "07:40",
+    "zuhr": {
+      "azan": "12:48",
+      "iqamah": "13:30"
+    },
+    "asr": {
+      "azan": "16:03",
+      "iqamah": "16:30"
+    },
+    "maghrib": {
+      "azan": "17:54",
+      "iqamah": "17:59"
+    },
+    "isha": {
+      "azan": "19:16",
+      "iqamah": "20:15"
+    }
+  },
+  "2026-10-25": {
+    "fajr": {
+      "azan": "05:09",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:43",
+    "zuhr": {
+      "azan": "11:48",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:59",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:50",
+      "iqamah": "16:55"
+    },
+    "isha": {
+      "azan": "18:14",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-10-26": {
+    "fajr": {
+      "azan": "05:11",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:45",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:57",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:48",
+      "iqamah": "16:53"
+    },
+    "isha": {
+      "azan": "18:12",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-10-27": {
+    "fajr": {
+      "azan": "05:13",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:47",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:56",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:46",
+      "iqamah": "16:51"
+    },
+    "isha": {
+      "azan": "18:10",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-10-28": {
+    "fajr": {
+      "azan": "05:14",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:49",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:54",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:44",
+      "iqamah": "16:49"
+    },
+    "isha": {
+      "azan": "18:08",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-10-29": {
+    "fajr": {
+      "azan": "05:15",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:50",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:52",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:42",
+      "iqamah": "16:47"
+    },
+    "isha": {
+      "azan": "18:04",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-10-30": {
+    "fajr": {
+      "azan": "05:17",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:52",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:49",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:40",
+      "iqamah": "16:45"
+    },
+    "isha": {
+      "azan": "18:02",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-10-31": {
+    "fajr": {
+      "azan": "05:18",
+      "iqamah": "05:55"
+    },
+    "shuruq": "06:54",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:49",
+      "iqamah": "15:30"
+    },
+    "maghrib": {
+      "azan": "16:38",
+      "iqamah": "16:43"
+    },
+    "isha": {
+      "azan": "18:00",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-01": {
+    "fajr": {
+      "azan": "05:20",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:56",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:47",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:37",
+      "iqamah": "16:42"
+    },
+    "isha": {
+      "azan": "18:03",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-02": {
+    "fajr": {
+      "azan": "05:21",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:57",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:45",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:35",
+      "iqamah": "16:40"
+    },
+    "isha": {
+      "azan": "18:01",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-03": {
+    "fajr": {
+      "azan": "05:23",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:59",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:44",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:33",
+      "iqamah": "16:38"
+    },
+    "isha": {
+      "azan": "17:59",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-04": {
+    "fajr": {
+      "azan": "05:25",
+      "iqamah": "06:10"
+    },
+    "shuruq": "06:59",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:44",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:33",
+      "iqamah": "16:38"
+    },
+    "isha": {
+      "azan": "17:58",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-05": {
+    "fajr": {
+      "azan": "05:26",
+      "iqamah": "06:10"
+    },
+    "shuruq": "07:03",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:40",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:30",
+      "iqamah": "16:35"
+    },
+    "isha": {
+      "azan": "17:57",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-06": {
+    "fajr": {
+      "azan": "05:28",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:04",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:39",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:28",
+      "iqamah": "16:33"
+    },
+    "isha": {
+      "azan": "17:56",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-07": {
+    "fajr": {
+      "azan": "05:29",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:06",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:37",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:26",
+      "iqamah": "16:31"
+    },
+    "isha": {
+      "azan": "17:54",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-08": {
+    "fajr": {
+      "azan": "05:31",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:08",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:36",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:25",
+      "iqamah": "16:30"
+    },
+    "isha": {
+      "azan": "17:52",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-09": {
+    "fajr": {
+      "azan": "05:32",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:10",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:34",
+      "iqamah": "15:00"
+    },
+    "maghrib": {
+      "azan": "16:23",
+      "iqamah": "16:28"
+    },
+    "isha": {
+      "azan": "17:50",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-10": {
+    "fajr": {
+      "azan": "05:34",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:11",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:33",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:22",
+      "iqamah": "16:27"
+    },
+    "isha": {
+      "azan": "17:49",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-11": {
+    "fajr": {
+      "azan": "05:35",
+      "iqamah": "06:20"
+    },
+    "shuruq": "07:13",
+    "zuhr": {
+      "azan": "11:47",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:31",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:20",
+      "iqamah": "16:25"
+    },
+    "isha": {
+      "azan": "17:48",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-12": {
+    "fajr": {
+      "azan": "05:37",
+      "iqamah": "06:30"
+    },
+    "shuruq": "07:15",
+    "zuhr": {
+      "azan": "11:48",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:30",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:19",
+      "iqamah": "16:24"
+    },
+    "isha": {
+      "azan": "17:47",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-13": {
+    "fajr": {
+      "azan": "05:38",
+      "iqamah": "06:30"
+    },
+    "shuruq": "07:17",
+    "zuhr": {
+      "azan": "11:48",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:29",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:17",
+      "iqamah": "16:22"
+    },
+    "isha": {
+      "azan": "17:45",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-14": {
+    "fajr": {
+      "azan": "05:40",
+      "iqamah": "06:30"
+    },
+    "shuruq": "07:18",
+    "zuhr": {
+      "azan": "11:48",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:27",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:16",
+      "iqamah": "16:21"
+    },
+    "isha": {
+      "azan": "17:44",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-15": {
+    "fajr": {
+      "azan": "05:41",
+      "iqamah": "06:30"
+    },
+    "shuruq": "07:20",
+    "zuhr": {
+      "azan": "11:48",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:26",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:15",
+      "iqamah": "16:20"
+    },
+    "isha": {
+      "azan": "17:43",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-16": {
+    "fajr": {
+      "azan": "05:42",
+      "iqamah": "06:30"
+    },
+    "shuruq": "07:22",
+    "zuhr": {
+      "azan": "11:48",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:25",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:13",
+      "iqamah": "16:18"
+    },
+    "isha": {
+      "azan": "17:42",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-17": {
+    "fajr": {
+      "azan": "05:44",
+      "iqamah": "06:30"
+    },
+    "shuruq": "07:23",
+    "zuhr": {
+      "azan": "11:48",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:24",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:12",
+      "iqamah": "16:17"
+    },
+    "isha": {
+      "azan": "17:41",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-18": {
+    "fajr": {
+      "azan": "05:45",
+      "iqamah": "06:40"
+    },
+    "shuruq": "07:25",
+    "zuhr": {
+      "azan": "11:49",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:23",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:11",
+      "iqamah": "16:16"
+    },
+    "isha": {
+      "azan": "17:40",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-19": {
+    "fajr": {
+      "azan": "05:47",
+      "iqamah": "06:40"
+    },
+    "shuruq": "07:27",
+    "zuhr": {
+      "azan": "11:49",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:21",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:09",
+      "iqamah": "16:14"
+    },
+    "isha": {
+      "azan": "17:39",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-20": {
+    "fajr": {
+      "azan": "05:48",
+      "iqamah": "06:40"
+    },
+    "shuruq": "07:28",
+    "zuhr": {
+      "azan": "11:49",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:20",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:08",
+      "iqamah": "16:13"
+    },
+    "isha": {
+      "azan": "17:38",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-21": {
+    "fajr": {
+      "azan": "05:49",
+      "iqamah": "06:40"
+    },
+    "shuruq": "07:30",
+    "zuhr": {
+      "azan": "11:49",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:19",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:07",
+      "iqamah": "16:12"
+    },
+    "isha": {
+      "azan": "17:37",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-22": {
+    "fajr": {
+      "azan": "05:51",
+      "iqamah": "06:40"
+    },
+    "shuruq": "07:32",
+    "zuhr": {
+      "azan": "11:50",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:18",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:06",
+      "iqamah": "16:11"
+    },
+    "isha": {
+      "azan": "17:36",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-23": {
+    "fajr": {
+      "azan": "05:52",
+      "iqamah": "06:40"
+    },
+    "shuruq": "07:33",
+    "zuhr": {
+      "azan": "11:50",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:17",
+      "iqamah": "14:45"
+    },
+    "maghrib": {
+      "azan": "16:05",
+      "iqamah": "16:10"
+    },
+    "isha": {
+      "azan": "17:35",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-24": {
+    "fajr": {
+      "azan": "05:54",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:35",
+    "zuhr": {
+      "azan": "11:50",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:16",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:04",
+      "iqamah": "16:09"
+    },
+    "isha": {
+      "azan": "17:34",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-25": {
+    "fajr": {
+      "azan": "05:55",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:36",
+    "zuhr": {
+      "azan": "11:50",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:16",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:03",
+      "iqamah": "16:08"
+    },
+    "isha": {
+      "azan": "17:33",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-26": {
+    "fajr": {
+      "azan": "05:56",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:36",
+    "zuhr": {
+      "azan": "11:50",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:16",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:03",
+      "iqamah": "16:08"
+    },
+    "isha": {
+      "azan": "17:32",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-27": {
+    "fajr": {
+      "azan": "05:57",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:39",
+    "zuhr": {
+      "azan": "11:51",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:14",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:01",
+      "iqamah": "16:06"
+    },
+    "isha": {
+      "azan": "17:32",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-28": {
+    "fajr": {
+      "azan": "05:59",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:41",
+    "zuhr": {
+      "azan": "11:51",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:13",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:01",
+      "iqamah": "16:06"
+    },
+    "isha": {
+      "azan": "17:31",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-29": {
+    "fajr": {
+      "azan": "06:00",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:42",
+    "zuhr": {
+      "azan": "11:52",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:13",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:00",
+      "iqamah": "16:05"
+    },
+    "isha": {
+      "azan": "17:31",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-11-30": {
+    "fajr": {
+      "azan": "06:01",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:44",
+    "zuhr": {
+      "azan": "11:52",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:12",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:59",
+      "iqamah": "16:04"
+    },
+    "isha": {
+      "azan": "17:30",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-01": {
+    "fajr": {
+      "azan": "06:02",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:45",
+    "zuhr": {
+      "azan": "11:53",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:11",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:59",
+      "iqamah": "16:04"
+    },
+    "isha": {
+      "azan": "17:30",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-02": {
+    "fajr": {
+      "azan": "06:03",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:47",
+    "zuhr": {
+      "azan": "11:53",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:11",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:58",
+      "iqamah": "16:03"
+    },
+    "isha": {
+      "azan": "17:30",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-03": {
+    "fajr": {
+      "azan": "06:05",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:48",
+    "zuhr": {
+      "azan": "11:53",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:10",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:57",
+      "iqamah": "16:02"
+    },
+    "isha": {
+      "azan": "17:29",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-04": {
+    "fajr": {
+      "azan": "06:06",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:49",
+    "zuhr": {
+      "azan": "11:54",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:10",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:57",
+      "iqamah": "16:02"
+    },
+    "isha": {
+      "azan": "17:29",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-05": {
+    "fajr": {
+      "azan": "06:07",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:50",
+    "zuhr": {
+      "azan": "11:54",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:10",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:57",
+      "iqamah": "16:02"
+    },
+    "isha": {
+      "azan": "17:29",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-06": {
+    "fajr": {
+      "azan": "06:08",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:52",
+    "zuhr": {
+      "azan": "11:55",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:56",
+      "iqamah": "16:01"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-07": {
+    "fajr": {
+      "azan": "06:09",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:53",
+    "zuhr": {
+      "azan": "11:55",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:56",
+      "iqamah": "16:01"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-08": {
+    "fajr": {
+      "azan": "06:10",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:54",
+    "zuhr": {
+      "azan": "11:55",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:56",
+      "iqamah": "16:01"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-09": {
+    "fajr": {
+      "azan": "06:11",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:55",
+    "zuhr": {
+      "azan": "11:56",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:55",
+      "iqamah": "16:00"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-10": {
+    "fajr": {
+      "azan": "06:12",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:56",
+    "zuhr": {
+      "azan": "11:56",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:55",
+      "iqamah": "16:00"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-11": {
+    "fajr": {
+      "azan": "06:13",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:56",
+    "zuhr": {
+      "azan": "11:56",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:55",
+      "iqamah": "16:00"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-12": {
+    "fajr": {
+      "azan": "06:14",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:58",
+    "zuhr": {
+      "azan": "11:57",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:55",
+      "iqamah": "16:00"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-13": {
+    "fajr": {
+      "azan": "06:14",
+      "iqamah": "06:45"
+    },
+    "shuruq": "07:59",
+    "zuhr": {
+      "azan": "11:58",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:55",
+      "iqamah": "16:00"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-14": {
+    "fajr": {
+      "azan": "06:15",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:00",
+    "zuhr": {
+      "azan": "11:58",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:55",
+      "iqamah": "16:00"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-15": {
+    "fajr": {
+      "azan": "06:16",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:01",
+    "zuhr": {
+      "azan": "11:59",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:55",
+      "iqamah": "16:00"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-16": {
+    "fajr": {
+      "azan": "06:17",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:02",
+    "zuhr": {
+      "azan": "11:59",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:56",
+      "iqamah": "16:01"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-17": {
+    "fajr": {
+      "azan": "06:18",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:02",
+    "zuhr": {
+      "azan": "12:00",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:09",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:56",
+      "iqamah": "16:01"
+    },
+    "isha": {
+      "azan": "17:28",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-18": {
+    "fajr": {
+      "azan": "06:18",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:03",
+    "zuhr": {
+      "azan": "12:00",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:10",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:56",
+      "iqamah": "16:01"
+    },
+    "isha": {
+      "azan": "17:29",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-19": {
+    "fajr": {
+      "azan": "06:19",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:04",
+    "zuhr": {
+      "azan": "12:01",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:10",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:57",
+      "iqamah": "16:02"
+    },
+    "isha": {
+      "azan": "17:29",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-20": {
+    "fajr": {
+      "azan": "06:19",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:04",
+    "zuhr": {
+      "azan": "12:01",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:11",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:57",
+      "iqamah": "16:02"
+    },
+    "isha": {
+      "azan": "17:30",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-21": {
+    "fajr": {
+      "azan": "06:20",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:05",
+    "zuhr": {
+      "azan": "12:02",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:11",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:57",
+      "iqamah": "16:02"
+    },
+    "isha": {
+      "azan": "17:31",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-22": {
+    "fajr": {
+      "azan": "06:21",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:05",
+    "zuhr": {
+      "azan": "12:02",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:12",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:58",
+      "iqamah": "16:03"
+    },
+    "isha": {
+      "azan": "17:31",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-23": {
+    "fajr": {
+      "azan": "06:21",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:06",
+    "zuhr": {
+      "azan": "12:03",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:12",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:58",
+      "iqamah": "16:03"
+    },
+    "isha": {
+      "azan": "17:31",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-24": {
+    "fajr": {
+      "azan": "06:21",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:06",
+    "zuhr": {
+      "azan": "12:03",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:13",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "15:59",
+      "iqamah": "16:04"
+    },
+    "isha": {
+      "azan": "17:32",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-25": {
+    "fajr": {
+      "azan": "06:22",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:04",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:13",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:00",
+      "iqamah": "16:05"
+    },
+    "isha": {
+      "azan": "17:32",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-26": {
+    "fajr": {
+      "azan": "06:22",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:04",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:14",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:00",
+      "iqamah": "16:05"
+    },
+    "isha": {
+      "azan": "17:32",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-27": {
+    "fajr": {
+      "azan": "06:22",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:05",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:15",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:01",
+      "iqamah": "16:06"
+    },
+    "isha": {
+      "azan": "17:33",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-28": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:05",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:16",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:02",
+      "iqamah": "16:07"
+    },
+    "isha": {
+      "azan": "17:34",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-29": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:06",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:17",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:03",
+      "iqamah": "16:08"
+    },
+    "isha": {
+      "azan": "17:35",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-30": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:06",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:18",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:04",
+      "iqamah": "16:09"
+    },
+    "isha": {
+      "azan": "17:36",
+      "iqamah": "19:00"
+    }
+  },
+  "2026-12-31": {
+    "fajr": {
+      "azan": "06:23",
+      "iqamah": "06:45"
+    },
+    "shuruq": "08:07",
+    "zuhr": {
+      "azan": "12:07",
+      "iqamah": "13:00"
+    },
+    "asr": {
+      "azan": "14:19",
+      "iqamah": "14:30"
+    },
+    "maghrib": {
+      "azan": "16:05",
+      "iqamah": "16:10"
+    },
+    "isha": {
+      "azan": "17:37",
+      "iqamah": "19:00"
+    }
+  }
+}

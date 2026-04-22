@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aldershot Islamic Centre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lora:wght@500;600;700&family=Raleway:wght@300;400;500;600&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="header" id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/images/logo.png" alt="Aldershot Islamic Centre">
+            </a>
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link active">HOME</a></li>
+                    <li><a href="#about" class="nav-link">ABOUT</a></li>
+                    <li><a href="#services" class="nav-link">SERVICES</a></li>
+                    <li><a href="activities.html" class="nav-link">ACTIVITIES</a></li>
+                    <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+                    <li><a href="#donate" class="nav-link nav-donate">DONATE</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Prayer Times Section -->
+    <section class="section prayer-times-hero" id="prayer-times">
+        <div class="container">
+            <div class="salah-widget" id="salah-widget">
+                <div class="salah-widget-header">
+                    <div class="title">
+                        <span class="icon-pill">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </span>
+                        Today's Prayer Times
+                    </div>
+                    <div class="salah-widget-clock">
+                        <span class="time" id="salah-time">--:--</span>
+                        <span class="hijri" id="salah-hijri">—</span>
+                        <span class="greg" id="salah-greg">—</span>
+                    </div>
+                </div>
+                <div class="salah-table" id="salah-table"></div>
+                <div class="jumma" id="salah-jumma"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(rgba(10, 63, 37, 0.78), rgba(14, 92, 54, 0.65)), url('assets/images/Masjid-1.png') center/cover no-repeat;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <p class="hero-arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+            <h1>Welcome to<br><span class="brand-name">Aldershot Islamic Centre</span></h1>
+            <p>A place of worship, learning, and community in the heart of Aldershot</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Our Services</a>
+                <a href="#events" class="btn btn-outline">Upcoming Events</a>
+                <a href="#donate" class="btn btn-outline">Donate</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-with-image">
+                <div class="about-text">
+                    <p>The Aldershot Islamic Centre was established by local brothers who recognised the need for a dedicated place of worship in our community. With sincerity, unity, and the help of Allah, they came together and opened a masjid in the heart of Aldershot, easily accessible for everyone who lives, works, or passes through the area. Today, our centre accommodates up to 150 worshippers at a time and serves as a welcoming home for Muslims of all backgrounds, offering a space for prayer, reflection, and connection.</p>
+                    <p>Beyond the daily prayers and Jumu'ah, we are committed to nurturing faith and character through our weekday Madrasah for children, Qur'an Tajw&imacr;d classes, Qur'anic Arabic, and our nightly Qur'an Circle after Maghrib/Isha. We regularly host community events, guest scholars, and educational programmes to help strengthen families and bring hearts together. Our masjid is run entirely by the community, and through your support, we aim to continue growing, improving our services, and serving as a centre of guidance, unity, and compassion for Aldershot and beyond.</p>
+                </div>
+                <div class="about-image">
+                    <img src="assets/images/Masjid-2.png" alt="Aldershot Islamic Centre prayer hall">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Our Masjid</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="assets/images/Masjid-1.png" alt="Masjid mihrab and prayer area">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/Masjid-2.png" alt="Masjid prayer hall">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="section events" id="events">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="events-grid">
+                <div class="events-empty">
+                    <p>No upcoming events at the moment. Please check back soon or follow us for updates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">&#9829;</div>
+                    <h3>Charity & Donation</h3>
+                    <p>Your donations help us maintain the house of Allah and support essential community services. Through your generosity, we are able to run daily prayers, classes, events, and support those in need. Every contribution, big or small, helps strengthen our masjid and benefits the entire community.</p>
+                    <a href="service-charity.html" class="btn btn-small">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">&#9961;</div>
+                    <h3>Mosque Development</h3>
+                    <p>Our masjid currently operates from a rented building with a high monthly cost, and we are working towards purchasing a permanent place that will serve the community for generations to come. With your support and generosity, we aim to establish a stable, long-term home for Muslims in Aldershot and the surrounding areas.</p>
+                    <a href="service-development.html" class="btn btn-small">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">&#128214;</div>
+                    <h3>Qur'an Circle</h3>
+                    <p>Every night after 'Isha, brothers gather to recite the Qur'an together in a calm and supportive environment. We correct recitation, review Tajw&imacr;d rules, and reflect briefly on meanings and lessons. All levels are welcome, and it is a beautiful opportunity to reconnect with Allah's words.</p>
+                    <a href="service-quran-circle.html" class="btn btn-small">Learn More</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">&#127891;</div>
+                    <h3>Madrasah</h3>
+                    <p>Our weekday Madrasah provides children aged 7&ndash;14 with structured learning in Qur'an (with Tajw&imacr;d), Islamic Studies, and Qur'anic Arabic. We aim to nurture good character, love for the deen, and confidence in their Islamic identity through engaging lessons and a caring environment.</p>
+                    <a href="service-madrasah.html" class="btn btn-small">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Welcome Banner -->
+    <section class="section welcome-banner">
+        <div class="container welcome-banner-content">
+            <p class="welcome-arabic">أَهْلًا وَسَهْلًا</p>
+            <h2>Everyone Is Welcome</h2>
+            <p>Our doors are open to people of all backgrounds. Whether you are a long-time member of the community or visiting for the first time, you will always find a warm welcome at Aldershot Islamic Centre.</p>
+        </div>
+    </section>
+
+    <!-- Donate Section -->
+    <section class="section donate" id="donate">
+        <div class="container donate-content">
+            <h2 class="section-title section-title-light">Support Your Masjid</h2>
+            <p>Your generosity keeps the masjid running and helps us serve the community. Every donation, no matter how small, makes a difference.</p>
+            <a href="contact.html" class="btn btn-primary btn-large">Get in Touch to Donate</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-about">
+                <img src="assets/images/logo.png" alt="Aldershot Islamic Centre" class="footer-logo">
+                <p>A welcoming home for Muslims of all backgrounds in Aldershot, offering a space for prayer, reflection, and connection.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="activities.html">Activities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Aldershot Islamic Centre<br>50a Station Rd, Aldershot GU11 1BG</p>
+                <p><a href="mailto:info@aldershotislamiccentre.org.uk">info@aldershotislamiccentre.org.uk</a></p>
+            </div>
+            <div class="footer-hours">
+                <h4>Opening Hours</h4>
+                <p>Open daily for all five prayers and Jumu'ah.</p>
+                <p>Madrasah and class timings vary. Please contact us for details.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Aldershot Islamic Centre. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/salah-widget.js"></script>
+</body>
+</html>

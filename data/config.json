@@ -1,0 +1,44 @@
+{
+  "mosque": {
+    "name": "Aldershot Islamic Centre",
+    "shortName": "AIC",
+    "logo": "assets/logo.png",
+    "website": "www.aldershotislamiccentre.org.uk"
+  },
+  "location": {
+    "address": "50 A Station Road, Aldershot GU11 1BG",
+    "city": "Aldershot",
+    "country": "United Kingdom",
+    "latitude": 51.2474,
+    "longitude": -0.7574,
+    "timezone": "Europe/London"
+  },
+  "jumma": {
+    "bst": [
+      { "label": "Jumu'ah 1", "jamaat": "13:30" },
+      { "label": "Jumu'ah 2", "jamaat": "14:00" }
+    ],
+    "gmt": [
+      { "label": "Jumu'ah 1", "jamaat": "12:30" },
+      { "label": "Jumu'ah 2", "jamaat": "13:00" }
+    ]
+  },
+  "rotation": {
+    "ayahHadithIntervalSeconds": 30
+  },
+  "donation": {
+    "accountName": "Aldershot Islamic Centre",
+    "sortCode": "52-41-56",
+    "accountNumber": "48442801",
+    "reference": "DONATION",
+    "message": "Support your masjid — Sadaqah Jariyah"
+  },
+  "whatsapp": {
+    "qrImage": "assets/whatsapp-qr.png",
+    "label": "Scan to join our WhatsApp group"
+  },
+  "admin": {
+    "refreshToken": "CHANGE-ME-BEFORE-DEPLOY",
+    "sheetCsvUrl": "https://docs.google.com/spreadsheets/d/1E0qBghTtZqtsMmy5xjMM3aPloAMbqARFKTJaTFK8vbU/export?format=csv&gid=0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.bracknell-ics.org.uk)",
+      "WebFetch(domain:gorgeous-lily-79fa56.netlify.app)",
+      "WebFetch(domain:mawaqit.net)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\imthi\\Documents\\AIC\\Website\\assets"
+    ]
+  }
+}

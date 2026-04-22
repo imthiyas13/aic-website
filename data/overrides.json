@@ -1,0 +1,27 @@
+{
+  "updatedAt": "2026-04-19T20:33:48Z",
+  "rules": [
+    {
+      "from": "2026-04-19",
+      "to": "2026-04-30",
+      "prayer": "isha",
+      "iqamah": "22:00",
+      "note": "Test override"
+    },
+    {
+      "from": "2026-04-19",
+      "to": "2026-04-30",
+      "prayer": "jumma1",
+      "iqamah": "13:30",
+      "note": "Test Jumma override"
+    },
+    {
+      "from": "2026-04-19",
+      "to": "2026-04-30",
+      "prayer": "jumma2",
+      "iqamah": "14:15",
+      "note": ""
+    }
+  ],
+  "errors": []
+}
