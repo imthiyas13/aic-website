@@ -1080,34 +1080,39 @@ img {
         gap: 32px;
     }
 
-    /* Salah widget — collapse to a 3-column layout (drop tomorrow column) */
+    /* Salah widget — keep 4 columns but compact sizing for mobile */
+    .prayer-times-hero .container {
+        padding: 0 8px;
+    }
     .salah-table .row {
-        grid-template-columns: 1.4fr 1fr 1fr;
-        padding: 6px 14px;
+        grid-template-columns: 0.85fr 1fr 1fr 1fr;
+        padding: 8px 4px;
+        gap: 4px;
     }
     .salah-table .row.head {
-        padding: 8px 14px;
-        letter-spacing: 0.12em;
+        padding: 10px 4px;
+        letter-spacing: 0.08em;
     }
     .salah-table .row.head .name,
     .salah-table .row.head .azan,
     .salah-table .row.head .iqamah,
     .salah-table .row.head .tomorrow {
-        font-size: 12px;
-    }
-    .salah-table .row .tomorrow,
-    .salah-table .row.head .tomorrow {
-        display: none;
+        font-size: 14px;
     }
     .salah-table .row .name .prayer-en {
-        font-size: 18px;
+        font-size: 21px;
     }
     .salah-table .row .name .prayer-ar {
-        font-size: 16px;
+        font-size: 18px;
     }
     .salah-table .row .azan,
-    .salah-table .row .iqamah {
-        font-size: 18px;
+    .salah-table .row .iqamah,
+    .salah-table .row .tomorrow {
+        font-size: 21px;
+    }
+    .salah-table .row .tomorrow {
+        padding: 8px 0;
+        margin: -8px 0;
     }
     .salah-widget-header {
         padding: 10px 14px;
@@ -1196,13 +1201,31 @@ img {
         padding: 28px 20px;
     }
 
+    .salah-table .row {
+        grid-template-columns: 0.8fr 1fr 1fr 1fr;
+        padding: 8px 4px;
+    }
     .salah-table .row .name {
         flex-direction: column;
         gap: 2px;
         align-items: flex-start;
     }
+    .salah-table .row .name .prayer-en {
+        font-size: 18px;
+    }
     .salah-table .row .name .prayer-ar {
-        font-size: 14px;
+        font-size: 16px;
+    }
+    .salah-table .row .azan,
+    .salah-table .row .iqamah,
+    .salah-table .row .tomorrow {
+        font-size: 18px;
+    }
+    .salah-table .row.head .name,
+    .salah-table .row.head .azan,
+    .salah-table .row.head .iqamah,
+    .salah-table .row.head .tomorrow {
+        font-size: 13px;
     }
 }
 
