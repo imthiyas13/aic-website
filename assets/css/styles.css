@@ -727,12 +727,8 @@ img {
 .salah-table .row.dim {
     background: rgba(14, 92, 54, 0.025);
 }
-.salah-table .row.dim .name .prayer-en {
-    font-size: 16px;
-    color: var(--text-dim);
-}
+.salah-table .row.dim .name .prayer-en,
 .salah-table .row.dim .name .prayer-ar {
-    font-size: 15px;
     color: var(--text-dim);
 }
 .salah-table .row.dim .azan,
@@ -740,7 +736,6 @@ img {
 .salah-table .row.dim .tomorrow {
     color: var(--text-dim);
     font-weight: 500;
-    font-size: 16px;
 }
 
 .salah-table .row.next {
