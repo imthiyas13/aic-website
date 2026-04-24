@@ -273,7 +273,10 @@ function findNextPrayer(dayData, tomorrowData, jummaList, timezone) {
     candidates.sort((a, b) => a.sortMin - b.sortMin);
 
     for (const c of candidates) {
-        if (c.sortMin >= nowMin) {
+        // Jumu'ah transitions move on at the exact jamaat minute (strict future),
+        // while regular prayers remain "next" for the minute they start in.
+        const isUpcoming = c.isJumma ? c.sortMin > nowMin : c.sortMin >= nowMin;
+        if (isUpcoming) {
             return { ...c, minutesUntil: c.sortMin - nowMin, isTomorrow: false };
         }
     }
@@ -329,7 +332,7 @@ function decorateJumma(jummaEl, jummaList, timezone) {
     jummaList.forEach((j, i) => {
         if (!j.jamaat) return;
         const sortMin = toMinutes(j.jamaat);
-        if (sortMin < nowMin) return;
+        if (sortMin <= nowMin) return;
         const card = jummaEl.querySelector(`.card[data-jumma-index="${i}"]`);
         if (!card) return;
         card.classList.add('next');
