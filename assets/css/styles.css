@@ -767,7 +767,7 @@ img {
 
 .jumma .card {
     background: var(--accent-bg);
-    border: 1px solid var(--border-soft);
+    border: 2px solid var(--accent);
     border-radius: 10px;
     padding: 16px 20px;
     display: grid;
@@ -821,7 +821,7 @@ img {
 
 .jumma .card.next {
     background: var(--primary);
-    border-color: var(--primary);
+    border-color: var(--accent);
     box-shadow: 0 4px 14px rgba(14, 92, 54, 0.25);
 }
 
