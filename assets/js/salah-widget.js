@@ -284,17 +284,11 @@ function findNextPrayer(dayData, tomorrowData, jummaList, timezone) {
     return null;
 }
 
-function highlightNextPrayer(tableEl, jummaEl, next) {
+function highlightNextPrayer(tableEl, next) {
     tableEl.querySelectorAll('.row').forEach(r => r.classList.remove('next'));
-    jummaEl.querySelectorAll('.card').forEach(c => c.classList.remove('next'));
-    if (!next || next.isTomorrow) return;
-    if (next.isJumma) {
-        const card = jummaEl.querySelector(`.card[data-jumma-index="${next.jummaIndex}"]`);
-        if (card) card.classList.add('next');
-    } else {
-        const row = tableEl.querySelector(`.row[data-prayer="${next.key}"]`);
-        if (row) row.classList.add('next');
-    }
+    if (!next || next.isTomorrow || next.isJumma) return;
+    const row = tableEl.querySelector(`.row[data-prayer="${next.key}"]`);
+    if (row) row.classList.add('next');
 }
 
 function formatDuration(minutes) {
@@ -305,28 +299,43 @@ function formatDuration(minutes) {
     return `${m}m`;
 }
 
-// Attaches an "in 2h 14m" pill next to the Jama'ah time of the next prayer.
+// Attaches an "in 2h 14m" pill next to the Jama'ah time of the next prayer in the salah table.
 // If next is tomorrow's Fajr, attaches it to Fajr's Tomorrow cell instead.
-// If next is a Jumu'ah, attaches it underneath the matching Jumu'ah card.
-function attachNextBadge(tableEl, jummaEl, next) {
+// Jumu'ah badges are managed by decorateJumma — this function ignores Jumma cases.
+function attachNextBadge(tableEl, next) {
     tableEl.querySelectorAll('.next-badge').forEach(b => b.remove());
-    jummaEl.querySelectorAll('.next-badge').forEach(b => b.remove());
-    if (!next) return;
+    if (!next || next.isJumma) return;
     const badge = document.createElement('span');
     badge.className = 'next-badge';
     badge.textContent = `in ${formatDuration(next.minutesUntil)}`;
-    if (next.isJumma) {
-        const card = jummaEl.querySelector(`.card[data-jumma-index="${next.jummaIndex}"]`);
-        if (!card) return;
-        const body = card.querySelector('.body') || card;
-        body.appendChild(badge);
-        return;
-    }
     const row = tableEl.querySelector(`.row[data-prayer="${next.key}"]`);
     if (!row) return;
     const cell = next.isTomorrow ? row.querySelector('.tomorrow') : row.querySelector('.iqamah');
     if (!cell) return;
     cell.appendChild(badge);
+}
+
+// On Friday, highlight every Jumu'ah card whose time hasn't passed yet, and
+// attach an individual countdown badge underneath each one.
+function decorateJumma(jummaEl, jummaList, timezone) {
+    jummaEl.querySelectorAll('.card').forEach(c => c.classList.remove('next'));
+    jummaEl.querySelectorAll('.next-badge').forEach(b => b.remove());
+    if (!isFriday(timezone) || !jummaList) return;
+    const nowMin = nowMinutes(timezone);
+    jummaList.forEach((j, i) => {
+        if (!j.jamaat) return;
+        const sortMin = toMinutes(j.jamaat);
+        if (sortMin < nowMin) return;
+        const card = jummaEl.querySelector(`.card[data-jumma-index="${i}"]`);
+        if (!card) return;
+        card.classList.add('next');
+        const body = card.querySelector('.body') || card;
+        const badge = document.createElement('span');
+        badge.className = 'next-badge';
+        badge.dataset.jummaIndex = String(i);
+        badge.textContent = `in ${formatDuration(sortMin - nowMin)}`;
+        body.appendChild(badge);
+    });
 }
 
 function renderJumma(containerEl, jummaList) {
@@ -426,15 +435,18 @@ async function initSalahWidget() {
 
         const next = findNextPrayer(day, tomorrow, jummaList, tz);
         currentNext = next;
-        highlightNextPrayer(tableEl, jummaEl, next);
-        attachNextBadge(tableEl, jummaEl, next);
+        highlightNextPrayer(tableEl, next);
+        attachNextBadge(tableEl, next);
+        decorateJumma(jummaEl, jummaList, tz);
     };
 
-    // Per-second tick: refines the badge text into seconds during the final minute,
+    // Per-second tick: refines the soonest-prayer badge into seconds during the final minute,
     // and triggers a full update when the next prayer is reached.
     const tickBadge = () => {
         if (!currentNext) return;
-        const badge = widget.querySelector('.next-badge');
+        const badge = currentNext.isJumma
+            ? jummaEl.querySelector(`.card[data-jumma-index="${currentNext.jummaIndex}"] .next-badge`)
+            : tableEl.querySelector('.next-badge');
         if (!badge) return;
         const secs = secondsUntilNext(currentNext, tz);
         if (secs == null) return;

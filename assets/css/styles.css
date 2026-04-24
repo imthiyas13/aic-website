@@ -835,6 +835,16 @@ img {
     color: var(--accent-soft);
 }
 
+.jumma .card.next .next-badge {
+    background: var(--accent);
+    color: var(--primary-dark);
+}
+
+.jumma .card.next .next-badge.imminent {
+    background: #fff;
+    color: var(--primary-dark);
+}
+
 .salah-error {
     padding: 32px 28px;
     text-align: center;
