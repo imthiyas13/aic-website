@@ -820,29 +820,9 @@ img {
 }
 
 .jumma .card.next {
-    background: var(--primary);
+    background: rgba(14, 92, 54, 0.1);
     border-color: var(--accent);
-    box-shadow: 0 4px 14px rgba(14, 92, 54, 0.25);
-}
-
-.jumma .card.next .mosque-icon,
-.jumma .card.next .label,
-.jumma .card.next .times {
-    color: #fff;
-}
-
-.jumma .card.next .times small {
-    color: var(--accent-soft);
-}
-
-.jumma .card.next .next-badge {
-    background: var(--accent);
-    color: var(--primary-dark);
-}
-
-.jumma .card.next .next-badge.imminent {
-    background: #fff;
-    color: var(--primary-dark);
+    box-shadow: 0 4px 14px rgba(14, 92, 54, 0.15);
 }
 
 .salah-error {
