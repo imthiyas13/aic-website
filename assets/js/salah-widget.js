@@ -185,6 +185,10 @@ function isBST(timezone) {
 }
 
 function isFriday(timezone) {
+    // Allow preview overrides via ?friday=0 (force off) or ?friday=1 (force on).
+    const override = new URLSearchParams(window.location.search).get('friday');
+    if (override === '0') return false;
+    if (override === '1') return true;
     const fmt = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: timezone });
     return fmt.format(new Date()) === 'Fri';
 }
