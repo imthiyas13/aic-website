@@ -184,6 +184,11 @@ function isBST(timezone) {
     return tzOffsetMinutes(now, timezone) !== tzOffsetMinutes(jan, timezone);
 }
 
+function isFriday(timezone) {
+    const fmt = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: timezone });
+    return fmt.format(new Date()) === 'Fri';
+}
+
 function applyOverrides(day, dateKey, overrides) {
     if (!day) return day;
     const out = { ...day };
@@ -238,28 +243,55 @@ function renderSalahTable(tableEl, dayData, tomorrowData) {
 }
 
 // Returns the next upcoming prayer today, or tomorrow's Fajr if all of today's are past.
-// Shape: { key, label, iqamah, minutesUntil, isTomorrow }
-function findNextPrayer(dayData, tomorrowData, timezone) {
+// On Friday, Zuhr is replaced by Jumu'ah 1 and Jumu'ah 2 (which sit chronologically among the day's prayers).
+// Shape: { key, label, iqamah, minutesUntil, isTomorrow, isJumma, jummaIndex }
+function findNextPrayer(dayData, tomorrowData, jummaList, timezone) {
     if (!dayData) return null;
     const nowMin = nowMinutes(timezone);
+    const friday = isFriday(timezone);
+
+    const candidates = [];
     for (const p of PRAYERS) {
+        if (friday && p.key === 'zuhr') continue;
         const iqamah = dayData[p.key]?.iqamah;
         if (!iqamah) continue;
-        const iqMin = toMinutes(iqamah);
-        if (iqMin >= nowMin) {
-            return { key: p.key, label: p.label, iqamah, minutesUntil: iqMin - nowMin, isTomorrow: false };
+        candidates.push({ key: p.key, label: p.label, iqamah, sortMin: toMinutes(iqamah), isJumma: false });
+    }
+    if (friday && jummaList) {
+        jummaList.forEach((j, i) => {
+            if (!j.jamaat) return;
+            candidates.push({
+                key: `jumma${i + 1}`, label: j.label, iqamah: j.jamaat,
+                sortMin: toMinutes(j.jamaat), isJumma: true, jummaIndex: i,
+            });
+        });
+    }
+    candidates.sort((a, b) => a.sortMin - b.sortMin);
+
+    for (const c of candidates) {
+        if (c.sortMin >= nowMin) {
+            return { ...c, minutesUntil: c.sortMin - nowMin, isTomorrow: false };
         }
     }
     const fajr = tomorrowData?.fajr?.iqamah;
     if (fajr) {
-        return { key: 'fajr', label: 'Fajr', iqamah: fajr, minutesUntil: (24 * 60 - nowMin) + toMinutes(fajr), isTomorrow: true };
+        return {
+            key: 'fajr', label: 'Fajr', iqamah: fajr,
+            minutesUntil: (24 * 60 - nowMin) + toMinutes(fajr),
+            isTomorrow: true, isJumma: false,
+        };
     }
     return null;
 }
 
-function highlightNextPrayer(tableEl, next) {
+function highlightNextPrayer(tableEl, jummaEl, next) {
     tableEl.querySelectorAll('.row').forEach(r => r.classList.remove('next'));
-    if (next && !next.isTomorrow) {
+    jummaEl.querySelectorAll('.card').forEach(c => c.classList.remove('next'));
+    if (!next || next.isTomorrow) return;
+    if (next.isJumma) {
+        const card = jummaEl.querySelector(`.card[data-jumma-index="${next.jummaIndex}"]`);
+        if (card) card.classList.add('next');
+    } else {
         const row = tableEl.querySelector(`.row[data-prayer="${next.key}"]`);
         if (row) row.classList.add('next');
     }
@@ -275,22 +307,31 @@ function formatDuration(minutes) {
 
 // Attaches an "in 2h 14m" pill next to the Jama'ah time of the next prayer.
 // If next is tomorrow's Fajr, attaches it to Fajr's Tomorrow cell instead.
-function attachNextBadge(tableEl, next) {
+// If next is a Jumu'ah, attaches it underneath the matching Jumu'ah card.
+function attachNextBadge(tableEl, jummaEl, next) {
     tableEl.querySelectorAll('.next-badge').forEach(b => b.remove());
+    jummaEl.querySelectorAll('.next-badge').forEach(b => b.remove());
     if (!next) return;
+    const badge = document.createElement('span');
+    badge.className = 'next-badge';
+    badge.textContent = `in ${formatDuration(next.minutesUntil)}`;
+    if (next.isJumma) {
+        const card = jummaEl.querySelector(`.card[data-jumma-index="${next.jummaIndex}"]`);
+        if (!card) return;
+        const body = card.querySelector('.body') || card;
+        body.appendChild(badge);
+        return;
+    }
     const row = tableEl.querySelector(`.row[data-prayer="${next.key}"]`);
     if (!row) return;
     const cell = next.isTomorrow ? row.querySelector('.tomorrow') : row.querySelector('.iqamah');
     if (!cell) return;
-    const badge = document.createElement('span');
-    badge.className = 'next-badge';
-    badge.textContent = `in ${formatDuration(next.minutesUntil)}`;
     cell.appendChild(badge);
 }
 
 function renderJumma(containerEl, jummaList) {
-    containerEl.innerHTML = jummaList.map(j => `
-    <div class="card">
+    containerEl.innerHTML = jummaList.map((j, i) => `
+    <div class="card" data-jumma-index="${i}">
       <div class="mosque-icon">${MOSQUE_ICON}</div>
       <div class="body">
         <div class="label">${j.label}</div>
@@ -378,21 +419,22 @@ async function initSalahWidget() {
         const tomorrowKey = nextDayKey(key);
         const tomorrow = applyOverrides(salah[tomorrowKey], tomorrowKey, overrides);
         renderSalahTable(tableEl, day, tomorrow);
-        const next = findNextPrayer(day, tomorrow, tz);
-        currentNext = next;
-        highlightNextPrayer(tableEl, next);
-        attachNextBadge(tableEl, next);
 
         const baseList = isBST(tz) ? config.jumma.bst : config.jumma.gmt;
         const jummaList = applyJummaOverrides(baseList, key, overrides);
         renderJumma(jummaEl, jummaList);
+
+        const next = findNextPrayer(day, tomorrow, jummaList, tz);
+        currentNext = next;
+        highlightNextPrayer(tableEl, jummaEl, next);
+        attachNextBadge(tableEl, jummaEl, next);
     };
 
     // Per-second tick: refines the badge text into seconds during the final minute,
     // and triggers a full update when the next prayer is reached.
     const tickBadge = () => {
         if (!currentNext) return;
-        const badge = tableEl.querySelector('.next-badge');
+        const badge = widget.querySelector('.next-badge');
         if (!badge) return;
         const secs = secondsUntilNext(currentNext, tz);
         if (secs == null) return;

@@ -819,6 +819,22 @@ img {
     margin-top: 2px;
 }
 
+.jumma .card.next {
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 4px 14px rgba(14, 92, 54, 0.25);
+}
+
+.jumma .card.next .mosque-icon,
+.jumma .card.next .label,
+.jumma .card.next .times {
+    color: #fff;
+}
+
+.jumma .card.next .times small {
+    color: var(--accent-soft);
+}
+
 .salah-error {
     padding: 32px 28px;
     text-align: center;
@@ -1164,15 +1180,15 @@ img {
         min-width: 0;
     }
     .jumma .card .label {
-        font-size: 9px;
+        font-size: 13px;
         letter-spacing: 0.12em;
     }
     .jumma .card .times {
-        font-size: 18px;
+        font-size: 26px;
     }
     .jumma .card .times small {
-        font-size: 8px;
-        margin-top: 2px;
+        font-size: 12px;
+        margin-top: 4px;
     }
     .next-badge {
         font-size: 10px;
