@@ -767,7 +767,7 @@ img {
 
 .jumma .card {
     background: var(--accent-bg);
-    border: 2px solid var(--accent);
+    border: 2px solid transparent;
     border-radius: 10px;
     padding: 16px 20px;
     display: grid;
