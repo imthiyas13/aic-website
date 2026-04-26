@@ -752,6 +752,72 @@ img {
     font-weight: 700;
 }
 
+/* Eid Salah section — appears 7 days before Eid through end of Eid day.
+   Sits above the salah widget on the homepage. */
+.eid {
+    max-width: 1100px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, rgba(201, 160, 90, 0.22), rgba(14, 92, 54, 0.08));
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 20px 28px;
+    box-shadow: var(--shadow);
+}
+.eid-header {
+    text-align: center;
+    margin-bottom: 14px;
+}
+.eid-title {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    letter-spacing: 0.04em;
+}
+.eid-date {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+}
+.eid-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+.eid-card {
+    background: var(--panel-strong);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+}
+.eid-card .label {
+    font-size: 11px;
+    color: var(--primary);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+.eid-card .time {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+.eid-card .time small {
+    display: block;
+    font-size: 9px;
+    color: var(--primary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 2px;
+    font-weight: 600;
+}
+
 /* Jumma cards */
 .jumma {
     display: grid;
@@ -1179,6 +1245,18 @@ img {
         font-size: 13px;
         padding: 4px 12px;
     }
+    .eid {
+        margin: 0 14px 14px;
+        padding: 12px 12px;
+        border-width: 1px;
+    }
+    .eid-title { font-size: 16px; }
+    .eid-date { font-size: 10px; }
+    .eid-cards { gap: 6px; }
+    .eid-card { padding: 8px 6px; }
+    .eid-card .label { font-size: 8px; letter-spacing: 0.1em; margin-bottom: 4px; }
+    .eid-card .time { font-size: 16px; }
+    .eid-card .time small { font-size: 7px; }
     .prayer-times-hero {
         padding-top: 130px;
     }

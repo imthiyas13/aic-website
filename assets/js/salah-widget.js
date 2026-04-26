@@ -6,7 +6,10 @@ const PRAYERS = [
     { key: 'isha', label: 'Isha', arabic: 'العشاء' },
 ];
 
-const VALID_PRAYERS = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha', 'jumma1', 'jumma2'];
+const VALID_PRAYERS = ['fajr', 'zuhr', 'asr', 'maghrib', 'isha', 'jumma1', 'jumma2', 'eid1', 'eid2', 'eid3'];
+const EID_KEYS = ['eid1', 'eid2', 'eid3'];
+const EID_LABELS = ['1st Salah', '2nd Salah', '3rd Salah'];
+const EID_WINDOW_DAYS = 7;
 const SHEET_REFRESH_MS = 10 * 60 * 1000; // 10 minutes
 
 const SHURUQ_ARABIC = 'الشروق';
@@ -62,7 +65,12 @@ function parseCsv(text) {
 }
 
 function isValidDate(s) { return /^\d{4}-\d{2}-\d{2}$/.test(s) && !isNaN(Date.parse(s)); }
-function isValidTime(s) { return /^([01]\d|2[0-3]):[0-5]\d$/.test(s); }
+function isValidTime(s) { return /^([01]?\d|2[0-3]):[0-5]\d$/.test(s); }
+function normalizeTime(s) {
+    if (!isValidTime(s)) return s;
+    const [h, m] = s.split(':');
+    return `${h.padStart(2, '0')}:${m}`;
+}
 
 // Validates and normalizes sheet rows into the same shape as overrides.json.
 function parseSheetOverrides(csvText) {
@@ -88,7 +96,7 @@ function parseSheetOverrides(csvText) {
         if (date_to_raw && !isValidDate(date_to_raw)) { errors.push(`Row ${lineNo}: invalid date_to '${date_to_raw}'`); continue; }
         if (date_to < date_from) { errors.push(`Row ${lineNo}: date_to '${date_to_raw}' is before date_from '${date_from}'`); continue; }
         if (!isValidTime(iqamah)) { errors.push(`Row ${lineNo}: invalid time '${iqamah}'`); continue; }
-        rules.push({ from: date_from, to: date_to, prayer, iqamah, note });
+        rules.push({ from: date_from, to: date_to, prayer, iqamah: normalizeTime(iqamah), note });
     }
     return { rules, errors };
 }
@@ -345,6 +353,62 @@ function decorateJumma(jummaEl, jummaList, timezone) {
     });
 }
 
+function subtractDays(yyyy_mm_dd, days) {
+    const [y, m, d] = yyyy_mm_dd.split('-').map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, d));
+    dt.setUTCDate(dt.getUTCDate() - days);
+    const yy = dt.getUTCFullYear();
+    const mm = String(dt.getUTCMonth() + 1).padStart(2, '0');
+    const dd = String(dt.getUTCDate()).padStart(2, '0');
+    return `${yy}-${mm}-${dd}`;
+}
+
+// Find an Eid event from overrides whose display window includes today.
+// Window: (date_from - EID_WINDOW_DAYS) ... date_to (inclusive).
+// Eid entries are grouped by date_from so 3 rows on the same day = 1 event.
+function findActiveEid(overrides, todayKey) {
+    const eidRules = (overrides.rules || []).filter(r => EID_KEYS.includes(r.prayer));
+    if (eidRules.length === 0) return null;
+    const groups = {};
+    for (const r of eidRules) {
+        const key = r.from;
+        if (!groups[key]) groups[key] = { date: r.from, dateTo: r.to, note: '', prayers: {} };
+        groups[key].prayers[r.prayer] = r.iqamah;
+        if (r.note && !groups[key].note) groups[key].note = r.note;
+    }
+    for (const g of Object.values(groups)) {
+        const showFrom = subtractDays(g.date, EID_WINDOW_DAYS);
+        if (todayKey >= showFrom && todayKey <= g.dateTo) return g;
+    }
+    return null;
+}
+
+function renderEid(el, eid, timezone) {
+    if (!el) return;
+    if (!eid) { el.innerHTML = ''; el.hidden = true; return; }
+    el.hidden = false;
+    const [y, m, d] = eid.date.split('-').map(Number);
+    const dateFmt = new Intl.DateTimeFormat('en-GB', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: timezone,
+    });
+    const hijriStr = formatHijri(new Date(Date.UTC(y, m - 1, d, 12)));
+    const dateStr = dateFmt.format(new Date(Date.UTC(y, m - 1, d, 12)));
+    const cards = EID_KEYS
+        .map((k, i) => eid.prayers[k] ? `
+        <div class="eid-card">
+          <div class="label">${EID_LABELS[i]}</div>
+          <div class="time">${eid.prayers[k]}<small>Jama'ah</small></div>
+        </div>` : '')
+        .filter(Boolean)
+        .join('');
+    el.innerHTML = `
+      <div class="eid-header">
+        <div class="eid-title">${eid.note || 'Eid Salah'}</div>
+        <div class="eid-date">${dateStr} &middot; ${hijriStr}</div>
+      </div>
+      <div class="eid-cards">${cards}</div>`;
+}
+
 function renderJumma(containerEl, jummaList) {
     containerEl.innerHTML = jummaList.map((j, i) => `
     <div class="card" data-jumma-index="${i}">
@@ -381,12 +445,18 @@ function startClock(timeEl, gregEl, hijriEl, timezone) {
     const timeFmt = new Intl.DateTimeFormat('en-GB', {
         hour: '2-digit', minute: '2-digit', hour12: false, timeZone: timezone,
     });
+    const tzFmt = new Intl.DateTimeFormat('en-GB', {
+        timeZone: timezone, timeZoneName: 'short',
+    });
     const gregFmt = new Intl.DateTimeFormat('en-GB', {
         weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: timezone,
     });
     const tick = () => {
         const now = new Date();
-        if (timeEl) timeEl.textContent = timeFmt.format(now);
+        if (timeEl) {
+            const tzName = tzFmt.formatToParts(now).find(p => p.type === 'timeZoneName')?.value || '';
+            timeEl.textContent = `${timeFmt.format(now)} ${tzName}`;
+        }
         if (gregEl) gregEl.textContent = gregFmt.format(now);
         if (hijriEl) hijriEl.textContent = formatHijri(now);
     };
@@ -400,6 +470,7 @@ async function initSalahWidget() {
 
     const tableEl = document.getElementById('salah-table');
     const jummaEl = document.getElementById('salah-jumma');
+    const eidEl = document.getElementById('salah-eid');
     const timeEl = document.getElementById('salah-time');
     const gregEl = document.getElementById('salah-greg');
     const hijriEl = document.getElementById('salah-hijri');
@@ -439,6 +510,9 @@ async function initSalahWidget() {
         const baseList = isBST(tz) ? config.jumma.bst : config.jumma.gmt;
         const jummaList = applyJummaOverrides(baseList, key, overrides);
         renderJumma(jummaEl, jummaList);
+
+        const eid = findActiveEid(overrides, key);
+        renderEid(eidEl, eid, tz);
 
         const next = findNextPrayer(day, tomorrow, jummaList, tz);
         currentNext = next;
