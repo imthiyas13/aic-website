@@ -9,6 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lora:wght@500;600;700&family=Raleway:wght@300;400;500;600&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css?v=12">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/images/logo.png">
+    <meta name="theme-color" content="#0a3f25">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Aldershot IC">
 </head>
 <body>
     <!-- Navigation -->
@@ -38,6 +44,13 @@
     <!-- Prayer Times Section -->
     <section class="section prayer-times-hero" id="prayer-times">
         <div class="container">
+            <section class="notify-card mobile-only">
+                <div class="notify-text">
+                    <div class="notify-title">Daily reminder</div>
+                    <div class="notify-sub" id="notify-sub">Get a morning push when jama'ah times change.</div>
+                </div>
+                <button type="button" class="notify-btn" id="notify-btn" data-state="idle">Enable</button>
+            </section>
             <div class="eid" id="salah-eid" hidden></div>
             <div class="salah-widget" id="salah-widget">
                 <div class="salah-widget-header">
@@ -211,6 +224,14 @@
 
     <script src="assets/js/script.js"></script>
     <script src="assets/js/salah-widget.js"></script>
+    <script src="assets/js/notifications.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').catch(console.error);
+            });
+        }
+    </script>
 </body>
 </html>
         
