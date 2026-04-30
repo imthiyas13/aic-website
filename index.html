@@ -44,6 +44,14 @@
     <!-- Prayer Times Section -->
     <section class="section prayer-times-hero" id="prayer-times">
         <div class="container">
+            <section class="install-card" id="install-card" hidden>
+                <div class="install-text">
+                    <div class="install-title">Install app</div>
+                    <div class="install-sub">Add to your home screen for quick access and offline use.</div>
+                </div>
+                <button type="button" class="install-btn" id="install-btn">Install</button>
+                <button type="button" class="install-dismiss" id="install-dismiss" aria-label="Dismiss">&times;</button>
+            </section>
             <section class="notify-card mobile-only">
                 <div class="notify-text">
                     <div class="notify-title">Daily reminder</div>
@@ -225,6 +233,7 @@
     <script src="assets/js/script.js"></script>
     <script src="assets/js/salah-widget.js"></script>
     <script src="assets/js/notifications.js"></script>
+    <script src="assets/js/install.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

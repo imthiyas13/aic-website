@@ -752,6 +752,66 @@ img {
     font-weight: 700;
 }
 
+/* Install banner — shown when the browser confirms the site is installable */
+.install-card {
+    max-width: 1100px;
+    margin: 0 auto 14px;
+    background: var(--primary-dark);
+    color: #fff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.install-card[hidden] { display: none; }
+.install-card .install-text { flex: 1; min-width: 0; }
+.install-card .install-title {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.04em;
+}
+.install-card .install-sub {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.78);
+    margin-top: 2px;
+    line-height: 1.4;
+}
+.install-card .install-btn {
+    flex-shrink: 0;
+    background: var(--accent);
+    color: var(--primary-dark);
+    border: none;
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+.install-card .install-btn:hover { background: var(--accent-soft); }
+.install-card .install-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.install-card .install-dismiss {
+    flex-shrink: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    font-size: 22px;
+    line-height: 1;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+.install-card .install-dismiss:hover { color: #fff; }
+
 /* Daily reminder card — only visible on phones (≤768px) */
 .notify-card.mobile-only {
     display: none;

@@ -91,7 +91,11 @@ async function setupNotificationToggle() {
     }
 
     const existing = await getPushSubscription();
-    setNotifyButtonState(btn, sub, existing ? 'enabled' : 'idle');
+    if (existing) {
+        card.hidden = true;
+        return;
+    }
+    setNotifyButtonState(btn, sub, 'idle');
 
     btn.addEventListener('click', async () => {
         const isEnabled = btn.dataset.state === 'enabled';
@@ -109,7 +113,8 @@ async function setupNotificationToggle() {
                     }
                 }
                 await subscribeToPush();
-                setNotifyButtonState(btn, sub, 'enabled');
+                card.hidden = true;
+                return;
             }
         } catch (err) {
             console.error(err);
