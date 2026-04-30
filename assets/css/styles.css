@@ -816,6 +816,7 @@ img {
 .notify-card.mobile-only {
     display: none;
 }
+.notify-card[hidden] { display: none !important; }
 .notify-card {
     max-width: 1100px;
     margin: 0 auto 14px;

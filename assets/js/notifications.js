@@ -80,6 +80,10 @@ async function setupNotificationToggle() {
     const btn = document.getElementById('notify-btn');
     const sub = document.getElementById('notify-sub');
 
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+        || window.navigator.standalone === true;
+    if (!isStandalone) { card.hidden = true; return; }
+
     if (!NOTIFICATIONS_WORKER_URL) { card.hidden = true; return; }
     if (!('Notification' in window) || !('serviceWorker' in navigator) || !('PushManager' in window)) {
         setNotifyButtonState(btn, sub, 'unsupported');
