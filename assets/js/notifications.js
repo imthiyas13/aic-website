@@ -80,25 +80,27 @@ async function setupNotificationToggle() {
     const btn = document.getElementById('notify-btn');
     const sub = document.getElementById('notify-sub');
 
+    // Card stays hidden (HTML default) unless every gate below passes.
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches
         || window.navigator.standalone === true;
-    if (!isStandalone) { card.hidden = true; return; }
+    if (!isStandalone) return;
+    if (!NOTIFICATIONS_WORKER_URL) return;
 
-    if (!NOTIFICATIONS_WORKER_URL) { card.hidden = true; return; }
     if (!('Notification' in window) || !('serviceWorker' in navigator) || !('PushManager' in window)) {
+        card.hidden = false;
         setNotifyButtonState(btn, sub, 'unsupported');
         return;
     }
     if (Notification.permission === 'denied') {
+        card.hidden = false;
         setNotifyButtonState(btn, sub, 'denied');
         return;
     }
 
     const existing = await getPushSubscription();
-    if (existing) {
-        card.hidden = true;
-        return;
-    }
+    if (existing) return;
+
+    card.hidden = false;
     setNotifyButtonState(btn, sub, 'idle');
 
     btn.addEventListener('click', async () => {
