@@ -55,7 +55,7 @@ function setNotifyButtonState(btn, sub, state) {
     btn.dataset.state = state;
     if (state === 'enabled') {
         btn.textContent = 'Enabled · tap to disable';
-        sub.textContent = "You'll get a morning push when jama'ah times change.";
+        sub.textContent = "You'll get a morning alert when jama'ah times change.";
     } else if (state === 'denied') {
         btn.textContent = 'Blocked';
         btn.disabled = true;
@@ -70,7 +70,7 @@ function setNotifyButtonState(btn, sub, state) {
     } else {
         btn.textContent = 'Enable';
         btn.disabled = false;
-        sub.textContent = "Get a morning push when jama'ah times change.";
+        sub.textContent = "Get a morning alert when jama'ah times change.";
     }
 }
 
