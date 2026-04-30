@@ -63,7 +63,7 @@ function setNotifyButtonState(btn, sub, state) {
     } else if (state === 'unsupported') {
         btn.textContent = 'Not supported';
         btn.disabled = true;
-        sub.textContent = 'Push notifications are not available on this device. Install to home screen first.';
+        sub.textContent = 'Prayer alerts are not available on this device. Install to home screen first.';
     } else if (state === 'busy') {
         btn.textContent = 'Working…';
         btn.disabled = true;
