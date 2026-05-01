@@ -143,6 +143,10 @@ img {
     background: var(--primary-dark);
 }
 
+.mobile-donate {
+    display: none;
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -1163,6 +1167,25 @@ img {
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
+    }
+
+    .mobile-donate {
+        display: inline-flex;
+        align-items: center;
+        background: var(--primary);
+        color: var(--panel-strong);
+        padding: 9px 18px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .mobile-donate:hover,
+    .mobile-donate:focus {
+        background: var(--primary-dark);
+        color: var(--panel-strong);
     }
 
     .nav {
