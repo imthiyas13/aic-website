@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lora:wght@500;600;700&family=Raleway:wght@300;400;500;600&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=13">
+    <link rel="stylesheet" href="assets/css/styles.css?v=14">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/assets/images/logo.png">
@@ -46,9 +46,125 @@
         <div class="container">
             <p>Charity is at the heart of our community, and your donations play a vital role in keeping the masjid running smoothly throughout the year. From covering essential expenses such as rent, utilities, maintenance, and cleaning, to supporting our educational programmes and community services, every contribution helps us serve you better.</p>
             <p>The masjid relies entirely on the generosity of worshippers, and your support ensures that this house of Allah remains open, active, and welcoming for everyone&mdash;whether they come daily or only for Jumu'ah. By giving for the sake of Allah, you help build a stronger, more connected Muslim community in Aldershot.</p>
-            <p style="text-align: center; margin-top: 32px;">
+            <p style="text-align: center; margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
                 <a href="https://buy.stripe.com/6oU9AS248g82bq5fEr1kA00" class="btn btn-primary btn-large" target="_blank" rel="noopener">Donate Now</a>
+                <a href="#direct-debit" class="btn btn-small">Set up Monthly Direct Debit</a>
             </p>
+        </div>
+    </section>
+
+    <!-- Direct Debit Form -->
+    <section class="dd-section" id="direct-debit">
+        <div class="container">
+            <div class="dd-card">
+                <header class="dd-header">
+                    <h2>Set Up a Monthly Direct Debit</h2>
+                    <p>Support the masjid with a regular monthly gift. Complete the form below &mdash; you'll then be guided to GoCardless to securely authorise your bank.</p>
+                </header>
+
+                <form id="dd-form" class="dd-form" novalidate>
+                    <fieldset class="dd-fieldset">
+                        <legend>1. Your Details</legend>
+
+                        <div class="form-row form-row-split">
+                            <label class="form-field field-narrow">
+                                <span class="form-label">Title</span>
+                                <select name="title" autocomplete="honorific-prefix">
+                                    <option value="">&mdash;</option>
+                                    <option>Mr</option>
+                                    <option>Mrs</option>
+                                    <option>Miss</option>
+                                    <option>Ms</option>
+                                    <option>Dr</option>
+                                </select>
+                            </label>
+                            <label class="form-field">
+                                <span class="form-label">Full Name <em>*</em></span>
+                                <input type="text" name="fullName" required autocomplete="name" autocapitalize="words">
+                            </label>
+                        </div>
+
+                        <label class="form-field">
+                            <span class="form-label">Address Line 1 <em>*</em></span>
+                            <input type="text" name="address" required autocomplete="address-line1" autocapitalize="words">
+                        </label>
+
+                        <div class="form-row">
+                            <label class="form-field">
+                                <span class="form-label">Town / City <em>*</em></span>
+                                <input type="text" name="town" required autocomplete="address-level2" autocapitalize="words">
+                            </label>
+                            <label class="form-field field-narrow">
+                                <span class="form-label">Postcode <em>*</em></span>
+                                <input type="text" name="postcode" required autocomplete="postal-code" autocapitalize="characters">
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="form-field">
+                                <span class="form-label">Email <em>*</em></span>
+                                <input type="email" name="email" required autocomplete="email" inputmode="email">
+                            </label>
+                            <label class="form-field">
+                                <span class="form-label">Phone <em>*</em></span>
+                                <input type="tel" name="phone" required autocomplete="tel" inputmode="tel">
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="dd-fieldset">
+                        <legend>2. Your Donation</legend>
+
+                        <div class="form-row">
+                            <label class="form-field">
+                                <span class="form-label">Amount (&pound;) <em>*</em></span>
+                                <div class="input-with-prefix">
+                                    <span class="input-prefix">&pound;</span>
+                                    <input type="number" name="amount" min="1" step="1" required inputmode="decimal" placeholder="20">
+                                </div>
+                            </label>
+                            <label class="form-field">
+                                <span class="form-label">Frequency</span>
+                                <input type="text" value="Monthly" readonly tabindex="-1" class="readonly-input">
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <label class="form-field">
+                                <span class="form-label">Start Date <em>*</em></span>
+                                <input type="date" name="startDate" required>
+                            </label>
+                            <label class="form-field">
+                                <span class="form-label">Purpose <em>*</em></span>
+                                <select name="purpose" required>
+                                    <option value="">Select&hellip;</option>
+                                    <option>General</option>
+                                    <option>Madrasa</option>
+                                    <option>Building Fund</option>
+                                    <option>Sadaqah</option>
+                                    <option>Zakat</option>
+                                </select>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <p class="dd-secure-note">
+                        <span class="lock-icon" aria-hidden="true">&#128274;</span>
+                        Your bank account details are <strong>not</strong> collected on this page. After you continue, GoCardless will securely capture them on their own page, protected by the Direct Debit Guarantee.
+                    </p>
+
+                    <div class="dd-actions">
+                        <button type="submit" class="btn btn-primary btn-large" id="dd-submit">Continue to GoCardless</button>
+                    </div>
+
+                    <div id="dd-status" class="dd-status" role="status" aria-live="polite" hidden></div>
+                </form>
+
+                <footer class="dd-footer">
+                    <p><strong>Aldershot Islamic Centre</strong> &middot; Registered Charity No. 1214576 &middot; Powered by GoCardless</p>
+                </footer>
+            </div>
+
             <a href="index.html#services" class="back-link">&larr; Back to Services</a>
         </div>
     </section>
@@ -80,9 +196,10 @@
                 <p>Madrasah and class timings vary. Please contact us for details.</p>
             </div>
         </div>
-        <div class="footer-bottom"><div class="container"><p>&copy; 2026 Aldershot Islamic Centre. All rights reserved.</p></div></div>
+        <div class="footer-bottom"><div class="container"><p>&copy; 2026 Aldershot Islamic Centre. Registered Charity No. 1214576. All rights reserved.</p></div></div>
     </footer>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/direct-debit.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {

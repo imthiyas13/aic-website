@@ -1495,6 +1495,268 @@ img {
     text-decoration: underline;
 }
 
+/* ===== Direct Debit Form ===== */
+.dd-section {
+    padding: 20px 0 80px;
+}
+
+.dd-section .container {
+    max-width: 760px;
+}
+
+.dd-card {
+    background: var(--panel-strong);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+.dd-header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    color: #fff;
+    padding: 32px 28px;
+    text-align: center;
+}
+
+.dd-header h2 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.dd-header p {
+    font-size: 15px;
+    color: var(--accent-soft);
+    font-weight: 300;
+    margin: 0;
+}
+
+.dd-form {
+    padding: 28px;
+}
+
+.dd-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 28px;
+}
+
+.dd-fieldset legend {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+    border-bottom: 2px solid var(--accent);
+    width: 100%;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.form-row-split {
+    grid-template-columns: 100px 1fr;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+
+.form-row .form-field {
+    margin-bottom: 0;
+}
+
+.form-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: 0.2px;
+}
+
+.form-label em {
+    color: var(--danger);
+    font-style: normal;
+    margin-left: 2px;
+}
+
+.dd-form input[type="text"],
+.dd-form input[type="email"],
+.dd-form input[type="tel"],
+.dd-form input[type="number"],
+.dd-form input[type="date"],
+.dd-form select {
+    font-family: var(--sans);
+    font-size: 16px; /* 16px+ prevents iOS zoom on focus */
+    font-weight: 400;
+    color: var(--text);
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    min-height: 48px; /* touch target */
+}
+
+.dd-form select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3e%3cpath fill='%230e5c36' d='M6 8L0 0h12z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+}
+
+.dd-form input:focus,
+.dd-form select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
+}
+
+.dd-form input:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: var(--danger);
+}
+
+.readonly-input {
+    background: var(--bg-soft) !important;
+    color: var(--text-dim) !important;
+    cursor: not-allowed;
+}
+
+.input-with-prefix {
+    position: relative;
+}
+
+.input-with-prefix .input-prefix {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--text-dim);
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.input-with-prefix input {
+    padding-left: 28px !important;
+}
+
+.dd-secure-note {
+    background: var(--accent-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text);
+    margin: 20px 0 24px;
+}
+
+.dd-secure-note .lock-icon {
+    margin-right: 6px;
+}
+
+.dd-actions {
+    text-align: center;
+}
+
+.dd-actions .btn {
+    width: 100%;
+    max-width: 360px;
+}
+
+.dd-status {
+    margin-top: 20px;
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.dd-status.success {
+    background: rgba(14, 92, 54, 0.08);
+    border: 1px solid var(--primary);
+    color: var(--primary-dark);
+}
+
+.dd-status.error {
+    background: rgba(192, 57, 43, 0.08);
+    border: 1px solid var(--danger);
+    color: var(--danger);
+}
+
+.dd-footer {
+    padding: 18px 28px;
+    background: var(--bg-soft);
+    border-top: 1px solid var(--border-soft);
+    text-align: center;
+}
+
+.dd-footer p {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin: 0;
+}
+
+@media (max-width: 560px) {
+    .dd-section {
+        padding: 10px 0 60px;
+    }
+    .dd-section .container {
+        padding: 0 14px;
+    }
+    .dd-card {
+        border-radius: 10px;
+    }
+    .dd-header {
+        padding: 24px 20px;
+    }
+    .dd-header h2 {
+        font-size: 22px;
+    }
+    .dd-header p {
+        font-size: 14px;
+    }
+    .dd-form {
+        padding: 22px 18px;
+    }
+    .dd-fieldset legend {
+        font-size: 16px;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    .form-row .form-field {
+        margin-bottom: 14px;
+    }
+    .form-row-split {
+        grid-template-columns: 90px 1fr;
+        gap: 12px;
+    }
+    .form-row-split .form-field {
+        margin-bottom: 0;
+    }
+    .dd-actions .btn {
+        max-width: 100%;
+    }
+}
+
 /* ===== Activities Page ===== */
 .activity-block {
     margin-bottom: 60px;
