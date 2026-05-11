@@ -1,8 +1,18 @@
 # Direct Debit Form — Backend Setup
 
 The form on `service-charity.html` (`#direct-debit`) submits to a Google Apps
-Script web app that writes each signup to a Google Sheet and (optionally)
-creates a GoCardless billing request flow.
+Script web app. The script:
+
+1. Appends each signup to a Google Sheet (audit log).
+2. Calls the Stripe API to create a **Checkout Session** in subscription
+   mode with **BACS Direct Debit** at the donor's chosen monthly amount.
+3. Returns the session URL — the frontend redirects the donor to Stripe.
+4. The donor enters their sort code / account number on Stripe's hosted
+   page. Stripe creates the customer, mandate, and monthly subscription.
+5. Stripe collects the subscription each month automatically (no further
+   action needed from the masjid).
+
+Bank account details never touch our servers or the Google Sheet.
 
 ## 1. Create the Google Sheet
 
@@ -12,26 +22,30 @@ creates a GoCardless billing request flow.
 ## 2. Create the Apps Script project
 
 1. From the sheet: **Extensions → Apps Script**.
-2. Delete the placeholder `Code.gs` and paste in the contents of
+2. Delete `Code.gs` and paste in the contents of
    [`direct-debit.gs`](direct-debit.gs).
 3. Replace `PASTE_YOUR_GOOGLE_SHEET_ID_HERE` with the sheet ID from step 1.
 4. Save (disk icon).
 
-## 3. (Optional) Wire up GoCardless auto-redirect
+## 3. Enable BACS Direct Debit in Stripe
 
-If you skip this, the form still works — signups land in the sheet and an
-email goes to `info@aldershotislamiccentre.org.uk`. You then send the donor
-a GoCardless link manually.
+1. Log into the Stripe Dashboard.
+2. Go to **Settings → Payments → Payment methods**.
+3. Enable **BACS Direct Debit**.
+4. Complete the verification Stripe asks for (charity name, address,
+   service user number is assigned automatically).
+5. Note: BACS DD subscriptions only work in GBP and only for UK customers.
 
-To auto-create a GoCardless billing request flow and redirect the donor:
+## 4. Add the Stripe secret key to Apps Script
 
-1. Get a GoCardless access token: <https://manage.gocardless.com/developers/access-tokens>
-   (start with **sandbox** for testing).
-2. In Apps Script: **Project Settings (⚙) → Script Properties → Add property**:
-   - `GOCARDLESS_ACCESS_TOKEN` = `sandbox_xxx…` (or `live_xxx…`)
-   - `GOCARDLESS_ENV` = `sandbox` (or `live`)
+1. In Stripe Dashboard: **Developers → API keys** → copy your **secret key**
+   (`sk_live_…` for production, `sk_test_…` for testing).
+2. In Apps Script: **⚙ Project Settings → Script Properties → Add property**:
+   - Name: `STRIPE_SECRET_KEY`
+   - Value: `sk_test_…` (start in test mode)
+3. Save.
 
-## 4. Deploy as web app
+## 5. Deploy as web app
 
 1. **Deploy → New deployment → ⚙ → Web app**.
 2. Settings:
@@ -40,28 +54,57 @@ To auto-create a GoCardless billing request flow and redirect the donor:
 3. Click **Deploy**, authorise when prompted.
 4. Copy the **Web app URL** (ends in `/exec`).
 
-## 5. Paste the URL into the website
+## 6. Paste the URL into the website
 
 Open [`../assets/js/direct-debit.js`](../assets/js/direct-debit.js) and replace
-`REPLACE_WITH_APPS_SCRIPT_WEB_APP_URL` with the URL from step 4.
+`REPLACE_WITH_APPS_SCRIPT_WEB_APP_URL` (line 8) with the URL from step 5.
 
-## 6. Test
+## 7. Test in Stripe test mode
 
-1. Open `service-charity.html` in a browser, scroll to the form.
-2. Submit with test data.
-3. Check the sheet — a new row should appear.
-4. Check `info@aldershotislamiccentre.org.uk` — a notification email should arrive.
-5. If GoCardless is wired up, you'll be redirected to their hosted page.
+1. Open `service-charity.html`, scroll to the form.
+2. Fill in test details, set amount to e.g. £5, choose a purpose, submit.
+3. You should be redirected to Stripe Checkout.
+4. Use Stripe's test BACS DD details:
+   - Sort code: `10-88-00`
+   - Account number: `00012345`
+   - Name on account: anything
+5. Complete checkout. You should land back on `service-charity.html?dd=success`.
+6. Check the Stripe Dashboard → Customers / Subscriptions — the subscription
+   should be listed with status `active` (or `incomplete` until the BACS
+   mandate clears, usually 3 working days).
+7. Check the Google Sheet — a new row should be present.
+8. Check `info@aldershotislamiccentre.org.uk` for the notification email.
 
-## Re-deploying after changes
+Test card / DD references: <https://stripe.com/docs/testing#bacs-direct-debit>
 
-After editing `direct-debit.gs`: **Deploy → Manage deployments → ✏ (edit) →
-Version: New version → Deploy**. The URL stays the same.
+## 8. Go live
+
+1. In Stripe Dashboard, toggle from test to live mode.
+2. Generate a live secret key (`sk_live_…`) and update the Apps Script
+   `STRIPE_SECRET_KEY` property.
+3. **Deploy → Manage deployments → ✏ → Version: New version → Deploy**
+   (URL stays the same).
+
+## Re-deploying after code changes
+
+After editing `direct-debit.gs`: **Deploy → Manage deployments → ✏ →
+Version: New version → Deploy**. The URL doesn't change.
 
 ## What the form does NOT collect
 
-The page collects: title, name, address, email, phone, amount, start date, purpose.
+Page fields: title, name, address, town, postcode, email, phone, amount,
+start date, purpose.
 
-It does **not** collect sort code or account number — those are captured on
-GoCardless's hosted page, protected by the Direct Debit Guarantee. This keeps
-the masjid out of scope for sensitive bank data handling.
+It does **not** collect sort code or account number — Stripe captures them
+on their hosted Checkout page, protected by the Direct Debit Guarantee.
+This keeps the masjid out of scope for sensitive bank data handling.
+
+## Notes
+
+- **Start date**: if the donor picks a future start date, the script sets
+  `subscription_data[trial_end]` so the first collection is delayed until
+  that date. BACS clearing also takes ~3 working days on top.
+- **Fees**: Stripe BACS DD is currently 1% + 20p per payment, capped at £4.
+  Check <https://stripe.com/gb/pricing> for the latest.
+- **Refunds / cancellations**: handle these in the Stripe Dashboard.
+  Customers can also cancel the Direct Debit at any time with their bank.

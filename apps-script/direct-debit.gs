@@ -1,34 +1,21 @@
 /**
- * Aldershot Islamic Centre - Direct Debit signup endpoint.
+ * Aldershot Islamic Centre - Monthly Direct Debit signup endpoint.
  *
- * Receives JSON from the website form and appends a row to a Google Sheet.
- * Optionally creates a GoCardless billing request flow and returns the
- * authorisation URL so the user can be redirected to authorise their bank.
+ * Receives JSON from the website form, appends a row to a Google Sheet,
+ * creates a Stripe Checkout Session (subscription mode, BACS Direct Debit,
+ * donor-chosen amount), and returns the session URL so the frontend can
+ * redirect the donor. The donor enters bank details on Stripe's hosted
+ * Checkout page - they never touch our servers/sheet.
  *
- * Setup:
- *  1. Create a Google Sheet (e.g. "AIC Direct Debit Signups").
- *  2. Copy its ID from the URL: docs.google.com/spreadsheets/d/<THIS_PART>/edit
- *  3. Paste it into SHEET_ID below.
- *  4. (Optional) Add a GoCardless access token in Script Properties:
- *        Project Settings -> Script Properties -> Add property
- *        Name:  GOCARDLESS_ACCESS_TOKEN
- *        Value: live_xxx or sandbox_xxx
- *     Also set GOCARDLESS_ENV to "live" or "sandbox" (defaults to "sandbox").
- *  5. Deploy -> New deployment -> Type: Web app
- *        Execute as: Me
- *        Who has access: Anyone
- *     Copy the Web App URL.
- *  6. Paste that URL into ENDPOINT in assets/js/direct-debit.js.
- *
- * Notes:
- *  - The website only collects name/address/email/phone/amount/purpose/start date.
- *  - Bank account details (sort code / account number) are NEVER collected here -
- *    GoCardless captures them on their own hosted page, protected by the
- *    Direct Debit Guarantee.
+ * Setup: see ./README.md
  */
 
 const SHEET_ID = 'PASTE_YOUR_GOOGLE_SHEET_ID_HERE';
 const SHEET_NAME = 'Signups';
+
+const SUCCESS_URL = 'https://aldershotislamiccentre.org.uk/service-charity.html?dd=success';
+const CANCEL_URL  = 'https://aldershotislamiccentre.org.uk/service-charity.html#direct-debit';
+const NOTIFY_EMAIL = 'info@aldershotislamiccentre.org.uk';
 
 const HEADERS = [
   'Timestamp',
@@ -43,7 +30,7 @@ const HEADERS = [
   'Frequency',
   'Start Date',
   'Purpose',
-  'GoCardless Billing Request ID',
+  'Stripe Checkout Session ID',
   'User Agent',
   'Page URL'
 ];
@@ -52,26 +39,31 @@ function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
 
-    // Append to sheet
-    const sheet = getOrCreateSheet_();
-    const props = PropertiesService.getScriptProperties();
-    const gcToken = props.getProperty('GOCARDLESS_ACCESS_TOKEN');
-    const gcEnv = props.getProperty('GOCARDLESS_ENV') || 'sandbox';
+    // Basic server-side validation
+    const amount = parseFloat(data.amount);
+    if (!data.fullName || !data.email || !amount || amount < 1 || !data.purpose) {
+      return jsonResponse_({ ok: false, error: 'Missing required fields' });
+    }
 
-    let billingRequestId = '';
+    const props = PropertiesService.getScriptProperties();
+    const stripeKey = props.getProperty('STRIPE_SECRET_KEY');
+
+    let sessionId = '';
     let redirectUrl = '';
 
-    if (gcToken) {
+    if (stripeKey) {
       try {
-        const flow = createGoCardlessFlow_(gcToken, gcEnv, data);
-        billingRequestId = flow.billingRequestId;
-        redirectUrl = flow.authorisationUrl;
-      } catch (gcErr) {
-        // Log and continue - we still save the row even if GC fails
-        console.error('GoCardless flow failed: ' + gcErr.message);
+        const session = createStripeCheckoutSession_(stripeKey, data);
+        sessionId = session.id;
+        redirectUrl = session.url;
+      } catch (stripeErr) {
+        console.error('Stripe session create failed: ' + stripeErr.message);
+        return jsonResponse_({ ok: false, error: 'Payment provider error. Please try again or email the masjid.' });
       }
     }
 
+    // Append signup to sheet (always, even if Stripe fails)
+    const sheet = getOrCreateSheet_();
     sheet.appendRow([
       new Date(),
       data.title || '',
@@ -85,15 +77,14 @@ function doPost(e) {
       data.frequency || 'Monthly',
       data.startDate || '',
       data.purpose || '',
-      billingRequestId,
+      sessionId,
       data.userAgent || '',
       data.pageUrl || ''
     ]);
 
-    // Email the masjid so they see signups in real time
     try {
       MailApp.sendEmail({
-        to: 'info@aldershotislamiccentre.org.uk',
+        to: NOTIFY_EMAIL,
         subject: 'New Direct Debit signup: ' + (data.fullName || 'Unknown'),
         body:
           'A new Direct Debit signup has been submitted.\n\n' +
@@ -104,9 +95,11 @@ function doPost(e) {
           'Amount: £' + (data.amount || '') + ' / month\n' +
           'Start Date: ' + (data.startDate || '') + '\n' +
           'Purpose: ' + (data.purpose || '') + '\n\n' +
-          (billingRequestId
-            ? 'GoCardless billing request created: ' + billingRequestId + '\n'
-            : 'GoCardless flow not created - send the donor a manual link.\n')
+          (sessionId
+            ? 'Stripe Checkout session: ' + sessionId + '\n' +
+              'The donor was redirected to Stripe to enter their bank details. ' +
+              'Check the Stripe dashboard to confirm the subscription is active.'
+            : 'Stripe is not configured - the donor saw an error. Send them a payment link manually.')
       });
     } catch (mailErr) {
       console.error('Email notify failed: ' + mailErr.message);
@@ -144,84 +137,64 @@ function jsonResponse_(obj) {
 }
 
 /**
- * Creates a GoCardless Billing Request + Billing Request Flow.
- * Returns { billingRequestId, authorisationUrl }.
- * Docs: https://developer.gocardless.com/api-reference/#billing-requests-billing-requests
+ * Creates a Stripe Checkout Session in subscription mode with BACS Direct Debit.
+ * The donor's chosen amount becomes the monthly recurring price.
+ * Docs: https://stripe.com/docs/api/checkout/sessions/create
  */
-function createGoCardlessFlow_(token, env, data) {
-  const baseUrl = env === 'live'
-    ? 'https://api.gocardless.com'
-    : 'https://api-sandbox.gocardless.com';
+function createStripeCheckoutSession_(secretKey, data) {
+  const amountPence = Math.round(parseFloat(data.amount) * 100);
+  const purpose = data.purpose || 'General';
+  const productName = 'Aldershot Islamic Centre — Monthly Donation (' + purpose + ')';
 
-  // 1. Create the billing request (mandate-only - donor authorises but no charge yet)
-  const brBody = {
-    billing_requests: {
-      mandate_request: {
-        currency: 'GBP',
-        scheme: 'bacs',
-        metadata: {
-          purpose: data.purpose || 'General',
-          amount: String(data.amount || ''),
-          start_date: data.startDate || ''
-        }
-      }
-    }
+  const params = {
+    'mode': 'subscription',
+    'payment_method_types[0]': 'bacs_debit',
+    'customer_email': data.email || '',
+    'billing_address_collection': 'auto',
+    'line_items[0][price_data][currency]': 'gbp',
+    'line_items[0][price_data][product_data][name]': productName,
+    'line_items[0][price_data][recurring][interval]': 'month',
+    'line_items[0][price_data][unit_amount]': String(amountPence),
+    'line_items[0][quantity]': '1',
+    'success_url': SUCCESS_URL,
+    'cancel_url': CANCEL_URL,
+    'metadata[purpose]': purpose,
+    'metadata[full_name]': data.fullName || '',
+    'metadata[phone]': data.phone || '',
+    'metadata[address]': data.address || '',
+    'metadata[town]': data.town || '',
+    'metadata[postcode]': data.postcode || '',
+    'metadata[requested_start_date]': data.startDate || '',
+    'subscription_data[metadata][purpose]': purpose,
+    'subscription_data[metadata][full_name]': data.fullName || ''
   };
 
-  const brRes = UrlFetchApp.fetch(baseUrl + '/billing_requests', {
+  // If the donor picked a future start date, delay the first charge via trial_end.
+  // (BACS clearing also takes ~3 working days regardless.)
+  if (data.startDate) {
+    const ts = Math.floor(new Date(data.startDate).getTime() / 1000);
+    const minTrial = Math.floor(Date.now() / 1000) + 48 * 60 * 60; // Stripe requires trial_end >= now + 48h
+    if (ts > minTrial) {
+      params['subscription_data[trial_end]'] = String(ts);
+    }
+  }
+
+  const body = Object.keys(params)
+    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+    .join('&');
+
+  const res = UrlFetchApp.fetch('https://api.stripe.com/v1/checkout/sessions', {
     method: 'post',
-    contentType: 'application/json',
-    headers: {
-      Authorization: 'Bearer ' + token,
-      'GoCardless-Version': '2015-07-06',
-      Accept: 'application/json'
-    },
-    payload: JSON.stringify(brBody),
+    contentType: 'application/x-www-form-urlencoded',
+    headers: { Authorization: 'Bearer ' + secretKey },
+    payload: body,
     muteHttpExceptions: true
   });
 
-  if (brRes.getResponseCode() >= 300) {
-    throw new Error('Billing request create failed: ' + brRes.getContentText());
+  if (res.getResponseCode() >= 300) {
+    throw new Error('Stripe ' + res.getResponseCode() + ': ' + res.getContentText());
   }
-  const br = JSON.parse(brRes.getContentText()).billing_requests;
 
-  // 2. Create the flow (hosted authorisation page)
-  const flowBody = {
-    billing_request_flows: {
-      redirect_uri: 'https://aldershotislamiccentre.org.uk/service-charity.html#direct-debit',
-      exit_uri: 'https://aldershotislamiccentre.org.uk/service-charity.html',
-      prefilled_customer: {
-        given_name: (data.fullName || '').split(' ')[0],
-        family_name: (data.fullName || '').split(' ').slice(1).join(' '),
-        email: data.email || '',
-        address_line1: data.address || '',
-        city: data.town || '',
-        postal_code: data.postcode || '',
-        country_code: 'GB'
-      },
-      links: { billing_request: br.id }
-    }
-  };
-
-  const flowRes = UrlFetchApp.fetch(baseUrl + '/billing_request_flows', {
-    method: 'post',
-    contentType: 'application/json',
-    headers: {
-      Authorization: 'Bearer ' + token,
-      'GoCardless-Version': '2015-07-06',
-      Accept: 'application/json'
-    },
-    payload: JSON.stringify(flowBody),
-    muteHttpExceptions: true
-  });
-
-  if (flowRes.getResponseCode() >= 300) {
-    throw new Error('Billing request flow create failed: ' + flowRes.getContentText());
-  }
-  const flow = JSON.parse(flowRes.getContentText()).billing_request_flows;
-
-  return {
-    billingRequestId: br.id,
-    authorisationUrl: flow.authorisation_url
-  };
+  const session = JSON.parse(res.getContentText());
+  return { id: session.id, url: session.url };
 }

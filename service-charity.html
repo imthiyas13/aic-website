@@ -59,7 +59,7 @@
             <div class="dd-card">
                 <header class="dd-header">
                     <h2>Set Up a Monthly Direct Debit</h2>
-                    <p>Support the masjid with a regular monthly gift. Complete the form below &mdash; you'll then be guided to GoCardless to securely authorise your bank.</p>
+                    <p>Support the masjid with a regular monthly gift. Complete the form below &mdash; you'll then be taken to Stripe to securely enter your bank details.</p>
                 </header>
 
                 <form id="dd-form" class="dd-form" novalidate>
@@ -150,18 +150,18 @@
 
                     <p class="dd-secure-note">
                         <span class="lock-icon" aria-hidden="true">&#128274;</span>
-                        Your bank account details are <strong>not</strong> collected on this page. After you continue, GoCardless will securely capture them on their own page, protected by the Direct Debit Guarantee.
+                        Your bank account details are <strong>not</strong> collected on this page. After you continue, Stripe will securely capture them on their hosted checkout page, protected by the Direct Debit Guarantee.
                     </p>
 
                     <div class="dd-actions">
-                        <button type="submit" class="btn btn-primary btn-large" id="dd-submit">Continue to GoCardless</button>
+                        <button type="submit" class="btn btn-primary btn-large" id="dd-submit">Continue to Stripe</button>
                     </div>
 
                     <div id="dd-status" class="dd-status" role="status" aria-live="polite" hidden></div>
                 </form>
 
                 <footer class="dd-footer">
-                    <p><strong>Aldershot Islamic Centre</strong> &middot; Registered Charity No. 1214576 &middot; Powered by GoCardless</p>
+                    <p><strong>Aldershot Islamic Centre</strong> &middot; Registered Charity No. 1214576 &middot; Payments processed by Stripe</p>
                 </footer>
             </div>
 

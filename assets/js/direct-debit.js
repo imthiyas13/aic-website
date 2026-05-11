@@ -12,6 +12,16 @@
     const submitBtn = document.getElementById('dd-submit');
     const statusEl = document.getElementById('dd-status');
 
+    // Show a confirmation message when the donor returns from Stripe Checkout.
+    if (window.location.search.indexOf('dd=success') !== -1) {
+        const note = document.createElement('div');
+        note.className = 'dd-status success';
+        note.textContent = "Jazak Allah khair — your Direct Debit has been set up. You'll receive a confirmation email from Stripe and the first collection will appear in your bank within a few working days.";
+        form.parentNode.insertBefore(note, form);
+        form.hidden = true;
+        return;
+    }
+
     // Sensible defaults: start date one month from today
     const startDateInput = form.elements['startDate'];
     if (startDateInput && !startDateInput.value) {
@@ -95,15 +105,14 @@
                 throw new Error(json.error || ('HTTP ' + res.status));
             }
 
-            // If the Apps Script created a GoCardless billing request flow, it can return a URL.
             if (json.redirectUrl) {
-                setStatus('Redirecting you to GoCardless to authorise your bank…', 'success');
+                setStatus('Redirecting you to Stripe to enter your bank details…', 'success');
                 window.location.href = json.redirectUrl;
                 return;
             }
 
             setStatus(
-                "Thank you! Your details have been received. We'll email you a secure GoCardless link shortly to complete the Direct Debit setup.",
+                "Thank you! Your details have been received. We'll email you a secure payment link shortly to complete the Direct Debit setup.",
                 'success'
             );
             form.reset();
