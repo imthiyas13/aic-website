@@ -28,7 +28,8 @@ const HEADERS = [
   'Phone',
   'Amount (£)',
   'Frequency',
-  'Start Date',
+  'Preferred Collection Day',
+  'First Collection Date',
   'Purpose',
   'Stripe Checkout Session ID',
   'User Agent',
@@ -48,12 +49,18 @@ function doPost(e) {
     const props = PropertiesService.getScriptProperties();
     const stripeKey = props.getProperty('STRIPE_SECRET_KEY');
 
+    // Work out the first collection date from the preferred day of the month
+    const preferredDay = parseInt(data.preferredDay, 10);
+    const firstCollectionDate = preferredDay >= 1 && preferredDay <= 28
+      ? computeFirstCollectionDate_(preferredDay)
+      : null;
+
     let sessionId = '';
     let redirectUrl = '';
 
     if (stripeKey) {
       try {
-        const session = createStripeCheckoutSession_(stripeKey, data);
+        const session = createStripeCheckoutSession_(stripeKey, data, firstCollectionDate);
         sessionId = session.id;
         redirectUrl = session.url;
       } catch (stripeErr) {
@@ -75,7 +82,8 @@ function doPost(e) {
       data.phone || '',
       data.amount || '',
       data.frequency || 'Monthly',
-      data.startDate || '',
+      data.preferredDay || '',
+      firstCollectionDate ? Utilities.formatDate(firstCollectionDate, 'Europe/London', 'yyyy-MM-dd') : '',
       data.purpose || '',
       sessionId,
       data.userAgent || '',
@@ -93,7 +101,8 @@ function doPost(e) {
           'Phone: ' + (data.phone || '') + '\n' +
           'Address: ' + (data.address || '') + ', ' + (data.town || '') + ', ' + (data.postcode || '') + '\n\n' +
           'Amount: £' + (data.amount || '') + ' / month\n' +
-          'Start Date: ' + (data.startDate || '') + '\n' +
+          'Preferred collection day: ' + (data.preferredDay || '') + '\n' +
+          'First collection date: ' + (firstCollectionDate ? Utilities.formatDate(firstCollectionDate, 'Europe/London', 'd MMM yyyy') : 'n/a') + '\n' +
           'Purpose: ' + (data.purpose || '') + '\n\n' +
           (sessionId
             ? 'Stripe Checkout session: ' + sessionId + '\n' +
@@ -137,11 +146,33 @@ function jsonResponse_(obj) {
 }
 
 /**
+ * Returns the next Date on which the preferred day of the month falls,
+ * with enough lead time for BACS (5 calendar days, ~3 working days).
+ * The subscription's billing cycle then anchors to this date, so every
+ * future collection lands on the same day each month.
+ */
+function computeFirstCollectionDate_(preferredDay) {
+  const LEAD_DAYS = 5;
+  const earliest = new Date();
+  earliest.setDate(earliest.getDate() + LEAD_DAYS);
+
+  // Set the noon timestamp on the preferred day of the current month
+  const target = new Date(earliest.getFullYear(), earliest.getMonth(), preferredDay, 12, 0, 0);
+
+  // If that's already passed this month (vs the buffered earliest), roll forward
+  while (target.getTime() < earliest.getTime()) {
+    target.setMonth(target.getMonth() + 1);
+  }
+  return target;
+}
+
+/**
  * Creates a Stripe Checkout Session in subscription mode with BACS Direct Debit.
- * The donor's chosen amount becomes the monthly recurring price.
+ * The donor's chosen amount becomes the monthly recurring price, anchored to
+ * their preferred day of the month via subscription_data.trial_end.
  * Docs: https://stripe.com/docs/api/checkout/sessions/create
  */
-function createStripeCheckoutSession_(secretKey, data) {
+function createStripeCheckoutSession_(secretKey, data, firstCollectionDate) {
   const amountPence = Math.round(parseFloat(data.amount) * 100);
   const purpose = data.purpose || 'General';
   const productName = 'Aldershot Islamic Centre — Monthly Donation (' + purpose + ')';
@@ -164,19 +195,15 @@ function createStripeCheckoutSession_(secretKey, data) {
     'metadata[address]': data.address || '',
     'metadata[town]': data.town || '',
     'metadata[postcode]': data.postcode || '',
-    'metadata[requested_start_date]': data.startDate || '',
+    'metadata[preferred_day]': data.preferredDay || '',
     'subscription_data[metadata][purpose]': purpose,
-    'subscription_data[metadata][full_name]': data.fullName || ''
+    'subscription_data[metadata][full_name]': data.fullName || '',
+    'subscription_data[metadata][preferred_day]': data.preferredDay || ''
   };
 
-  // If the donor picked a future start date, delay the first charge via trial_end.
-  // (BACS clearing also takes ~3 working days regardless.)
-  if (data.startDate) {
-    const ts = Math.floor(new Date(data.startDate).getTime() / 1000);
-    const minTrial = Math.floor(Date.now() / 1000) + 48 * 60 * 60; // Stripe requires trial_end >= now + 48h
-    if (ts > minTrial) {
-      params['subscription_data[trial_end]'] = String(ts);
-    }
+  // Anchor the first (and every future) collection to the donor's preferred day
+  if (firstCollectionDate) {
+    params['subscription_data[trial_end]'] = String(Math.floor(firstCollectionDate.getTime() / 1000));
   }
 
   const body = Object.keys(params)

@@ -22,13 +22,11 @@
         return;
     }
 
-    // Sensible defaults: start date one month from today
-    const startDateInput = form.elements['startDate'];
-    if (startDateInput && !startDateInput.value) {
-        const d = new Date();
-        d.setMonth(d.getMonth() + 1);
-        startDateInput.value = d.toISOString().slice(0, 10);
-        startDateInput.min = new Date().toISOString().slice(0, 10);
+    // Pre-select today's day of the month as a sensible default for collection day (clamped to 28)
+    const preferredDaySelect = form.elements['preferredDay'];
+    if (preferredDaySelect && !preferredDaySelect.value) {
+        const today = new Date().getDate();
+        preferredDaySelect.value = String(Math.min(today, 28));
     }
 
     function setStatus(message, kind) {
@@ -67,7 +65,7 @@
         if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.push('a valid Email');
         if (!data.phone) errors.push('Phone');
         if (!data.amount || Number(data.amount) < 1) errors.push('a valid Amount');
-        if (!data.startDate) errors.push('Start Date');
+        if (!data.preferredDay) errors.push('Preferred Collection Day');
         if (!data.purpose) errors.push('Purpose');
         return errors;
     }
