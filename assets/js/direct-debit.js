@@ -4,7 +4,7 @@
     // === Configure this ===
     // Paste your Google Apps Script Web App URL here after deploying.
     // It will look like: https://script.google.com/macros/s/AKfycb.../exec
-    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzY6P9Dm4zUn00j3WS2wnH_sNlP3dS3kU7PqfVDsQ3SQ_uyrrx3Aqvw5Wkymdo8OYyINg/exec';
+    const ENDPOINT = 'https://script.google.com/macros/s/AKfycbw9nElIOkErNot7tdWb0qQj2dT9VH2twKgEEoXEVfZfJg227lHs2OWiflyf7tSQkGbF/exec';
 
     const form = document.getElementById('dd-form');
     if (!form) return;
