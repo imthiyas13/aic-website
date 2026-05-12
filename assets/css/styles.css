@@ -1539,6 +1539,42 @@ img {
     padding: 28px;
 }
 
+.dd-cta-body {
+    padding: 28px;
+}
+
+.dd-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 22px;
+}
+
+.dd-bullets li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--text);
+}
+
+.dd-bullets li::before {
+    content: '\2713';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent-bg);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .dd-fieldset {
     border: none;
     padding: 0;
@@ -1732,7 +1768,8 @@ img {
     .dd-header p {
         font-size: 14px;
     }
-    .dd-form {
+    .dd-form,
+    .dd-cta-body {
         padding: 22px 18px;
     }
     .dd-fieldset legend {

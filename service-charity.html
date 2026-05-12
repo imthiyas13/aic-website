@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lora:wght@500;600;700&family=Raleway:wght@300;400;500;600&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=14">
+    <link rel="stylesheet" href="assets/css/styles.css?v=15">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/assets/images/logo.png">
@@ -53,142 +53,34 @@
         </div>
     </section>
 
-    <!-- Direct Debit Form -->
+    <!-- Direct Debit CTA -->
     <section class="dd-section" id="direct-debit">
         <div class="container">
             <div class="dd-card">
                 <header class="dd-header">
                     <h2>Set Up a Monthly Direct Debit</h2>
-                    <p>Support the masjid with a regular monthly gift. Complete the form below &mdash; you'll then be taken to Stripe to securely enter your bank details.</p>
+                    <p>Support the masjid with a regular monthly gift, securely set up through Stripe in under a minute.</p>
                 </header>
 
-                <form id="dd-form" class="dd-form" novalidate>
-                    <fieldset class="dd-fieldset">
-                        <legend>1. Your Details</legend>
-
-                        <div class="form-row form-row-split">
-                            <label class="form-field field-narrow">
-                                <span class="form-label">Title</span>
-                                <select name="title" autocomplete="honorific-prefix">
-                                    <option value="">&mdash;</option>
-                                    <option>Mr</option>
-                                    <option>Mrs</option>
-                                    <option>Miss</option>
-                                    <option>Ms</option>
-                                    <option>Dr</option>
-                                </select>
-                            </label>
-                            <label class="form-field">
-                                <span class="form-label">Full Name <em>*</em></span>
-                                <input type="text" name="fullName" required autocomplete="name" autocapitalize="words">
-                            </label>
-                        </div>
-
-                        <label class="form-field">
-                            <span class="form-label">Address Line 1 <em>*</em></span>
-                            <input type="text" name="address" required autocomplete="address-line1" autocapitalize="words">
-                        </label>
-
-                        <div class="form-row">
-                            <label class="form-field">
-                                <span class="form-label">Town / City <em>*</em></span>
-                                <input type="text" name="town" required autocomplete="address-level2" autocapitalize="words">
-                            </label>
-                            <label class="form-field field-narrow">
-                                <span class="form-label">Postcode <em>*</em></span>
-                                <input type="text" name="postcode" required autocomplete="postal-code" autocapitalize="characters">
-                            </label>
-                        </div>
-
-                        <div class="form-row">
-                            <label class="form-field">
-                                <span class="form-label">Email <em>*</em></span>
-                                <input type="email" name="email" required autocomplete="email" inputmode="email">
-                            </label>
-                            <label class="form-field">
-                                <span class="form-label">Phone <em>*</em></span>
-                                <input type="tel" name="phone" required autocomplete="tel" inputmode="tel">
-                            </label>
-                        </div>
-                    </fieldset>
-
-                    <fieldset class="dd-fieldset">
-                        <legend>2. Your Donation</legend>
-
-                        <div class="form-row">
-                            <label class="form-field">
-                                <span class="form-label">Amount (&pound;) <em>*</em></span>
-                                <div class="input-with-prefix">
-                                    <span class="input-prefix">&pound;</span>
-                                    <input type="number" name="amount" min="1" step="1" required inputmode="decimal" placeholder="20">
-                                </div>
-                            </label>
-                            <label class="form-field">
-                                <span class="form-label">Frequency</span>
-                                <input type="text" value="Monthly" readonly tabindex="-1" class="readonly-input">
-                            </label>
-                        </div>
-
-                        <div class="form-row">
-                            <label class="form-field">
-                                <span class="form-label">Preferred Collection Day <em>*</em></span>
-                                <select name="preferredDay" required>
-                                    <option value="">Select&hellip;</option>
-                                    <option value="1">1st of each month</option>
-                                    <option value="2">2nd of each month</option>
-                                    <option value="3">3rd of each month</option>
-                                    <option value="4">4th of each month</option>
-                                    <option value="5">5th of each month</option>
-                                    <option value="6">6th of each month</option>
-                                    <option value="7">7th of each month</option>
-                                    <option value="8">8th of each month</option>
-                                    <option value="9">9th of each month</option>
-                                    <option value="10">10th of each month</option>
-                                    <option value="11">11th of each month</option>
-                                    <option value="12">12th of each month</option>
-                                    <option value="13">13th of each month</option>
-                                    <option value="14">14th of each month</option>
-                                    <option value="15">15th of each month</option>
-                                    <option value="16">16th of each month</option>
-                                    <option value="17">17th of each month</option>
-                                    <option value="18">18th of each month</option>
-                                    <option value="19">19th of each month</option>
-                                    <option value="20">20th of each month</option>
-                                    <option value="21">21st of each month</option>
-                                    <option value="22">22nd of each month</option>
-                                    <option value="23">23rd of each month</option>
-                                    <option value="24">24th of each month</option>
-                                    <option value="25">25th of each month</option>
-                                    <option value="26">26th of each month</option>
-                                    <option value="27">27th of each month</option>
-                                    <option value="28">28th of each month</option>
-                                </select>
-                            </label>
-                            <label class="form-field">
-                                <span class="form-label">Purpose <em>*</em></span>
-                                <select name="purpose" required>
-                                    <option value="">Select&hellip;</option>
-                                    <option>General</option>
-                                    <option>Madrasa</option>
-                                    <option>Building Fund</option>
-                                    <option>Sadaqah</option>
-                                    <option>Zakat</option>
-                                </select>
-                            </label>
-                        </div>
-                    </fieldset>
+                <div class="dd-cta-body">
+                    <ul class="dd-bullets">
+                        <li><strong>Choose any amount</strong> &mdash; enter the amount you want to give each month on the next page.</li>
+                        <li><strong>Pick your collection day</strong> &mdash; tell us which day of the month suits you (typically near payday).</li>
+                        <li><strong>Pay direct from your bank</strong> &mdash; no card needed. Lower fees mean more goes to the masjid.</li>
+                        <li><strong>Cancel any time</strong> &mdash; you're protected by the Direct Debit Guarantee.</li>
+                    </ul>
 
                     <p class="dd-secure-note">
                         <span class="lock-icon" aria-hidden="true">&#128274;</span>
-                        Your bank account details are <strong>not</strong> collected on this page. After you continue, Stripe will securely capture them on their hosted checkout page, protected by the Direct Debit Guarantee.
+                        Your bank details are entered securely on Stripe's hosted page &mdash; never on this site.
                     </p>
 
                     <div class="dd-actions">
-                        <button type="submit" class="btn btn-primary btn-large" id="dd-submit">Continue to Stripe</button>
+                        <a href="REPLACE_WITH_STRIPE_PAYMENT_LINK_URL" id="dd-cta-link" class="btn btn-primary btn-large">Set Up Direct Debit</a>
                     </div>
 
                     <div id="dd-status" class="dd-status" role="status" aria-live="polite" hidden></div>
-                </form>
+                </div>
 
                 <footer class="dd-footer">
                     <p><strong>Aldershot Islamic Centre</strong> &middot; Registered Charity No. 1214576 &middot; Payments processed by Stripe</p>
