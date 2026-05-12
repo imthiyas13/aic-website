@@ -10,7 +10,7 @@
  * Setup: see ./README.md
  */
 
-const SHEET_ID = 'PASTE_YOUR_GOOGLE_SHEET_ID_HERE';
+const SHEET_ID = '1cldNpxCNU45Wj_0BefcBL24eBSsCZ8tkDrSFzHFwaFU';
 const SHEET_NAME = 'Signups';
 
 const SUCCESS_URL = 'https://aldershotislamiccentre.org.uk/service-charity.html?dd=success';
