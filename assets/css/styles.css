@@ -1552,7 +1552,7 @@ img {
 
 .dd-tiers {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     margin-bottom: 24px;
 }
@@ -1877,12 +1877,6 @@ img {
     }
     .dd-tier-amount {
         font-size: 22px;
-    }
-    .dd-tier-featured {
-        grid-column: span 2;
-    }
-    .dd-tier-featured .dd-tier-amount {
-        font-size: 28px;
     }
     .dd-fieldset legend {
         font-size: 16px;
