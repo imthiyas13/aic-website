@@ -152,8 +152,15 @@ function readPreferredDay_(session) {
   const fields = session.custom_fields || [];
   for (let i = 0; i < fields.length; i++) {
     const f = fields[i];
-    if (f.key === 'preferred_day' || (f.label && (f.label.custom || '').toLowerCase().indexOf('collection day') !== -1)) {
+    const key = (f.key || '').toLowerCase();
+    const label = (f.label && (f.label.custom || '')).toLowerCase();
+    const looksLikeDay =
+      key.indexOf('day') !== -1 || key.indexOf('date') !== -1 ||
+      label.indexOf('collection day') !== -1 || label.indexOf('preferred date') !== -1 ||
+      label.indexOf('preferred day') !== -1;
+    if (looksLikeDay) {
       const v = f.dropdown ? f.dropdown.value : (f.text ? f.text.value : '');
+      // parseInt picks up leading digits, so "1st_of_each_month" -> 1
       const day = parseInt(v, 10);
       if (day >= 1 && day <= 28) return day;
     }
@@ -165,7 +172,9 @@ function readPurpose_(session) {
   const fields = session.custom_fields || [];
   for (let i = 0; i < fields.length; i++) {
     const f = fields[i];
-    if (f.key === 'purpose' || (f.label && (f.label.custom || '').toLowerCase().indexOf('purpose') !== -1)) {
+    const key = (f.key || '').toLowerCase();
+    const label = (f.label && (f.label.custom || '')).toLowerCase();
+    if (key.indexOf('purpose') !== -1 || label.indexOf('purpose') !== -1) {
       return f.dropdown ? f.dropdown.value : (f.text ? f.text.value : '');
     }
   }
