@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lora:wght@500;600;700&family=Raleway:wght@300;400;500;600&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=17">
+    <link rel="stylesheet" href="assets/css/styles.css?v=18">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/assets/images/logo.png">
@@ -63,35 +63,28 @@
                 </header>
 
                 <div class="dd-cta-body">
-                    <p class="dd-intro">Choose an amount and you'll be taken to Stripe to set up your Direct Debit in under a minute.</p>
-
-                    <div class="dd-tiers" role="list">
-                        <a href="https://buy.stripe.com/cNifZgdMQcVQ0Lrdwj1kA03" class="dd-tier" role="listitem"><span class="dd-tier-amount">&pound;5</span><span class="dd-tier-period">per month</span></a>
-                        <a href="https://buy.stripe.com/6oUbJ0dMQdZUam11NB1kA02" class="dd-tier" role="listitem"><span class="dd-tier-amount">&pound;10</span><span class="dd-tier-period">per month</span></a>
-                        <a href="https://buy.stripe.com/aFa3cucIMaNIfGleAn1kA04" class="dd-tier dd-tier-featured" role="listitem"><span class="dd-tier-badge">Popular</span><span class="dd-tier-amount">&pound;20</span><span class="dd-tier-period">per month</span></a>
-                        <a href="https://buy.stripe.com/00weVc4cg9JE65LeAn1kA05" class="dd-tier" role="listitem"><span class="dd-tier-amount">&pound;30</span><span class="dd-tier-period">per month</span></a>
-                        <a href="https://buy.stripe.com/cNidR8gZ2cVQfGlfEr1kA06" class="dd-tier" role="listitem"><span class="dd-tier-amount">&pound;50</span><span class="dd-tier-period">per month</span></a>
-                        <a href="https://buy.stripe.com/7sY7sK8sw2hceCh1NB1kA07" class="dd-tier" role="listitem"><span class="dd-tier-amount">&pound;100</span><span class="dd-tier-period">per month</span></a>
-                    </div>
+                    <p class="dd-intro">Choose any amount, pick monthly or one-time, and pay securely &mdash; cards, Direct Debit, Apple Pay and more.</p>
 
                     <ul class="dd-bullets">
-                        <li><strong>Choose your collection day</strong> &mdash; tell Stripe which day of the month suits you.</li>
-                        <li><strong>Pay direct from your bank</strong> &mdash; no card needed. Lower fees mean more goes to the masjid.</li>
-                        <li><strong>Cancel any time</strong> &mdash; you're protected by the Direct Debit Guarantee.</li>
+                        <li><strong>Any amount, any frequency</strong> &mdash; you decide what works for you.</li>
+                        <li><strong>Gift Aid eligible</strong> &mdash; UK taxpayers can add 25% from HMRC at no extra cost.</li>
+                        <li><strong>Cancel any time</strong> &mdash; recurring donations are fully under your control.</li>
                     </ul>
+
+                    <div class="dd-actions">
+                        <a href="https://donorbox.org/monthly-donations-935143" class="btn btn-primary btn-large" target="_blank" rel="noopener">Donate to the Masjid</a>
+                    </div>
 
                     <p class="dd-secure-note">
                         <span class="lock-icon" aria-hidden="true">&#128274;</span>
-                        Your bank details are entered securely on Stripe's hosted page &mdash; never on this site.
+                        Donations are processed securely by Donorbox &amp; Stripe. Your payment details never touch this site.
                     </p>
-
-                    <p class="dd-other">Want to give a different amount or one-off? <a href="https://buy.stripe.com/6oU9AS248g82bq5fEr1kA00" target="_blank" rel="noopener">Use our flexible donation page &rarr;</a></p>
 
                     <div id="dd-status" class="dd-status" role="status" aria-live="polite" hidden></div>
                 </div>
 
                 <footer class="dd-footer">
-                    <p><strong>Aldershot Islamic Centre</strong> &middot; Registered Charity No. 1214576 &middot; Payments processed by Stripe</p>
+                    <p><strong>Aldershot Islamic Centre</strong> &middot; Registered Charity No. 1214576 &middot; Powered by Donorbox &amp; Stripe</p>
                 </footer>
             </div>
 
@@ -129,7 +122,6 @@
         <div class="footer-bottom"><div class="container"><p>&copy; 2026 Aldershot Islamic Centre. Registered Charity No. 1214576. All rights reserved.</p></div></div>
     </footer>
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/direct-debit.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
