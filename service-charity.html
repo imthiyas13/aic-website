@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lora:wght@500;600;700&family=Raleway:wght@300;400;500;600&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=15">
+    <link rel="stylesheet" href="assets/css/styles.css?v=16">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/assets/images/logo.png">
@@ -63,9 +63,18 @@
                 </header>
 
                 <div class="dd-cta-body">
+                    <p class="dd-intro">Choose an amount and you'll be taken to Stripe to set up your Direct Debit in under a minute.</p>
+
+                    <div class="dd-tiers" role="list">
+                        <a href="REPLACE_WITH_STRIPE_LINK_5"   class="dd-tier" role="listitem"><span class="dd-tier-amount">&pound;5</span><span class="dd-tier-period">per month</span></a>
+                        <a href="REPLACE_WITH_STRIPE_LINK_10"  class="dd-tier" role="listitem"><span class="dd-tier-amount">&pound;10</span><span class="dd-tier-period">per month</span></a>
+                        <a href="REPLACE_WITH_STRIPE_LINK_20"  class="dd-tier dd-tier-featured" role="listitem"><span class="dd-tier-badge">Popular</span><span class="dd-tier-amount">&pound;20</span><span class="dd-tier-period">per month</span></a>
+                        <a href="REPLACE_WITH_STRIPE_LINK_50"  class="dd-tier" role="listitem"><span class="dd-tier-amount">&pound;50</span><span class="dd-tier-period">per month</span></a>
+                        <a href="REPLACE_WITH_STRIPE_LINK_100" class="dd-tier" role="listitem"><span class="dd-tier-amount">&pound;100</span><span class="dd-tier-period">per month</span></a>
+                    </div>
+
                     <ul class="dd-bullets">
-                        <li><strong>Choose any amount</strong> &mdash; enter the amount you want to give each month on the next page.</li>
-                        <li><strong>Pick your collection day</strong> &mdash; tell us which day of the month suits you (typically near payday).</li>
+                        <li><strong>Choose your collection day</strong> &mdash; tell Stripe which day of the month suits you.</li>
                         <li><strong>Pay direct from your bank</strong> &mdash; no card needed. Lower fees mean more goes to the masjid.</li>
                         <li><strong>Cancel any time</strong> &mdash; you're protected by the Direct Debit Guarantee.</li>
                     </ul>
@@ -75,9 +84,7 @@
                         Your bank details are entered securely on Stripe's hosted page &mdash; never on this site.
                     </p>
 
-                    <div class="dd-actions">
-                        <a href="REPLACE_WITH_STRIPE_PAYMENT_LINK_URL" id="dd-cta-link" class="btn btn-primary btn-large">Set Up Direct Debit</a>
-                    </div>
+                    <p class="dd-other">Want to give a different amount or one-off? <a href="https://buy.stripe.com/6oU9AS248g82bq5fEr1kA00" target="_blank" rel="noopener">Use our flexible donation page &rarr;</a></p>
 
                     <div id="dd-status" class="dd-status" role="status" aria-live="polite" hidden></div>
                 </div>
