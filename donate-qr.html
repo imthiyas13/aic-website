@@ -113,7 +113,7 @@
         // fresh GoCardless Instant Bank Pay request per scan and deep-link the
         // donor's banking app. If left as the REPLACE_WITH_… placeholder, QRs
         // fall back to Donorbox prefilled URLs so the page still works.
-        var GOCARDLESS_PROXY_URL = 'REPLACE_WITH_APPS_SCRIPT_URL';
+        var GOCARDLESS_PROXY_URL = 'https://script.google.com/macros/s/AKfycbxLeybadwHfV6YkiiOFtrZsFjfsNcRMSsZg5MCM6j07mlQWnYMv2X1KXMeY7j7xgk-xEw/exec';
         var DONORBOX_FALLBACK = 'https://donorbox.org/monthly-donations-935143';
 
         function buildPaymentUrl(amount) {
