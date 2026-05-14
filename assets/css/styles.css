@@ -2408,62 +2408,63 @@ img {
         margin: 10mm;
     }
     .qr-poster-logo {
-        width: 110px !important;
-        margin: 0 auto 10px !important;
+        width: 100px !important;
+        margin: 0 auto 6px !important;
     }
     .qr-poster-title {
-        font-size: 28px !important;
-        margin-bottom: 4px !important;
+        font-size: 26px !important;
+        margin-bottom: 2px !important;
     }
     .qr-poster-arabic {
-        font-size: 23px !important;
-        margin: 4px 0 8px !important;
+        font-size: 22px !important;
+        margin: 2px 0 6px !important;
     }
     .qr-poster-sub {
         font-size: 15px !important;
-        max-width: 520px;
-        margin: 0 auto 12px !important;
+        max-width: 680px;
+        margin: 0 auto 8px !important;
         line-height: 1.4 !important;
     }
     .qr-poster-head {
-        margin-bottom: 12px !important;
+        margin-bottom: 8px !important;
     }
     .qr-single {
         box-shadow: none;
         border: 2px solid #222;
         break-inside: avoid;
         page-break-inside: avoid;
-        margin: 0 auto 12px;
-        max-width: 280px;
-        padding: 14px 14px 10px !important;
+        margin: 0 auto 8px;
+        max-width: 260px;
+        padding: 10px 10px 8px !important;
     }
     .qr-single .qr-code svg {
-        width: 220px !important;
-        height: 220px !important;
+        width: 200px !important;
+        height: 200px !important;
     }
     .qr-single-caption {
-        font-size: 13px !important;
-        margin-top: 8px !important;
+        font-size: 12px !important;
+        margin-top: 6px !important;
+        letter-spacing: 0.8px !important;
     }
     .qr-explainer {
         background: transparent !important;
         border: 1px solid #999;
-        max-width: 520px;
-        margin: 0 auto 12px;
-        padding: 14px 18px 12px !important;
+        max-width: 680px;
+        margin: 0 auto 8px;
+        padding: 10px 16px 8px !important;
         break-inside: avoid;
         page-break-inside: avoid;
     }
     .qr-explainer h2 {
-        font-size: 18px !important;
-        margin-bottom: 8px !important;
+        font-size: 17px !important;
+        margin-bottom: 6px !important;
     }
     .qr-steps {
-        margin-bottom: 10px !important;
+        margin-bottom: 6px !important;
     }
     .qr-steps li {
-        font-size: 14px !important;
-        margin-bottom: 6px !important;
+        font-size: 13px !important;
+        margin-bottom: 4px !important;
         gap: 10px !important;
     }
     .qr-step-num {
@@ -2471,67 +2472,70 @@ img {
         color: #fff !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        width: 22px !important;
-        height: 22px !important;
-        flex-basis: 22px !important;
-        font-size: 12px !important;
+        width: 20px !important;
+        height: 20px !important;
+        flex-basis: 20px !important;
+        font-size: 11px !important;
     }
     .qr-explainer-foot {
-        font-size: 13px !important;
-        margin-top: 8px !important;
+        font-size: 12px !important;
+        margin-top: 6px !important;
     }
     .qr-bank-details {
         background: transparent !important;
         border: 1px solid #999;
-        padding: 14px 18px 12px !important;
-        margin: 0 auto 12px;
-        max-width: 520px;
+        padding: 10px 16px 8px !important;
+        margin: 0 auto 8px;
+        max-width: 680px;
         break-inside: avoid;
         page-break-inside: avoid;
     }
     .qr-bank-details h2 {
-        font-size: 18px !important;
-        margin-bottom: 4px !important;
+        font-size: 17px !important;
+        margin-bottom: 2px !important;
     }
     .qr-bank-intro {
-        font-size: 13px !important;
-        margin-bottom: 10px !important;
+        font-size: 12px !important;
+        margin-bottom: 8px !important;
     }
     .bank-grid {
         gap: 8px !important;
-        margin-bottom: 8px !important;
+        margin-bottom: 6px !important;
     }
     .bank-cell {
         background: transparent !important;
         border: 1px solid #ccc;
-        padding: 8px 6px !important;
+        padding: 6px 6px !important;
     }
     .bank-cell dt {
         font-size: 10px !important;
-        margin-bottom: 3px !important;
+        margin-bottom: 2px !important;
     }
     .bank-cell dd {
-        font-size: 14px !important;
+        font-size: 13px !important;
     }
     .bank-ref {
-        font-size: 13px !important;
+        font-size: 12px !important;
     }
     .qr-poster-foot {
         border-top: 1px solid #999;
         border-bottom: 1px solid #999;
         padding: 8px 12px !important;
-        margin-bottom: 0 !important;
+        margin: 0 auto !important;
+        max-width: 680px;
+        break-inside: avoid;
+        page-break-inside: avoid;
     }
     .qr-foot-quote {
         font-size: 11px !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 4px !important;
     }
     .qr-foot-quote span {
         font-size: 10px !important;
     }
     .qr-foot-charity,
     .qr-foot-website {
-        font-size: 13px !important;
+        font-size: 12px !important;
         margin: 0 !important;
     }
     .qr-poster-head,
