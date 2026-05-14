@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-05-14T22:10:27Z",
+  "updatedAt": "2026-05-14T22:10:33Z",
   "rules": [
     {
       "from": "2026-04-19",
-      "to": "2026-04-30",
+      "to": "9999-12-31",
       "prayer": "jumma1",
       "iqamah": "13:30",
       "note": "Test Jumma override"
