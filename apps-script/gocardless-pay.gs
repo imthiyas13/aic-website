@@ -130,13 +130,13 @@ function amountEntryPage_() {
     'h1{font-family:Lora,Georgia,serif;font-size:26px;color:#0a3f25;margin:0 0 6px;font-weight:700;}' +
     '.arabic{font-family:Amiri,serif;direction:rtl;font-size:18px;color:#0e5c36;margin:6px 0 12px;}' +
     '.intro{font-size:15px;color:#6b7480;max-width:340px;margin:0 auto 22px;line-height:1.5;}' +
-    '.card{max-width:360px;margin:0 auto;background:#fff;border:2px solid #0e5c36;border-radius:16px;padding:24px 22px;box-shadow:0 8px 20px rgba(14,92,54,0.10);}' +
-    '.input-wrap{position:relative;margin-bottom:12px;}' +
-    '.input-wrap .prefix{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:22px;color:#6b7480;font-weight:500;pointer-events:none;}' +
-    'input[type="number"]{font-family:inherit;font-size:24px;font-weight:600;padding:14px 16px 14px 40px;width:100%;border:1.5px solid rgba(14,92,54,0.18);border-radius:10px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:56px;color:#1f2933;}' +
-    'input[type="email"]{font-family:inherit;font-size:16px;font-weight:400;padding:12px 16px;width:100%;border:1.5px solid rgba(14,92,54,0.18);border-radius:10px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:48px;color:#1f2933;}' +
+    '.card{max-width:420px;margin:0 auto;background:#fff;border:2px solid #0e5c36;border-radius:16px;padding:28px 22px;box-shadow:0 8px 20px rgba(14,92,54,0.10);}' +
+    '.input-wrap{position:relative;margin-bottom:14px;}' +
+    '.input-wrap .prefix{position:absolute;left:20px;top:50%;transform:translateY(-50%);font-size:30px;color:#6b7480;font-weight:500;pointer-events:none;}' +
+    'input[type="number"]{font-family:inherit;font-size:34px;font-weight:700;padding:18px 18px 18px 52px;width:100%;border:1.5px solid rgba(14,92,54,0.18);border-radius:12px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:72px;color:#1f2933;}' +
+    'input[type="email"]{font-family:inherit;font-size:18px;font-weight:400;padding:16px 18px;width:100%;border:1.5px solid rgba(14,92,54,0.18);border-radius:12px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:60px;color:#1f2933;}' +
     'input:focus{outline:none;border-color:#0e5c36;box-shadow:0 0 0 3px rgba(14,92,54,0.08);}' +
-    'button{font-family:inherit;width:100%;padding:14px 28px;background:#0e5c36;color:#fff;border:0;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;min-height:52px;}' +
+    'button{font-family:inherit;width:100%;padding:18px 28px;background:#0e5c36;color:#fff;border:0;border-radius:10px;font-size:16px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;min-height:64px;margin-top:4px;}' +
     'button:hover,button:focus{background:#0a3f25;}' +
     '.hint{font-size:12px;color:#6b7480;line-height:1.5;margin:14px 0 0;}' +
     '.error{color:#c0392b;font-size:14px;margin-top:12px;display:none;}' +
@@ -150,7 +150,7 @@ function amountEntryPage_() {
     '<form id="amount-form" novalidate>' +
     '<div class="input-wrap">' +
     '<span class="prefix" aria-hidden="true">£</span>' +
-    '<input type="number" id="amount-input" name="amount" min="1" max="5000" step="1" placeholder="20" inputmode="decimal" aria-label="Donation amount in pounds" required autofocus>' +
+    '<input type="number" id="amount-input" name="amount" min="1" max="5000" step="1" inputmode="decimal" aria-label="Donation amount in pounds" required autofocus>' +
     '</div>' +
     '<div class="input-wrap input-wrap-plain">' +
     '<input type="email" id="email-input" name="email" placeholder="your@email.com" inputmode="email" autocomplete="email" aria-label="Your email address" required>' +
