@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lora:wght@500;600;700&family=Raleway:wght@300;400;500;600&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=20">
+    <link rel="stylesheet" href="assets/css/styles.css?v=21">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <meta name="theme-color" content="#0a3f25">
 </head>
@@ -40,26 +40,39 @@
             </div>
 
             <div class="qr-grid" id="qr-grid">
-                <div class="qr-card">
+                <a class="qr-card" data-tap-amount="5">
                     <div class="qr-amount">&pound;5</div>
                     <div class="qr-code" data-amount="5"></div>
-                    <div class="qr-caption">Scan to donate &pound;5</div>
-                </div>
-                <div class="qr-card">
+                    <div class="qr-caption">Scan or tap to donate &pound;5</div>
+                </a>
+                <a class="qr-card" data-tap-amount="10">
                     <div class="qr-amount">&pound;10</div>
                     <div class="qr-code" data-amount="10"></div>
-                    <div class="qr-caption">Scan to donate &pound;10</div>
-                </div>
-                <div class="qr-card">
+                    <div class="qr-caption">Scan or tap to donate &pound;10</div>
+                </a>
+                <a class="qr-card" data-tap-amount="15">
                     <div class="qr-amount">&pound;15</div>
                     <div class="qr-code" data-amount="15"></div>
-                    <div class="qr-caption">Scan to donate &pound;15</div>
-                </div>
-                <div class="qr-card">
+                    <div class="qr-caption">Scan or tap to donate &pound;15</div>
+                </a>
+                <a class="qr-card" data-tap-amount="20">
                     <div class="qr-amount">&pound;20</div>
                     <div class="qr-code" data-amount="20"></div>
-                    <div class="qr-caption">Scan to donate &pound;20</div>
-                </div>
+                    <div class="qr-caption">Scan or tap to donate &pound;20</div>
+                </a>
+            </div>
+
+            <div class="qr-custom no-print" id="qr-custom">
+                <h3>Or choose your own amount</h3>
+                <p>Enter any amount &mdash; you'll be taken straight to your banking app to authorise.</p>
+                <form class="qr-custom-form" id="qr-custom-form" novalidate>
+                    <span class="qr-custom-input">
+                        <span class="qr-custom-currency" aria-hidden="true">&pound;</span>
+                        <input type="number" id="qr-custom-amount" min="1" max="5000" step="1" placeholder="20" inputmode="decimal" aria-label="Donation amount in pounds" required>
+                    </span>
+                    <button type="submit" class="btn btn-primary">Donate now</button>
+                </form>
+                <p class="qr-custom-error" id="qr-custom-error" role="alert" hidden></p>
             </div>
 
             <div class="qr-poster-foot">
@@ -124,20 +137,44 @@
             return DONORBOX_FALLBACK + '?default_amount=' + encodeURIComponent(amount) + '&default_interval=o';
         }
 
-        document.querySelectorAll('#qr-grid .qr-code').forEach(function (el) {
-            var amount = el.dataset.amount;
+        // Render the QR codes and make each card tappable as a fallback for
+        // people viewing the page directly on their phone (instead of scanning
+        // a printed copy with a second device).
+        document.querySelectorAll('#qr-grid .qr-card').forEach(function (card) {
+            var amount = card.dataset.tapAmount;
             var url = buildPaymentUrl(amount);
-            // qrcode-generator API: type 0 = auto-detect, 'M' = ~15% error correction
-            var qr = qrcode(0, 'M');
-            qr.addData(url);
-            qr.make();
-            el.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
-            var svg = el.querySelector('svg');
-            if (svg) {
-                svg.setAttribute('width', '240');
-                svg.setAttribute('height', '240');
+            card.setAttribute('href', url);
+            var qrEl = card.querySelector('.qr-code');
+            if (qrEl) {
+                var qr = qrcode(0, 'M');
+                qr.addData(url);
+                qr.make();
+                qrEl.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
+                var svg = qrEl.querySelector('svg');
+                if (svg) {
+                    svg.setAttribute('width', '240');
+                    svg.setAttribute('height', '240');
+                }
             }
         });
+
+        var customForm = document.getElementById('qr-custom-form');
+        if (customForm) {
+            var amountInput = document.getElementById('qr-custom-amount');
+            var errorEl = document.getElementById('qr-custom-error');
+            customForm.addEventListener('submit', function (ev) {
+                ev.preventDefault();
+                errorEl.hidden = true;
+                var amount = parseFloat(amountInput.value);
+                if (isNaN(amount) || amount < 1 || amount > 5000) {
+                    errorEl.textContent = 'Please enter an amount between £1 and £5,000.';
+                    errorEl.hidden = false;
+                    amountInput.focus();
+                    return;
+                }
+                window.location.href = buildPaymentUrl(amount);
+            });
+        }
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
