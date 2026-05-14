@@ -2333,12 +2333,44 @@ img {
         border: 2px solid #222;
         break-inside: avoid;
         page-break-inside: avoid;
-        margin-top: 20px;
-        max-width: 460px;
+        margin-top: 16px;
+        max-width: 360px;
     }
     .qr-single .qr-code svg {
-        width: 380px !important;
-        height: 380px !important;
+        width: 300px !important;
+        height: 300px !important;
+    }
+    .qr-explainer {
+        background: transparent !important;
+        border: 1px solid #999;
+        max-width: 540px;
+        margin-top: 14px;
+        margin-bottom: 14px;
+        padding: 14px 18px 12px;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    .qr-explainer h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .qr-steps li {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+    .qr-step-num {
+        background: #222 !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        width: 22px;
+        height: 22px;
+        flex-basis: 22px;
+        font-size: 12px;
+    }
+    .qr-explainer-foot {
+        font-size: 11px;
+        margin-top: 10px;
     }
     .qr-poster-foot {
         border-top: 1px solid #999;
