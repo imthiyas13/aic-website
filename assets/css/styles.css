@@ -2403,103 +2403,136 @@ img {
         max-width: 100% !important;
         padding: 0 !important;
     }
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
     .qr-poster-logo {
-        width: 160px !important;
-        margin-bottom: 18px !important;
+        width: 110px !important;
+        margin: 0 auto 10px !important;
     }
     .qr-poster-title {
-        font-size: 36px !important;
+        font-size: 28px !important;
+        margin-bottom: 4px !important;
     }
     .qr-poster-arabic {
-        font-size: 24px !important;
+        font-size: 18px !important;
+        margin: 4px 0 8px !important;
     }
     .qr-poster-sub {
-        font-size: 14px !important;
-        max-width: 540px;
-        margin: 0 auto 18px !important;
+        font-size: 12px !important;
+        max-width: 480px;
+        margin: 0 auto 12px !important;
+        line-height: 1.4 !important;
+    }
+    .qr-poster-head {
+        margin-bottom: 12px !important;
     }
     .qr-single {
         box-shadow: none;
         border: 2px solid #222;
         break-inside: avoid;
         page-break-inside: avoid;
-        margin-top: 16px;
-        max-width: 360px;
+        margin: 0 auto 12px;
+        max-width: 280px;
+        padding: 14px 14px 10px !important;
     }
     .qr-single .qr-code svg {
-        width: 300px !important;
-        height: 300px !important;
+        width: 220px !important;
+        height: 220px !important;
+    }
+    .qr-single-caption {
+        font-size: 10px !important;
+        margin-top: 8px !important;
     }
     .qr-explainer {
         background: transparent !important;
         border: 1px solid #999;
-        max-width: 540px;
-        margin-top: 14px;
-        margin-bottom: 14px;
-        padding: 14px 18px 12px;
+        max-width: 480px;
+        margin: 0 auto 10px;
+        padding: 10px 14px 8px !important;
         break-inside: avoid;
         page-break-inside: avoid;
     }
     .qr-explainer h2 {
-        font-size: 18px;
-        margin-bottom: 10px;
+        font-size: 14px !important;
+        margin-bottom: 6px !important;
+    }
+    .qr-steps {
+        margin-bottom: 8px !important;
     }
     .qr-steps li {
-        font-size: 13px;
-        margin-bottom: 6px;
+        font-size: 11px !important;
+        margin-bottom: 4px !important;
+        gap: 8px !important;
     }
     .qr-step-num {
         background: #222 !important;
         color: #fff !important;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
-        width: 22px;
-        height: 22px;
-        flex-basis: 22px;
-        font-size: 12px;
+        width: 18px !important;
+        height: 18px !important;
+        flex-basis: 18px !important;
+        font-size: 10px !important;
     }
     .qr-explainer-foot {
-        font-size: 11px;
-        margin-top: 10px;
+        font-size: 10px !important;
+        margin-top: 6px !important;
     }
     .qr-bank-details {
         background: transparent !important;
         border: 1px solid #999;
-        padding: 14px 18px 12px;
-        margin: 0 auto 12px;
-        max-width: 540px;
+        padding: 10px 14px 8px !important;
+        margin: 0 auto 10px;
+        max-width: 480px;
         break-inside: avoid;
         page-break-inside: avoid;
     }
     .qr-bank-details h2 {
-        font-size: 18px;
-        margin-bottom: 4px;
+        font-size: 14px !important;
+        margin-bottom: 2px !important;
     }
     .qr-bank-intro {
-        font-size: 12px;
-        margin-bottom: 10px;
+        font-size: 10px !important;
+        margin-bottom: 8px !important;
     }
     .bank-grid {
-        gap: 8px;
-        margin-bottom: 10px;
+        gap: 6px !important;
+        margin-bottom: 6px !important;
     }
     .bank-cell {
         background: transparent !important;
         border: 1px solid #ccc;
-        padding: 8px 6px;
+        padding: 6px 4px !important;
     }
     .bank-cell dt {
-        font-size: 9px;
+        font-size: 8px !important;
+        margin-bottom: 2px !important;
     }
     .bank-cell dd {
-        font-size: 13px;
+        font-size: 11px !important;
     }
     .bank-ref {
-        font-size: 11px;
+        font-size: 10px !important;
     }
     .qr-poster-foot {
         border-top: 1px solid #999;
         border-bottom: 1px solid #999;
+        padding: 8px 12px !important;
+        margin-bottom: 0 !important;
+    }
+    .qr-foot-quote {
+        font-size: 11px !important;
+        margin-bottom: 6px !important;
+    }
+    .qr-foot-quote span {
+        font-size: 10px !important;
+    }
+    .qr-foot-charity,
+    .qr-foot-website {
+        font-size: 10px !important;
+        margin: 0 !important;
     }
     .qr-poster-head,
     .qr-poster-foot {
