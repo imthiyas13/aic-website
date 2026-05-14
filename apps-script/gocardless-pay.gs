@@ -70,16 +70,16 @@ function doGet(e) {
     const br = JSON.parse(brRes.getContentText()).billing_requests;
 
     // Step 2: create the Billing Request Flow (hosted Open Banking page).
-    // Pre-fill the donor's email so GoCardless's form arrives with the field
-    // already populated. We don't lock customer details: GoCardless requires
-    // multiple fields (name, address) for that, and we only collect email.
-    // The donor will see GoCardless's email page with the address pre-filled
-    // and just tap Continue.
+    // customer_details_captured: true tells GoCardless we've already collected
+    // the donor's details on our side, so its customer-collection screen is
+    // skipped entirely - the donor goes straight from our amount page to the
+    // bank-pick step.
     const flowBody = {
       billing_request_flows: {
         redirect_uri: GC_REDIRECT_URI,
         exit_uri: GC_EXIT_URI,
         prefilled_customer: { email: email },
+        customer_details_captured: true,
         links: { billing_request: br.id }
       }
     };
