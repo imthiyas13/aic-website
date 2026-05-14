@@ -3,28 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qur'an Circle - Aldershot Islamic Centre</title>
+    <title>Donate by QR Code - Aldershot Islamic Centre</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lora:wght@500;600;700&family=Raleway:wght@300;400;500;600&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css?v=20">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon" href="/assets/images/logo.png">
     <meta name="theme-color" content="#0a3f25">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Aldershot IC">
 </head>
 <body>
-    <header class="header" id="header">
+    <header class="header no-print" id="header">
         <div class="container nav-container">
             <a href="index.html" class="logo"><img src="assets/images/logo.png" alt="Aldershot Islamic Centre"></a>
             <nav class="nav" id="nav">
                 <ul class="nav-list">
                     <li><a href="index.html" class="nav-link">HOME</a></li>
                     <li><a href="index.html#about" class="nav-link">ABOUT</a></li>
-                    <li><a href="index.html#services" class="nav-link active">SERVICES</a></li>
+                    <li><a href="index.html#services" class="nav-link">SERVICES</a></li>
                     <li><a href="activities.html" class="nav-link">ACTIVITIES</a></li>
                     <li><a href="contact.html" class="nav-link">CONTACT</a></li>
                     <li><a href="https://donorbox.org/monthly-donations-935143" class="nav-link nav-donate" target="_blank" rel="noopener">DONATE</a></li>
@@ -35,23 +30,52 @@
         </div>
     </header>
 
-    <section class="page-header">
-        <div class="container">
-            <h1 class="brand-name">Qur'an Circle</h1>
-            <p>Reconnecting with the Book of Allah every night after 'Isha</p>
+    <section class="qr-poster">
+        <div class="container qr-poster-container">
+            <div class="qr-poster-head">
+                <img src="assets/images/logo.png" alt="Aldershot Islamic Centre" class="qr-poster-logo">
+                <h1 class="qr-poster-title">Donate by QR Code</h1>
+                <p class="qr-poster-arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+                <p class="qr-poster-sub">Scan with your phone camera. Pay quickly by card, bank, Apple Pay, or PayPal &mdash; in seconds.</p>
+            </div>
+
+            <div class="qr-grid" id="qr-grid">
+                <div class="qr-card">
+                    <div class="qr-amount">&pound;5</div>
+                    <div class="qr-code" data-url="https://donorbox.org/monthly-donations-935143?default_amount=5&amp;default_interval=o"></div>
+                    <div class="qr-caption">Scan to donate &pound;5</div>
+                </div>
+                <div class="qr-card">
+                    <div class="qr-amount">&pound;10</div>
+                    <div class="qr-code" data-url="https://donorbox.org/monthly-donations-935143?default_amount=10&amp;default_interval=o"></div>
+                    <div class="qr-caption">Scan to donate &pound;10</div>
+                </div>
+                <div class="qr-card">
+                    <div class="qr-amount">&pound;15</div>
+                    <div class="qr-code" data-url="https://donorbox.org/monthly-donations-935143?default_amount=15&amp;default_interval=o"></div>
+                    <div class="qr-caption">Scan to donate &pound;15</div>
+                </div>
+                <div class="qr-card">
+                    <div class="qr-amount">&pound;20</div>
+                    <div class="qr-code" data-url="https://donorbox.org/monthly-donations-935143?default_amount=20&amp;default_interval=o"></div>
+                    <div class="qr-caption">Scan to donate &pound;20</div>
+                </div>
+            </div>
+
+            <div class="qr-poster-foot">
+                <p class="qr-foot-quote">&ldquo;The most beloved of deeds to Allah is the most regular and consistent even if it were a little.&rdquo; <span>(Sahih Bukhari)</span></p>
+                <p class="qr-foot-charity"><strong>Aldershot Islamic Centre</strong> &middot; 50a Station Rd, Aldershot GU11 1BG &middot; Registered Charity 1214576</p>
+                <p class="qr-foot-website">aldershotislamiccentre.org.uk</p>
+            </div>
+
+            <p class="qr-poster-actions no-print">
+                <button type="button" class="btn btn-primary" onclick="window.print()">Print this page</button>
+                <a href="service-charity.html" class="back-link">&larr; Back to Charity &amp; Donation</a>
+            </p>
         </div>
     </section>
 
-    <section class="page-content">
-        <div class="container">
-            <p>Our Qur'an Circle takes place every night after 'Isha and provides a peaceful, supportive environment for brothers to reconnect with the Book of Allah. We recite together, correct pronunciation and Tajw&#x12B;d, and learn the rules in a simple and practical way.</p>
-            <p>From time to time, we also reflect on the meanings of verses and read short passages of tafsir to deepen our understanding. The circle welcomes all levels&mdash;from beginners to those who recite fluently&mdash;and creates a beautiful sense of brotherhood and spiritual growth.</p>
-            <p>It is a chance to improve one's recitation, strengthen one's heart, and keep a regular connection with the Qur'an throughout the week.</p>
-            <a href="index.html#services" class="back-link">&larr; Back to Services</a>
-        </div>
-    </section>
-
-    <footer class="footer">
+    <footer class="footer no-print">
         <div class="container footer-grid">
             <div class="footer-about">
                 <img src="assets/images/logo.png" alt="Aldershot Islamic Centre" class="footer-logo">
@@ -80,8 +104,18 @@
         </div>
         <div class="footer-bottom"><div class="container"><p>&copy; 2026 Aldershot Islamic Centre. Registered Charity No. 1214576. All rights reserved.</p></div></div>
     </footer>
+
+    <script src="assets/js/qrcode.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script>
+        document.querySelectorAll('#qr-grid .qr-code').forEach(function (el) {
+            new QRCode(el, {
+                text: el.dataset.url,
+                width: 240,
+                height: 240,
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        });
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js').catch(console.error);
