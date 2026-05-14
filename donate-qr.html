@@ -42,22 +42,22 @@
             <div class="qr-grid" id="qr-grid">
                 <div class="qr-card">
                     <div class="qr-amount">&pound;5</div>
-                    <div class="qr-code" data-url="https://donorbox.org/monthly-donations-935143?default_amount=5&amp;default_interval=o"></div>
+                    <div class="qr-code" data-amount="5"></div>
                     <div class="qr-caption">Scan to donate &pound;5</div>
                 </div>
                 <div class="qr-card">
                     <div class="qr-amount">&pound;10</div>
-                    <div class="qr-code" data-url="https://donorbox.org/monthly-donations-935143?default_amount=10&amp;default_interval=o"></div>
+                    <div class="qr-code" data-amount="10"></div>
                     <div class="qr-caption">Scan to donate &pound;10</div>
                 </div>
                 <div class="qr-card">
                     <div class="qr-amount">&pound;15</div>
-                    <div class="qr-code" data-url="https://donorbox.org/monthly-donations-935143?default_amount=15&amp;default_interval=o"></div>
+                    <div class="qr-code" data-amount="15"></div>
                     <div class="qr-caption">Scan to donate &pound;15</div>
                 </div>
                 <div class="qr-card">
                     <div class="qr-amount">&pound;20</div>
-                    <div class="qr-code" data-url="https://donorbox.org/monthly-donations-935143?default_amount=20&amp;default_interval=o"></div>
+                    <div class="qr-code" data-amount="20"></div>
                     <div class="qr-caption">Scan to donate &pound;20</div>
                 </div>
             </div>
@@ -108,10 +108,28 @@
     <script src="assets/js/qrcode.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script>
+        // === Configure this once after deploying apps-script/gocardless-pay.gs ===
+        // Paste the deployed Apps Script Web App URL here. Scans will then mint a
+        // fresh GoCardless Instant Bank Pay request per scan and deep-link the
+        // donor's banking app. If left as the REPLACE_WITH_… placeholder, QRs
+        // fall back to Donorbox prefilled URLs so the page still works.
+        var GOCARDLESS_PROXY_URL = 'REPLACE_WITH_APPS_SCRIPT_URL';
+        var DONORBOX_FALLBACK = 'https://donorbox.org/monthly-donations-935143';
+
+        function buildPaymentUrl(amount) {
+            if (GOCARDLESS_PROXY_URL && GOCARDLESS_PROXY_URL.indexOf('REPLACE_') !== 0) {
+                var sep = GOCARDLESS_PROXY_URL.indexOf('?') === -1 ? '?' : '&';
+                return GOCARDLESS_PROXY_URL + sep + 'amount=' + encodeURIComponent(amount);
+            }
+            return DONORBOX_FALLBACK + '?default_amount=' + encodeURIComponent(amount) + '&default_interval=o';
+        }
+
         document.querySelectorAll('#qr-grid .qr-code').forEach(function (el) {
+            var amount = el.dataset.amount;
+            var url = buildPaymentUrl(amount);
             // qrcode-generator API: type 0 = auto-detect, 'M' = ~15% error correction
             var qr = qrcode(0, 'M');
-            qr.addData(el.dataset.url);
+            qr.addData(url);
             qr.make();
             el.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
             var svg = el.querySelector('svg');
@@ -120,6 +138,7 @@
                 svg.setAttribute('height', '240');
             }
         });
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/service-worker.js').catch(console.error);
