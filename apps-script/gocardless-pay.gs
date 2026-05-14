@@ -126,22 +126,22 @@ function amountEntryPage_() {
     '<meta name="viewport" content="width=device-width,initial-scale=1">' +
     '<title>Donate to the Masjid</title>' +
     '<style>' +
-    'body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#faf6ec;color:#1f2933;margin:0;padding:40px 20px;text-align:center;}' +
-    'h1{font-family:Lora,Georgia,serif;font-size:58px;color:#0a3f25;margin:0 0 16px;font-weight:700;line-height:1.1;}' +
-    '.arabic{font-family:Amiri,serif;direction:rtl;font-size:42px;color:#0e5c36;margin:14px 0 22px;}' +
-    '.intro{font-size:32px;color:#6b7480;margin:0 auto 42px;line-height:1.4;padding:0 12px;}' +
-    '.card{max-width:780px;margin:0 auto;background:#fff;border:3px solid #0e5c36;border-radius:28px;padding:52px 40px;box-shadow:0 10px 28px rgba(14,92,54,0.12);}' +
-    '.input-wrap{position:relative;margin-bottom:26px;}' +
-    '.input-wrap .prefix{position:absolute;left:34px;top:50%;transform:translateY(-50%);font-size:62px;color:#6b7480;font-weight:500;pointer-events:none;}' +
-    'input[type="number"]{font-family:inherit;font-size:72px;font-weight:700;padding:32px 32px 32px 106px;width:100%;border:2px solid rgba(14,92,54,0.18);border-radius:20px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:146px;color:#1f2933;}' +
-    'input[type="email"]{font-family:inherit;font-size:36px;font-weight:400;padding:28px;width:100%;border:2px solid rgba(14,92,54,0.18);border-radius:20px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:110px;color:#1f2933;}' +
+    'body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#faf6ec;color:#1f2933;margin:0;padding:44px 22px;text-align:center;}' +
+    'h1{font-family:Lora,Georgia,serif;font-size:64px;color:#0a3f25;margin:0 0 18px;font-weight:700;line-height:1.1;}' +
+    '.arabic{font-family:Amiri,serif;direction:rtl;font-size:46px;color:#0e5c36;margin:16px 0 24px;}' +
+    '.intro{font-size:36px;color:#6b7480;margin:0 auto 46px;line-height:1.4;padding:0 14px;}' +
+    '.card{max-width:860px;margin:0 auto;background:#fff;border:3px solid #0e5c36;border-radius:32px;padding:58px 44px;box-shadow:0 10px 28px rgba(14,92,54,0.12);}' +
+    '.input-wrap{position:relative;margin-bottom:28px;}' +
+    '.input-wrap .prefix{position:absolute;left:38px;top:50%;transform:translateY(-50%);font-size:68px;color:#6b7480;font-weight:500;pointer-events:none;}' +
+    'input[type="number"]{font-family:inherit;font-size:80px;font-weight:700;padding:36px 36px 36px 116px;width:100%;border:2px solid rgba(14,92,54,0.18);border-radius:22px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:162px;color:#1f2933;}' +
+    'input[type="email"]{font-family:inherit;font-size:40px;font-weight:400;padding:32px;width:100%;border:2px solid rgba(14,92,54,0.18);border-radius:22px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:122px;color:#1f2933;}' +
     'input:focus{outline:none;border-color:#0e5c36;box-shadow:0 0 0 5px rgba(14,92,54,0.10);}' +
-    'button{font-family:inherit;width:100%;padding:34px 42px;background:#0e5c36;color:#fff;border:0;border-radius:20px;font-size:32px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;cursor:pointer;min-height:120px;margin-top:10px;}' +
+    'button{font-family:inherit;width:100%;padding:38px 46px;background:#0e5c36;color:#fff;border:0;border-radius:22px;font-size:36px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;min-height:132px;margin-top:12px;}' +
     'button:hover,button:focus{background:#0a3f25;}' +
-    '.hint{font-size:24px;color:#6b7480;line-height:1.5;margin:30px 0 0;padding:0 8px;}' +
-    '.error{color:#c0392b;font-size:26px;margin-top:22px;display:none;}' +
+    '.hint{font-size:26px;color:#6b7480;line-height:1.5;margin:32px 0 0;padding:0 8px;}' +
+    '.error{color:#c0392b;font-size:28px;margin-top:24px;display:none;}' +
     '.error.visible{display:block;}' +
-    'footer{margin-top:52px;font-size:24px;color:#8a8f99;line-height:1.6;}' +
+    'footer{margin-top:56px;font-size:26px;color:#8a8f99;line-height:1.6;}' +
     '</style></head><body>' +
     '<h1>Donate to the Masjid</h1>' +
     '<p class="arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>' +
