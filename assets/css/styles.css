@@ -2328,6 +2328,21 @@ img {
         max-width: 100% !important;
         padding: 0 !important;
     }
+    .qr-poster-logo {
+        width: 160px !important;
+        margin-bottom: 18px !important;
+    }
+    .qr-poster-title {
+        font-size: 36px !important;
+    }
+    .qr-poster-arabic {
+        font-size: 24px !important;
+    }
+    .qr-poster-sub {
+        font-size: 14px !important;
+        max-width: 540px;
+        margin: 0 auto 18px !important;
+    }
     .qr-single {
         box-shadow: none;
         border: 2px solid #222;
