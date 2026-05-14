@@ -1,7 +1,7 @@
 // AIC website service worker — PWA caching + push notifications.
 // Bump CACHE_VERSION whenever you ship code/CSS/HTML changes that
 // you need to flush on installed phones.
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 const CACHE_NAME = `aic-site-${CACHE_VERSION}`;
 
 const CORE_ASSETS = [
