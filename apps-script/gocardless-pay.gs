@@ -24,14 +24,18 @@ function doGet(e) {
   try {
     const rawAmount = e && e.parameter && e.parameter.amount;
     // If no amount in URL, show the amount-entry form. The form posts back
-    // to this same URL with ?amount=N and we fall through to the GoCardless
-    // flow on the next request.
+    // to this same URL with ?amount=N&email=… and we fall through to the
+    // GoCardless flow on the next request.
     if (!rawAmount) {
       return amountEntryPage_();
     }
     const amount = parseFloat(rawAmount);
     if (!amount || isNaN(amount) || amount < MIN_AMOUNT_GBP || amount > MAX_AMOUNT_GBP) {
       return errorPage_('Please enter a donation amount between £' + MIN_AMOUNT_GBP + ' and £' + MAX_AMOUNT_GBP + '.');
+    }
+    const email = String((e.parameter.email || '')).trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return errorPage_('Please enter a valid email address.');
     }
 
     const props = PropertiesService.getScriptProperties();
@@ -52,7 +56,8 @@ function doGet(e) {
           currency: 'GBP',
           description: GC_PAYMENT_DESCRIPTION,
           scheme: 'faster_payments'
-        }
+        },
+        customer_details: { email: email }
       }
     };
 
@@ -63,11 +68,15 @@ function doGet(e) {
     }
     const br = JSON.parse(brRes.getContentText()).billing_requests;
 
-    // Step 2: create the Billing Request Flow (hosted Open Banking page)
+    // Step 2: create the Billing Request Flow (hosted Open Banking page).
+    // Pre-fill the donor's email and lock customer details so GoCardless
+    // skips its email-collection screen and goes straight to bank choice.
     const flowBody = {
       billing_request_flows: {
         redirect_uri: GC_REDIRECT_URI,
         exit_uri: GC_EXIT_URI,
+        prefilled_customer: { email: email },
+        lock_customer_details: true,
         links: { billing_request: br.id }
       }
     };
@@ -116,9 +125,10 @@ function amountEntryPage_() {
     '.arabic{font-family:Amiri,serif;direction:rtl;font-size:18px;color:#0e5c36;margin:6px 0 12px;}' +
     '.intro{font-size:15px;color:#6b7480;max-width:340px;margin:0 auto 22px;line-height:1.5;}' +
     '.card{max-width:360px;margin:0 auto;background:#fff;border:2px solid #0e5c36;border-radius:16px;padding:24px 22px;box-shadow:0 8px 20px rgba(14,92,54,0.10);}' +
-    '.input-wrap{position:relative;margin-bottom:14px;}' +
+    '.input-wrap{position:relative;margin-bottom:12px;}' +
     '.input-wrap .prefix{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:22px;color:#6b7480;font-weight:500;pointer-events:none;}' +
-    'input{font-family:inherit;font-size:24px;font-weight:600;padding:14px 16px 14px 40px;width:100%;border:1.5px solid rgba(14,92,54,0.18);border-radius:10px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:56px;color:#1f2933;}' +
+    'input[type="number"]{font-family:inherit;font-size:24px;font-weight:600;padding:14px 16px 14px 40px;width:100%;border:1.5px solid rgba(14,92,54,0.18);border-radius:10px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:56px;color:#1f2933;}' +
+    'input[type="email"]{font-family:inherit;font-size:16px;font-weight:400;padding:12px 16px;width:100%;border:1.5px solid rgba(14,92,54,0.18);border-radius:10px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:48px;color:#1f2933;}' +
     'input:focus{outline:none;border-color:#0e5c36;box-shadow:0 0 0 3px rgba(14,92,54,0.08);}' +
     'button{font-family:inherit;width:100%;padding:14px 28px;background:#0e5c36;color:#fff;border:0;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;min-height:52px;}' +
     'button:hover,button:focus{background:#0a3f25;}' +
@@ -136,6 +146,9 @@ function amountEntryPage_() {
     '<span class="prefix" aria-hidden="true">£</span>' +
     '<input type="number" id="amount-input" name="amount" min="1" max="5000" step="1" placeholder="20" inputmode="decimal" aria-label="Donation amount in pounds" required autofocus>' +
     '</div>' +
+    '<div class="input-wrap input-wrap-plain">' +
+    '<input type="email" id="email-input" name="email" placeholder="your@email.com" inputmode="email" autocomplete="email" aria-label="Your email address" required>' +
+    '</div>' +
     '<button type="submit">Donate now</button>' +
     '<p class="error" id="amount-error" role="alert"></p>' +
     '<p class="hint">Pay directly from your bank account · protected by your bank\'s usual security</p>' +
@@ -144,14 +157,19 @@ function amountEntryPage_() {
     '<footer>Aldershot Islamic Centre · Registered Charity 1214576</footer>' +
     '<script>' +
     'var SCRIPT_URL=' + JSON.stringify(scriptUrl) + ';' +
+    'var EMAIL_RE=/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;' +
     'document.getElementById("amount-form").addEventListener("submit",function(ev){' +
     'ev.preventDefault();' +
-    'var input=document.getElementById("amount-input");' +
+    'var amtInput=document.getElementById("amount-input");' +
+    'var emailInput=document.getElementById("email-input");' +
     'var err=document.getElementById("amount-error");' +
-    'var amt=parseFloat(input.value);' +
+    'var amt=parseFloat(amtInput.value);' +
+    'var email=(emailInput.value||"").trim();' +
     'err.classList.remove("visible");' +
-    'if(isNaN(amt)||amt<1||amt>5000){err.textContent="Please enter an amount between £1 and £5,000.";err.classList.add("visible");input.focus();return;}' +
-    'var url=SCRIPT_URL+(SCRIPT_URL.indexOf("?")===-1?"?":"&")+"amount="+encodeURIComponent(amt);' +
+    'if(isNaN(amt)||amt<1||amt>5000){err.textContent="Please enter an amount between £1 and £5,000.";err.classList.add("visible");amtInput.focus();return;}' +
+    'if(!email||!EMAIL_RE.test(email)){err.textContent="Please enter a valid email address.";err.classList.add("visible");emailInput.focus();return;}' +
+    'var sep=SCRIPT_URL.indexOf("?")===-1?"?":"&";' +
+    'var url=SCRIPT_URL+sep+"amount="+encodeURIComponent(amt)+"&email="+encodeURIComponent(email);' +
     'try{window.top.location.href=url;}catch(e){window.location.href=url;}' +
     '});' +
     '</script>' +
