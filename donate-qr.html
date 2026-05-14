@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lora:wght@500;600;700&family=Raleway:wght@300;400;500;600&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=21">
+    <link rel="stylesheet" href="assets/css/styles.css?v=22">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <meta name="theme-color" content="#0a3f25">
 </head>
@@ -34,45 +34,27 @@
         <div class="container qr-poster-container">
             <div class="qr-poster-head">
                 <img src="assets/images/logo.png" alt="Aldershot Islamic Centre" class="qr-poster-logo">
-                <h1 class="qr-poster-title">Donate by QR Code</h1>
+                <h1 class="qr-poster-title">Donate to the Masjid</h1>
                 <p class="qr-poster-arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-                <p class="qr-poster-sub">Scan with your phone camera. Pay quickly by card, bank, Apple Pay, or PayPal &mdash; in seconds.</p>
-            </div>
-
-            <div class="qr-grid" id="qr-grid">
-                <a class="qr-card" data-tap-amount="5">
-                    <div class="qr-amount">&pound;5</div>
-                    <div class="qr-code" data-amount="5"></div>
-                    <div class="qr-caption">Scan or tap to donate &pound;5</div>
-                </a>
-                <a class="qr-card" data-tap-amount="10">
-                    <div class="qr-amount">&pound;10</div>
-                    <div class="qr-code" data-amount="10"></div>
-                    <div class="qr-caption">Scan or tap to donate &pound;10</div>
-                </a>
-                <a class="qr-card" data-tap-amount="15">
-                    <div class="qr-amount">&pound;15</div>
-                    <div class="qr-code" data-amount="15"></div>
-                    <div class="qr-caption">Scan or tap to donate &pound;15</div>
-                </a>
-                <a class="qr-card" data-tap-amount="20">
-                    <div class="qr-amount">&pound;20</div>
-                    <div class="qr-code" data-amount="20"></div>
-                    <div class="qr-caption">Scan or tap to donate &pound;20</div>
-                </a>
+                <p class="qr-poster-sub print-only">Scan the QR code below to donate any amount, directly from your bank.</p>
+                <p class="qr-poster-sub no-print">Enter any amount, then authorise the payment in your banking app.</p>
             </div>
 
             <div class="qr-custom no-print" id="qr-custom">
-                <h3>Or choose your own amount</h3>
-                <p>Enter any amount &mdash; you'll be taken straight to your banking app to authorise.</p>
                 <form class="qr-custom-form" id="qr-custom-form" novalidate>
                     <span class="qr-custom-input">
                         <span class="qr-custom-currency" aria-hidden="true">&pound;</span>
-                        <input type="number" id="qr-custom-amount" min="1" max="5000" step="1" placeholder="20" inputmode="decimal" aria-label="Donation amount in pounds" required>
+                        <input type="number" id="qr-custom-amount" min="1" max="5000" step="1" placeholder="20" inputmode="decimal" aria-label="Donation amount in pounds" required autofocus>
                     </span>
                     <button type="submit" class="btn btn-primary">Donate now</button>
                 </form>
                 <p class="qr-custom-error" id="qr-custom-error" role="alert" hidden></p>
+                <p class="qr-custom-hint">Pay directly from your bank account &middot; protected by your bank's usual security</p>
+            </div>
+
+            <div class="qr-single">
+                <div class="qr-code" id="qr-code-big"></div>
+                <p class="qr-single-caption">Scan with your phone camera to donate</p>
             </div>
 
             <div class="qr-poster-foot">
@@ -137,26 +119,23 @@
             return DONORBOX_FALLBACK + '?default_amount=' + encodeURIComponent(amount) + '&default_interval=o';
         }
 
-        // Render the QR codes and make each card tappable as a fallback for
-        // people viewing the page directly on their phone (instead of scanning
-        // a printed copy with a second device).
-        document.querySelectorAll('#qr-grid .qr-card').forEach(function (card) {
-            var amount = card.dataset.tapAmount;
-            var url = buildPaymentUrl(amount);
-            card.setAttribute('href', url);
-            var qrEl = card.querySelector('.qr-code');
-            if (qrEl) {
-                var qr = qrcode(0, 'M');
-                qr.addData(url);
-                qr.make();
-                qrEl.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
-                var svg = qrEl.querySelector('svg');
-                if (svg) {
-                    svg.setAttribute('width', '240');
-                    svg.setAttribute('height', '240');
-                }
+        // Render the single big QR. It encodes the live URL of this page so a
+        // scanner lands here on their phone and can type the amount they want.
+        // We hard-code the production URL so the printed poster always points
+        // at the live page (not file:// during local testing).
+        var POSTER_URL = 'https://aldershotislamiccentre.org.uk/donate-qr.html';
+        var bigQrEl = document.getElementById('qr-code-big');
+        if (bigQrEl) {
+            var qr = qrcode(0, 'M');
+            qr.addData(POSTER_URL);
+            qr.make();
+            bigQrEl.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
+            var svg = bigQrEl.querySelector('svg');
+            if (svg) {
+                svg.setAttribute('width', '320');
+                svg.setAttribute('height', '320');
             }
-        });
+        }
 
         var customForm = document.getElementById('qr-custom-form');
         if (customForm) {
