@@ -63,28 +63,33 @@ function doGet(e) {
 
     const brRes = gcFetch_(baseUrl + '/billing_requests', 'post', token, brBody);
     if (brRes.getResponseCode() >= 300) {
-      console.error('Billing request create failed: ' + brRes.getContentText());
-      return errorPage_('Sorry, the payment provider returned an error. Please try again.');
+      const errText = brRes.getContentText();
+      console.error('Billing request create failed: ' + errText);
+      return errorPage_('Payment provider error: ' + errText.substring(0, 200));
     }
     const br = JSON.parse(brRes.getContentText()).billing_requests;
 
     // Step 2: create the Billing Request Flow (hosted Open Banking page).
-    // Pre-fill the donor's email and lock customer details so GoCardless
-    // skips its email-collection screen and goes straight to bank choice.
+    // Pre-fill the donor's email so GoCardless's form arrives with the field
+    // already populated. We don't lock customer details: GoCardless requires
+    // multiple fields (name, address) for that, and we only collect email.
+    // The donor will see GoCardless's email page with the address pre-filled
+    // and just tap Continue.
     const flowBody = {
       billing_request_flows: {
         redirect_uri: GC_REDIRECT_URI,
         exit_uri: GC_EXIT_URI,
         prefilled_customer: { email: email },
-        lock_customer_details: true,
         links: { billing_request: br.id }
       }
     };
 
     const flowRes = gcFetch_(baseUrl + '/billing_request_flows', 'post', token, flowBody);
     if (flowRes.getResponseCode() >= 300) {
-      console.error('Billing request flow create failed: ' + flowRes.getContentText());
-      return errorPage_('Sorry, the payment provider returned an error. Please try again.');
+      const errText = flowRes.getContentText();
+      console.error('Billing request flow create failed: ' + errText);
+      // Surface a short hint in the user message for easier debugging
+      return errorPage_('Payment provider error: ' + errText.substring(0, 200));
     }
     const flow = JSON.parse(flowRes.getContentText()).billing_request_flows;
 
