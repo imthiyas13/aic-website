@@ -48,7 +48,9 @@ function doGet(e) {
       ? 'https://api.gocardless.com'
       : 'https://api-sandbox.gocardless.com';
 
-    // Step 1: create the Billing Request (one-off Instant Bank Pay via faster_payments)
+    // Step 1: create the Billing Request (one-off Instant Bank Pay via faster_payments).
+    // Customer details (email) go on the flow's prefilled_customer, not here -
+    // GoCardless rejects customer_details as an unknown key on billing_requests.
     const brBody = {
       billing_requests: {
         payment_request: {
@@ -56,8 +58,7 @@ function doGet(e) {
           currency: 'GBP',
           description: GC_PAYMENT_DESCRIPTION,
           scheme: 'faster_payments'
-        },
-        customer_details: { email: email }
+        }
       }
     };
 
