@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lora:wght@500;600;700&family=Raleway:wght@300;400;500;600&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=22">
+    <link rel="stylesheet" href="assets/css/styles.css?v=23">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <meta name="theme-color" content="#0a3f25">
 </head>
@@ -36,26 +36,17 @@
                 <img src="assets/images/logo.png" alt="Aldershot Islamic Centre" class="qr-poster-logo">
                 <h1 class="qr-poster-title">Donate to the Masjid</h1>
                 <p class="qr-poster-arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
-                <p class="qr-poster-sub print-only">Scan the QR code below to donate any amount, directly from your bank.</p>
-                <p class="qr-poster-sub no-print">Enter any amount, then authorise the payment in your banking app.</p>
-            </div>
-
-            <div class="qr-custom no-print" id="qr-custom">
-                <form class="qr-custom-form" id="qr-custom-form" novalidate>
-                    <span class="qr-custom-input">
-                        <span class="qr-custom-currency" aria-hidden="true">&pound;</span>
-                        <input type="number" id="qr-custom-amount" min="1" max="5000" step="1" placeholder="20" inputmode="decimal" aria-label="Donation amount in pounds" required autofocus>
-                    </span>
-                    <button type="submit" class="btn btn-primary">Donate now</button>
-                </form>
-                <p class="qr-custom-error" id="qr-custom-error" role="alert" hidden></p>
-                <p class="qr-custom-hint">Pay directly from your bank account &middot; protected by your bank's usual security</p>
+                <p class="qr-poster-sub">Scan the QR code with your phone camera. Choose any amount, then pay directly from your bank in seconds.</p>
             </div>
 
             <div class="qr-single">
                 <div class="qr-code" id="qr-code-big"></div>
-                <p class="qr-single-caption">Scan with your phone camera to donate</p>
+                <p class="qr-single-caption">Scan to donate</p>
             </div>
+
+            <p class="qr-poster-actions no-print">
+                <a href="https://script.google.com/macros/s/AKfycbxLeybadwHfV6YkiiOFtrZsFjfsNcRMSsZg5MCM6j07mlQWnYMv2X1KXMeY7j7xgk-xEw/exec" class="btn btn-primary btn-large" target="_blank" rel="noopener">Or donate now without scanning</a>
+            </p>
 
             <div class="qr-poster-foot">
                 <p class="qr-foot-quote">&ldquo;The most beloved of deeds to Allah is the most regular and consistent even if it were a little.&rdquo; <span>(Sahih Bukhari)</span></p>
@@ -103,31 +94,16 @@
     <script src="assets/js/qrcode.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script>
-        // === Configure this once after deploying apps-script/gocardless-pay.gs ===
-        // Paste the deployed Apps Script Web App URL here. Scans will then mint a
-        // fresh GoCardless Instant Bank Pay request per scan and deep-link the
-        // donor's banking app. If left as the REPLACE_WITH_… placeholder, QRs
-        // fall back to Donorbox prefilled URLs so the page still works.
-        var GOCARDLESS_PROXY_URL = 'https://script.google.com/macros/s/AKfycbxLeybadwHfV6YkiiOFtrZsFjfsNcRMSsZg5MCM6j07mlQWnYMv2X1KXMeY7j7xgk-xEw/exec';
-        var DONORBOX_FALLBACK = 'https://donorbox.org/monthly-donations-935143';
+        // The QR encodes the GoCardless Apps Script proxy URL with no amount.
+        // When scanned, the proxy serves an "Enter amount" form. After the
+        // donor submits, the proxy creates the Open Banking request and
+        // deep-links into their banking app.
+        var QR_TARGET_URL = 'https://script.google.com/macros/s/AKfycbxLeybadwHfV6YkiiOFtrZsFjfsNcRMSsZg5MCM6j07mlQWnYMv2X1KXMeY7j7xgk-xEw/exec';
 
-        function buildPaymentUrl(amount) {
-            if (GOCARDLESS_PROXY_URL && GOCARDLESS_PROXY_URL.indexOf('REPLACE_') !== 0) {
-                var sep = GOCARDLESS_PROXY_URL.indexOf('?') === -1 ? '?' : '&';
-                return GOCARDLESS_PROXY_URL + sep + 'amount=' + encodeURIComponent(amount);
-            }
-            return DONORBOX_FALLBACK + '?default_amount=' + encodeURIComponent(amount) + '&default_interval=o';
-        }
-
-        // Render the single big QR. It encodes the live URL of this page so a
-        // scanner lands here on their phone and can type the amount they want.
-        // We hard-code the production URL so the printed poster always points
-        // at the live page (not file:// during local testing).
-        var POSTER_URL = 'https://aldershotislamiccentre.org.uk/donate-qr.html';
         var bigQrEl = document.getElementById('qr-code-big');
         if (bigQrEl) {
             var qr = qrcode(0, 'M');
-            qr.addData(POSTER_URL);
+            qr.addData(QR_TARGET_URL);
             qr.make();
             bigQrEl.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
             var svg = bigQrEl.querySelector('svg');
@@ -135,24 +111,6 @@
                 svg.setAttribute('width', '320');
                 svg.setAttribute('height', '320');
             }
-        }
-
-        var customForm = document.getElementById('qr-custom-form');
-        if (customForm) {
-            var amountInput = document.getElementById('qr-custom-amount');
-            var errorEl = document.getElementById('qr-custom-error');
-            customForm.addEventListener('submit', function (ev) {
-                ev.preventDefault();
-                errorEl.hidden = true;
-                var amount = parseFloat(amountInput.value);
-                if (isNaN(amount) || amount < 1 || amount > 5000) {
-                    errorEl.textContent = 'Please enter an amount between £1 and £5,000.';
-                    errorEl.hidden = false;
-                    amountInput.focus();
-                    return;
-                }
-                window.location.href = buildPaymentUrl(amount);
-            });
         }
 
         if ('serviceWorker' in navigator) {

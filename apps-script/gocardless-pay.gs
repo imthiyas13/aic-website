@@ -22,7 +22,14 @@ const MAX_AMOUNT_GBP = 5000;
 
 function doGet(e) {
   try {
-    const amount = parseFloat(e && e.parameter && e.parameter.amount);
+    const rawAmount = e && e.parameter && e.parameter.amount;
+    // If no amount in URL, show the amount-entry form. The form posts back
+    // to this same URL with ?amount=N and we fall through to the GoCardless
+    // flow on the next request.
+    if (!rawAmount) {
+      return amountEntryPage_();
+    }
+    const amount = parseFloat(rawAmount);
     if (!amount || isNaN(amount) || amount < MIN_AMOUNT_GBP || amount > MAX_AMOUNT_GBP) {
       return errorPage_('Please enter a donation amount between £' + MIN_AMOUNT_GBP + ' and £' + MAX_AMOUNT_GBP + '.');
     }
@@ -91,6 +98,67 @@ function gcFetch_(url, method, token, body) {
     payload: JSON.stringify(body),
     muteHttpExceptions: true
   });
+}
+
+function amountEntryPage_() {
+  // The form posts back to this same Apps Script /exec URL with ?amount=N.
+  // We use ScriptApp.getService().getUrl() so the form works regardless of
+  // which deployment of the script is being served.
+  const scriptUrl = ScriptApp.getService().getUrl();
+  const html =
+    '<!DOCTYPE html><html lang="en"><head>' +
+    '<meta charset="UTF-8">' +
+    '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<title>Donate to the Masjid</title>' +
+    '<style>' +
+    'body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#faf6ec;color:#1f2933;margin:0;padding:40px 20px;text-align:center;}' +
+    'h1{font-family:Lora,Georgia,serif;font-size:26px;color:#0a3f25;margin:0 0 6px;font-weight:700;}' +
+    '.arabic{font-family:Amiri,serif;direction:rtl;font-size:18px;color:#0e5c36;margin:6px 0 12px;}' +
+    '.intro{font-size:15px;color:#6b7480;max-width:340px;margin:0 auto 22px;line-height:1.5;}' +
+    '.card{max-width:360px;margin:0 auto;background:#fff;border:2px solid #0e5c36;border-radius:16px;padding:24px 22px;box-shadow:0 8px 20px rgba(14,92,54,0.10);}' +
+    '.input-wrap{position:relative;margin-bottom:14px;}' +
+    '.input-wrap .prefix{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:22px;color:#6b7480;font-weight:500;pointer-events:none;}' +
+    'input{font-family:inherit;font-size:24px;font-weight:600;padding:14px 16px 14px 40px;width:100%;border:1.5px solid rgba(14,92,54,0.18);border-radius:10px;text-align:center;box-sizing:border-box;-webkit-appearance:none;appearance:none;min-height:56px;color:#1f2933;}' +
+    'input:focus{outline:none;border-color:#0e5c36;box-shadow:0 0 0 3px rgba(14,92,54,0.08);}' +
+    'button{font-family:inherit;width:100%;padding:14px 28px;background:#0e5c36;color:#fff;border:0;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;min-height:52px;}' +
+    'button:hover,button:focus{background:#0a3f25;}' +
+    '.hint{font-size:12px;color:#6b7480;line-height:1.5;margin:14px 0 0;}' +
+    '.error{color:#c0392b;font-size:14px;margin-top:12px;display:none;}' +
+    '.error.visible{display:block;}' +
+    'footer{margin-top:28px;font-size:12px;color:#8a8f99;line-height:1.6;}' +
+    '</style></head><body>' +
+    '<h1>Donate to the Masjid</h1>' +
+    '<p class="arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>' +
+    '<p class="intro">Enter any amount, then authorise the payment in your banking app.</p>' +
+    '<div class="card">' +
+    '<form id="amount-form" novalidate>' +
+    '<div class="input-wrap">' +
+    '<span class="prefix" aria-hidden="true">£</span>' +
+    '<input type="number" id="amount-input" name="amount" min="1" max="5000" step="1" placeholder="20" inputmode="decimal" aria-label="Donation amount in pounds" required autofocus>' +
+    '</div>' +
+    '<button type="submit">Donate now</button>' +
+    '<p class="error" id="amount-error" role="alert"></p>' +
+    '<p class="hint">Pay directly from your bank account · protected by your bank\'s usual security</p>' +
+    '</form>' +
+    '</div>' +
+    '<footer>Aldershot Islamic Centre · Registered Charity 1214576</footer>' +
+    '<script>' +
+    'var SCRIPT_URL=' + JSON.stringify(scriptUrl) + ';' +
+    'document.getElementById("amount-form").addEventListener("submit",function(ev){' +
+    'ev.preventDefault();' +
+    'var input=document.getElementById("amount-input");' +
+    'var err=document.getElementById("amount-error");' +
+    'var amt=parseFloat(input.value);' +
+    'err.classList.remove("visible");' +
+    'if(isNaN(amt)||amt<1||amt>5000){err.textContent="Please enter an amount between £1 and £5,000.";err.classList.add("visible");input.focus();return;}' +
+    'var url=SCRIPT_URL+(SCRIPT_URL.indexOf("?")===-1?"?":"&")+"amount="+encodeURIComponent(amt);' +
+    'try{window.top.location.href=url;}catch(e){window.location.href=url;}' +
+    '});' +
+    '</script>' +
+    '</body></html>';
+  return HtmlService.createHtmlOutput(html)
+    .setTitle('Donate to the Masjid')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
 function redirectPage_(url, amount) {
