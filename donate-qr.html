@@ -109,12 +109,16 @@
     <script src="assets/js/script.js"></script>
     <script>
         document.querySelectorAll('#qr-grid .qr-code').forEach(function (el) {
-            new QRCode(el, {
-                text: el.dataset.url,
-                width: 240,
-                height: 240,
-                correctLevel: QRCode.CorrectLevel.M
-            });
+            // qrcode-generator API: type 0 = auto-detect, 'M' = ~15% error correction
+            var qr = qrcode(0, 'M');
+            qr.addData(el.dataset.url);
+            qr.make();
+            el.innerHTML = qr.createSvgTag({ scalable: true, margin: 0 });
+            var svg = el.querySelector('svg');
+            if (svg) {
+                svg.setAttribute('width', '240');
+                svg.setAttribute('height', '240');
+            }
         });
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
