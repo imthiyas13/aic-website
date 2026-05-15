@@ -14,6 +14,13 @@ const SHEET_REFRESH_MS = 10 * 60 * 1000; // 10 minutes
 
 const SHURUQ_ARABIC = 'الشروق';
 
+// Prayer data lives in the GitHub repo so the admin app's saves appear here
+// instantly, without an intermediate deploy. Cache-buster on the query keeps
+// the Fastly CDN in front of raw.githubusercontent.com from serving stale
+// content right after a save.
+const GH_RAW_BASE = 'https://raw.githubusercontent.com/imthiyas13/aic-website/main';
+const ghDataUrl = name => `${GH_RAW_BASE}/data/${name}?t=${Date.now()}`;
+
 const MOSQUE_ICON = `<svg viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path d="M30 4 Q32 2 34 4 L33 6 L31 6 Z"/>
   <circle cx="32" cy="9" r="2.2"/>
@@ -119,7 +126,7 @@ async function loadOverrides(config) {
             console.warn('Sheet fetch failed, falling back to overrides.json:', err);
         }
     }
-    return loadJsonSafe('data/overrides.json', { rules: [] });
+    return loadJsonSafe(ghDataUrl('overrides.json'), { rules: [] });
 }
 
 function todayKey(timezone) {
@@ -479,7 +486,7 @@ async function initSalahWidget() {
     try {
         config = await loadJson('data/config.json');
         [salah, overrides] = await Promise.all([
-            loadJson('data/salah-times.json'),
+            loadJson(ghDataUrl('salah-times.json')),
             loadOverrides(config),
         ]);
     } catch (err) {
