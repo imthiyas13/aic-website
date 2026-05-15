@@ -823,7 +823,7 @@ function wireUp() {
   });
 }
 
-function onRefreshKiosk() {
+function callPiAction(path, pending) {
   const url = (state.kiosk.url || '').trim().replace(/\/+$/, '');
   const key = (state.kiosk.key || '').trim();
   if (!url || !key) {
@@ -832,22 +832,38 @@ function onRefreshKiosk() {
     toast('Set the Pi URL and refresh key first', true);
     return;
   }
-  const target = `${url}/refresh?key=${encodeURIComponent(key)}`;
-  window.open(target, '_blank', 'noopener');
+  const target = `${url}${path}?key=${encodeURIComponent(key)}`;
+
+  // Browsers block HTTPS pages from fetching HTTP resources. Skip the
+  // fetch and open the URL directly in that case — the Pi response page
+  // auto-closes itself after success, so the tab just flashes.
+  const mixedContent = location.protocol === 'https:' && url.startsWith('http://');
+  if (mixedContent) {
+    toast(`${pending}…`);
+    window.open(target, '_blank', 'noopener');
+    return;
+  }
+
+  toast(`${pending}…`);
+  fetch(target, { headers: { 'Accept': 'application/json' } })
+    .then(async r => {
+      let data = null;
+      try { data = await r.json(); } catch (_) {}
+      const msg = data?.message || (r.ok ? 'Done' : `HTTP ${r.status}`);
+      if (r.ok && data?.ok !== false) toast(msg);
+      else toast(msg, true);
+    })
+    .catch(e => {
+      // Network/CORS error — open in tab as a fallback so the action still
+      // goes through. May be popup-blocked since this isn't sync with the
+      // user gesture; that's OK, we surface the error in the toast.
+      toast(`${pending} failed: ${e.message || 'network error'}`, true);
+      window.open(target, '_blank', 'noopener');
+    });
 }
 
-function onPullKiosk() {
-  const url = (state.kiosk.url || '').trim().replace(/\/+$/, '');
-  const key = (state.kiosk.key || '').trim();
-  if (!url || !key) {
-    state.kiosk.showCfg = true;
-    render();
-    toast('Set the Pi URL and refresh key first', true);
-    return;
-  }
-  const target = `${url}/pull?key=${encodeURIComponent(key)}`;
-  window.open(target, '_blank', 'noopener');
-}
+function onRefreshKiosk() { callPiAction('/refresh', 'Refreshing'); }
+function onPullKiosk() { callPiAction('/pull', 'Pulling'); }
 
 function onSubmitKioskCfg(ev) {
   ev.preventDefault();
