@@ -1,7 +1,7 @@
 // AIC website service worker — PWA caching + push notifications.
 // Bump CACHE_VERSION whenever you ship code/CSS/HTML changes that
 // you need to flush on installed phones.
-const CACHE_VERSION = 'v4';
+const CACHE_VERSION = 'v5';
 const CACHE_NAME = `aic-site-${CACHE_VERSION}`;
 
 const CORE_ASSETS = [
@@ -24,8 +24,6 @@ const CORE_ASSETS = [
     '/assets/images/Masjid-1.png',
     '/assets/images/Masjid-2.png',
     '/data/config.json',
-    '/data/salah-times.json',
-    '/data/overrides.json',
 ];
 
 self.addEventListener('install', (event) => {
