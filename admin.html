@@ -765,6 +765,7 @@ function render() {
       <span class="banner-text">Saves commit to GitHub. Website rebuilds in ~30s; the kiosk syncs within ~60s — or refresh it now.</span>
       <span class="banner-actions">
         <button class="primary" data-act="refresh-kiosk">Refresh kiosk</button>
+        <button class="primary" data-act="pull-kiosk" title="Pull latest code from GitHub on the Pi">Pull latest</button>
         <button class="ghost icon-btn" data-act="toggle-kiosk-cfg" title="Kiosk settings" aria-label="Kiosk settings">&#9881;</button>
       </span>
     </div>
@@ -799,6 +800,7 @@ function wireUp() {
       else if (act === 'del-eid') { onDeleteEid(el.dataset.date); }
       else if (act === 'signout') { signOut(); }
       else if (act === 'refresh-kiosk') { onRefreshKiosk(); }
+      else if (act === 'pull-kiosk') { onPullKiosk(); }
       else if (act === 'toggle-kiosk-cfg') { state.kiosk.showCfg = !state.kiosk.showCfg; render(); }
       else if (act === 'cancel-kiosk-cfg') { state.kiosk.showCfg = false; render(); }
     });
@@ -831,6 +833,19 @@ function onRefreshKiosk() {
     return;
   }
   const target = `${url}/refresh?key=${encodeURIComponent(key)}`;
+  window.open(target, '_blank', 'noopener');
+}
+
+function onPullKiosk() {
+  const url = (state.kiosk.url || '').trim().replace(/\/+$/, '');
+  const key = (state.kiosk.key || '').trim();
+  if (!url || !key) {
+    state.kiosk.showCfg = true;
+    render();
+    toast('Set the Pi URL and refresh key first', true);
+    return;
+  }
+  const target = `${url}/pull?key=${encodeURIComponent(key)}`;
   window.open(target, '_blank', 'noopener');
 }
 
