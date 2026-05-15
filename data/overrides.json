@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-15T00:58:01Z",
+  "updatedAt": "2026-05-15T00:58:26Z",
   "rules": [
     {
       "from": "2026-04-19",
@@ -18,15 +18,15 @@
     {
       "from": "2026-05-15",
       "to": "9999-12-31",
-      "prayer": "isha",
-      "iqamah": "22:15",
+      "prayer": "fajr",
+      "iqamah": "04:25",
       "note": ""
     },
     {
       "from": "2026-05-15",
       "to": "9999-12-31",
-      "prayer": "fajr",
-      "iqamah": "04:20",
+      "prayer": "isha",
+      "iqamah": "22:15",
       "note": ""
     }
   ],
