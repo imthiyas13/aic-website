@@ -15,11 +15,28 @@ const SHEET_REFRESH_MS = 10 * 60 * 1000; // 10 minutes
 const SHURUQ_ARABIC = 'الشروق';
 
 // Prayer data lives in the GitHub repo so the admin app's saves appear here
-// instantly, without an intermediate deploy. Cache-buster on the query keeps
-// the Fastly CDN in front of raw.githubusercontent.com from serving stale
-// content right after a save.
-const GH_RAW_BASE = 'https://raw.githubusercontent.com/imthiyas13/aic-website/main';
-const ghDataUrl = name => `${GH_RAW_BASE}/data/${name}?t=${Date.now()}`;
+// instantly, without an intermediate deploy. We hit the Contents API rather
+// than raw.githubusercontent.com because the raw host is fronted by a CDN
+// that ignores query-string cache-busters and can serve minutes-old responses
+// after a save; the Contents API isn't cached at the edge.
+const GH_API_BASE = 'https://api.github.com/repos/imthiyas13/aic-website/contents/data';
+
+async function loadGithubJson(filename, fallback) {
+    try {
+        const res = await fetch(`${GH_API_BASE}/${filename}`, {
+            headers: { 'Accept': 'application/vnd.github.raw' },
+            cache: 'no-cache',
+        });
+        if (!res.ok) throw new Error(`GitHub fetch failed for ${filename}: ${res.status}`);
+        return await res.json();
+    } catch (err) {
+        if (fallback !== undefined) {
+            console.warn(`Falling back for ${filename}:`, err);
+            return fallback;
+        }
+        throw err;
+    }
+}
 
 const MOSQUE_ICON = `<svg viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
   <path d="M30 4 Q32 2 34 4 L33 6 L31 6 Z"/>
@@ -126,7 +143,7 @@ async function loadOverrides(config) {
             console.warn('Sheet fetch failed, falling back to overrides.json:', err);
         }
     }
-    return loadJsonSafe(ghDataUrl('overrides.json'), { rules: [] });
+    return loadGithubJson('overrides.json', { rules: [] });
 }
 
 function todayKey(timezone) {
@@ -486,7 +503,7 @@ async function initSalahWidget() {
     try {
         config = await loadJson('data/config.json');
         [salah, overrides] = await Promise.all([
-            loadJson(ghDataUrl('salah-times.json')),
+            loadGithubJson('salah-times.json'),
             loadOverrides(config),
         ]);
     } catch (err) {
