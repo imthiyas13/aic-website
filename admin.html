@@ -297,10 +297,28 @@ const REPO_OWNER = 'imthiyas13';
 const REPO_NAME = 'aic-website';
 const FILE_PATH = 'data/overrides.json';
 const BRANCH = 'main';
-const PAT_KEY = 'aic-admin-pat';
-const PI_URL_KEY = 'aic-admin-pi-url';
-const PI_REFRESH_KEY = 'aic-admin-pi-key';
-const DEFAULT_PI_URL = 'http://raspberrypi.local:8080';
+
+// Kiosk (Pi) — hardcoded so the cog/settings form is gone.
+const PI_URL = 'http://100.86.107.50:8080';
+const PI_REFRESH_KEY_VALUE = '__FILL_IN_AIC_REFRESH_KEY__';
+
+// Admin login — password-gated. The actual GitHub PAT is XOR-encrypted with
+// the password and base64'd into PAT_ENCRYPTED below, so the raw PAT never
+// appears in source (and GitHub secret scanning won't auto-revoke it).
+//
+// To set this up, run this snippet in your browser console once:
+//   (() => {
+//     const pat = 'github_pat_xxxxxxxxxxxx';   // your new PAT
+//     const pw  = 'choose-an-admin-password';  // what admins will type
+//     let bin = '';
+//     for (let i = 0; i < pat.length; i++)
+//       bin += String.fromCharCode(pat.charCodeAt(i) ^ pw.charCodeAt(i % pw.length));
+//     console.log(btoa(bin));
+//   })();
+// Copy the printed string and paste it as PAT_ENCRYPTED, then commit.
+const PAT_ENCRYPTED = '__FILL_IN_BASE64_XOR_OF_PAT_AND_PASSWORD__';
+
+const AUTH_KEY = 'aic-admin-auth';
 
 const PRAYERS_STD = [
   { key: 'fajr',    label: 'Fajr' },
@@ -317,19 +335,25 @@ const INDEF = '9999-12-31';
 
 const root = document.getElementById('root');
 const toastEl = document.getElementById('toast');
-let pat = localStorage.getItem(PAT_KEY) || '';
+let pat = '';  // populated from PAT_ENCRYPTED + password on successful login
 let state = {
   rules: [],
   updatedAt: null,
   fileSha: null,
   adding: null,    // null | 'ovd' | 'eid'
   editing: null,   // null | { kind, idx | date }
-  kiosk: {
-    url: localStorage.getItem(PI_URL_KEY) || DEFAULT_PI_URL,
-    key: localStorage.getItem(PI_REFRESH_KEY) || '',
-    showCfg: false,
-  },
 };
+
+function decryptPat(password) {
+  if (!password || !PAT_ENCRYPTED || PAT_ENCRYPTED.startsWith('__FILL_IN_')) return '';
+  let bin;
+  try { bin = atob(PAT_ENCRYPTED); } catch { return ''; }
+  let out = '';
+  for (let i = 0; i < bin.length; i++) {
+    out += String.fromCharCode(bin.charCodeAt(i) ^ password.charCodeAt(i % password.length));
+  }
+  return out;
+}
 
 /* ---------- Helpers ---------- */
 
@@ -532,34 +556,33 @@ function renderAuth(message = '') {
   root.innerHTML = `
     <div class="auth-block">
       <h1>AIC Admin</h1>
-      <p class="desc">
-        Sign in with a GitHub Personal Access Token. The token is stored only in your browser.
-        <br><br>
-        Need one? Create a fine-grained PAT at
-        <a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener">github.com/settings/personal-access-tokens</a>
-        with <strong>Contents: Read &amp; write</strong> on
-        <code>${REPO_OWNER}/${REPO_NAME}</code>.
-      </p>
+      <p class="desc">Enter the admin password to continue.</p>
       ${message ? `<div class="err-msg">${escapeHtml(message)}</div>` : ''}
-      <input id="pat" type="password" placeholder="github_pat_..." autocomplete="off">
+      <input id="pw" type="password" placeholder="Password" autocomplete="current-password">
       <button class="primary" id="auth-go">Continue</button>
     </div>`;
-  const input = document.getElementById('pat');
+  const input = document.getElementById('pw');
   const go = document.getElementById('auth-go');
   go.onclick = async () => {
-    const v = input.value.trim();
+    const v = input.value;
     if (!v) return;
     go.disabled = true;
     go.textContent = 'Verifying…';
-    pat = v;
+    const candidate = decryptPat(v);
+    if (!candidate) {
+      pat = '';
+      renderAuth('Admin not configured yet (PAT_ENCRYPTED is empty).');
+      return;
+    }
+    pat = candidate;
     try {
       await loadRules();
-      localStorage.setItem(PAT_KEY, pat);
+      localStorage.setItem(AUTH_KEY, v);
       render();
     } catch (e) {
       pat = '';
       const msg = e.status === 401 || e.status === 403
-        ? 'Token rejected. Check the scope (Contents: Read & write).'
+        ? 'Wrong password.'
         : (e.message || 'Sign-in failed');
       renderAuth(msg);
     }
@@ -571,8 +594,8 @@ function renderAuth(message = '') {
 }
 
 function signOut() {
-  if (!confirm('Sign out and forget the token from this device?')) return;
-  localStorage.removeItem(PAT_KEY);
+  if (!confirm('Sign out from this device?')) return;
+  localStorage.removeItem(AUTH_KEY);
   pat = '';
   state = { rules: [], updatedAt: null, fileSha: null, adding: null, editing: null };
   renderAuth();
@@ -699,23 +722,6 @@ function eidFormHtml(initial, mode) {
     </form>`;
 }
 
-function kioskCfgFormHtml() {
-  return `
-    <form class="editor" data-form="kiosk-cfg">
-      <h3>Kiosk refresh settings</h3>
-      <label><span class="lbl">Pi URL</span>
-        <input type="url" name="url" value="${escapeHtml(state.kiosk.url)}" placeholder="${escapeHtml(DEFAULT_PI_URL)}" required>
-      </label>
-      <label><span class="lbl">Refresh key</span>
-        <input type="text" name="key" value="${escapeHtml(state.kiosk.key)}" placeholder="AIC_REFRESH_KEY from the Pi" autocomplete="off" required>
-      </label>
-      <div class="form-actions">
-        <button type="button" class="ghost" data-act="cancel-kiosk-cfg">Cancel</button>
-        <button type="submit" class="primary">Save</button>
-      </div>
-    </form>`;
-}
-
 /* ---------- Main render ---------- */
 
 function render() {
@@ -766,10 +772,8 @@ function render() {
       <span class="banner-actions">
         <button class="primary" data-act="refresh-kiosk">Refresh kiosk</button>
         <button class="primary" data-act="pull-kiosk" title="Pull latest code from GitHub on the Pi">Pull latest</button>
-        <button class="ghost icon-btn" data-act="toggle-kiosk-cfg" title="Kiosk settings" aria-label="Kiosk settings">&#9881;</button>
       </span>
     </div>
-    ${state.kiosk.showCfg ? kioskCfgFormHtml() : ''}
 
     <section class="card">
       <h2>Prayer overrides <span class="count">${others.length} active</span></h2>
@@ -801,8 +805,6 @@ function wireUp() {
       else if (act === 'signout') { signOut(); }
       else if (act === 'refresh-kiosk') { onRefreshKiosk(); }
       else if (act === 'pull-kiosk') { onPullKiosk(); }
-      else if (act === 'toggle-kiosk-cfg') { state.kiosk.showCfg = !state.kiosk.showCfg; render(); }
-      else if (act === 'cancel-kiosk-cfg') { state.kiosk.showCfg = false; render(); }
     });
   });
 
@@ -816,20 +818,16 @@ function wireUp() {
       sync();
     } else if (f.dataset.form === 'eid') {
       f.addEventListener('submit', onSubmitEid);
-    } else if (f.dataset.form === 'kiosk-cfg') {
-      f.addEventListener('submit', onSubmitKioskCfg);
     }
     f.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
 }
 
 function callPiAction(path, pending) {
-  const url = (state.kiosk.url || '').trim().replace(/\/+$/, '');
-  const key = (state.kiosk.key || '').trim();
-  if (!url || !key) {
-    state.kiosk.showCfg = true;
-    render();
-    toast('Set the Pi URL and refresh key first', true);
+  const url = PI_URL.replace(/\/+$/, '');
+  const key = PI_REFRESH_KEY_VALUE;
+  if (!key || key.startsWith('__FILL_IN_')) {
+    toast('Refresh key not configured in admin source', true);
     return;
   }
   const target = `${url}${path}?key=${encodeURIComponent(key)}`;
@@ -865,21 +863,6 @@ function callPiAction(path, pending) {
 function onRefreshKiosk() { callPiAction('/refresh', 'Refreshing'); }
 function onPullKiosk() { callPiAction('/pull', 'Pulling'); }
 
-function onSubmitKioskCfg(ev) {
-  ev.preventDefault();
-  const f = ev.target;
-  const url = f.url.value.trim().replace(/\/+$/, '');
-  const key = f.key.value.trim();
-  if (!url || !key) { toast('Both fields are required', true); return; }
-  localStorage.setItem(PI_URL_KEY, url);
-  localStorage.setItem(PI_REFRESH_KEY, key);
-  state.kiosk.url = url;
-  state.kiosk.key = key;
-  state.kiosk.showCfg = false;
-  render();
-  toast('Kiosk settings saved');
-}
-
 /* ---------- Mutations ---------- */
 
 async function applyMutation(mutator) {
@@ -896,9 +879,9 @@ async function applyMutation(mutator) {
     render();
   } catch (e) {
     if (e.status === 401 || e.status === 403) {
-      localStorage.removeItem(PAT_KEY);
+      localStorage.removeItem(AUTH_KEY);
       pat = '';
-      renderAuth('Token expired or rejected. Please sign in again.');
+      renderAuth('Session rejected. Please sign in again.');
       return;
     }
     toast(e.message || 'Save failed', true);
@@ -977,15 +960,18 @@ function onDeleteEid(date) {
 /* ---------- Boot ---------- */
 
 async function init() {
+  const stored = localStorage.getItem(AUTH_KEY) || '';
+  if (!stored) { renderAuth(); return; }
+  pat = decryptPat(stored);
   if (!pat) { renderAuth(); return; }
   try {
     await loadRules();
     render();
   } catch (e) {
     if (e.status === 401 || e.status === 403) {
-      localStorage.removeItem(PAT_KEY);
+      localStorage.removeItem(AUTH_KEY);
       pat = '';
-      renderAuth('Token rejected. Please sign in again.');
+      renderAuth('Session rejected. Please sign in again.');
     } else {
       root.innerHTML = `<div class="auth-block"><h1>AIC Admin</h1>
         <p class="desc" style="color:var(--danger)">Failed to load: ${escapeHtml(e.message || 'unknown error')}</p>
