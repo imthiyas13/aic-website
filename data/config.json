@@ -36,9 +36,5 @@
   "whatsapp": {
     "qrImage": "assets/whatsapp-qr.png",
     "label": "Scan to join our WhatsApp group"
-  },
-  "admin": {
-    "refreshToken": "CHANGE-ME-BEFORE-DEPLOY",
-    "sheetCsvUrl": "https://docs.google.com/spreadsheets/d/1E0qBghTtZqtsMmy5xjMM3aPloAMbqARFKTJaTFK8vbU/export?format=csv&gid=0"
   }
 }
