@@ -225,26 +225,34 @@ function isFriday(timezone) {
     return fmt.format(new Date()) === 'Fri';
 }
 
+// When multiple rules cover the same prayer on the same day (e.g. an old
+// "from May" rule and a newer "from June" rule both still in the file), the
+// one with the latest `from` date wins — newer schedules supersede older
+// ones without requiring the admin to manually close out the previous rule.
+function pickLatestRule(rules, dateKey, prayerKey) {
+    let chosen = null;
+    for (const r of rules || []) {
+        if (r.prayer !== prayerKey) continue;
+        if (dateKey < r.from || dateKey > r.to) continue;
+        if (!chosen || r.from > chosen.from) chosen = r;
+    }
+    return chosen;
+}
+
 function applyOverrides(day, dateKey, overrides) {
     if (!day) return day;
     const out = { ...day };
-    for (const r of overrides.rules || []) {
-        if (dateKey >= r.from && dateKey <= r.to && out[r.prayer]) {
-            out[r.prayer] = { ...out[r.prayer], iqamah: r.iqamah };
-        }
+    for (const prayer of Object.keys(out)) {
+        const r = pickLatestRule(overrides.rules, dateKey, prayer);
+        if (r) out[prayer] = { ...out[prayer], iqamah: r.iqamah };
     }
     return out;
 }
 
 function applyJummaOverrides(list, dateKey, overrides) {
     return list.map((j, i) => {
-        const key = `jumma${i + 1}`;
-        for (const r of overrides.rules || []) {
-            if (dateKey >= r.from && dateKey <= r.to && r.prayer === key) {
-                return { ...j, jamaat: r.iqamah };
-            }
-        }
-        return j;
+        const r = pickLatestRule(overrides.rules, dateKey, `jumma${i + 1}`);
+        return r ? { ...j, jamaat: r.iqamah } : j;
     });
 }
 
