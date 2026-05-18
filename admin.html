@@ -109,6 +109,19 @@
     padding: 0.4rem 0.55rem; font-size: 1rem;
   }
 
+  .kiosk-status {
+    padding: 0.7rem 0.9rem; border-radius: 0.5rem;
+    font-size: 0.88rem; margin-bottom: 1rem;
+    background: #f9fafb; border: 1px solid var(--line);
+    color: var(--text);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .kiosk-status:empty { display: none; }
+  .kiosk-status.ok      { background: var(--ok-bg);   border-color: var(--accent);   color: var(--accent-dark); }
+  .kiosk-status.err     { background: var(--err-bg);  border-color: var(--err-line); color: var(--danger); }
+  .kiosk-status.pending { background: var(--warn-bg); border-color: var(--warn-line); color: #8a5a00; }
+  .kiosk-status .ts { color: var(--muted); font-size: 0.78rem; margin-left: auto; flex-shrink: 0; }
+
   .item {
     background: #fafbfa;
     border: 1px solid var(--line);
@@ -340,8 +353,9 @@ let state = {
   rules: [],
   updatedAt: null,
   fileSha: null,
-  adding: null,    // null | 'ovd' | 'eid'
-  editing: null,   // null | { kind, idx | date }
+  adding: null,        // null | 'ovd' | 'eid'
+  editing: null,       // null | { kind, idx | date }
+  kioskStatus: null,   // null | { text, kind, ts }
 };
 
 function decryptPat(password) {
@@ -774,6 +788,7 @@ function render() {
         <button class="primary" data-act="pull-kiosk" title="Pull latest code from GitHub on the Pi">Pull latest</button>
       </span>
     </div>
+    <div class="kiosk-status${state.kioskStatus ? ' ' + state.kioskStatus.kind : ''}" id="kiosk-status">${state.kioskStatus ? `<span>${escapeHtml(state.kioskStatus.text)}</span><span class="ts">${escapeHtml(state.kioskStatus.ts)}</span>` : ''}</div>
 
     <section class="card">
       <h2>Prayer overrides <span class="count">${others.length} active</span></h2>
@@ -823,40 +838,45 @@ function wireUp() {
   });
 }
 
+function setKioskStatus(text, kind) {
+  state.kioskStatus = { text, kind, ts: new Date().toLocaleTimeString() };
+  const el = document.getElementById('kiosk-status');
+  if (!el) return;
+  el.className = 'kiosk-status' + (kind ? ' ' + kind : '');
+  el.innerHTML = `<span>${escapeHtml(text)}</span><span class="ts">${escapeHtml(state.kioskStatus.ts)}</span>`;
+}
+
 function callPiAction(path, pending) {
   const url = PI_URL.replace(/\/+$/, '');
   const key = PI_REFRESH_KEY_VALUE;
   if (!key || key.startsWith('__FILL_IN_')) {
-    toast('Refresh key not configured in admin source', true);
+    setKioskStatus('Refresh key not configured in admin source', 'err');
     return;
   }
   const target = `${url}${path}?key=${encodeURIComponent(key)}`;
 
-  // Browsers block HTTPS pages from fetching HTTP resources. Skip the
-  // fetch and open the URL directly in that case — the Pi response page
-  // auto-closes itself after success, so the tab just flashes.
+  // HTTPS pages can't fetch plain-HTTP resources; if that's the case, fall
+  // back to opening in a new tab (Pi's response page auto-closes). The
+  // Pi-served copy of this file uses a same-origin URL and so always takes
+  // the inline fetch path.
   const mixedContent = location.protocol === 'https:' && url.startsWith('http://');
   if (mixedContent) {
-    toast(`${pending}…`);
+    setKioskStatus(`${pending} — opened in new tab (HTTPS→HTTP can't run inline)`, 'pending');
     window.open(target, '_blank', 'noopener');
     return;
   }
 
-  toast(`${pending}…`);
+  setKioskStatus(`${pending}…`, 'pending');
   fetch(target, { headers: { 'Accept': 'application/json' } })
     .then(async r => {
       let data = null;
       try { data = await r.json(); } catch (_) {}
       const msg = data?.message || (r.ok ? 'Done' : `HTTP ${r.status}`);
-      if (r.ok && data?.ok !== false) toast(msg);
-      else toast(msg, true);
+      const ok = r.ok && data?.ok !== false;
+      setKioskStatus(`${ok ? '✓' : '✗'} ${msg}`, ok ? 'ok' : 'err');
     })
     .catch(e => {
-      // Network/CORS error — open in tab as a fallback so the action still
-      // goes through. May be popup-blocked since this isn't sync with the
-      // user gesture; that's OK, we surface the error in the toast.
-      toast(`${pending} failed: ${e.message || 'network error'}`, true);
-      window.open(target, '_blank', 'noopener');
+      setKioskStatus(`✗ ${pending} failed — ${e.message || 'network error'}`, 'err');
     });
 }
 
