@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-21T20:17:04Z",
+  "updatedAt": "2026-05-22T17:31:13Z",
   "rules": [
     {
       "from": "2026-04-19",
@@ -35,6 +35,27 @@
       "prayer": "fajr",
       "iqamah": "04:15",
       "note": ""
+    },
+    {
+      "from": "2026-05-27",
+      "to": "2026-05-27",
+      "prayer": "eid1",
+      "iqamah": "07:00",
+      "note": "Eid ul Adha"
+    },
+    {
+      "from": "2026-05-27",
+      "to": "2026-05-27",
+      "prayer": "eid2",
+      "iqamah": "08:00",
+      "note": "Eid ul Adha"
+    },
+    {
+      "from": "2026-05-27",
+      "to": "2026-05-27",
+      "prayer": "eid3",
+      "iqamah": "09:00",
+      "note": "Eid ul Adha"
     }
   ],
   "errors": []
