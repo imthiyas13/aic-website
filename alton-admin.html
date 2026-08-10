@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#2f9d93">
+<meta name="robots" content="noindex, nofollow">
+<title>Alton Islamic Centre Admin — Salah Times</title>
+<style>
+  :root {
+    --bg: #f4f6f5;
+    --card: #ffffff;
+    --line: #e5e7eb;
+    --line-soft: #eef0ee;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --accent: #2f9d93;
+    --accent-dark: #264a56;
+    --accent-soft: #e4f3f1;
+    --danger: #b3261e;
+    --warn-bg: #fff4e6;
+    --warn-line: #e8a94a;
+    --ok-bg: #e6f7ea;
+    --err-bg: #fde2e2;
+    --err-line: #d9534f;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { font-size: 16px; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.4;
+    padding: 1rem;
+    padding-bottom: 4rem;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  header.page {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.8rem;
+    margin-bottom: 1rem;
+  }
+  header.page h1 {
+    font-size: 1.5rem; margin: 0;
+    color: var(--accent-dark);
+  }
+  .updated { color: var(--muted); font-size: 0.85rem; }
+  .signout {
+    background: transparent; border: 0;
+    color: var(--muted); font-size: 0.85rem;
+    padding: 0.2rem 0.5rem; cursor: pointer;
+    text-decoration: underline; min-height: auto;
+  }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 1.2rem; transform: translateX(-50%);
+    background: #1a1a1a; color: #fff; padding: 0.8rem 1.2rem; border-radius: 0.6rem;
+    font-size: 0.95rem; opacity: 0; transition: opacity 0.2s;
+    pointer-events: none; z-index: 100;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    max-width: calc(100vw - 2rem);
+  }
+  .toast.show { opacity: 1; }
+  .toast.err { background: var(--danger); }
+
+  section.card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 0.9rem;
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  section.card > h2 {
+    font-size: 1.1rem; margin: 0 0 0.8rem;
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 0.5rem;
+  }
+  section.card > h2 .count {
+    color: var(--muted); font-size: 0.85rem; font-weight: 500;
+  }
+  .empty {
+    color: var(--muted); padding: 0.9rem; font-size: 0.95rem;
+    text-align: center;
+    background: var(--line-soft);
+    border-radius: 0.5rem;
+    margin: 0 0 0.7rem;
+  }
+  .info-banner {
+    background: var(--accent-soft); color: var(--accent-dark);
+    border: 1px solid var(--accent);
+    padding: 0.7rem 0.9rem; border-radius: 0.5rem;
+    font-size: 0.85rem; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.7rem;
+    flex-wrap: wrap;
+  }
+  .info-banner .banner-text { flex: 1 1 200px; min-width: 0; }
+  .info-banner .banner-actions {
+    display: flex; gap: 0.4rem; flex-shrink: 0;
+  }
+  .info-banner .banner-actions button {
+    padding: 0.4rem 0.75rem; min-height: 34px;
+    font-size: 0.82rem; font-weight: 600;
+  }
+  .info-banner .banner-actions .icon-btn {
+    padding: 0.4rem 0.55rem; font-size: 1rem;
+  }
+
+  .kiosk-status {
+    padding: 0.7rem 0.9rem; border-radius: 0.5rem;
+    font-size: 0.88rem; margin-bottom: 1rem;
+    background: #f9fafb; border: 1px solid var(--line);
+    color: var(--text);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .kiosk-status:empty { display: none; }
+  .kiosk-status.ok      { background: var(--ok-bg);   border-color: var(--accent);   color: var(--accent-dark); }
+  .kiosk-status.err     { background: var(--err-bg);  border-color: var(--err-line); color: var(--danger); }
+  .kiosk-status.pending { background: var(--warn-bg); border-color: var(--warn-line); color: #8a5a00; }
+  .kiosk-status .ts { color: var(--muted); font-size: 0.78rem; margin-left: auto; flex-shrink: 0; }
+
+  .item {
+    background: #fafbfa;
+    border: 1px solid var(--line);
+    border-radius: 0.7rem;
+    padding: 0.85rem 0.95rem;
+    margin-bottom: 0.6rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem 0.8rem;
+    align-items: start;
+  }
+  .item .info {
+    display: flex; flex-direction: column;
+    gap: 0.3rem; min-width: 0;
+  }
+  .item .top {
+    display: flex; align-items: center;
+    flex-wrap: wrap; gap: 0.5rem 0.7rem;
+  }
+  .item .time {
+    font-size: 1.45rem; font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text); line-height: 1;
+  }
+  .pill {
+    display: inline-block; padding: 0.22rem 0.7rem; border-radius: 999px;
+    background: #eef2ff; color: #3730a3;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .pill.eid {
+    background: #fef3c7; color: #92400e;
+    font-size: 0.85rem; padding: 0.3rem 0.8rem;
+  }
+  .item .when {
+    color: var(--muted); font-size: 0.92rem;
+  }
+  .item .note {
+    color: var(--text); font-size: 0.95rem; word-wrap: break-word;
+  }
+  .item .actions {
+    display: flex; gap: 0.4rem; flex-direction: column; align-self: stretch;
+  }
+  .item .actions button {
+    padding: 0.45rem 0.8rem; min-height: 38px;
+    font-size: 0.85rem; font-weight: 600;
+  }
+  @media (min-width: 540px) {
+    .item .actions { flex-direction: row; align-self: start; }
+  }
+
+  .eid-times {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0.45rem; margin-top: 0.3rem;
+  }
+  .eid-times .slot {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: 0.45rem; padding: 0.4rem 0.5rem;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.1rem;
+  }
+  .eid-times .slot .lbl {
+    font-size: 0.65rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600;
+  }
+  .eid-times .slot .val {
+    font-size: 1.05rem; font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .eid-times .slot.empty { opacity: 0.4; }
+
+  form.editor {
+    background: var(--accent-soft);
+    border: 1.5px solid var(--accent);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 0.6rem;
+    display: grid; gap: 0.7rem;
+  }
+  form.editor h3 {
+    margin: 0 0 0.1rem; font-size: 1rem;
+    color: var(--accent-dark);
+  }
+  form.editor label { display: block; }
+  form.editor label .lbl {
+    display: block; font-size: 0.72rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 0.3rem; font-weight: 700;
+  }
+  form.editor input,
+  form.editor select {
+    width: 100%; padding: 0.7rem 0.8rem;
+    font-size: 16px;
+    border: 1px solid var(--line); border-radius: 0.5rem;
+    background: #fff; color: var(--text);
+    font-family: inherit;
+    min-height: 44px;
+  }
+  form.editor input:focus,
+  form.editor select:focus {
+    outline: 2px solid var(--accent); outline-offset: 1px;
+  }
+  form.editor .checkbox-row {
+    display: flex; align-items: center; gap: 0.55rem;
+    font-size: 0.95rem; padding: 0.2rem 0;
+  }
+  form.editor .checkbox-row input {
+    width: 20px; height: 20px; min-height: auto; margin: 0;
+  }
+  form.editor .form-actions {
+    display: flex; gap: 0.5rem; margin-top: 0.3rem;
+  }
+  form.editor .form-actions button { flex: 1; }
+
+  button {
+    border: 0; border-radius: 0.5rem;
+    padding: 0.7rem 1rem; font-size: 16px;
+    font-weight: 600; font-family: inherit;
+    cursor: pointer; min-height: 44px;
+  }
+  button.primary { background: var(--accent); color: #fff; }
+  button.primary:hover { background: var(--accent-dark); }
+  button.ghost {
+    background: #fff; color: var(--text);
+    border: 1px solid var(--line);
+  }
+  button.ghost:hover { background: #f3f4f6; }
+  button.danger {
+    background: #fff; color: var(--danger);
+    border: 1px solid #f3cfcf;
+  }
+  button.danger:hover { background: var(--err-bg); border-color: var(--err-line); }
+  button.add-btn {
+    width: 100%; padding: 0.95rem;
+    background: transparent; color: var(--accent-dark);
+    border: 2px dashed var(--accent);
+    font-size: 1rem; min-height: 52px;
+  }
+  button.add-btn:hover { background: var(--accent-soft); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .auth-block {
+    text-align: center; padding: 2rem 1rem;
+    max-width: 420px; margin: 0 auto;
+  }
+  .auth-block h1 { margin: 0 0 0.4rem; color: var(--accent-dark); }
+  .auth-block .desc {
+    color: var(--muted); font-size: 0.95rem;
+    margin: 0 0 1.5rem; line-height: 1.5;
+  }
+  .auth-block .desc a { color: var(--accent); }
+  .auth-block input {
+    width: 100%; margin: 0 0 0.8rem;
+    padding: 0.8rem 1rem; font-size: 16px; min-height: 48px;
+    border: 1px solid var(--line); border-radius: 0.5rem;
+    background: #fff;
+  }
+  .auth-block button { width: 100%; min-height: 48px; }
+  .auth-block .err-msg {
+    color: var(--danger); font-size: 0.9rem;
+    background: var(--err-bg); border: 1px solid var(--err-line);
+    padding: 0.6rem; border-radius: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .save-status {
+    margin-top: 0.6rem; font-size: 0.85rem;
+    color: var(--muted); text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="root">
+  <div class="auth-block">
+    <h1>Alton Admin</h1>
+    <p class="desc">Loading…</p>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+/* ---------- Config ----------
+   ALTON ADMIN, hosted on the Aldershot site:
+     https://www.aldershotislamiccentre.org.uk/alton-admin.html
+   It is served from the aic-website repo but reads/writes Alton's overrides in
+   the alton-website repo below — the PAT decides which repo is touched, not
+   where the page is hosted. AUTH_KEY differs from admin.html's so the two
+   admins don't share a saved password in localStorage (same origin now).
+
+   Three things must be filled in before this page works.
+     1. PAT_ENCRYPTED       — see the snippet below (needs a GitHub PAT with
+                              Contents:write on alton-website, plus a password).
+     2. PI_URL              — the Alton Pi's LAN/Tailscale address
+                              (see setup-pi.sh output).
+     3. PI_REFRESH_KEY_VALUE — must match AIC_REFRESH_KEY on the Alton Pi and
+                              admin.refreshToken in the Pi's data/config.json.
+   Only #1 is needed to edit times; #2 and #3 just power the two kiosk buttons.
+   REPO_OWNER/REPO_NAME point at the repo holding Alton's data/overrides.json —
+   that file must already exist in the repo or loading will 404. */
+const REPO_OWNER = 'imthiyas13';
+const REPO_NAME = 'alton-website';
+const FILE_PATH = 'data/overrides.json';
+const BRANCH = 'main';
+
+// Kiosk (Pi) — hardcoded so the cog/settings form is gone.
+const PI_URL = 'http://ALTON-PI-IP:8080';
+const PI_REFRESH_KEY_VALUE = 'CHANGE_ME_ALTON_TOKEN';
+
+// Admin login — password-gated. The actual GitHub PAT is XOR-encrypted with
+// the password and base64'd into PAT_ENCRYPTED below, so the raw PAT never
+// appears in source (and GitHub secret scanning won't auto-revoke it).
+//
+// To set this up, run this snippet in your browser console once:
+//   (() => {
+//     const pat = 'github_pat_xxxxxxxxxxxx';   // your new PAT
+//     const pw  = 'choose-an-admin-password';  // what admins will type
+//     let bin = '';
+//     for (let i = 0; i < pat.length; i++)
+//       bin += String.fromCharCode(pat.charCodeAt(i) ^ pw.charCodeAt(i % pw.length));
+//     console.log(btoa(bin));
+//   })();
+// Copy the printed string and paste it as PAT_ENCRYPTED, then commit.
+const PAT_ENCRYPTED = '__FILL_IN_WITH_ENCRYPTED_PAT__';
+
+const AUTH_KEY = 'alton-admin-auth';
+
+const PRAYERS_STD = [
+  { key: 'fajr',    label: 'Fajr' },
+  { key: 'zuhr',    label: 'Zuhr' },
+  { key: 'asr',     label: 'Asr' },
+  { key: 'maghrib', label: 'Maghrib' },
+  { key: 'isha',    label: 'Isha' },
+  { key: 'jumma1',  label: "Jumu'ah 1" },
+  { key: 'jumma2',  label: "Jumu'ah 2" },
+];
+const EID_KEYS = ['eid1', 'eid2', 'eid3'];
+const EID_LABELS = ['1st Salah', '2nd Salah', '3rd Salah'];
+const INDEF = '9999-12-31';
+
+const root = document.getElementById('root');
+const toastEl = document.getElementById('toast');
+let pat = '';  // populated from PAT_ENCRYPTED + password on successful login
+let state = {
+  rules: [],
+  updatedAt: null,
+  fileSha: null,
+  adding: null,        // null | 'ovd' | 'eid'
+  editing: null,       // null | { kind, idx | date }
+  kioskStatus: null,   // null | { text, kind, ts }
+};
+
+function decryptPat(password) {
+  if (!password || !PAT_ENCRYPTED || PAT_ENCRYPTED.startsWith('__FILL_IN_')) return '';
+  let bin;
+  try { bin = atob(PAT_ENCRYPTED); } catch { return ''; }
+  let out = '';
+  for (let i = 0; i < bin.length; i++) {
+    out += String.fromCharCode(bin.charCodeAt(i) ^ password.charCodeAt(i % password.length));
+  }
+  return out;
+}
+
+/* ---------- Helpers ---------- */
+
+function toast(msg, isErr = false) {
+  toastEl.textContent = msg;
+  toastEl.classList.toggle('err', isErr);
+  toastEl.classList.add('show');
+  setTimeout(() => toastEl.classList.remove('show'), 2500);
+}
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  }[c]));
+}
+
+function prayerLabel(key) {
+  const p = PRAYERS_STD.find(x => x.key === key);
+  if (p) return p.label;
+  const i = EID_KEYS.indexOf(key);
+  if (i >= 0) return EID_LABELS[i];
+  return key;
+}
+
+function sameDay(a, b) {
+  return a.getFullYear() === b.getFullYear()
+    && a.getMonth() === b.getMonth()
+    && a.getDate() === b.getDate();
+}
+
+function fmtDate(s) {
+  if (!s) return '';
+  if (s === INDEF) return 'until further notice';
+  const parts = s.split('-').map(Number);
+  if (parts.length !== 3 || parts.some(isNaN)) return s;
+  const [y, m, d] = parts;
+  const date = new Date(y, m - 1, d);
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const tom = new Date(today); tom.setDate(today.getDate() + 1);
+  if (sameDay(date, today)) return 'Today';
+  if (sameDay(date, tom)) return 'Tomorrow';
+  return date.toLocaleDateString(undefined, {
+    weekday: 'short', day: 'numeric', month: 'short', year: 'numeric',
+  });
+}
+
+function fmtRange(from, to) {
+  if (!from) return '';
+  if (!to || to === from) return fmtDate(from);
+  if (to === INDEF) return `${fmtDate(from)} → until further notice`;
+  return `${fmtDate(from)} → ${fmtDate(to)}`;
+}
+
+function todayStr() {
+  const d = new Date();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
+function nowIsoUtc() {
+  return new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
+}
+
+/* ---------- UTF-8 safe base64 ---------- */
+
+function utf8ToBase64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
+
+function base64ToUtf8(b64) {
+  const clean = b64.replace(/\s+/g, '');
+  const bin = atob(clean);
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
+/* ---------- GitHub API ---------- */
+
+const GH_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents`;
+
+async function ghGet(path) {
+  const url = `${GH_BASE}/${path}?ref=${encodeURIComponent(BRANCH)}&t=${Date.now()}`;
+  const res = await fetch(url, {
+    headers: {
+      'Authorization': `Bearer ${pat}`,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    let msg;
+    try { msg = JSON.parse(text).message || text; } catch { msg = text; }
+    const err = new Error(msg || `HTTP ${res.status}`);
+    err.status = res.status;
+    throw err;
+  }
+  return res.json();
+}
+
+async function ghPut(path, jsonContent, sha, message) {
+  const url = `${GH_BASE}/${path}`;
+  const body = {
+    message,
+    content: utf8ToBase64(JSON.stringify(jsonContent, null, 2) + '\n'),
+    branch: BRANCH,
+  };
+  if (sha) body.sha = sha;
+  const res = await fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer ${pat}`,
+      'Accept': 'application/vnd.github+json',
+      'Content-Type': 'application/json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    let msg;
+    try { msg = JSON.parse(text).message || text; } catch { msg = text; }
+    const err = new Error(msg || `HTTP ${res.status}`);
+    err.status = res.status;
+    throw err;
+  }
+  return res.json();
+}
+
+async function loadRules() {
+  const data = await ghGet(FILE_PATH);
+  state.fileSha = data.sha;
+  const text = base64ToUtf8(data.content);
+  let parsed;
+  try { parsed = JSON.parse(text); } catch { parsed = { rules: [], updatedAt: null }; }
+  state.rules = parsed.rules || [];
+  state.updatedAt = parsed.updatedAt || null;
+}
+
+async function saveRules(rules) {
+  const updatedAt = nowIsoUtc();
+  const newJson = { updatedAt, rules, errors: [] };
+  let result;
+  try {
+    result = await ghPut(FILE_PATH, newJson, state.fileSha, 'admin: update prayer time overrides');
+  } catch (e) {
+    if (e.status === 409 || /sha/i.test(e.message)) {
+      // Conflict — refetch and retry once
+      await loadRules();
+      result = await ghPut(FILE_PATH, newJson, state.fileSha, 'admin: update prayer time overrides');
+    } else {
+      throw e;
+    }
+  }
+  state.fileSha = result.content && result.content.sha;
+  state.rules = rules;
+  state.updatedAt = updatedAt;
+  return { ok: true, updatedAt, rules };
+}
+
+/* ---------- Data shaping ---------- */
+
+function groupEid(rules) {
+  const groups = {};
+  const others = [];
+  for (const r of rules) {
+    if (EID_KEYS.includes(r.prayer)) {
+      const g = groups[r.from] = groups[r.from] || { date: r.from, note: '', prayers: {} };
+      g.prayers[r.prayer] = r.iqamah;
+      if (r.note && !g.note) g.note = r.note;
+    } else {
+      others.push(r);
+    }
+  }
+  const eidEvents = Object.values(groups).sort((a, b) => a.date.localeCompare(b.date));
+  others.sort((a, b) => a.from.localeCompare(b.from) || a.prayer.localeCompare(b.prayer));
+  return { eidEvents, others };
+}
+
+function flattenRules(others, eidEvents) {
+  const out = [...others];
+  for (const e of eidEvents) {
+    for (const k of EID_KEYS) {
+      if (e.prayers[k]) {
+        out.push({ from: e.date, to: e.date, prayer: k, iqamah: e.prayers[k], note: e.note || '' });
+      }
+    }
+  }
+  return out;
+}
+
+/* ---------- Auth screen ---------- */
+
+function renderAuth(message = '') {
+  root.innerHTML = `
+    <div class="auth-block">
+      <h1>Alton Admin</h1>
+      <p class="desc">Enter the admin password to continue.</p>
+      ${message ? `<div class="err-msg">${escapeHtml(message)}</div>` : ''}
+      <input id="pw" type="password" placeholder="Password" autocomplete="current-password">
+      <button class="primary" id="auth-go">Continue</button>
+    </div>`;
+  const input = document.getElementById('pw');
+  const go = document.getElementById('auth-go');
+  go.onclick = async () => {
+    const v = input.value;
+    if (!v) return;
+    go.disabled = true;
+    go.textContent = 'Verifying…';
+    const candidate = decryptPat(v);
+    if (!candidate) {
+      pat = '';
+      renderAuth('Admin not configured yet (PAT_ENCRYPTED is empty).');
+      return;
+    }
+    pat = candidate;
+    try {
+      await loadRules();
+      localStorage.setItem(AUTH_KEY, v);
+      render();
+    } catch (e) {
+      pat = '';
+      const msg = e.status === 401 || e.status === 403
+        ? 'Wrong password.'
+        : (e.message || 'Sign-in failed');
+      renderAuth(msg);
+    }
+  };
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') go.click();
+  });
+  input.focus();
+}
+
+function signOut() {
+  if (!confirm('Sign out from this device?')) return;
+  localStorage.removeItem(AUTH_KEY);
+  pat = '';
+  state = { rules: [], updatedAt: null, fileSha: null, adding: null, editing: null };
+  renderAuth();
+}
+
+/* ---------- Item cards ---------- */
+
+function ovdCardHtml(r, idx) {
+  return `
+    <div class="item">
+      <div class="info">
+        <div class="top">
+          <span class="pill">${escapeHtml(prayerLabel(r.prayer))}</span>
+          <span class="time">${escapeHtml(r.iqamah)}</span>
+        </div>
+        <div class="when">${escapeHtml(fmtRange(r.from, r.to))}</div>
+        ${r.note ? `<div class="note">${escapeHtml(r.note)}</div>` : ''}
+      </div>
+      <div class="actions">
+        <button class="ghost" data-act="edit-ovd" data-i="${idx}">Edit</button>
+        <button class="danger" data-act="del-ovd" data-i="${idx}">Delete</button>
+      </div>
+    </div>`;
+}
+
+function eidCardHtml(e) {
+  const slot = (k, label) => {
+    const v = e.prayers[k];
+    return v
+      ? `<div class="slot"><span class="lbl">${label}</span><span class="val">${escapeHtml(v)}</span></div>`
+      : `<div class="slot empty"><span class="lbl">${label}</span><span class="val">—</span></div>`;
+  };
+  return `
+    <div class="item">
+      <div class="info">
+        <div class="top">
+          <span class="pill eid">${escapeHtml(e.note || 'Eid Salah')}</span>
+        </div>
+        <div class="when">${escapeHtml(fmtDate(e.date))}</div>
+        <div class="eid-times">
+          ${slot('eid1', '1st')}
+          ${slot('eid2', '2nd')}
+          ${slot('eid3', '3rd')}
+        </div>
+      </div>
+      <div class="actions">
+        <button class="ghost" data-act="edit-eid" data-date="${escapeHtml(e.date)}">Edit</button>
+        <button class="danger" data-act="del-eid" data-date="${escapeHtml(e.date)}">Delete</button>
+      </div>
+    </div>`;
+}
+
+/* ---------- Editor forms ---------- */
+
+function ovdFormHtml(initial, mode) {
+  const from = initial?.from || todayStr();
+  const indef = !initial || !initial.to || initial.to === INDEF;
+  const to = (initial?.to && initial.to !== INDEF) ? initial.to : '';
+  const prayer = initial?.prayer || 'fajr';
+  const iqamah = initial?.iqamah || '';
+  const title = mode === 'edit' ? 'Edit override' : 'New override';
+  return `
+    <form class="editor" data-form="ovd">
+      <h3>${title}</h3>
+      <label><span class="lbl">Prayer</span>
+        <select name="prayer" required>
+          ${PRAYERS_STD.map(p => `<option value="${p.key}"${p.key === prayer ? ' selected' : ''}>${p.label}</option>`).join('')}
+        </select>
+      </label>
+      <label><span class="lbl">Jama'ah time</span>
+        <input type="time" name="iqamah" value="${escapeHtml(iqamah)}" required>
+      </label>
+      <label><span class="lbl">From date</span>
+        <input type="date" name="from" value="${escapeHtml(from)}" required>
+      </label>
+      <label class="checkbox-row">
+        <input type="checkbox" name="indef"${indef ? ' checked' : ''}>
+        Apply until further notice
+      </label>
+      <label data-todate><span class="lbl">To date</span>
+        <input type="date" name="to" value="${escapeHtml(to)}">
+      </label>
+      <div class="form-actions">
+        <button type="button" class="ghost" data-act="cancel">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>`;
+}
+
+function eidFormHtml(initial, mode) {
+  const date = initial?.date || todayStr();
+  const note = initial?.note || '';
+  const e1 = initial?.prayers?.eid1 || '';
+  const e2 = initial?.prayers?.eid2 || '';
+  const e3 = initial?.prayers?.eid3 || '';
+  const title = mode === 'edit' ? 'Edit Eid event' : 'New Eid event';
+  const origDate = mode === 'edit' ? ` data-orig-date="${escapeHtml(initial.date)}"` : '';
+  return `
+    <form class="editor" data-form="eid"${origDate}>
+      <h3>${title}</h3>
+      <label><span class="lbl">Eid date</span>
+        <input type="date" name="date" value="${escapeHtml(date)}" required>
+      </label>
+      <label><span class="lbl">Header</span>
+        <input type="text" name="note" list="eid-headers" placeholder="Eid ul Fitr" value="${escapeHtml(note)}" required>
+        <datalist id="eid-headers">
+          <option value="Eid ul Fitr">
+          <option value="Eid ul Adha">
+        </datalist>
+      </label>
+      <label><span class="lbl">1st salah time</span>
+        <input type="time" name="eid1" value="${escapeHtml(e1)}">
+      </label>
+      <label><span class="lbl">2nd salah time</span>
+        <input type="time" name="eid2" value="${escapeHtml(e2)}">
+      </label>
+      <label><span class="lbl">3rd salah time</span>
+        <input type="time" name="eid3" value="${escapeHtml(e3)}">
+      </label>
+      <div class="form-actions">
+        <button type="button" class="ghost" data-act="cancel">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>`;
+}
+
+/* ---------- Main render ---------- */
+
+function render() {
+  const { eidEvents, others } = groupEid(state.rules);
+  const updated = state.updatedAt ? new Date(state.updatedAt).toLocaleString() : '—';
+
+  let ovdList;
+  if (others.length === 0 && state.adding !== 'ovd') {
+    ovdList = '<p class="empty">No active overrides.</p>';
+  } else {
+    ovdList = others.map((r, i) => {
+      if (state.editing && state.editing.kind === 'ovd' && state.editing.idx === i) {
+        return ovdFormHtml(r, 'edit');
+      }
+      return ovdCardHtml(r, i);
+    }).join('');
+  }
+
+  let eidList;
+  if (eidEvents.length === 0 && state.adding !== 'eid') {
+    eidList = '<p class="empty">No Eid events scheduled.</p>';
+  } else {
+    eidList = eidEvents.map(e => {
+      if (state.editing && state.editing.kind === 'eid' && state.editing.date === e.date) {
+        return eidFormHtml(e, 'edit');
+      }
+      return eidCardHtml(e);
+    }).join('');
+  }
+
+  const addOvdBlock = state.adding === 'ovd'
+    ? ovdFormHtml(null, 'add')
+    : `<button class="add-btn" data-act="add-ovd">+ Add override</button>`;
+  const addEidBlock = state.adding === 'eid'
+    ? eidFormHtml(null, 'add')
+    : `<button class="add-btn" data-act="add-eid">+ Add Eid event</button>`;
+
+  root.innerHTML = `
+    <header class="page">
+      <h1>Alton Admin</h1>
+      <span class="updated">Last saved: ${escapeHtml(updated)}
+        <button class="signout" data-act="signout">sign out</button>
+      </span>
+    </header>
+
+    <div class="info-banner">
+      <span class="banner-text">Saves commit to Alton's GitHub repo. The Alton kiosk syncs within ~60s — or refresh it now.</span>
+      <span class="banner-actions">
+        <button class="primary" data-act="refresh-kiosk">Refresh kiosk</button>
+        <button class="primary" data-act="pull-kiosk" title="Pull latest code from GitHub on the Pi">Pull latest</button>
+      </span>
+    </div>
+    <div class="kiosk-status${state.kioskStatus ? ' ' + state.kioskStatus.kind : ''}" id="kiosk-status">${state.kioskStatus ? `<span>${escapeHtml(state.kioskStatus.text)}</span><span class="ts">${escapeHtml(state.kioskStatus.ts)}</span>` : ''}</div>
+
+    <section class="card">
+      <h2>Prayer overrides <span class="count">${others.length} active</span></h2>
+      ${ovdList}
+      ${addOvdBlock}
+    </section>
+
+    <section class="card">
+      <h2>Eid events <span class="count">${eidEvents.length} planned</span></h2>
+      ${eidList}
+      ${addEidBlock}
+    </section>
+  `;
+
+  wireUp();
+}
+
+function wireUp() {
+  root.querySelectorAll('[data-act]').forEach(el => {
+    el.addEventListener('click', () => {
+      const act = el.dataset.act;
+      if (act === 'add-ovd') { state.adding = 'ovd'; state.editing = null; render(); }
+      else if (act === 'add-eid') { state.adding = 'eid'; state.editing = null; render(); }
+      else if (act === 'cancel') { state.adding = null; state.editing = null; render(); }
+      else if (act === 'edit-ovd') { state.editing = { kind: 'ovd', idx: parseInt(el.dataset.i, 10) }; state.adding = null; render(); }
+      else if (act === 'edit-eid') { state.editing = { kind: 'eid', date: el.dataset.date }; state.adding = null; render(); }
+      else if (act === 'del-ovd') { onDeleteOverride(parseInt(el.dataset.i, 10)); }
+      else if (act === 'del-eid') { onDeleteEid(el.dataset.date); }
+      else if (act === 'signout') { signOut(); }
+      else if (act === 'refresh-kiosk') { onRefreshKiosk(); }
+      else if (act === 'pull-kiosk') { onPullKiosk(); }
+    });
+  });
+
+  root.querySelectorAll('form[data-form]').forEach(f => {
+    if (f.dataset.form === 'ovd') {
+      f.addEventListener('submit', onSubmitOvd);
+      const indefEl = f.querySelector('input[name="indef"]');
+      const toBlock = f.querySelector('[data-todate]');
+      const sync = () => { toBlock.style.display = indefEl.checked ? 'none' : ''; };
+      indefEl.addEventListener('change', sync);
+      sync();
+    } else if (f.dataset.form === 'eid') {
+      f.addEventListener('submit', onSubmitEid);
+    }
+    f.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+}
+
+function setKioskStatus(text, kind) {
+  state.kioskStatus = { text, kind, ts: new Date().toLocaleTimeString() };
+  const el = document.getElementById('kiosk-status');
+  if (!el) return;
+  el.className = 'kiosk-status' + (kind ? ' ' + kind : '');
+  el.innerHTML = `<span>${escapeHtml(text)}</span><span class="ts">${escapeHtml(state.kioskStatus.ts)}</span>`;
+}
+
+function callPiAction(path, pending) {
+  const url = PI_URL.replace(/\/+$/, '');
+  const key = PI_REFRESH_KEY_VALUE;
+  if (url.includes('ALTON-PI-IP')) {
+    setKioskStatus('Kiosk address (PI_URL) not set in admin source', 'err');
+    return;
+  }
+  if (!key || key.startsWith('__FILL_IN_') || key.startsWith('CHANGE_ME')) {
+    setKioskStatus('Refresh key not configured in admin source', 'err');
+    return;
+  }
+  const target = `${url}${path}?key=${encodeURIComponent(key)}`;
+
+  // HTTPS pages can't fetch plain-HTTP resources; if that's the case, fall
+  // back to opening in a new tab (Pi's response page auto-closes). The
+  // Pi-served copy of this file uses a same-origin URL and so always takes
+  // the inline fetch path.
+  const mixedContent = location.protocol === 'https:' && url.startsWith('http://');
+  if (mixedContent) {
+    setKioskStatus(`${pending} — opened in new tab (HTTPS→HTTP can't run inline)`, 'pending');
+    window.open(target, '_blank', 'noopener');
+    return;
+  }
+
+  setKioskStatus(`${pending}…`, 'pending');
+  fetch(target, { headers: { 'Accept': 'application/json' } })
+    .then(async r => {
+      let data = null;
+      try { data = await r.json(); } catch (_) {}
+      const msg = data?.message || (r.ok ? 'Done' : `HTTP ${r.status}`);
+      const ok = r.ok && data?.ok !== false;
+      setKioskStatus(`${ok ? '✓' : '✗'} ${msg}`, ok ? 'ok' : 'err');
+    })
+    .catch(e => {
+      setKioskStatus(`✗ ${pending} failed — ${e.message || 'network error'}`, 'err');
+    });
+}
+
+function onRefreshKiosk() { callPiAction('/refresh', 'Refreshing'); }
+function onPullKiosk() { callPiAction('/pull', 'Pulling'); }
+
+/* ---------- Mutations ---------- */
+
+async function applyMutation(mutator) {
+  const { eidEvents, others } = groupEid(state.rules);
+  const next = mutator({ eidEvents, others });
+  if (!next) return;
+  const newRules = flattenRules(next.others, next.eidEvents);
+  toast('Saving…');
+  try {
+    await saveRules(newRules);
+    toast('Saved to GitHub');
+    state.adding = null;
+    state.editing = null;
+    render();
+  } catch (e) {
+    if (e.status === 401 || e.status === 403) {
+      localStorage.removeItem(AUTH_KEY);
+      pat = '';
+      renderAuth('Session rejected. Please sign in again.');
+      return;
+    }
+    toast(e.message || 'Save failed', true);
+  }
+}
+
+function readOvdForm(f) {
+  const prayer = f.prayer.value;
+  const iqamah = f.iqamah.value;
+  const from = f.from.value;
+  const to = f.indef.checked ? INDEF : (f.to.value || INDEF);
+  if (!prayer || !iqamah || !from) return { error: 'Fill all required fields' };
+  if (to !== INDEF && to < from) return { error: '"To" date is before "From" date' };
+  return { rule: { from, to, prayer, iqamah } };
+}
+
+function onSubmitOvd(ev) {
+  ev.preventDefault();
+  const f = ev.target;
+  const result = readOvdForm(f);
+  if (result.error) { toast(result.error, true); return; }
+  const editing = state.editing;
+  applyMutation(({ eidEvents, others }) => {
+    if (editing && editing.kind === 'ovd') {
+      const old = others[editing.idx];
+      const note = old?.note || '';
+      others.splice(editing.idx, 1, { ...result.rule, note });
+    } else {
+      others.push({ ...result.rule, note: '' });
+    }
+    return { eidEvents, others };
+  });
+}
+
+function onDeleteOverride(idx) {
+  if (!confirm('Delete this override?')) return;
+  applyMutation(({ eidEvents, others }) => {
+    others.splice(idx, 1);
+    return { eidEvents, others };
+  });
+}
+
+function readEidForm(f) {
+  const date = f.date.value;
+  const note = f.note.value.trim();
+  const prayers = { eid1: f.eid1.value, eid2: f.eid2.value, eid3: f.eid3.value };
+  const haveAny = Object.values(prayers).some(v => v);
+  if (!date || !note || !haveAny) {
+    return { error: 'Need date, header, and at least one salah time' };
+  }
+  return { event: { date, note, prayers }, origDate: f.dataset.origDate || null };
+}
+
+function onSubmitEid(ev) {
+  ev.preventDefault();
+  const f = ev.target;
+  const result = readEidForm(f);
+  if (result.error) { toast(result.error, true); return; }
+  applyMutation(({ eidEvents, others }) => {
+    const filtered = eidEvents.filter(e =>
+      e.date !== result.event.date && e.date !== result.origDate
+    );
+    filtered.push(result.event);
+    return { eidEvents: filtered, others };
+  });
+}
+
+function onDeleteEid(date) {
+  if (!confirm('Delete this Eid event?')) return;
+  applyMutation(({ eidEvents, others }) => ({
+    eidEvents: eidEvents.filter(e => e.date !== date),
+    others,
+  }));
+}
+
+/* ---------- Boot ---------- */
+
+async function init() {
+  const stored = localStorage.getItem(AUTH_KEY) || '';
+  if (!stored) { renderAuth(); return; }
+  pat = decryptPat(stored);
+  if (!pat) { renderAuth(); return; }
+  try {
+    await loadRules();
+    render();
+  } catch (e) {
+    if (e.status === 401 || e.status === 403) {
+      localStorage.removeItem(AUTH_KEY);
+      pat = '';
+      renderAuth('Session rejected. Please sign in again.');
+    } else {
+      root.innerHTML = `<div class="auth-block"><h1>Alton Admin</h1>
+        <p class="desc" style="color:var(--danger)">Failed to load: ${escapeHtml(e.message || 'unknown error')}</p>
+        <button class="ghost" onclick="location.reload()">Retry</button></div>`;
+    }
+  }
+}
+
+init();
+</script>
+</body>
+</html>
