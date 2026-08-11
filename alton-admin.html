@@ -297,7 +297,7 @@
 <body>
 <div class="wrap" id="root">
   <div class="auth-block">
-    <h1>Alton Admin</h1>
+    <h1>Alton Islamic Centre - Admin</h1>
     <p class="desc">Loading…</p>
   </div>
 </div>
@@ -330,8 +330,14 @@ const FILE_PATH = 'data/overrides.json';
 const BRANCH = 'main';
 
 // Kiosk (Pi) — hardcoded so the cog/settings form is gone.
-const PI_URL = 'http://ALTON-PI-IP:8080';
-const PI_REFRESH_KEY_VALUE = 'CHANGE_ME_ALTON_TOKEN';
+// Alton Pi over Tailscale, so this survives the move to the mosque's 4G MiFi
+// (CGNAT means no reachable LAN address from outside). Reaching it requires the
+// caller's device to be on the same tailnet — fine for the maintainer, but a
+// mosque volunteer's phone would need the LAN address instead. The kiosk syncs
+// from GitHub every minute regardless, so these buttons only skip that wait.
+// The key matches AIC_REFRESH_KEY in the Pi's systemd unit.
+const PI_URL = 'http://100.81.30.94:8080';
+const PI_REFRESH_KEY_VALUE = 'fc25e0955af2d209e5d998ca29d78280';
 
 // Admin login — password-gated. The actual GitHub PAT is XOR-encrypted with
 // the password and base64'd into PAT_ENCRYPTED below, so the raw PAT never
@@ -587,7 +593,7 @@ function flattenRules(others, eidEvents) {
 function renderAuth(message = '') {
   root.innerHTML = `
     <div class="auth-block">
-      <h1>Alton Admin</h1>
+      <h1>Alton Islamic Centre - Admin</h1>
       <p class="desc">Enter the admin password to continue.</p>
       ${message ? `<div class="err-msg">${escapeHtml(message)}</div>` : ''}
       <input id="pw" type="password" placeholder="Password" autocomplete="current-password">
@@ -793,7 +799,7 @@ function render() {
 
   root.innerHTML = `
     <header class="page">
-      <h1>Alton Admin</h1>
+      <h1>Alton Islamic Centre - Admin</h1>
       <span class="updated">Last saved: ${escapeHtml(updated)}
         <button class="signout" data-act="signout">sign out</button>
       </span>
@@ -1015,7 +1021,7 @@ async function init() {
       pat = '';
       renderAuth('Session rejected. Please sign in again.');
     } else {
-      root.innerHTML = `<div class="auth-block"><h1>Alton Admin</h1>
+      root.innerHTML = `<div class="auth-block"><h1>Alton Islamic Centre - Admin</h1>
         <p class="desc" style="color:var(--danger)">Failed to load: ${escapeHtml(e.message || 'unknown error')}</p>
         <button class="ghost" onclick="location.reload()">Retry</button></div>`;
     }
