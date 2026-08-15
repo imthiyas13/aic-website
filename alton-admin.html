@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#2f9d93">
-<meta name="robots" content="noindex, nofollow">
 <title>Alton Islamic Centre Admin — Salah Times</title>
 <style>
   :root {
@@ -213,6 +212,7 @@
     margin-bottom: 0.3rem; font-weight: 700;
   }
   form.editor input,
+  form.editor textarea,
   form.editor select {
     width: 100%; padding: 0.7rem 0.8rem;
     font-size: 16px;
@@ -221,7 +221,9 @@
     font-family: inherit;
     min-height: 44px;
   }
+  form.editor textarea { resize: vertical; line-height: 1.5; }
   form.editor input:focus,
+  form.editor textarea:focus,
   form.editor select:focus {
     outline: 2px solid var(--accent); outline-offset: 1px;
   }
@@ -263,6 +265,41 @@
   }
   button.add-btn:hover { background: var(--accent-soft); }
   button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Reminder carousel curation */
+  .kind-toggles { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+  button.kind-toggle { flex: 1 1 auto; min-width: 110px; opacity: 0.55; }
+  button.kind-toggle.on { opacity: 1; border-color: var(--accent); color: var(--accent-dark); }
+  button.kind-toggle .count {
+    margin-left: 0.4rem; font-size: 0.8rem; color: var(--muted);
+  }
+  .item.dimmed { opacity: 0.5; }
+  .item .arabic-line {
+    font-size: 1.15rem; line-height: 1.9;
+    color: var(--text); word-wrap: break-word;
+    font-family: "Amiri", "Traditional Arabic", serif;
+  }
+  .filter-bar {
+    display: flex; gap: 0.4rem; flex-wrap: wrap;
+    margin-bottom: 0.7rem;
+  }
+  .filter-bar input {
+    flex: 1 1 180px; min-width: 0;
+  }
+  .filter-bar input, .filter-bar select {
+    padding: 0.55rem 0.7rem; font-size: 16px;
+    border: 1px solid var(--line); border-radius: 0.5rem;
+    background: #fff; color: var(--text);
+    font-family: inherit; min-height: 42px;
+  }
+  .filter-bar select { flex: 0 1 auto; }
+  .filter-bar input:focus, .filter-bar select:focus {
+    outline: 2px solid var(--accent); outline-offset: 1px;
+  }
+  .filter-count {
+    color: var(--muted); font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
 
   .auth-block {
     text-align: center; padding: 2rem 1rem;
@@ -307,55 +344,65 @@
 "use strict";
 
 /* ---------- Config ----------
-   ALTON ADMIN, hosted on the Aldershot site:
-     https://www.aldershotislamiccentre.org.uk/alton-admin.html
-   It is served from the aic-website repo but reads/writes Alton's overrides in
-   the alton-website repo below — the PAT decides which repo is touched, not
-   where the page is hosted. AUTH_KEY differs from admin.html's so the two
-   admins don't share a saved password in localStorage (same origin now).
-
-   Three things must be filled in before this page works.
-     1. PAT_ENCRYPTED       — see the snippet below (needs a GitHub PAT with
-                              Contents:write on alton-website, plus a password).
-     2. PI_URL              — the Alton Pi's LAN/Tailscale address
-                              (see setup-pi.sh output).
-     3. PI_REFRESH_KEY_VALUE — must match AIC_REFRESH_KEY on the Alton Pi and
-                              admin.refreshToken in the Pi's data/config.json.
-   Only #1 is needed to edit times; #2 and #3 just power the two kiosk buttons.
-   REPO_OWNER/REPO_NAME point at the repo holding Alton's data/overrides.json —
-   that file must already exist in the repo or loading will 404. */
+   ALTON DEPLOYMENT: fill these in before use.
+   - REPO_OWNER/REPO_NAME: the GitHub repo hosting Alton's data/overrides.json.
+   - PI_URL: derived from the address the page was served on; only the
+     local-file fallback is hardcoded.
+   The refresh key is NOT stored here — see getRefreshKey() below. */
 const REPO_OWNER = 'imthiyas13';
 const REPO_NAME = 'alton-website';
+// Read-only source of the shipped ayahs/hadiths/sayings.
+const DISPLAY_REPO = 'alton-masjid-display';
 const FILE_PATH = 'data/overrides.json';
+// Carousel curation. Same repo as the overrides; the Pi syncs both.
+const CONTENT_PATH = 'data/content.json';
+const REMINDER_KINDS = ['Ayah', 'Hadith', 'Wisdom'];
 const BRANCH = 'main';
 
-// Kiosk (Pi) — hardcoded so the cog/settings form is gone.
-// Alton Pi over Tailscale, so this survives the move to the mosque's 4G MiFi
-// (CGNAT means no reachable LAN address from outside). Reaching it requires the
-// caller's device to be on the same tailnet — fine for the maintainer, but a
-// mosque volunteer's phone would need the LAN address instead. The kiosk syncs
-// from GitHub every minute regardless, so these buttons only skip that wait.
-// The key matches AIC_REFRESH_KEY in the Pi's systemd unit.
-const PI_URL = 'http://100.81.30.94:8080';
-const PI_REFRESH_KEY_VALUE = 'fc25e0955af2d209e5d998ca29d78280';
+// Kiosk (Pi). When the Pi itself serves this page — over plain http, whether
+// that is mosque WiFi (altonpi.local / 192.168.x) or Tailscale — talk back to
+// whatever address the browser actually used. Same origin, so no CORS and no
+// mixed content, and it works from both networks without editing this file.
+// The Tailscale address is only the fallback for opening admin.html as a local
+// file; an https host keeps that fallback too so the mixed-content path below
+// still opens the Pi in a new tab rather than fetching the wrong host.
+const PI_URL = location.protocol === 'http:'
+  ? location.origin
+  : 'http://100.81.30.94:8080';
 
-// Admin login — password-gated. The actual GitHub PAT is XOR-encrypted with
-// the password and base64'd into PAT_ENCRYPTED below, so the raw PAT never
-// appears in source (and GitHub secret scanning won't auto-revoke it).
+// The refresh key (AIC_REFRESH_KEY on the Pi) is deliberately not committed —
+// it lets anyone who can reach the Pi trigger a git pull and a service restart.
+// Prompted for once per browser and kept in localStorage, the same place the
+// admin password already lives. Read it off the Pi with:
+//   grep AIC_REFRESH_KEY /etc/systemd/system/aic-display.service
+const REFRESH_KEY_STORE = 'aic-alton-refresh-key';
+
+function getRefreshKey() {
+  let key = localStorage.getItem(REFRESH_KEY_STORE) || '';
+  if (!key) {
+    key = (window.prompt('Kiosk refresh key (from the Pi\'s aic-display.service):') || '').trim();
+    if (key) localStorage.setItem(REFRESH_KEY_STORE, key);
+  }
+  return key;
+}
+
+// Admin login — the GitHub token IS the credential; it is entered once and
+// kept in this browser's localStorage. NOTHING SECRET IS STORED IN THIS FILE.
 //
-// To set this up, run this snippet in your browser console once:
-//   (() => {
-//     const pat = 'github_pat_xxxxxxxxxxxx';   // your new PAT
-//     const pw  = 'choose-an-admin-password';  // what admins will type
-//     let bin = '';
-//     for (let i = 0; i < pat.length; i++)
-//       bin += String.fromCharCode(pat.charCodeAt(i) ^ pw.charCodeAt(i % pw.length));
-//     console.log(btoa(bin));
-//   })();
-// Copy the printed string and paste it as PAT_ENCRYPTED, then commit.
-const PAT_ENCRYPTED = 'BkgAWBs9PhQMHTFQEDdzKhMtIixZAlRMGgA2KhQsXwEsPkwgAxk2VzM8E1s5RA0ILTADNwcACQRnBWdcMgsONAwnO0s4Ay0zBiddUSEvaDgGOB0iMCIuJCtkOmBZ';
-
-const AUTH_KEY = 'alton-admin-auth';
+// This page used to ship the token XOR'd against an admin password
+// (PAT_ENCRYPTED). That is obfuscation, not encryption: every PAT begins with
+// the known 11 characters "github_pat_", so XORing the ciphertext against that
+// prefix hands back the first 11 characters of the password, and with them the
+// token — entirely, if the password was 11 characters or shorter. It held up
+// only as long as nobody could read the file. On 2026-08-15 we found this page
+// published at aldershotislamiccentre.org.uk/alton-admin.html out of the public
+// aic-website repo, so the token had been world-readable since 11 August. That
+// token was revoked and the scheme replaced with this one.
+//
+// Give a new admin the token itself, through a password manager. It needs:
+//   alton-website        Contents: Read and write   (overrides + reminders)
+//   alton-masjid-display Contents: Read             (list shipped reminders)
+const AUTH_KEY = 'alton-admin-token';
 
 const PRAYERS_STD = [
   { key: 'fajr',    label: 'Fajr' },
@@ -372,26 +419,20 @@ const INDEF = '9999-12-31';
 
 const root = document.getElementById('root');
 const toastEl = document.getElementById('toast');
-let pat = '';  // populated from PAT_ENCRYPTED + password on successful login
+let pat = '';  // the token, entered on sign-in and cached in localStorage
 let state = {
   rules: [],
   updatedAt: null,
   fileSha: null,
-  adding: null,        // null | 'ovd' | 'eid'
+  adding: null,        // null | 'ovd' | 'eid' | 'item'
   editing: null,       // null | { kind, idx | date }
   kioskStatus: null,   // null | { text, kind, ts }
+  content: null,       // { show, hidden, items } from data/content.json
+  contentSha: null,    // null when the file does not exist yet
+  builtins: null,      // { Ayah: [], Hadith: [], Wisdom: [] } read off the Pi
+  builtinsErr: null,   // set when the Pi could not be reached
+  filter: { q: '', kind: 'all', status: 'all' },  // browsing only, never saved
 };
-
-function decryptPat(password) {
-  if (!password || !PAT_ENCRYPTED || PAT_ENCRYPTED.startsWith('__FILL_IN_')) return '';
-  let bin;
-  try { bin = atob(PAT_ENCRYPTED); } catch { return ''; }
-  let out = '';
-  for (let i = 0; i < bin.length; i++) {
-    out += String.fromCharCode(bin.charCodeAt(i) ^ password.charCodeAt(i % password.length));
-  }
-  return out;
-}
 
 /* ---------- Helpers ---------- */
 
@@ -476,9 +517,11 @@ function base64ToUtf8(b64) {
 /* ---------- GitHub API ---------- */
 
 const GH_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents`;
+// Read-only: where the shipped reminders live, for the hide list.
+const DISPLAY_BASE = `https://api.github.com/repos/${REPO_OWNER}/${DISPLAY_REPO}/contents`;
 
-async function ghGet(path) {
-  const url = `${GH_BASE}/${path}?ref=${encodeURIComponent(BRANCH)}&t=${Date.now()}`;
+async function ghGet(path, base = GH_BASE) {
+  const url = `${base}/${path}?ref=${encodeURIComponent(BRANCH)}&t=${Date.now()}`;
   const res = await fetch(url, {
     headers: {
       'Authorization': `Bearer ${pat}`,
@@ -557,6 +600,130 @@ async function saveRules(rules) {
   return { ok: true, updatedAt, rules };
 }
 
+/* ---------- Reminder carousel (ayah / hadith / wisdom) ---------- */
+
+function emptyContent() {
+  return {
+    show: { Ayah: true, Hadith: true, Wisdom: true },
+    hidden: { Ayah: [], Hadith: [], Wisdom: [] },
+    items: [],
+  };
+}
+
+async function loadContent() {
+  let parsed = {};
+  try {
+    const data = await ghGet(CONTENT_PATH);
+    state.contentSha = data.sha;
+    try { parsed = JSON.parse(base64ToUtf8(data.content)); } catch { parsed = {}; }
+  } catch (e) {
+    // 404 just means nobody has curated anything yet; the first save creates it.
+    if (e.status !== 404) throw e;
+    state.contentSha = null;
+  }
+  const base = emptyContent();
+  state.content = {
+    show: { ...base.show, ...(parsed.show || {}) },
+    hidden: { ...base.hidden, ...(parsed.hidden || {}) },
+    items: Array.isArray(parsed.items) ? parsed.items : [],
+  };
+}
+
+// The shipped ayahs/hadiths/sayings live in the display repo, not the website
+// repo this page writes to. Two ways in, depending on how this page was opened:
+//   - Pi-served (plain http): read them straight off the kiosk, same origin,
+//     which is also the copy actually on screen.
+//   - Hosted over https: browsers block a plain-http fetch to the Pi as mixed
+//     content, so go through the GitHub API instead. Needs the token to have
+//     Contents: Read on alton-masjid-display.
+// Either way this only powers the per-item hide list — the category toggles and
+// adding your own reminders work regardless.
+async function loadBuiltins() {
+  const files = { Ayah: 'ayahs.json', Hadith: 'hadiths.json', Wisdom: 'sayings.json' };
+  const out = { Ayah: [], Hadith: [], Wisdom: [] };
+  const fromPi = location.protocol === 'http:';
+  try {
+    await Promise.all(Object.entries(files).map(async ([kind, file]) => {
+      if (fromPi) {
+        const res = await fetch(`${PI_URL.replace(/\/+$/, '')}/data/${file}`, { cache: 'no-store' });
+        if (res.ok) out[kind] = await res.json();
+      } else {
+        const data = await ghGet(`data/${file}`, DISPLAY_BASE);
+        out[kind] = JSON.parse(base64ToUtf8(data.content));
+      }
+    }));
+    state.builtinsErr = null;
+  } catch (e) {
+    state.builtinsErr = fromPi
+      ? 'Kiosk unreachable — connect to the mosque network or Tailscale to hide '
+        + 'individual reminders. Categories and your own additions still work.'
+      : 'Could not read the shipped reminders from GitHub '
+        + `(${e.message || 'unknown error'}). The token needs Contents: Read on `
+        + 'alton-masjid-display. Categories and your own additions still work.';
+  }
+  state.builtins = out;
+}
+
+async function saveContent(next) {
+  const payload = { updatedAt: nowIsoUtc(), ...next };
+  let result;
+  try {
+    result = await ghPut(CONTENT_PATH, payload, state.contentSha, 'admin: update reminder carousel');
+  } catch (e) {
+    if (e.status === 409 || /sha/i.test(e.message)) {
+      await loadContent();
+      result = await ghPut(CONTENT_PATH, payload, state.contentSha, 'admin: update reminder carousel');
+    } else {
+      throw e;
+    }
+  }
+  state.contentSha = result.content && result.content.sha;
+  state.content = next;
+}
+
+async function applyContentMutation(mutator) {
+  const current = JSON.parse(JSON.stringify(state.content || emptyContent()));
+  const next = mutator(current);
+  if (!next) return;
+  toast('Saving…');
+  try {
+    await saveContent(next);
+    toast('Saved to GitHub');
+    state.adding = null;
+    render();
+  } catch (e) {
+    if (e.status === 401 || e.status === 403) {
+      localStorage.removeItem(AUTH_KEY);
+      pat = '';
+      renderAuth('Session rejected. Please sign in again.');
+      return;
+    }
+    toast(e.message || 'Save failed', true);
+  }
+}
+
+// Every reminder the kiosk could show, shipped and added, tagged with whether
+// it is currently visible. Mirrors buildPool() in js/content.js.
+function allReminders() {
+  const content = state.content || emptyContent();
+  const builtins = state.builtins || { Ayah: [], Hadith: [], Wisdom: [] };
+  const rows = [];
+  for (const kind of REMINDER_KINDS) {
+    const hidden = new Set(content.hidden?.[kind] || []);
+    const own = (content.items || []).filter(i => i && i.kind === kind);
+    for (const item of [...(builtins[kind] || []), ...own]) {
+      rows.push({
+        kind,
+        item,
+        custom: own.includes(item),
+        hidden: hidden.has(item.reference),
+        categoryOff: content.show?.[kind] === false,
+      });
+    }
+  }
+  return rows;
+}
+
 /* ---------- Data shaping ---------- */
 
 function groupEid(rules) {
@@ -594,33 +761,33 @@ function renderAuth(message = '') {
   root.innerHTML = `
     <div class="auth-block">
       <h1>Alton Islamic Centre - Admin</h1>
-      <p class="desc">Enter the admin password to continue.</p>
+      <p class="desc">Paste your access token to continue. It stays on this
+        device — you will only be asked once.</p>
       ${message ? `<div class="err-msg">${escapeHtml(message)}</div>` : ''}
-      <input id="pw" type="password" placeholder="Password" autocomplete="current-password">
+      <input id="pw" type="password" placeholder="Access token" autocomplete="off"
+        spellcheck="false" autocapitalize="off">
       <button class="primary" id="auth-go">Continue</button>
     </div>`;
   const input = document.getElementById('pw');
   const go = document.getElementById('auth-go');
   go.onclick = async () => {
-    const v = input.value;
+    const v = input.value.trim();
     if (!v) return;
     go.disabled = true;
     go.textContent = 'Verifying…';
-    const candidate = decryptPat(v);
-    if (!candidate) {
-      pat = '';
-      renderAuth('Admin not configured yet (PAT_ENCRYPTED is empty).');
-      return;
-    }
-    pat = candidate;
+    pat = v;
     try {
+      // The token is only stored once GitHub has actually accepted it, so a
+      // mistyped one never gets cached and silently fails on every later visit.
       await loadRules();
+      await loadContent();
+      await loadBuiltins();
       localStorage.setItem(AUTH_KEY, v);
       render();
     } catch (e) {
       pat = '';
       const msg = e.status === 401 || e.status === 403
-        ? 'Wrong password.'
+        ? 'That token was rejected. Check it was copied in full and has not expired.'
         : (e.message || 'Sign-in failed');
       renderAuth(msg);
     }
@@ -635,7 +802,9 @@ function signOut() {
   if (!confirm('Sign out from this device?')) return;
   localStorage.removeItem(AUTH_KEY);
   pat = '';
-  state = { rules: [], updatedAt: null, fileSha: null, adding: null, editing: null };
+  state = { rules: [], updatedAt: null, fileSha: null, adding: null, editing: null,
+            kioskStatus: null, content: null, contentSha: null, builtins: null, builtinsErr: null,
+            filter: { q: '', kind: 'all', status: 'all' } };
   renderAuth();
 }
 
@@ -796,6 +965,12 @@ function render() {
   const addEidBlock = state.adding === 'eid'
     ? eidFormHtml(null, 'add')
     : `<button class="add-btn" data-act="add-eid">+ Add Eid event</button>`;
+  // The list is long, so the add button sits at both ends. The form itself
+  // opens at the top only — two live copies would be two competing forms.
+  const addItemBtn = `<button class="add-btn" data-act="add-item">+ Add reminder</button>`;
+  const addItemTop = state.adding === 'item' ? itemFormHtml() : addItemBtn;
+  const addItemBottom = state.adding === 'item' ? '' : addItemBtn;
+  const visibleCount = allReminders().filter(r => !r.hidden && !r.categoryOff).length;
 
   root.innerHTML = `
     <header class="page">
@@ -806,7 +981,7 @@ function render() {
     </header>
 
     <div class="info-banner">
-      <span class="banner-text">Saves commit to Alton's GitHub repo. The Alton kiosk syncs within ~60s — or refresh it now.</span>
+      <span class="banner-text">Saves commit to GitHub. Website rebuilds in ~30s; the kiosk syncs within ~60s — or refresh it now.</span>
       <span class="banner-actions">
         <button class="primary" data-act="refresh-kiosk">Refresh kiosk</button>
         <button class="primary" data-act="pull-kiosk" title="Pull latest code from GitHub on the Pi">Pull latest</button>
@@ -825,9 +1000,160 @@ function render() {
       ${eidList}
       ${addEidBlock}
     </section>
+
+    <section class="card">
+      <h2>Reminders on screen <span class="count">${visibleCount} showing</span></h2>
+      ${addItemTop}
+      ${remindersHtml()}
+      ${addItemBottom}
+    </section>
   `;
 
   wireUp();
+}
+
+function filteredReminders() {
+  const f = state.filter;
+  const q = f.q.trim().toLowerCase();
+  return allReminders().filter(r => {
+    if (f.kind !== 'all' && r.kind !== f.kind) return false;
+    const off = r.hidden || r.categoryOff;
+    if (f.status === 'showing' && off) return false;
+    if (f.status === 'hidden' && !off) return false;
+    if (!q) return true;
+    const hay = [
+      r.item.translations?.en || '',
+      r.item.arabic || '',
+      r.item.reference || '',
+    ].join(' ').toLowerCase();
+    return hay.includes(q);
+  });
+}
+
+// Only the list is re-rendered while filtering, so the search box keeps focus
+// and the caret stays put between keystrokes.
+function reminderListHtml() {
+  const rows = filteredReminders();
+  const total = allReminders().length;
+
+  if (rows.length === 0) {
+    return `<p class="empty">${total === 0
+      ? 'No reminders found.'
+      : 'Nothing matches this filter.'}</p>`;
+  }
+
+  const count = `<div class="filter-count">Showing ${rows.length} of ${total}</div>`;
+
+  return count + rows.map(r => {
+    const en = r.item.translations?.en || '';
+    const arabic = r.item.arabic || '';
+    const off = r.hidden || r.categoryOff;
+    return `
+      <div class="item${off ? ' dimmed' : ''}">
+        <div class="info">
+          <div class="top">
+            <span class="pill">${escapeHtml(r.kind)}</span>
+            ${r.custom ? '<span class="pill">added</span>' : ''}
+            ${r.categoryOff ? '<span class="pill">category off</span>' : ''}
+            ${r.hidden ? '<span class="pill">hidden</span>' : ''}
+          </div>
+          ${arabic ? `<div class="arabic-line" dir="rtl" lang="ar">${escapeHtml(arabic)}</div>` : ''}
+          <div class="when">${escapeHtml(en)}</div>
+          <div class="note">${escapeHtml(r.item.reference || '')}</div>
+        </div>
+        <div class="actions">
+          <button class="ghost" data-act="toggle-item"
+            data-kind="${escapeHtml(r.kind)}" data-ref="${escapeHtml(r.item.reference || '')}">
+            ${r.hidden ? 'Show' : 'Hide'}</button>
+          ${r.custom ? `<button class="danger" data-act="del-item"
+            data-kind="${escapeHtml(r.kind)}" data-ref="${escapeHtml(r.item.reference || '')}">
+            Delete</button>` : ''}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function remindersHtml() {
+  const content = state.content || emptyContent();
+  const rows = allReminders();
+  const f = state.filter;
+
+  const toggles = REMINDER_KINDS.map(kind => {
+    const on = content.show?.[kind] !== false;
+    const n = rows.filter(r => r.kind === kind && !r.hidden).length;
+    return `
+      <button class="ghost kind-toggle${on ? ' on' : ''}" data-act="toggle-kind" data-kind="${kind}">
+        ${on ? '&#10003;' : '&#10007;'} ${escapeHtml(kind)}
+        <span class="count">${n}</span>
+      </button>`;
+  }).join('');
+
+  const opt = (val, label, sel) =>
+    `<option value="${val}"${val === sel ? ' selected' : ''}>${label}</option>`;
+
+  const filterBar = `
+    <div class="filter-bar">
+      <input id="rem-q" type="search" placeholder="Search text, Arabic or reference"
+        value="${escapeHtml(f.q)}" autocomplete="off">
+      <select id="rem-kind">
+        ${opt('all', 'All types', f.kind)}
+        ${REMINDER_KINDS.map(k => opt(k, k, f.kind)).join('')}
+      </select>
+      <select id="rem-status">
+        ${opt('all', 'All', f.status)}
+        ${opt('showing', 'On screen', f.status)}
+        ${opt('hidden', 'Hidden', f.status)}
+      </select>
+    </div>`;
+
+  const note = state.builtinsErr
+    ? `<p class="empty">${escapeHtml(state.builtinsErr)}</p>`
+    : '';
+
+  return `<div class="kind-toggles">${toggles}</div>${filterBar}${note}`
+    + `<div id="reminder-list">${reminderListHtml()}</div>`;
+}
+
+function refreshReminderList() {
+  const el = document.getElementById('reminder-list');
+  if (!el) return;
+  el.innerHTML = reminderListHtml();
+  wireReminderRows(el);
+}
+
+function wireReminderRows(scope) {
+  scope.querySelectorAll('[data-act]').forEach(el => {
+    el.addEventListener('click', () => {
+      const act = el.dataset.act;
+      if (act === 'toggle-item') onToggleItem(el.dataset.kind, el.dataset.ref);
+      else if (act === 'del-item') onDeleteItem(el.dataset.kind, el.dataset.ref);
+    });
+  });
+}
+
+function itemFormHtml() {
+  return `
+    <form class="editor" data-form="item">
+      <h3>New reminder</h3>
+      <label><span class="lbl">Type</span>
+        <select name="kind" required>
+          ${REMINDER_KINDS.map(k => `<option value="${k}">${k}</option>`).join('')}
+        </select>
+      </label>
+      <label><span class="lbl">English text</span>
+        <textarea name="en" rows="3" required placeholder="Shown on screen below the Arabic"></textarea>
+      </label>
+      <label><span class="lbl">Arabic (optional)</span>
+        <textarea name="arabic" rows="2" dir="rtl" placeholder="Leave blank for English only"></textarea>
+      </label>
+      <label><span class="lbl">Reference</span>
+        <input name="reference" required placeholder="e.g. Surah Al-Baqarah 2:255">
+      </label>
+      <div class="form-actions">
+        <button type="button" class="ghost" data-act="cancel">Cancel</button>
+        <button type="submit" class="primary">Add reminder</button>
+      </div>
+    </form>`;
 }
 
 function wireUp() {
@@ -841,6 +1167,10 @@ function wireUp() {
       else if (act === 'edit-eid') { state.editing = { kind: 'eid', date: el.dataset.date }; state.adding = null; render(); }
       else if (act === 'del-ovd') { onDeleteOverride(parseInt(el.dataset.i, 10)); }
       else if (act === 'del-eid') { onDeleteEid(el.dataset.date); }
+      else if (act === 'add-item') { state.adding = 'item'; state.editing = null; render(); }
+      else if (act === 'toggle-kind') { onToggleKind(el.dataset.kind); }
+      else if (act === 'toggle-item') { onToggleItem(el.dataset.kind, el.dataset.ref); }
+      else if (act === 'del-item') { onDeleteItem(el.dataset.kind, el.dataset.ref); }
       else if (act === 'signout') { signOut(); }
       else if (act === 'refresh-kiosk') { onRefreshKiosk(); }
       else if (act === 'pull-kiosk') { onPullKiosk(); }
@@ -857,9 +1187,26 @@ function wireUp() {
       sync();
     } else if (f.dataset.form === 'eid') {
       f.addEventListener('submit', onSubmitEid);
+    } else if (f.dataset.form === 'item') {
+      f.addEventListener('submit', onSubmitItem);
     }
     f.scrollIntoView({ behavior: 'smooth', block: 'center' });
   });
+
+  // Filtering only re-renders the list, so the search box keeps focus between
+  // keystrokes; a full render() would drop the caret on every character.
+  const q = document.getElementById('rem-q');
+  if (q) {
+    q.addEventListener('input', () => { state.filter.q = q.value; refreshReminderList(); });
+  }
+  const kindSel = document.getElementById('rem-kind');
+  if (kindSel) {
+    kindSel.addEventListener('change', () => { state.filter.kind = kindSel.value; refreshReminderList(); });
+  }
+  const statusSel = document.getElementById('rem-status');
+  if (statusSel) {
+    statusSel.addEventListener('change', () => { state.filter.status = statusSel.value; refreshReminderList(); });
+  }
 }
 
 function setKioskStatus(text, kind) {
@@ -872,13 +1219,9 @@ function setKioskStatus(text, kind) {
 
 function callPiAction(path, pending) {
   const url = PI_URL.replace(/\/+$/, '');
-  const key = PI_REFRESH_KEY_VALUE;
-  if (url.includes('ALTON-PI-IP')) {
-    setKioskStatus('Kiosk address (PI_URL) not set in admin source', 'err');
-    return;
-  }
-  if (!key || key.startsWith('__FILL_IN_') || key.startsWith('CHANGE_ME')) {
-    setKioskStatus('Refresh key not configured in admin source', 'err');
+  const key = getRefreshKey();
+  if (!key) {
+    setKioskStatus('Refresh key not entered', 'err');
     return;
   }
   const target = `${url}${path}?key=${encodeURIComponent(key)}`;
@@ -901,6 +1244,9 @@ function callPiAction(path, pending) {
       try { data = await r.json(); } catch (_) {}
       const msg = data?.message || (r.ok ? 'Done' : `HTTP ${r.status}`);
       const ok = r.ok && data?.ok !== false;
+      // A wrong key would otherwise be stuck in localStorage forever, failing
+      // silently on every later click. Forget it so the next click re-prompts.
+      if (r.status === 403) localStorage.removeItem(REFRESH_KEY_STORE);
       setKioskStatus(`${ok ? '✓' : '✗'} ${msg}`, ok ? 'ok' : 'err');
     })
     .catch(e => {
@@ -1005,15 +1351,82 @@ function onDeleteEid(date) {
   }));
 }
 
+/* ---------- Reminder actions ---------- */
+
+function onToggleKind(kind) {
+  if (!REMINDER_KINDS.includes(kind)) return;
+  applyContentMutation(next => {
+    next.show[kind] = next.show[kind] === false;
+    return next;
+  });
+}
+
+// Rows are addressed by kind + reference rather than list position, so the
+// filter can reorder or hide rows without the buttons acting on the wrong one.
+function findReminder(kind, ref) {
+  return allReminders().find(r => r.kind === kind && (r.item.reference || '') === ref);
+}
+
+function onToggleItem(kind, ref) {
+  const row = findReminder(kind, ref);
+  if (!row) return;
+  applyContentMutation(next => {
+    const list = next.hidden[row.kind] || (next.hidden[row.kind] = []);
+    const at = list.indexOf(row.item.reference);
+    if (at === -1) list.push(row.item.reference);
+    else list.splice(at, 1);
+    return next;
+  });
+}
+
+function onDeleteItem(kind, ref) {
+  const row = findReminder(kind, ref);
+  if (!row || !row.custom) return;
+  if (!confirm('Delete this reminder? Ones that came with the display can be hidden instead.')) return;
+  applyContentMutation(next => {
+    next.items = (next.items || []).filter(
+      it => !(it.kind === row.kind && it.reference === row.item.reference));
+    // Drop any stale hide entry so re-adding the same reference shows up again.
+    next.hidden[row.kind] = (next.hidden[row.kind] || [])
+      .filter(ref => ref !== row.item.reference);
+    return next;
+  });
+}
+
+function onSubmitItem(e) {
+  e.preventDefault();
+  const f = e.target;
+  const kind = f.kind.value;
+  const en = f.en.value.trim();
+  const arabic = f.arabic.value.trim();
+  const reference = f.reference.value.trim();
+  if (!REMINDER_KINDS.includes(kind) || !en || !reference) {
+    toast('Type, English text and reference are all required', true);
+    return;
+  }
+  // References identify an item for hiding, so a duplicate would make the two
+  // impossible to tell apart in the hide list.
+  const clash = allReminders().some(r => r.kind === kind && r.item.reference === reference);
+  if (clash) {
+    toast('A reminder with that reference already exists', true);
+    return;
+  }
+  applyContentMutation(next => {
+    next.items = [...(next.items || []), { kind, arabic, reference, translations: { en } }];
+    return next;
+  });
+}
+
 /* ---------- Boot ---------- */
 
 async function init() {
   const stored = localStorage.getItem(AUTH_KEY) || '';
   if (!stored) { renderAuth(); return; }
-  pat = decryptPat(stored);
-  if (!pat) { renderAuth(); return; }
+  pat = stored;
   try {
     await loadRules();
+    await loadContent();
+    await loadBuiltins();
     render();
   } catch (e) {
     if (e.status === 401 || e.status === 403) {
