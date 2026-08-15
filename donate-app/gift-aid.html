@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Add Gift Aid — Aldershot Islamic Centre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/gift-aid.css?v=3">
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+    <meta name="theme-color" content="#1E88E5">
+</head>
+<body>
+
+<header class="ga-header">
+    <img src="assets/images/logo.png" alt="Aldershot Islamic Centre" class="ga-logo">
+    <h1 class="ga-charity">Aldershot Islamic Centre</h1>
+    <p class="ga-charity-ref">Registered Charity · 1214576</p>
+</header>
+
+<!-- ===== Form view ===== -->
+<main class="ga-main" id="view-form">
+    <section class="ga-hero">
+        <img src="assets/images/gift-aid-logo.svg" alt="Gift Aid" class="ga-hero-logo">
+        <div class="ga-hero-badge">+25%</div>
+        <h2 class="ga-hero-title">Boost your donation</h2>
+        <p class="ga-hero-sub">For every £1 you donate, the masjid can claim an extra 25p from HMRC — at no cost to you.</p>
+        <div class="ga-amounts" id="ga-amounts" hidden>
+            <div class="ga-amount-row">
+                <span class="ga-amount-label">Your donation</span>
+                <span class="ga-amount-value" id="ga-donation">—</span>
+            </div>
+            <div class="ga-amount-row ga-amount-extra">
+                <span class="ga-amount-label">Gift Aid (25%)</span>
+                <span class="ga-amount-value" id="ga-extra">—</span>
+            </div>
+            <div class="ga-amount-row ga-amount-total">
+                <span class="ga-amount-label">Total to the masjid</span>
+                <span class="ga-amount-value" id="ga-total">—</span>
+            </div>
+        </div>
+    </section>
+
+    <form class="ga-form" id="ga-form" novalidate>
+        <div class="ga-field ga-field-row">
+            <label class="ga-field-title">
+                <span class="ga-label">Title</span>
+                <select name="title" id="f-title" class="ga-input ga-select">
+                    <option value="">—</option>
+                    <option>Mr</option>
+                    <option>Mrs</option>
+                    <option>Ms</option>
+                    <option>Miss</option>
+                    <option>Mx</option>
+                    <option>Dr</option>
+                </select>
+            </label>
+            <label class="ga-field-firstname">
+                <span class="ga-label">First name <span class="ga-req">*</span></span>
+                <input type="text" name="firstName" id="f-firstName" class="ga-input" autocomplete="given-name" required maxlength="50">
+            </label>
+        </div>
+
+        <label class="ga-field">
+            <span class="ga-label">Last name <span class="ga-req">*</span></span>
+            <input type="text" name="lastName" id="f-lastName" class="ga-input" autocomplete="family-name" required maxlength="50">
+        </label>
+
+        <label class="ga-field">
+            <span class="ga-label">House name or number <span class="ga-req">*</span></span>
+            <input type="text" name="address" id="f-address" class="ga-input" autocomplete="address-line1" required maxlength="100" placeholder="e.g. 12 or Rose Cottage">
+            <span class="ga-help">First line of your home address (HMRC needs this to validate the claim).</span>
+        </label>
+
+        <label class="ga-field">
+            <span class="ga-label">Postcode <span class="ga-req">*</span></span>
+            <input type="text" name="postcode" id="f-postcode" class="ga-input" autocomplete="postal-code" required maxlength="10" inputmode="text" autocapitalize="characters" placeholder="GU11 1AA">
+        </label>
+
+        <label class="ga-field">
+            <span class="ga-label">Email <span class="ga-optional">(optional)</span></span>
+            <input type="email" name="email" id="f-email" class="ga-input" autocomplete="email" maxlength="100" placeholder="for a receipt">
+        </label>
+
+        <div class="ga-declaration">
+            <label class="ga-check">
+                <input type="checkbox" name="declaration" id="f-declaration" required>
+                <span class="ga-check-box" aria-hidden="true"></span>
+                <span class="ga-check-text">
+                    <strong>Gift Aid declaration</strong>
+                    I want to Gift Aid my donation of <span id="f-amount-text">my donation</span> today, all donations I have made for the past 4 years, and all future donations until I notify <strong>Aldershot Islamic Centre</strong> otherwise.
+                    I am a UK taxpayer and understand that if I pay less Income Tax and/or Capital Gains Tax in the current tax year than the amount of Gift Aid claimed on all my donations, it is my responsibility to pay any difference. I will notify the charity if I want to cancel this declaration, change my name or home address, or no longer pay sufficient tax.
+                </span>
+            </label>
+        </div>
+
+        <div class="ga-submit-bar">
+            <button type="submit" class="ga-submit" id="ga-submit">
+                <span class="ga-submit-text">Add Gift Aid</span>
+                <span class="ga-submit-spinner" aria-hidden="true"></span>
+            </button>
+            <p class="ga-error" id="ga-error" hidden></p>
+        </div>
+    </form>
+</main>
+
+<!-- ===== Success view ===== -->
+<main class="ga-main ga-success" id="view-success" hidden>
+    <div class="ga-success-card">
+        <div class="ga-success-tick">
+            <svg viewBox="0 0 80 80" width="64" height="64" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="40" cy="40" r="34"/>
+                <path d="M26 41l10 10 18-22"/>
+            </svg>
+        </div>
+        <p class="ga-success-arabic">جَزَاكَ ٱللَّٰهُ خَيْرًا</p>
+        <h2 class="ga-success-title">JazakAllah Khair</h2>
+        <p class="ga-success-sub">Your Gift Aid declaration has been recorded. The masjid will claim the 25% from HMRC on your behalf.</p>
+        <p class="ga-success-meta" id="ga-success-meta"></p>
+    </div>
+</main>
+
+<!-- ===== Config-error view ===== -->
+<main class="ga-main ga-fatal" id="view-fatal" hidden>
+    <div class="ga-fatal-card">
+        <h2>Form not configured</h2>
+        <p id="ga-fatal-message">The Gift Aid form is not yet connected to a submission endpoint. Please ask a volunteer.</p>
+    </div>
+</main>
+
+<script src="assets/js/gift-aid.js?v=3"></script>
+</body>
+</html>

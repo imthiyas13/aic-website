@@ -1,0 +1,38 @@
+{
+  "amounts": [3, 5, 10, 20, 50, 100],
+  "currency": "GBP",
+  "currencySymbol": "£",
+  "minCustom": 1,
+  "maxCustom": 1000,
+  "campaign": {
+    "title": "Aldershot Islamic Centre",
+    "subtitle": "Your sadaqah keeps the masjid running — every contribution counts.",
+    "registrationNumber": "1214576"
+  },
+  "thanksMessage": {
+    "arabic": "جَزَاكَ ٱللَّٰهُ خَيْرًا",
+    "english": "JazakAllah Khair",
+    "sub": "May Allah reward you with goodness."
+  },
+  "sumup": {
+    "appId": "org.aldershotic.donate.kiosk",
+    "transactionTitle": "AIC Donation",
+    "skipScreenSuccess": true,
+    "deeplinkFallbackSeconds": 8,
+    "deeplinkFallbackSecondsIos": 20
+  },
+  "giftAid": {
+    "enabled": true,
+    "formPath": "gift-aid.html",
+    "successDisplaySeconds": 25,
+    "charity": {
+      "name": "Aldershot Islamic Centre",
+      "registrationNumber": "1214576",
+      "hmrcRef": ""
+    },
+    "webhookUrl": "https://script.google.com/macros/s/AKfycbzHZ5OcYRSud64DUf5l4MFDy2O9uvUXsIVRNWMNL1b57H-V3kuTIxys1EyqWPuXbxEPxA/exec"
+  },
+  "idleResetSeconds": 30,
+  "thanksSeconds": 4,
+  "errorSeconds": 5
+}

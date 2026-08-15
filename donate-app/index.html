@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Donate — Aldershot Islamic Centre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css?v=13">
+    <link rel="icon" href="assets/images/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="assets/images/logo.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1E88E5">
+    <meta name="apple-mobile-web-app-title" content="AIC Donate">
+    <!--
+      Deliberately NOT setting apple-mobile-web-app-capable. In standalone mode
+      iOS returns the SumUp callback into Safari rather than the installed app,
+      so the thank-you screen would open somewhere the volunteer isn't looking.
+      Running in Safari keeps the whole round trip in one place.
+    -->
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body data-mode="handheld">
+
+<!-- ===== Screen: Who's collecting (handheld first run) ===== -->
+<section class="screen screen-setup" id="screen-setup" data-screen="setup" hidden>
+    <main class="setup-main">
+        <img src="assets/images/logo.png" alt="Aldershot Islamic Centre" class="setup-logo">
+        <h1 class="setup-title">Who's collecting?</h1>
+        <p class="setup-sub">Your name is added to each SumUp transaction so takings can be matched up afterwards. You only need to do this once on this phone.</p>
+        <form class="setup-form" id="setup-form" novalidate>
+            <input type="text" id="setup-name" class="setup-input" placeholder="e.g. Yusuf" autocomplete="name" maxlength="32" enterkeyhint="done">
+            <button type="submit" class="btn btn-primary setup-save" id="btn-setup-save">Start collecting</button>
+        </form>
+    </main>
+</section>
+
+<!-- ===== Screen: Amount Selection ===== -->
+<section class="screen screen-amounts is-active" id="screen-amounts" data-screen="amounts">
+    <header class="kiosk-header">
+        <img src="assets/images/logo.png" alt="Aldershot Islamic Centre" class="kiosk-logo">
+        <div class="kiosk-titles">
+            <h1 class="kiosk-title" id="campaign-title">Aldershot Islamic Centre</h1>
+            <p class="kiosk-sub" id="campaign-sub">Your sadaqah keeps the masjid running — every contribution counts.</p>
+            <p class="kiosk-charity-ref" id="campaign-ref">Registered Charity · 1214576</p>
+        </div>
+        <button type="button" class="collector-badge" id="collector-badge" hidden>
+            <span class="collector-dot" aria-hidden="true"></span>
+            <span id="collector-name"></span>
+        </button>
+    </header>
+
+    <main class="amounts-main">
+        <p class="amounts-prompt">Choose an amount</p>
+        <div class="amounts-grid" id="amounts-grid"></div>
+        <button type="button" class="amount-tile amount-custom" id="btn-custom">
+            <span class="tile-label">Other amount</span>
+        </button>
+    </main>
+
+    <footer class="kiosk-footer">
+        <div class="ga-reminder">
+            <img src="assets/images/gift-aid-logo.svg" alt="Gift Aid" class="ga-reminder-logo">
+            <div class="ga-reminder-text">
+                <strong>Don't leave before adding Gift Aid</strong>
+                <span>After paying, scan the QR with your phone to add 25% extra — at no cost to you, if you're a UK taxpayer.</span>
+            </div>
+        </div>
+    </footer>
+</section>
+
+<!-- ===== Screen: Custom Amount Pad ===== -->
+<section class="screen screen-custom" id="screen-custom" data-screen="custom" hidden>
+    <header class="kiosk-header kiosk-header-compact">
+        <img src="assets/images/logo.png" alt="" class="kiosk-logo">
+        <h2 class="kiosk-title">Enter amount</h2>
+    </header>
+
+    <main class="custom-main">
+        <div class="custom-display">
+            <span class="custom-currency">£</span>
+            <span class="custom-value" id="custom-value">0.00</span>
+        </div>
+        <div class="keypad" id="keypad">
+            <button type="button" class="key" data-key="1">1</button>
+            <button type="button" class="key" data-key="2">2</button>
+            <button type="button" class="key" data-key="3">3</button>
+            <button type="button" class="key" data-key="4">4</button>
+            <button type="button" class="key" data-key="5">5</button>
+            <button type="button" class="key" data-key="6">6</button>
+            <button type="button" class="key" data-key="7">7</button>
+            <button type="button" class="key" data-key="8">8</button>
+            <button type="button" class="key" data-key="9">9</button>
+            <button type="button" class="key key-secondary" data-key="clear">Clear</button>
+            <button type="button" class="key" data-key="0">0</button>
+            <button type="button" class="key key-secondary" data-key="back">⌫</button>
+        </div>
+        <div class="custom-actions">
+            <button type="button" class="btn btn-ghost" id="btn-custom-cancel">Cancel</button>
+            <button type="button" class="btn btn-primary" id="btn-custom-confirm" disabled>Continue</button>
+        </div>
+    </main>
+</section>
+
+<!-- ===== Screen: Pay (handing off to SumUp) ===== -->
+<section class="screen screen-pay" id="screen-pay" data-screen="pay" hidden>
+    <main class="pay-main">
+        <div class="pay-amount-block">
+            <span class="pay-amount-label">Donation amount</span>
+            <div class="pay-amount" id="pay-amount">£0</div>
+        </div>
+
+        <div class="pay-instruction">
+            <div class="pay-icon" aria-hidden="true">
+                <div class="spinner"></div>
+            </div>
+            <h2 class="pay-title">Opening SumUp…</h2>
+            <p class="pay-sub">Follow the prompts in the SumUp app, then tap the card on the reader.</p>
+        </div>
+
+        <div class="pay-actions">
+            <button type="button" class="btn btn-ghost" id="btn-pay-cancel">Cancel</button>
+        </div>
+    </main>
+</section>
+
+<!-- ===== Celebration banner (pinned top, doesn't cover the amount tiles) ===== -->
+<div class="celebration" id="celebration" aria-hidden="true">
+    <div class="celebration-card" id="celebration-card">
+        <div class="celebration-main">
+            <div class="celebration-icon">
+                <svg class="celebration-svg-success" viewBox="0 0 80 80" width="56" height="56" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="40" cy="40" r="34"/>
+                    <path d="M26 41l10 10 18-22"/>
+                </svg>
+                <svg class="celebration-svg-error" viewBox="0 0 80 80" width="56" height="56" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="40" cy="40" r="34"/>
+                    <line x1="28" y1="28" x2="52" y2="52"/>
+                    <line x1="52" y1="28" x2="28" y2="52"/>
+                </svg>
+            </div>
+            <div class="celebration-texts">
+                <h2 class="celebration-title" id="celebration-title">JazakAllah Khair</h2>
+                <p class="celebration-arabic" id="celebration-arabic">جَزَاكَ ٱللَّٰهُ خَيْرًا</p>
+                <p class="celebration-sub" id="celebration-sub">May Allah reward you with goodness.</p>
+            </div>
+        </div>
+        <div class="celebration-giftaid" id="celebration-giftaid">
+            <div class="qr-code" id="qr-code" aria-hidden="true"></div>
+            <div class="qr-caption">
+                <img src="assets/images/gift-aid-logo.svg" alt="Gift Aid" class="qr-giftaid-logo">
+                <span>Scan to add 25% extra at no cost</span>
+            </div>
+        </div>
+        <div class="stars" id="stars" aria-hidden="true"></div>
+    </div>
+</div>
+
+<script src="assets/js/qrcode.min.js"></script>
+<script src="assets/js/app.js?v=14"></script>
+</body>
+</html>

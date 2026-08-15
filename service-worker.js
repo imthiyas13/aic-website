@@ -1,7 +1,7 @@
 // AIC website service worker — PWA caching + push notifications.
 // Bump CACHE_VERSION whenever you ship code/CSS/HTML changes that
 // you need to flush on installed phones.
-const CACHE_VERSION = 'v6';
+const CACHE_VERSION = 'v7';
 const CACHE_NAME = `aic-site-${CACHE_VERSION}`;
 
 const CORE_ASSETS = [
@@ -53,6 +53,12 @@ self.addEventListener('fetch', (event) => {
 
     // Only handle GETs
     if (req.method !== 'GET') return;
+
+    // The donation app is in this SW's scope but must never be served stale:
+    // it carries the SumUp affiliate key and its own config, and a cached copy
+    // on a volunteer's phone would keep taking payments with old settings.
+    // Leave it entirely to the network.
+    if (url.origin === location.origin && url.pathname.startsWith('/donate-app/')) return;
 
     // Live Google Sheet: network-first, fall back to cache.
     if (url.host === 'docs.google.com') {

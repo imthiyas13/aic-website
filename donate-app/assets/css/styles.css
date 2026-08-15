@@ -1,0 +1,948 @@
+/* ===== Theme Tokens (logo-blue palette) ===== */
+:root {
+    --bg: #f5f8fc;
+    --bg-soft: #ffffff;
+    --panel: #ffffff;
+
+    --primary: #1e88e5;
+    --primary-dark: #1565c0;
+    --primary-light: #e3f0fb;
+    --primary-soft: rgba(30, 136, 229, 0.08);
+
+    --accent: #f59e0b;
+    --accent-soft: rgba(245, 158, 11, 0.18);
+
+    --text: #0f172a;
+    --text-dim: #475569;
+    --text-muted: #94a3b8;
+
+    --border: #e2e8f0;
+    --border-soft: #eef2f7;
+
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+    --shadow: 0 4px 14px rgba(15, 23, 42, 0.07), 0 1px 3px rgba(15, 23, 42, 0.04);
+    --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.06);
+
+    --danger: #ef4444;
+
+    --sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --arabic: 'Amiri', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+body {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--text);
+    background:
+        radial-gradient(ellipse 80% 60% at 80% 0%, rgba(30, 136, 229, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 70% 60% at 0% 100%, rgba(30, 136, 229, 0.08) 0%, transparent 55%),
+        var(--bg);
+    background-attachment: fixed;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+/* ===== Screen Base ===== */
+.screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+
+.screen.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.screen[hidden] {
+    display: none !important;
+}
+
+/* ===== Header (kiosk) ===== */
+.kiosk-header {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 28px 56px 16px;
+}
+
+.kiosk-header-compact {
+    padding: 24px 56px 8px;
+}
+
+.kiosk-logo {
+    height: 200px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.kiosk-titles {
+    flex: 1;
+    min-width: 0;
+}
+
+.kiosk-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.15;
+    color: var(--text);
+    letter-spacing: -0.5px;
+}
+
+.kiosk-sub {
+    margin-top: 6px;
+    font-size: 17px;
+    color: var(--text-dim);
+}
+
+.kiosk-charity-ref {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.kiosk-footer {
+    padding: 16px 56px 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.ga-reminder {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--primary-light);
+    border: 1px solid rgba(30, 136, 229, 0.18);
+    border-radius: 16px;
+    padding: 14px 22px;
+    max-width: 720px;
+    box-shadow: var(--shadow-sm);
+}
+
+.ga-reminder-logo {
+    height: 38px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.ga-reminder-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: left;
+    line-height: 1.35;
+}
+
+.ga-reminder-text strong {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    letter-spacing: -0.2px;
+}
+
+.ga-reminder-text span {
+    font-size: 13px;
+    color: var(--text-dim);
+}
+
+/* ===== Amounts Screen ===== */
+.amounts-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 56px 24px;
+    gap: 26px;
+}
+
+.amounts-prompt {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--text-dim);
+    letter-spacing: 0.2px;
+}
+
+.amounts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    gap: 22px;
+    width: 100%;
+    max-width: 920px;
+}
+
+.amount-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 5 / 3;
+    background: var(--panel);
+    border: 1px solid var(--border-soft);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    transition: transform 0.12s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    color: var(--primary-dark);
+    position: relative;
+    overflow: hidden;
+}
+
+.amount-tile::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(30, 136, 229, 0) 0%, rgba(30, 136, 229, 0.06) 100%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.amount-tile:active {
+    transform: scale(0.97);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-soft), var(--shadow);
+}
+
+.amount-tile:active::after { opacity: 1; }
+
+.amount-tile .tile-amount {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -1.5px;
+    color: var(--primary);
+    z-index: 1;
+}
+
+.amount-tile .tile-label {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 22px;
+    color: var(--primary);
+    z-index: 1;
+}
+
+.amount-custom {
+    width: 100%;
+    max-width: 920px;
+    aspect-ratio: auto;
+    padding: 22px;
+    background: transparent;
+    border: 2px dashed rgba(30, 136, 229, 0.3);
+    box-shadow: none;
+}
+
+.amount-custom:active {
+    background: var(--primary-soft);
+    border-color: var(--primary);
+    box-shadow: none;
+}
+
+/* ===== Custom Keypad Screen ===== */
+.custom-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 56px 36px;
+    gap: 24px;
+}
+
+.custom-display {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-family: var(--sans);
+    color: var(--text);
+}
+
+.custom-currency {
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--text-dim);
+}
+
+.custom-value {
+    font-size: 88px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    min-width: 240px;
+    text-align: left;
+    color: var(--primary);
+}
+
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.key {
+    height: 88px;
+    background: var(--panel);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--text);
+    transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.key:active {
+    transform: scale(0.96);
+    background: var(--primary-light);
+    box-shadow: var(--shadow);
+}
+
+.key-secondary {
+    font-size: 20px;
+    color: var(--text-dim);
+    background: var(--bg);
+    font-weight: 500;
+}
+
+.custom-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+/* ===== Generic Buttons ===== */
+.btn {
+    min-width: 180px;
+    padding: 18px 32px;
+    border-radius: 14px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: 0.1px;
+    transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(30, 136, 229, 0.28);
+}
+
+.btn-primary:disabled {
+    background: var(--text-muted);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.btn-primary:not(:disabled):active {
+    background: var(--primary-dark);
+    box-shadow: 0 2px 6px rgba(30, 136, 229, 0.3);
+}
+
+.btn-ghost {
+    background: var(--panel);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-ghost:active {
+    background: var(--bg);
+}
+
+/* ===== Pay Screen ===== */
+.pay-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 56px;
+    gap: 36px;
+}
+
+.pay-amount-block {
+    text-align: center;
+}
+
+.pay-amount-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.pay-amount {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: 120px;
+    line-height: 1;
+    color: var(--primary);
+    letter-spacing: -3px;
+}
+
+.pay-instruction {
+    text-align: center;
+    max-width: 720px;
+    background: var(--panel);
+    border: 1px solid var(--border-soft);
+    border-radius: 24px;
+    padding: 40px 44px;
+    box-shadow: var(--shadow-lg);
+    color: var(--primary);
+}
+
+.pay-icon {
+    color: var(--primary);
+    margin-bottom: 14px;
+    display: flex;
+    justify-content: center;
+}
+
+.spinner {
+    width: 64px;
+    height: 64px;
+    border: 6px solid var(--primary-soft);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.pay-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--text);
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+}
+
+.pay-sub {
+    margin-top: 12px;
+    font-size: 17px;
+    color: var(--text-dim);
+}
+
+.pay-actions {
+    display: flex;
+    gap: 18px;
+}
+
+/* ===== Celebration banner (top-pinned, never covers the amount tiles) ===== */
+.celebration {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.celebration.is-visible {
+    opacity: 1;
+}
+
+.celebration-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 16px 22px;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(15, 23, 42, 0.08);
+    border: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    max-width: min(720px, calc(100vw - 32px));
+    transform: translateY(-30px) scale(0.9);
+    opacity: 0;
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.celebration[data-kind="error"] .celebration-card {
+    border-radius: 9999px;
+    padding: 14px 28px 14px 22px;
+    gap: 16px;
+}
+
+.celebration-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.celebration.is-visible .celebration-card {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.celebration-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--primary);
+}
+
+.celebration-svg-success,
+.celebration-svg-error { display: none; }
+.celebration[data-kind="success"] .celebration-svg-success { display: inline-block; }
+.celebration[data-kind="success"] .celebration-icon { color: var(--primary); }
+.celebration[data-kind="error"] .celebration-svg-error { display: inline-block; }
+.celebration[data-kind="error"] .celebration-icon { color: var(--danger); }
+.celebration[data-kind="error"] .celebration-arabic,
+.celebration[data-kind="error"] .stars { display: none; }
+.celebration[data-kind="error"] .celebration-title { color: var(--danger); }
+
+.celebration-texts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.15;
+    min-width: 0;
+}
+
+.celebration-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--text);
+    line-height: 1.1;
+    letter-spacing: -0.2px;
+}
+
+.celebration-arabic {
+    font-family: var(--arabic);
+    font-size: 22px;
+    color: var(--primary);
+    direction: rtl;
+    line-height: 1.3;
+    margin-top: 2px;
+}
+
+.celebration-sub {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    max-width: 360px;
+}
+
+.celebration[data-kind="success"] .celebration-sub { display: none; }
+
+/* Gift Aid block — only on success */
+.celebration-giftaid {
+    display: none;
+    align-items: center;
+    gap: 14px;
+    padding-left: 18px;
+    border-left: 1px solid var(--border);
+}
+
+.celebration[data-kind="success"] .celebration-giftaid {
+    display: flex;
+}
+
+.celebration[data-kind="success"]:not([data-giftaid="true"]) .celebration-giftaid {
+    display: none;
+}
+
+.qr-code {
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    padding: 4px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+.qr-code img,
+.qr-code svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.qr-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: var(--sans);
+    line-height: 1.25;
+    max-width: 180px;
+}
+
+.qr-caption strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.1px;
+}
+
+.qr-giftaid-logo {
+    height: 28px;
+    width: auto;
+    display: block;
+}
+
+.qr-caption span {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 2px;
+}
+
+/* Star burst — emanates from the icon side of the card */
+.stars {
+    position: absolute;
+    top: 50%;
+    left: 56px;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.star {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
+    color: var(--accent);
+    opacity: 0;
+    --tx: 0px;
+    --ty: 0px;
+    --rot: 0deg;
+}
+
+.celebration.is-visible .star {
+    animation: star-burst 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes star-burst {
+    0%   { transform: translate(0, 0) scale(0.2) rotate(0deg); opacity: 0; }
+    18%  { opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--rot)); opacity: 0; }
+}
+
+.star svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.4));
+}
+
+/* ===== Responsive (smaller tablets / portrait) ===== */
+@media (max-width: 900px) {
+    .kiosk-header { padding: 20px 28px 12px; gap: 20px; }
+    .kiosk-logo { height: 130px; }
+    .kiosk-footer { padding: 12px 24px 18px; }
+    .ga-reminder { padding: 10px 16px; gap: 14px; }
+    .ga-reminder-logo { height: 30px; }
+    .ga-reminder-text strong { font-size: 14px; }
+    .ga-reminder-text span { font-size: 12px; }
+    .kiosk-title { font-size: 26px; }
+    .kiosk-sub { font-size: 15px; }
+    .amounts-main { padding: 8px 28px 20px; gap: 18px; }
+    .amounts-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .amount-tile .tile-amount { font-size: 44px; }
+    .pay-amount { font-size: 88px; }
+    .pay-title { font-size: 24px; }
+    .celebration-arabic { font-size: 18px; }
+    .celebration-title { font-size: 18px; }
+    .celebration-card { padding: 12px 18px; gap: 14px; border-radius: 18px; }
+    .celebration-main { gap: 12px; }
+    .qr-code { width: 80px; height: 80px; }
+    .qr-caption strong { font-size: 13px; }
+    .qr-caption span { font-size: 11px; }
+    .qr-caption { max-width: 140px; }
+    .qr-giftaid-logo { height: 22px; }
+}
+
+@media (max-width: 560px) {
+    .amounts-grid { grid-template-columns: repeat(2, 1fr); }
+    .kiosk-title { font-size: 22px; }
+    .amount-tile .tile-amount { font-size: 38px; }
+    .btn { min-width: 140px; padding: 14px 22px; font-size: 16px; }
+    .pay-amount { font-size: 72px; }
+}
+
+/* ===== Setup screen (handheld first run) ===== */
+.setup-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 32px 28px calc(32px + env(safe-area-inset-bottom));
+    text-align: center;
+}
+
+.setup-logo {
+    height: 96px;
+    width: auto;
+    margin-bottom: 4px;
+}
+
+.setup-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.4px;
+    color: var(--text);
+}
+
+.setup-sub {
+    font-size: 15px;
+    color: var(--text-dim);
+    max-width: 340px;
+    line-height: 1.45;
+}
+
+.setup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 340px;
+    margin-top: 10px;
+}
+
+.setup-input {
+    font: inherit;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--panel);
+    color: var(--text);
+    box-shadow: var(--shadow-sm);
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+.setup-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-soft);
+}
+
+.setup-save { width: 100%; }
+
+/* ===== Collector badge ===== */
+.collector-badge {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    padding: 7px 13px;
+    border-radius: 9999px;
+    background: var(--primary-light);
+    border: 1px solid rgba(30, 136, 229, 0.2);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary-dark);
+    max-width: 40vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.collector-badge[hidden] { display: none; }
+
+.collector-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+}
+
+.collector-badge.is-unset {
+    background: var(--bg);
+    border-color: var(--border);
+    color: var(--text-muted);
+}
+
+.collector-badge.is-unset .collector-dot { background: var(--text-muted); }
+
+/* ===== Handheld mode (admin phones) =====
+   The base layout is sized for a wall-mounted tablet; on a phone held in one
+   hand everything needs to come down a couple of steps and the thank-you
+   banner has to stack rather than sit side by side. */
+body[data-mode="handheld"] {
+    font-size: 16px;
+}
+
+body[data-mode="handheld"] .kiosk-header {
+    padding: calc(14px + env(safe-area-inset-top)) 18px 8px;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+body[data-mode="handheld"] .kiosk-logo { height: 54px; }
+body[data-mode="handheld"] .kiosk-title { font-size: 17px; letter-spacing: -0.2px; }
+body[data-mode="handheld"] .kiosk-sub { display: none; }
+body[data-mode="handheld"] .kiosk-charity-ref { margin-top: 3px; font-size: 10px; }
+
+body[data-mode="handheld"] .amounts-main {
+    padding: 4px 18px 12px;
+    gap: 12px;
+}
+
+body[data-mode="handheld"] .amounts-prompt { font-size: 15px; }
+body[data-mode="handheld"] .amounts-grid { gap: 12px; }
+body[data-mode="handheld"] .amount-tile { aspect-ratio: 2 / 1; border-radius: 16px; }
+body[data-mode="handheld"] .amount-tile .tile-amount { font-size: 32px; letter-spacing: -1px; }
+body[data-mode="handheld"] .amount-tile .tile-label { font-size: 16px; }
+
+/* The custom tile is also an .amount-tile, so it needs the fixed ratio undone
+   again or it grows to half the screen. */
+body[data-mode="handheld"] .amount-custom {
+    aspect-ratio: auto;
+    padding: 16px;
+}
+
+body[data-mode="handheld"] .kiosk-footer {
+    padding: 8px 18px calc(12px + env(safe-area-inset-bottom));
+}
+
+body[data-mode="handheld"] .ga-reminder { padding: 9px 13px; gap: 11px; border-radius: 13px; }
+body[data-mode="handheld"] .ga-reminder-logo { height: 24px; }
+body[data-mode="handheld"] .ga-reminder-text strong { font-size: 12px; }
+body[data-mode="handheld"] .ga-reminder-text span { font-size: 11px; }
+
+body[data-mode="handheld"] .custom-main { padding: 0 18px calc(20px + env(safe-area-inset-bottom)); gap: 16px; }
+body[data-mode="handheld"] .custom-currency { font-size: 30px; }
+body[data-mode="handheld"] .custom-value { font-size: 58px; min-width: 160px; }
+body[data-mode="handheld"] .key { height: 62px; font-size: 26px; }
+body[data-mode="handheld"] .key-secondary { font-size: 16px; }
+body[data-mode="handheld"] .keypad { gap: 10px; }
+
+body[data-mode="handheld"] .pay-main { padding: 24px 18px; gap: 22px; }
+body[data-mode="handheld"] .pay-amount { font-size: 60px; letter-spacing: -2px; }
+body[data-mode="handheld"] .pay-instruction { padding: 24px 20px; border-radius: 18px; }
+body[data-mode="handheld"] .pay-title { font-size: 20px; }
+body[data-mode="handheld"] .pay-sub { font-size: 15px; }
+body[data-mode="handheld"] .spinner { width: 44px; height: 44px; border-width: 5px; }
+
+/* Thank-you banner: on a phone this is the thing the donor is handed to look
+   at, so centre it and stack the Gift Aid QR under the message at a size
+   another phone's camera can actually read. */
+body[data-mode="handheld"] .celebration {
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Only tappable while actually on screen — it sits over the middle of the
+   amount tiles, so leaving it clickable would eat taps once it faded out. */
+body[data-mode="handheld"] .celebration.is-visible {
+    pointer-events: auto;
+}
+
+body[data-mode="handheld"] .celebration-card {
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px 20px;
+    min-width: min(300px, calc(100vw - 40px));
+    max-width: calc(100vw - 24px);
+}
+
+/* The banner is dismissed by tapping it — say so. Success only: the error
+   card stays a single row and clears itself after a few seconds anyway. */
+body[data-mode="handheld"] .celebration[data-kind="success"] .celebration-card::after {
+    content: 'Tap to continue';
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+body[data-mode="handheld"] .celebration[data-kind="error"] .celebration-card {
+    flex-direction: row;
+    border-radius: 18px;
+    padding: 13px 18px;
+}
+
+body[data-mode="handheld"] .celebration-giftaid {
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 0;
+    padding-top: 12px;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    width: 100%;
+}
+
+body[data-mode="handheld"] .qr-code { width: 150px; height: 150px; }
+body[data-mode="handheld"] .qr-caption { max-width: none; align-items: center; text-align: center; }
+body[data-mode="handheld"] .qr-caption span { font-size: 12px; }
+body[data-mode="handheld"] .qr-giftaid-logo { margin: 0 auto; }
+body[data-mode="handheld"] .celebration-sub { max-width: none; }
+
+/* Short phones in landscape: drop the chrome so the tiles still fit. */
+@media (max-height: 500px) {
+    body[data-mode="handheld"] .kiosk-footer { display: none; }
+    body[data-mode="handheld"] .kiosk-logo { height: 38px; }
+    body[data-mode="handheld"] .amount-tile { aspect-ratio: 3 / 1; }
+}

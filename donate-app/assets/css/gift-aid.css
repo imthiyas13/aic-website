@@ -1,0 +1,479 @@
+/* ===== Theme tokens (mirrors kiosk) ===== */
+:root {
+    --bg: #f5f8fc;
+    --panel: #ffffff;
+    --primary: #1e88e5;
+    --primary-dark: #1565c0;
+    --primary-light: #e3f0fb;
+    --primary-soft: rgba(30, 136, 229, 0.08);
+    --accent: #f59e0b;
+    --text: #0f172a;
+    --text-dim: #475569;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --border-soft: #eef2f7;
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+    --shadow: 0 4px 14px rgba(15, 23, 42, 0.07), 0 1px 3px rgba(15, 23, 42, 0.04);
+    --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.1);
+    --danger: #ef4444;
+    --success: #16a34a;
+    --sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --arabic: 'Amiri', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text);
+    background:
+        radial-gradient(ellipse 100% 40% at 50% 0%, rgba(30, 136, 229, 0.12) 0%, transparent 70%),
+        var(--bg);
+    background-attachment: fixed;
+    padding-bottom: 40px;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+a { color: var(--primary); }
+
+/* ===== Header ===== */
+.ga-header {
+    text-align: center;
+    padding: 32px 24px 16px;
+}
+
+.ga-logo {
+    height: 96px;
+    width: auto;
+    margin: 0 auto 16px;
+    display: block;
+}
+
+.ga-charity {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.3px;
+}
+
+.ga-charity-ref {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 0.2px;
+}
+
+/* ===== Main wrapper ===== */
+.ga-main {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== Hero ===== */
+.ga-hero {
+    background: var(--panel);
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-soft);
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ga-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--primary-soft) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.ga-hero > * { position: relative; }
+
+.ga-hero-logo {
+    height: 36px;
+    width: auto;
+    margin: 0 auto 14px;
+    display: block;
+}
+
+.ga-hero-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 22px;
+    padding: 6px 16px;
+    border-radius: 9999px;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    margin-bottom: 14px;
+    letter-spacing: -0.3px;
+}
+
+.ga-hero-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+.ga-hero-sub {
+    margin-top: 8px;
+    color: var(--text-dim);
+    font-size: 15px;
+}
+
+.ga-amounts {
+    margin-top: 18px;
+    background: var(--primary-light);
+    border-radius: 14px;
+    padding: 14px 18px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ga-amount-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 15px;
+    color: var(--text-dim);
+}
+
+.ga-amount-row.ga-amount-extra { color: var(--primary-dark); font-weight: 600; }
+.ga-amount-row.ga-amount-total {
+    border-top: 1px solid rgba(30, 136, 229, 0.2);
+    padding-top: 8px;
+    margin-top: 4px;
+    font-weight: 700;
+    color: var(--text);
+}
+.ga-amount-row.ga-amount-total .ga-amount-value { color: var(--primary); font-size: 20px; }
+
+.ga-amount-value {
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* ===== Form ===== */
+.ga-form {
+    background: var(--panel);
+    border-radius: 20px;
+    padding: 24px 22px 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ga-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ga-field-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 12px;
+}
+
+.ga-field-row > label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ga-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dim);
+    letter-spacing: 0.1px;
+}
+
+.ga-req { color: var(--danger); margin-left: 2px; }
+.ga-optional { color: var(--text-muted); font-weight: 400; }
+
+.ga-input {
+    width: 100%;
+    padding: 14px 14px;
+    font-family: inherit;
+    font-size: 17px;
+    color: var(--text);
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.ga-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: var(--panel);
+    box-shadow: 0 0 0 4px var(--primary-soft);
+}
+
+.ga-input.is-invalid {
+    border-color: var(--danger);
+    background: rgba(239, 68, 68, 0.04);
+}
+
+.ga-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23475569' stroke-width='1.6'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 12px 8px;
+    padding-right: 36px;
+}
+
+.ga-help {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* ===== Declaration ===== */
+.ga-declaration {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px;
+}
+
+.ga-check {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 14px;
+    align-items: start;
+    cursor: pointer;
+}
+
+.ga-check input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.ga-check-box {
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    margin-top: 2px;
+    position: relative;
+    transition: background 0.15s ease, border-color 0.15s ease;
+    flex-shrink: 0;
+}
+
+.ga-check-box::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    width: 6px;
+    height: 11px;
+    border: solid #fff;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg) scale(0);
+    transition: transform 0.15s ease;
+}
+
+.ga-check input:checked ~ .ga-check-box {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.ga-check input:checked ~ .ga-check-box::after {
+    transform: rotate(45deg) scale(1);
+}
+
+.ga-check input:focus-visible ~ .ga-check-box {
+    box-shadow: 0 0 0 4px var(--primary-soft);
+}
+
+.ga-check.is-invalid .ga-check-box {
+    border-color: var(--danger);
+    background: rgba(239, 68, 68, 0.04);
+}
+
+.ga-check-text {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text-dim);
+}
+
+.ga-check-text strong {
+    display: block;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+/* ===== Submit ===== */
+.ga-submit-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.ga-submit {
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 17px;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(30, 136, 229, 0.28);
+    transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    letter-spacing: 0.1px;
+}
+
+.ga-submit:active:not(:disabled) {
+    transform: scale(0.98);
+    background: var(--primary-dark);
+}
+
+.ga-submit:disabled {
+    background: var(--text-muted);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.ga-submit-spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: ga-spin 0.8s linear infinite;
+    display: none;
+}
+
+.ga-submit.is-loading .ga-submit-text { display: none; }
+.ga-submit.is-loading .ga-submit-spinner { display: inline-block; }
+
+@keyframes ga-spin { to { transform: rotate(360deg); } }
+
+.ga-error {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: var(--danger);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* ===== Success view ===== */
+.ga-success-card,
+.ga-fatal-card {
+    background: var(--panel);
+    border-radius: 24px;
+    padding: 36px 28px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-soft);
+    text-align: center;
+}
+
+.ga-success-tick {
+    color: var(--success);
+    margin: 0 auto 12px;
+    display: flex;
+    justify-content: center;
+    animation: ga-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes ga-pop {
+    0%   { transform: scale(0.4); opacity: 0; }
+    60%  { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.ga-success-arabic {
+    font-family: var(--arabic);
+    font-size: 36px;
+    color: var(--primary);
+    direction: rtl;
+    line-height: 1.4;
+}
+
+.ga-success-title {
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--text);
+    margin-top: 8px;
+    letter-spacing: -0.4px;
+}
+
+.ga-success-sub {
+    margin-top: 10px;
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.ga-success-meta {
+    margin-top: 16px;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.3px;
+}
+
+.ga-fatal-card h2 {
+    color: var(--danger);
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.ga-fatal-card p {
+    color: var(--text-dim);
+    font-size: 15px;
+}
+
+/* ===== Tighten layout on small screens ===== */
+@media (max-width: 380px) {
+    .ga-header { padding: 24px 16px 12px; }
+    .ga-logo { height: 80px; }
+    .ga-charity { font-size: 19px; }
+    .ga-hero { padding: 22px 18px; }
+    .ga-hero-title { font-size: 21px; }
+    .ga-form { padding: 20px 16px 16px; }
+    .ga-field-row { grid-template-columns: 80px 1fr; }
+}
