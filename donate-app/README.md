@@ -93,12 +93,22 @@ The setting sticks on that device. Kiosk mode restores the large tablet
 layout, forces fullscreen, and blocks long-press and double-tap. `?mode=handheld`
 switches back.
 
-The tablet currently runs its own local copy from `../../DonationApp/`. That copy
-still works and has not been changed except for one bug fix; move it over to this
-hosted version whenever convenient, rather than maintaining both.
+The wall tablet loads the older kiosk build, already hosted separately at
+**`/donate/`** on the same server. Its source is `../../DonationApp/`, which is
+not in any git repo — it is edited locally and uploaded to `/donate/` by FTP.
 
-Note that `DonationApp/` is not in any git repo, so fixes made there have to be
-copied to the tablet by hand as well.
+So there are two folders on the server:
+
+| Path | Build | Used by |
+| --- | --- | --- |
+| `/donate/` | kiosk-only, from `DonationApp/` | wall tablet |
+| `/donate-app/` | this one, phone + kiosk | admin phones |
+
+`/donate-app/` can eventually replace `/donate/` and serve both. If you do
+that, **change the tablet's start URL to `/donate/?mode=kiosk` before
+uploading** — this build defaults to the handheld layout, so a tablet loading
+the plain URL would come up in phone mode until told otherwise. The setting
+sticks per device once applied.
 
 ---
 
@@ -113,9 +123,10 @@ copied to the tablet by hand as well.
   deliberately not set: in standalone mode iOS returns the SumUp result into
   Safari instead of the installed app, so the thank-you screen would appear
   somewhere the volunteer isn't looking.
-- **The affiliate key in `data/key.txt` is public.** It only identifies the
-  integration; money always goes to whichever SumUp account is signed in on the
-  device, so an outsider cannot use it to collect on our behalf. The page is
+- **The affiliate key in `data/key.txt` is public** — as it already was at
+  `/donate/data/key.txt`, so this is no change in exposure. It only identifies
+  the integration; money always goes to whichever SumUp account is signed in on
+  the device, so an outsider cannot use it to collect on our behalf. The page is
   `noindex` and unlinked, but treat the URL as guessable.
 - **The site service worker deliberately skips `/donate-app/`** (see
   `../service-worker.js`) so a volunteer's phone can never run a cached copy
