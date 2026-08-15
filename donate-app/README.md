@@ -6,9 +6,22 @@ collection rounds.
 
 **Live URL:** <https://aldershotislamiccentre.org.uk/donate-app/>
 
-It is deployed by Netlify from this repo like the rest of the site, so a push
-to `main` updates every phone. Nothing is installed and nothing needs updating
-by hand.
+## Deploying
+
+The site is **not** deployed from this repo automatically — the host is plain
+nginx and the files are uploaded by hand (FileZilla/FTP). Pushing to `main`
+changes nothing on the live site.
+
+To publish or update the phone app, upload to the web root, keeping the folder
+structure:
+
+| Upload | To | Why |
+| --- | --- | --- |
+| `donate-app/` (whole folder) | web root, next to `index.html` | the app itself |
+| `service-worker.js` | web root | excludes `/donate-app/` from caching — without it, phones can run a stale copy |
+
+Volunteers' phones load the page fresh each time, so a re-upload reaches
+everyone without them doing anything.
 
 ---
 
@@ -34,7 +47,7 @@ page on its own cannot take money.
 3. **Open the donation page.** Send the volunteer their own link with their
    name in it, which sets them up in one tap:
 
-   ```
+   ```text
    https://aldershotislamiccentre.org.uk/donate-app/?collector=Yusuf
    ```
 
@@ -72,7 +85,7 @@ to the amounts — nothing else to do.
 
 The same page can run the wall-mounted tablet. Open it once with:
 
-```
+```text
 https://aldershotislamiccentre.org.uk/donate-app/?mode=kiosk
 ```
 
@@ -83,6 +96,9 @@ switches back.
 The tablet currently runs its own local copy from `../../DonationApp/`. That copy
 still works and has not been changed except for one bug fix; move it over to this
 hosted version whenever convenient, rather than maintaining both.
+
+Note that `DonationApp/` is not in any git repo, so fixes made there have to be
+copied to the tablet by hand as well.
 
 ---
 
