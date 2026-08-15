@@ -45,8 +45,12 @@
             $('ga-extra').textContent = `+ ${fmt(extra)}`;
             $('ga-total').textContent = fmt(total);
             $('ga-amounts').hidden = false;
-            $('f-amount-text').textContent = fmt(p.amount);
+            // Reads "...Gift Aid my donation of £20.00 today..."
+            $('f-amount-text').textContent = `my donation of ${fmt(p.amount)}`;
         } else {
+            // Opened without an amount (a plain Gift Aid link rather than a
+            // post-donation QR): take an enduring declaration with no figures.
+            $('ga-amounts').hidden = true;
             $('f-amount-text').textContent = 'my donation';
         }
     }

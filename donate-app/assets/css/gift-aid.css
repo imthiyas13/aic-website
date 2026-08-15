@@ -27,6 +27,14 @@
     box-sizing: border-box;
 }
 
+/* The hidden attribute has to beat the display rules further down. Without
+   this, .ga-amounts stays visible when the form is opened without an amount
+   (a plain Gift Aid link rather than a post-donation QR) and shows three
+   empty dashes to the donor. */
+[hidden] {
+    display: none !important;
+}
+
 html, body {
     width: 100%;
     min-height: 100%;

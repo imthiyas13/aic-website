@@ -1,5 +1,15 @@
 # AIC Donate — phone version
 
+> **Status: built and tested, but not currently in use.** It requires each
+> phone to carry a SumUp card reader. SumUp's deeplink cannot start a Tap to
+> Pay payment — that is only available through SumUp's native iOS/Android
+> Tap-to-Pay SDKs, not the URL scheme this page uses (see
+> [ios#19](https://github.com/sumup/sumup-ios-url-scheme/issues/19),
+> [android#38](https://github.com/sumup/sumup-android-url-scheme/issues/38)).
+> The team chose to take payments in the SumUp app with Tap to Pay instead,
+> and collect Gift Aid via the printed QR at `../giftaid-qr.html`. Keep this
+> folder for the wall tablet, or in case readers are adopted later.
+
 The donation screen from the masjid kiosk, running on the admin team's own
 phones so donations can be taken anywhere — at the door, at events, on
 collection rounds.
