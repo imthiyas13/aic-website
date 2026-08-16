@@ -12,6 +12,7 @@
         celebrationTimer: null,
         deeplinkFallbackTimer: null,
         mode: 'handheld',      // 'handheld' (admin phone) | 'kiosk' (wall tablet)
+        flow: 'giftaid',       // 'giftaid' (payment taken in the SumUp app) | 'sumup' (we hand off)
         platform: 'other',     // 'ios' | 'android' | 'other'
         collector: '',         // who is holding the phone, for reconciliation
         appSwitched: false,    // did the page go hidden after we fired the deeplink?
@@ -22,6 +23,7 @@
 
     /* ---------- Device / mode detection ---------- */
     const STORE_MODE = 'aic.donate.mode';
+    const STORE_FLOW = 'aic.donate.flow';
     const STORE_COLLECTOR = 'aic.donate.collector';
     const STORE_SETUP_DONE = 'aic.donate.setup';
     const STORE_PENDING = 'aic.donate.pending';
@@ -57,7 +59,23 @@
         return store.get(STORE_MODE) === 'kiosk' ? 'kiosk' : 'handheld';
     }
 
+    function detectFlow(mode) {
+        // ?flow=giftaid|sumup wins and sticks, same as mode.
+        const asked = new URL(window.location.href).searchParams.get('flow');
+        if (asked === 'giftaid' || asked === 'sumup') {
+            store.set(STORE_FLOW, asked);
+            return asked;
+        }
+        const stored = store.get(STORE_FLOW);
+        if (stored === 'giftaid' || stored === 'sumup') return stored;
+        // A phone has no card reader, so the volunteer takes the payment in the
+        // SumUp app and this page only issues the Gift Aid QR. The wall tablet
+        // has a reader, so it still hands off to SumUp itself.
+        return mode === 'kiosk' ? 'sumup' : 'giftaid';
+    }
+
     const isHandheld = () => state.mode === 'handheld';
+    const isGiftAidOnly = () => state.flow === 'giftaid';
 
     const fmt = (amount) => {
         const sym = state.config?.currencySymbol ?? '£';
@@ -131,11 +149,23 @@
     }
 
     function choose(amount) {
+        state.selectedAmount = amount;
+
+        // Gift-Aid-only flow: the volunteer has already taken the payment in
+        // the SumUp app, so there is nothing to hand off — go straight to the
+        // thank-you and the Gift Aid QR for this amount.
+        if (isGiftAidOnly()) {
+            state.customDigits = '';
+            renderCustom();
+            show('amounts');
+            showCelebration('success', null, { txCode: '', amount });
+            return;
+        }
+
         if (!state.affiliateKey) {
             showError('Payment not configured. Please contact a volunteer.');
             return;
         }
-        state.selectedAmount = amount;
         $('pay-amount').textContent = fmt(amount);
         show('pay');
         // Give the screen one frame to paint before navigating away.
@@ -371,10 +401,12 @@
 
         // Render Gift Aid QR on success if enabled and we have a tx code.
         const ga = state.config?.giftAid;
+        // In the Gift-Aid-only flow there is no SumUp transaction code to key
+        // off, so the amount alone is enough to warrant showing the QR.
         const showGiftAid = kind === 'success'
             && ga?.enabled
             && typeof qrcode !== 'undefined'
-            && ctx?.txCode;
+            && (ctx?.txCode || (isGiftAidOnly() && ctx?.amount > 0));
         if (showGiftAid) {
             renderGiftAidQr(ctx);
             el.dataset.giftaid = 'true';
@@ -405,7 +437,7 @@
             const ga = state.config.giftAid;
             const base = window.location.href.split('?')[0].split('#')[0].replace(/[^/]*$/, '');
             const formUrl = new URL(base + (ga.formPath || 'gift-aid.html'));
-            formUrl.searchParams.set('tx', ctx.txCode);
+            if (ctx.txCode) formUrl.searchParams.set('tx', ctx.txCode);
             formUrl.searchParams.set('amount', String(ctx.amount));
             formUrl.searchParams.set('t', String(Date.now()));
 
@@ -476,8 +508,10 @@
     function applyCollector() {
         const badge = $('collector-badge');
         if (!badge) return;
-        // Always shown on a phone — it doubles as the way back into setup.
-        badge.hidden = !isHandheld();
+        // Shown on a phone — it doubles as the way back into setup. Pointless
+        // in the Gift-Aid-only flow, where we never create the SumUp
+        // transaction: attribution comes from the volunteer's employee login.
+        badge.hidden = !isHandheld() || isGiftAidOnly();
         badge.classList.toggle('is-unset', !state.collector);
         $('collector-name').textContent = state.collector || 'Set name';
     }
@@ -563,6 +597,11 @@
         const c = state.config.campaign || {};
         if (c.title) $('campaign-title').textContent = c.title;
         if (c.subtitle) $('campaign-sub').textContent = c.subtitle;
+        // The amounts screen is read by the volunteer, not the donor, when the
+        // payment has already been taken in the SumUp app.
+        if (isGiftAidOnly()) {
+            $('amounts-prompt').textContent = 'How much was donated?';
+        }
         if (c.registrationNumber) {
             $('campaign-ref').textContent = `Registered Charity · ${c.registrationNumber}`;
         }
@@ -578,6 +617,7 @@
 
         state.platform = detectPlatform();
         state.mode = detectMode();
+        state.flow = detectFlow(state.mode);
         state.collector = store.get(STORE_COLLECTOR) || '';
 
         // ?collector=Name provisions a phone in one tap — send each volunteer
@@ -593,6 +633,7 @@
         }
 
         document.body.dataset.mode = state.mode;
+        document.body.dataset.flow = state.flow;
         document.body.dataset.platform = state.platform;
 
         state.config = await loadConfig();
@@ -677,7 +718,7 @@
         // If the page loaded with SumUp callback params, overlay the result on
         // amounts. Otherwise a phone with no collector name set goes to setup.
         show('amounts');
-        if (!handleReturn() && isHandheld() && !store.get(STORE_SETUP_DONE)) {
+        if (!handleReturn() && isHandheld() && !isGiftAidOnly() && !store.get(STORE_SETUP_DONE)) {
             show('setup');
         }
     }

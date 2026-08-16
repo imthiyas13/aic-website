@@ -1,144 +1,88 @@
 # AIC Donate — phone version
 
-> **Status: built and tested, but not currently in use.** It requires each
-> phone to carry a SumUp card reader. SumUp's deeplink cannot start a Tap to
-> Pay payment — that is only available through SumUp's native iOS/Android
-> Tap-to-Pay SDKs, not the URL scheme this page uses (see
-> [ios#19](https://github.com/sumup/sumup-ios-url-scheme/issues/19),
-> [android#38](https://github.com/sumup/sumup-android-url-scheme/issues/38)).
-> The team chose to take payments in the SumUp app with Tap to Pay instead,
-> and collect Gift Aid via the printed QR at `../giftaid-qr.html`. Keep this
-> folder for the wall tablet, or in case readers are adopted later.
-
-The donation screen from the masjid kiosk, running on the admin team's own
-phones so donations can be taken anywhere — at the door, at events, on
-collection rounds.
+Shows a donor their **Gift Aid QR code** after a volunteer has taken a card
+payment. Built for admin phones on collection rounds, at the door, or at events.
 
 **Live URL:** <https://aldershotislamiccentre.org.uk/donate-app/>
+
+## Why it works this way
+
+The volunteer takes the payment in the **SumUp app** using Tap to Pay, then
+taps the matching amount here to show the donor a Gift Aid QR for that exact
+figure.
+
+Two constraints forced this shape:
+
+1. **SumUp's deeplink cannot start a Tap to Pay payment.** Tap to Pay is only
+   available through SumUp's native iOS/Android SDKs, not the URL scheme a web
+   page can use (see
+   [ios#19](https://github.com/sumup/sumup-ios-url-scheme/issues/19),
+   [android#38](https://github.com/sumup/sumup-android-url-scheme/issues/38)).
+   Driving the payment from this page would mean carrying a card reader.
+2. **Volunteers must not have the main SumUp login.** The SumUp Business app
+   exposes the charity's balance, account and card details, and Send money.
+   Each volunteer gets a restricted **employee account** instead (free, up to
+   10, created at sumup.me → Employees): they can take payments and see their
+   own sales history, but cannot log into sumup.me, change account settings,
+   or view or move funds.
+
+Gift Aid is the one thing the SumUp app doesn't capture, and it is worth 25%
+on top — which is the entire reason this page exists.
 
 ## Deploying
 
 The site is **not** deployed from this repo automatically — the host is plain
-nginx and the files are uploaded by hand (FileZilla/FTP). Pushing to `main`
-changes nothing on the live site.
-
-To publish or update the phone app, upload to the web root, keeping the folder
-structure:
+nginx and files are uploaded by hand (FileZilla/FTP). Pushing to `main`
+publishes nothing.
 
 | Upload | To | Why |
 | --- | --- | --- |
-| `donate-app/` (whole folder) | web root, next to `index.html` | the app itself |
-| `service-worker.js` | web root | excludes `/donate-app/` from caching — without it, phones can run a stale copy |
-
-Volunteers' phones load the page fresh each time, so a re-upload reaches
-everyone without them doing anything.
-
----
-
-## How it works
-
-The page itself never touches card details. Tapping an amount hands off to the
-**SumUp app** via a deeplink, SumUp takes the payment, and then it sends the
-phone back here with the result. This page shows the thank-you message and the
-Gift Aid QR code.
-
-That means each phone needs the SumUp app installed and signed in — the web
-page on its own cannot take money.
-
----
+| `donate-app/` (whole folder) | web root, next to `index.html` | the app |
+| `service-worker.js` | web root | excludes `/donate-app/` from caching — without it phones can run a stale copy |
 
 ## Setting up a volunteer's phone
 
-1. **Install SumUp** from the App Store / Play Store and sign in to the AIC
-   merchant account.
-2. **Pair a card reader** (Air or Solo) over Bluetooth, or enable Tap to Pay if
-   that phone supports it. A reader can only be paired to one phone at a time,
-   so a phone and a reader travel together.
-3. **Open the donation page.** Send the volunteer their own link with their
-   name in it, which sets them up in one tap:
-
-   ```text
-   https://aldershotislamiccentre.org.uk/donate-app/?collector=Yusuf
-   ```
-
-   Without the `?collector=` part the page just asks for their name on first
-   run instead.
-4. **Add to Home Screen** so it's one tap to open:
-   - **Android (Chrome):** ⋮ menu → *Add to Home screen*
-   - **iPhone (Safari):** Share → *Add to Home Screen*
-
-### Why the name matters
-
-Whatever name is set gets attached to every SumUp transaction that phone takes
-(as the transaction title, e.g. `AIC Donation — Yusuf`, and on the internal
-reference). That's what lets the takings be reconciled per person afterwards in
-the SumUp dashboard. Tap the name badge in the top-right of the screen to
-change it.
-
----
+1. Create them a SumUp **employee account** at <https://me.sumup.com/> →
+   Employees → Add new employee.
+2. On their phone: install the **SumUp** app, sign in with *those* credentials
+   (never the main login), and enable Tap to Pay.
+3. Open <https://aldershotislamiccentre.org.uk/donate-app/> and Add to Home
+   Screen.
 
 ## Taking a donation
 
-1. Tap an amount, or *Other amount* for anything else.
-2. SumUp opens — take the payment as normal.
-3. The phone comes back here and shows *JazakAllah Khair* plus a **Gift Aid QR
-   code**. Hold the screen up for the donor to scan with their own phone; it
-   opens the Gift Aid form pre-filled with their donation amount.
-4. Tap the message to clear it and take the next donation.
+1. **SumUp app:** enter the amount, take the tap payment.
+2. **This app:** tap the matching amount (or *Other amount*).
+3. The Gift Aid QR appears — hold the screen up for the donor to scan. It opens
+   the form pre-filled with that amount.
+4. Tap the message to clear it, ready for the next donor.
 
-If the card is declined or the donor backs out, the screen says so and returns
-to the amounts — nothing else to do.
+This page has no way to confirm the payment actually succeeded — it shows
+whatever amount the volunteer taps. It is a Gift Aid prompt, not a receipt.
 
----
+## Modes
 
-## Kiosk mode
+Both stick per device once set, and both are set by URL:
 
-The same page can run the wall-mounted tablet. Open it once with:
+| URL | Effect |
+| --- | --- |
+| `?flow=giftaid` | no payment hand-off; tapping an amount shows the Gift Aid QR. **Default on phones.** |
+| `?flow=sumup` | hands off to the SumUp app to take the payment. Needs a paired card reader **and** `data/key.txt` restored (removed — see below). Default in kiosk mode. |
+| `?mode=kiosk` | large tablet layout, forced fullscreen, long-press/double-tap blocked |
+| `?mode=handheld` | phone layout. Default. |
+| `?collector=Name` | pre-sets the volunteer name (only used by `flow=sumup`) |
 
-```text
-https://aldershotislamiccentre.org.uk/donate-app/?mode=kiosk
-```
+## Notes
 
-The setting sticks on that device. Kiosk mode restores the large tablet
-layout, forces fullscreen, and blocks long-press and double-tap. `?mode=handheld`
-switches back.
-
-The wall tablet loads the older kiosk build, already hosted separately at
-**`/donate/`** on the same server. Its source is `../../DonationApp/`, which is
-not in any git repo — it is edited locally and uploaded to `/donate/` by FTP.
-
-So there are two folders on the server:
-
-| Path | Build | Used by |
-| --- | --- | --- |
-| `/donate/` | kiosk-only, from `DonationApp/` | wall tablet |
-| `/donate-app/` | this one, phone + kiosk | admin phones |
-
-`/donate-app/` can eventually replace `/donate/` and serve both. If you do
-that, **change the tablet's start URL to `/donate/?mode=kiosk` before
-uploading** — this build defaults to the handheld layout, so a tablet loading
-the plain URL would come up in phone mode until told otherwise. The setting
-sticks per device once applied.
-
----
-
-## Notes and things to watch
-
-- **iPhone needs a real-world test before the team relies on it.** SumUp's iOS
-  deeplink takes different parameters from Android (`amount` rather than
-  `total`, and separate success/failure return URLs). Both are implemented and
-  the return handling is tested, but the hand-off into the SumUp iOS app itself
-  could not be tested here. Do one £1 donation on an iPhone and refund it.
-- **iOS stays in Safari on purpose.** `apple-mobile-web-app-capable` is
-  deliberately not set: in standalone mode iOS returns the SumUp result into
-  Safari instead of the installed app, so the thank-you screen would appear
-  somewhere the volunteer isn't looking.
-- **The affiliate key in `data/key.txt` is public** — as it already was at
-  `/donate/data/key.txt`, so this is no change in exposure. It only identifies
-  the integration; money always goes to whichever SumUp account is signed in on
-  the device, so an outsider cannot use it to collect on our behalf. The page is
-  `noindex` and unlinked, but treat the URL as guessable.
-- **The site service worker deliberately skips `/donate-app/`** (see
-  `../service-worker.js`) so a volunteer's phone can never run a cached copy
-  with stale amounts or an old key.
-- **Amounts and copy** live in `data/config.json`, same as the kiosk.
+- **`data/key.txt` has been removed from this folder.** The SumUp affiliate key
+  is only needed by `flow=sumup`, which is not in use, so there is no reason to
+  publish it. Restore it from `../../DonationApp/data/key.txt` if you ever
+  switch this build back to taking payments itself.
+- **The wall tablet is separate.** It runs the older kiosk build at `/donate/`,
+  sourced from `../../DonationApp/` (not in any git repo, uploaded by FTP).
+  `/donate-app/?mode=kiosk` could replace it — but change the tablet's start URL
+  **before** uploading, or it will come up in phone mode.
+- **The iPhone hand-off for `flow=sumup` has never been tested live.** Both
+  platforms are implemented and the return handling is verified, but no one has
+  run a real payment from an iPhone. Irrelevant while `flow=giftaid` is in use.
+- **Amounts and copy** live in `data/config.json`.

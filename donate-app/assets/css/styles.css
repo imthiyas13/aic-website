@@ -722,6 +722,14 @@ button {
     .pay-amount { font-size: 72px; }
 }
 
+/* ===== Flow-specific footer copy =====
+   Only one of the two Gift Aid reminders is ever shown: the donor-facing one
+   when this page takes the payment, the volunteer-facing one when the payment
+   happens in the SumUp app and this page only issues the QR. */
+.ga-reminder-volunteer { display: none; }
+body[data-flow="giftaid"] .ga-reminder-donor { display: none; }
+body[data-flow="giftaid"] .ga-reminder-volunteer { display: flex; }
+
 /* ===== Setup screen (handheld first run) ===== */
 .setup-main {
     flex: 1;

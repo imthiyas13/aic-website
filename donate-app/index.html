@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css?v=13">
+    <link rel="stylesheet" href="assets/css/styles.css?v=14">
     <link rel="icon" href="assets/images/logo.png" type="image/png">
     <link rel="apple-touch-icon" href="assets/images/logo.png">
     <link rel="manifest" href="manifest.json">
@@ -52,7 +52,7 @@
     </header>
 
     <main class="amounts-main">
-        <p class="amounts-prompt">Choose an amount</p>
+        <p class="amounts-prompt" id="amounts-prompt">Choose an amount</p>
         <div class="amounts-grid" id="amounts-grid"></div>
         <button type="button" class="amount-tile amount-custom" id="btn-custom">
             <span class="tile-label">Other amount</span>
@@ -60,11 +60,20 @@
     </main>
 
     <footer class="kiosk-footer">
-        <div class="ga-reminder">
+        <!-- Donor-facing: shown when this page takes the payment itself. -->
+        <div class="ga-reminder ga-reminder-donor">
             <img src="assets/images/gift-aid-logo.svg" alt="Gift Aid" class="ga-reminder-logo">
             <div class="ga-reminder-text">
                 <strong>Don't leave before adding Gift Aid</strong>
                 <span>After paying, scan the QR with your phone to add 25% extra — at no cost to you, if you're a UK taxpayer.</span>
+            </div>
+        </div>
+        <!-- Volunteer-facing: shown when the payment is taken in the SumUp app. -->
+        <div class="ga-reminder ga-reminder-volunteer">
+            <img src="assets/images/gift-aid-logo.svg" alt="Gift Aid" class="ga-reminder-logo">
+            <div class="ga-reminder-text">
+                <strong>Take the payment in SumUp first</strong>
+                <span>Then tap the amount above and show this screen to the donor so they can scan the Gift Aid code.</span>
             </div>
         </div>
     </footer>
@@ -158,6 +167,6 @@
 </div>
 
 <script src="assets/js/qrcode.min.js"></script>
-<script src="assets/js/app.js?v=14"></script>
+<script src="assets/js/app.js?v=15"></script>
 </body>
 </html>
