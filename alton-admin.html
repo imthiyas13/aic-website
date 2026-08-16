@@ -97,10 +97,11 @@
     display: flex; align-items: center; gap: 0.7rem;
     flex-wrap: wrap;
   }
-  .info-banner .banner-text { flex: 1 1 200px; min-width: 0; }
   .info-banner .banner-actions {
     display: flex; gap: 0.4rem; flex-shrink: 0;
+    flex: 1;
   }
+  .info-banner .banner-actions button { flex: 1; }
   .info-banner .banner-actions button {
     padding: 0.4rem 0.75rem; min-height: 34px;
     font-size: 0.82rem; font-weight: 600;
@@ -299,6 +300,14 @@
   .filter-count {
     color: var(--muted); font-size: 0.8rem;
     margin-bottom: 0.5rem;
+  }
+  /* Type of the reminder being edited — shown, not chosen. */
+  form.editor .fixed-kind {
+    padding: 0.6rem 0.8rem; min-height: 44px;
+    display: flex; align-items: center;
+    border: 1px dashed var(--line); border-radius: 0.5rem;
+    background: #fff; color: var(--muted);
+    font-size: 0.95rem; font-weight: 600;
   }
 
   .auth-block {
@@ -606,6 +615,7 @@ function emptyContent() {
   return {
     show: { Ayah: true, Hadith: true, Wisdom: true },
     hidden: { Ayah: [], Hadith: [], Wisdom: [] },
+    edits: { Ayah: {}, Hadith: {}, Wisdom: {} },
     items: [],
   };
 }
@@ -625,6 +635,7 @@ async function loadContent() {
   state.content = {
     show: { ...base.show, ...(parsed.show || {}) },
     hidden: { ...base.hidden, ...(parsed.hidden || {}) },
+    edits: { ...base.edits, ...(parsed.edits || {}) },
     items: Array.isArray(parsed.items) ? parsed.items : [],
   };
 }
@@ -690,6 +701,7 @@ async function applyContentMutation(mutator) {
     await saveContent(next);
     toast('Saved to GitHub');
     state.adding = null;
+    state.editing = null;
     render();
   } catch (e) {
     if (e.status === 401 || e.status === 403) {
@@ -704,19 +716,29 @@ async function applyContentMutation(mutator) {
 
 // Every reminder the kiosk could show, shipped and added, tagged with whether
 // it is currently visible. Mirrors buildPool() in js/content.js.
+//
+// `ref` is the reference the item shipped with and is what every row button
+// addresses; `item` is what the kiosk actually shows, so an edited shipped item
+// carries the imam's wording (and his reference, if he changed that too).
 function allReminders() {
   const content = state.content || emptyContent();
   const builtins = state.builtins || { Ayah: [], Hadith: [], Wisdom: [] };
   const rows = [];
   for (const kind of REMINDER_KINDS) {
     const hidden = new Set(content.hidden?.[kind] || []);
+    const edits = content.edits?.[kind] || {};
     const own = (content.items || []).filter(i => i && i.kind === kind);
     for (const item of [...(builtins[kind] || []), ...own]) {
+      const ref = item.reference || '';
+      const custom = own.includes(item);
+      const edit = custom ? null : edits[ref];
       rows.push({
         kind,
-        item,
-        custom: own.includes(item),
-        hidden: hidden.has(item.reference),
+        ref,
+        item: edit ? { ...item, ...edit } : item,
+        custom,
+        edited: !!edit,
+        hidden: hidden.has(ref),
         categoryOff: content.show?.[kind] === false,
       });
     }
@@ -816,7 +838,9 @@ function ovdCardHtml(r, idx) {
       <div class="info">
         <div class="top">
           <span class="pill">${escapeHtml(prayerLabel(r.prayer))}</span>
+          ${r.khutbah ? `<span class="pill">Khutbah ${escapeHtml(r.khutbah)}</span>` : ''}
           <span class="time">${escapeHtml(r.iqamah)}</span>
+          ${r.khutbah ? '<span class="pill">Salah</span>' : ''}
         </div>
         <div class="when">${escapeHtml(fmtRange(r.from, r.to))}</div>
         ${r.note ? `<div class="note">${escapeHtml(r.note)}</div>` : ''}
@@ -863,6 +887,7 @@ function ovdFormHtml(initial, mode) {
   const to = (initial?.to && initial.to !== INDEF) ? initial.to : '';
   const prayer = initial?.prayer || 'fajr';
   const iqamah = initial?.iqamah || '';
+  const khutbah = initial?.khutbah || '';
   const title = mode === 'edit' ? 'Edit override' : 'New override';
   return `
     <form class="editor" data-form="ovd">
@@ -872,7 +897,10 @@ function ovdFormHtml(initial, mode) {
           ${PRAYERS_STD.map(p => `<option value="${p.key}"${p.key === prayer ? ' selected' : ''}>${p.label}</option>`).join('')}
         </select>
       </label>
-      <label><span class="lbl">Jama'ah time</span>
+      <label data-khutbah><span class="lbl">Khutbah time</span>
+        <input type="time" name="khutbah" value="${escapeHtml(khutbah)}">
+      </label>
+      <label><span class="lbl" data-timelbl>Jama'ah time</span>
         <input type="time" name="iqamah" value="${escapeHtml(iqamah)}" required>
       </label>
       <label><span class="lbl">From date</span>
@@ -981,7 +1009,6 @@ function render() {
     </header>
 
     <div class="info-banner">
-      <span class="banner-text">Saves commit to GitHub. Website rebuilds in ~30s; the kiosk syncs within ~60s — or refresh it now.</span>
       <span class="banner-actions">
         <button class="primary" data-act="refresh-kiosk">Refresh kiosk</button>
         <button class="primary" data-act="pull-kiosk" title="Pull latest code from GitHub on the Pi">Pull latest</button>
@@ -1045,15 +1072,18 @@ function reminderListHtml() {
   const count = `<div class="filter-count">Showing ${rows.length} of ${total}</div>`;
 
   return count + rows.map(r => {
+    if (isEditingItem(r)) return itemFormHtml(r);
     const en = r.item.translations?.en || '';
     const arabic = r.item.arabic || '';
     const off = r.hidden || r.categoryOff;
+    const addr = `data-kind="${escapeHtml(r.kind)}" data-ref="${escapeHtml(r.ref)}"`;
     return `
       <div class="item${off ? ' dimmed' : ''}">
         <div class="info">
           <div class="top">
             <span class="pill">${escapeHtml(r.kind)}</span>
             ${r.custom ? '<span class="pill">added</span>' : ''}
+            ${r.edited ? '<span class="pill">edited</span>' : ''}
             ${r.categoryOff ? '<span class="pill">category off</span>' : ''}
             ${r.hidden ? '<span class="pill">hidden</span>' : ''}
           </div>
@@ -1062,12 +1092,13 @@ function reminderListHtml() {
           <div class="note">${escapeHtml(r.item.reference || '')}</div>
         </div>
         <div class="actions">
-          <button class="ghost" data-act="toggle-item"
-            data-kind="${escapeHtml(r.kind)}" data-ref="${escapeHtml(r.item.reference || '')}">
-            ${r.hidden ? 'Show' : 'Hide'}</button>
-          ${r.custom ? `<button class="danger" data-act="del-item"
-            data-kind="${escapeHtml(r.kind)}" data-ref="${escapeHtml(r.item.reference || '')}">
-            Delete</button>` : ''}
+          <button class="ghost" data-act="edit-item" ${addr}>Edit</button>
+          <button class="ghost" data-act="toggle-item" ${addr}>${r.hidden ? 'Show' : 'Hide'}</button>
+          ${r.custom
+            ? `<button class="danger" data-act="del-item" ${addr}>Delete</button>`
+            : r.edited
+              ? `<button class="danger" data-act="revert-item" ${addr}>Undo edit</button>`
+              : ''}
         </div>
       </div>`;
   }).join('');
@@ -1121,37 +1152,76 @@ function refreshReminderList() {
   wireReminderRows(el);
 }
 
+// The filter re-renders only the list, so its rows and any open editor have to
+// be re-wired here rather than by wireUp().
 function wireReminderRows(scope) {
   scope.querySelectorAll('[data-act]').forEach(el => {
     el.addEventListener('click', () => {
       const act = el.dataset.act;
       if (act === 'toggle-item') onToggleItem(el.dataset.kind, el.dataset.ref);
       else if (act === 'del-item') onDeleteItem(el.dataset.kind, el.dataset.ref);
+      else if (act === 'revert-item') onRevertItem(el.dataset.kind, el.dataset.ref);
+      else if (act === 'edit-item') onEditItem(el.dataset.kind, el.dataset.ref);
+      else if (act === 'cancel') { state.adding = null; state.editing = null; render(); }
     });
+  });
+  scope.querySelectorAll('form[data-form="item"]').forEach(f => {
+    f.addEventListener('submit', onSubmitItem);
   });
 }
 
-function itemFormHtml() {
+function onEditItem(kind, ref) {
+  const row = findReminder(kind, ref);
+  if (!row) return;
+  state.editing = { kind: 'item', itemKind: row.kind, ref: row.ref };
+  state.adding = null;
+  render();
+}
+
+function isEditingItem(row) {
+  const e = state.editing;
+  return !!e && e.kind === 'item' && e.itemKind === row.kind && e.ref === row.ref;
+}
+
+// One form for both jobs. A shipped reminder cannot be moved to another type —
+// the edit is an overlay on the item where it sits in its own source file — so
+// the type is fixed there and only the wording is open. His own additions can
+// still be retyped.
+function itemFormHtml(row) {
+  const editing = !!row;
+  const item = row ? row.item : null;
+  const en = item?.translations?.en || '';
+  const arabic = item?.arabic || '';
+  const reference = item?.reference || '';
+  const sel = row && row.custom ? row.kind : '';
+  const kindField = editing && !row.custom
+    ? `<input type="hidden" name="kind" value="${escapeHtml(row.kind)}">
+       <div class="fixed-kind">${escapeHtml(row.kind)} &middot; came with the display</div>`
+    : `<select name="kind" required>
+         ${REMINDER_KINDS.map(k =>
+           `<option value="${k}"${k === sel ? ' selected' : ''}>${k}</option>`).join('')}
+       </select>`;
+  const addr = editing
+    ? ` data-kind="${escapeHtml(row.kind)}" data-ref="${escapeHtml(row.ref)}"`
+    : '';
   return `
-    <form class="editor" data-form="item">
-      <h3>New reminder</h3>
+    <form class="editor" data-form="item"${addr}>
+      <h3>${editing ? 'Edit reminder' : 'New reminder'}</h3>
       <label><span class="lbl">Type</span>
-        <select name="kind" required>
-          ${REMINDER_KINDS.map(k => `<option value="${k}">${k}</option>`).join('')}
-        </select>
+        ${kindField}
       </label>
       <label><span class="lbl">English text</span>
-        <textarea name="en" rows="3" required placeholder="Shown on screen below the Arabic"></textarea>
+        <textarea name="en" rows="3" required placeholder="Shown on screen below the Arabic">${escapeHtml(en)}</textarea>
       </label>
       <label><span class="lbl">Arabic (optional)</span>
-        <textarea name="arabic" rows="2" dir="rtl" placeholder="Leave blank for English only"></textarea>
+        <textarea name="arabic" rows="2" dir="rtl" placeholder="Leave blank for English only">${escapeHtml(arabic)}</textarea>
       </label>
       <label><span class="lbl">Reference</span>
-        <input name="reference" required placeholder="e.g. Surah Al-Baqarah 2:255">
+        <input name="reference" required placeholder="e.g. Surah Al-Baqarah 2:255" value="${escapeHtml(reference)}">
       </label>
       <div class="form-actions">
         <button type="button" class="ghost" data-act="cancel">Cancel</button>
-        <button type="submit" class="primary">Add reminder</button>
+        <button type="submit" class="primary">${editing ? 'Save' : 'Add reminder'}</button>
       </div>
     </form>`;
 }
@@ -1170,7 +1240,9 @@ function wireUp() {
       else if (act === 'add-item') { state.adding = 'item'; state.editing = null; render(); }
       else if (act === 'toggle-kind') { onToggleKind(el.dataset.kind); }
       else if (act === 'toggle-item') { onToggleItem(el.dataset.kind, el.dataset.ref); }
+      else if (act === 'edit-item') { onEditItem(el.dataset.kind, el.dataset.ref); }
       else if (act === 'del-item') { onDeleteItem(el.dataset.kind, el.dataset.ref); }
+      else if (act === 'revert-item') { onRevertItem(el.dataset.kind, el.dataset.ref); }
       else if (act === 'signout') { signOut(); }
       else if (act === 'refresh-kiosk') { onRefreshKiosk(); }
       else if (act === 'pull-kiosk') { onPullKiosk(); }
@@ -1185,6 +1257,19 @@ function wireUp() {
       const sync = () => { toBlock.style.display = indefEl.checked ? 'none' : ''; };
       indefEl.addEventListener('change', sync);
       sync();
+
+      // Khutbah is a Jumu'ah-only concept, so the field only appears for one —
+      // and the time below it is the salah, not a jama'ah, when it does.
+      const prayerEl = f.querySelector('select[name="prayer"]');
+      const khutbahBlock = f.querySelector('[data-khutbah]');
+      const timeLbl = f.querySelector('[data-timelbl]');
+      const syncJumma = () => {
+        const jumma = isJumma(prayerEl.value);
+        khutbahBlock.style.display = jumma ? '' : 'none';
+        timeLbl.textContent = jumma ? 'Salah time' : "Jama'ah time";
+      };
+      prayerEl.addEventListener('change', syncJumma);
+      syncJumma();
     } else if (f.dataset.form === 'eid') {
       f.addEventListener('submit', onSubmitEid);
     } else if (f.dataset.form === 'item') {
@@ -1282,14 +1367,26 @@ async function applyMutation(mutator) {
   }
 }
 
+function isJumma(prayer) {
+  return String(prayer || '').startsWith('jumma');
+}
+
 function readOvdForm(f) {
   const prayer = f.prayer.value;
   const iqamah = f.iqamah.value;
+  const khutbah = (f.khutbah?.value || '').trim();
   const from = f.from.value;
   const to = f.indef.checked ? INDEF : (f.to.value || INDEF);
   if (!prayer || !iqamah || !from) return { error: 'Fill all required fields' };
   if (to !== INDEF && to < from) return { error: '"To" date is before "From" date' };
-  return { rule: { from, to, prayer, iqamah } };
+  const rule = { from, to, prayer, iqamah };
+  // Khutbah only applies to Jumu'ah; carrying it on a Fajr rule would be noise
+  // the kiosk never reads. Times are HH:MM so they compare as strings.
+  if (isJumma(prayer) && khutbah) {
+    if (khutbah >= iqamah) return { error: 'Khutbah must be before the Salah time' };
+    rule.khutbah = khutbah;
+  }
+  return { rule };
 }
 
 function onSubmitOvd(ev) {
@@ -1364,7 +1461,7 @@ function onToggleKind(kind) {
 // Rows are addressed by kind + reference rather than list position, so the
 // filter can reorder or hide rows without the buttons acting on the wrong one.
 function findReminder(kind, ref) {
-  return allReminders().find(r => r.kind === kind && (r.item.reference || '') === ref);
+  return allReminders().find(r => r.kind === kind && r.ref === ref);
 }
 
 function onToggleItem(kind, ref) {
@@ -1372,8 +1469,8 @@ function onToggleItem(kind, ref) {
   if (!row) return;
   applyContentMutation(next => {
     const list = next.hidden[row.kind] || (next.hidden[row.kind] = []);
-    const at = list.indexOf(row.item.reference);
-    if (at === -1) list.push(row.item.reference);
+    const at = list.indexOf(row.ref);
+    if (at === -1) list.push(row.ref);
     else list.splice(at, 1);
     return next;
   });
@@ -1385,10 +1482,21 @@ function onDeleteItem(kind, ref) {
   if (!confirm('Delete this reminder? Ones that came with the display can be hidden instead.')) return;
   applyContentMutation(next => {
     next.items = (next.items || []).filter(
-      it => !(it.kind === row.kind && it.reference === row.item.reference));
+      it => !(it.kind === row.kind && (it.reference || '') === row.ref));
     // Drop any stale hide entry so re-adding the same reference shows up again.
-    next.hidden[row.kind] = (next.hidden[row.kind] || [])
-      .filter(ref => ref !== row.item.reference);
+    next.hidden[row.kind] = (next.hidden[row.kind] || []).filter(r => r !== row.ref);
+    return next;
+  });
+}
+
+// Throws away the imam's wording for a shipped reminder; the original text in
+// the display's own data files comes back.
+function onRevertItem(kind, ref) {
+  const row = findReminder(kind, ref);
+  if (!row || !row.edited) return;
+  if (!confirm('Put this reminder back to the wording it came with?')) return;
+  applyContentMutation(next => {
+    if (next.edits?.[row.kind]) delete next.edits[row.kind][row.ref];
     return next;
   });
 }
@@ -1400,19 +1508,65 @@ function onSubmitItem(e) {
   const en = f.en.value.trim();
   const arabic = f.arabic.value.trim();
   const reference = f.reference.value.trim();
+  // Present only while editing; identifies the row being saved.
+  const editRef = f.dataset.ref;
+  const row = editRef === undefined ? null : findReminder(f.dataset.kind, editRef);
+  if (editRef !== undefined && !row) {
+    toast('That reminder is no longer there', true);
+    state.editing = null;
+    render();
+    return;
+  }
   if (!REMINDER_KINDS.includes(kind) || !en || !reference) {
     toast('Type, English text and reference are all required', true);
     return;
   }
-  // References identify an item for hiding, so a duplicate would make the two
-  // impossible to tell apart in the hide list.
-  const clash = allReminders().some(r => r.kind === kind && r.item.reference === reference);
+  // References identify an item for hiding and for editing, so a duplicate
+  // would make the two impossible to tell apart in either list. The row being
+  // edited is matched by kind + shipped reference, not by identity — the list
+  // below is rebuilt, so its objects are never the same ones as `row`.
+  const isSelf = r => !!row && r.kind === row.kind && r.ref === row.ref;
+  const clash = allReminders().some(r =>
+    !isSelf(r) && r.kind === kind && (r.item.reference || '') === reference);
   if (clash) {
     toast('A reminder with that reference already exists', true);
     return;
   }
+
+  if (!row) {
+    applyContentMutation(next => {
+      next.items = [...(next.items || []), { kind, arabic, reference, translations: { en } }];
+      return next;
+    });
+    return;
+  }
+
+  if (row.custom) {
+    // His own item is rewritten in place. The hide list is keyed by kind and
+    // reference, so a change to either has to be carried over to it.
+    applyContentMutation(next => {
+      next.items = (next.items || []).map(it =>
+        (it.kind === row.kind && (it.reference || '') === row.ref)
+          ? { kind, arabic, reference, translations: { en } }
+          : it);
+      if (kind !== row.kind || reference !== row.ref) {
+        next.hidden[row.kind] = (next.hidden[row.kind] || []).filter(r => r !== row.ref);
+        if (row.hidden) {
+          next.hidden[kind] = next.hidden[kind] || [];
+          if (!next.hidden[kind].includes(reference)) next.hidden[kind].push(reference);
+        }
+      }
+      return next;
+    });
+    return;
+  }
+
+  // A shipped item is left alone and overlaid instead, keyed by the reference
+  // it shipped with, so the change survives an update to the display's data.
   applyContentMutation(next => {
-    next.items = [...(next.items || []), { kind, arabic, reference, translations: { en } }];
+    next.edits = next.edits || {};
+    next.edits[row.kind] = next.edits[row.kind] || {};
+    next.edits[row.kind][row.ref] = { arabic, reference, translations: { en } };
     return next;
   });
 }
