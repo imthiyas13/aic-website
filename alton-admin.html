@@ -310,6 +310,62 @@
     font-size: 0.95rem; font-weight: 600;
   }
 
+  /* Salah times viewer */
+  .day-nav {
+    display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center;
+    margin-bottom: 0.8rem;
+  }
+  .day-nav button {
+    padding: 0.5rem 0.8rem; min-height: 42px; font-size: 0.9rem;
+  }
+  .day-nav button.arrow { padding: 0.5rem 0.9rem; font-size: 1.2rem; line-height: 1; }
+  .day-nav button.on {
+    background: var(--accent-soft); border-color: var(--accent); color: var(--accent-dark);
+  }
+  .day-nav input[type="date"] {
+    flex: 1 1 150px; min-width: 0;
+    padding: 0.5rem 0.7rem; font-size: 16px;
+    border: 1px solid var(--line); border-radius: 0.5rem;
+    background: #fff; color: var(--text);
+    font-family: inherit; min-height: 42px;
+  }
+  .day-nav input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .day-title {
+    display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+  .day-title .date { font-weight: 700; color: var(--accent-dark); font-size: 1.05rem; }
+  table.times {
+    width: 100%; border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+  table.times th, table.times td {
+    padding: 0.55rem 0.4rem; text-align: right;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  table.times th {
+    font-size: 0.7rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+  }
+  table.times th:first-child, table.times td:first-child { text-align: left; }
+  table.times td.jamaah { font-weight: 700; font-size: 1.1rem; }
+  table.times td.nextday { color: var(--muted); }
+  table.times tr.dim td { color: var(--muted); }
+  table.times tr.jumma td:first-child { font-weight: 600; }
+  table.times td small { display: block; font-size: 0.65rem; color: var(--muted); font-weight: 500; }
+  table.times .pill {
+    margin-left: 0.35rem; font-size: 0.62rem; padding: 0.12rem 0.45rem;
+    vertical-align: middle; white-space: nowrap;
+  }
+  .eid-line {
+    background: #fef3c7; color: #92400e;
+    border-radius: 0.5rem; padding: 0.55rem 0.8rem;
+    font-size: 0.92rem; margin-bottom: 0.6rem;
+    display: flex; gap: 0.4rem 1rem; flex-wrap: wrap; align-items: baseline;
+  }
+  .eid-line b { font-variant-numeric: tabular-nums; }
+  .times-note { color: var(--muted); font-size: 0.8rem; margin: 0.6rem 0 0; }
+
   .auth-block {
     text-align: center; padding: 2rem 1rem;
     max-width: 420px; margin: 0 auto;
@@ -360,8 +416,6 @@
    The refresh key is NOT stored here — see getRefreshKey() below. */
 const REPO_OWNER = 'imthiyas13';
 const REPO_NAME = 'alton-website';
-// Read-only source of the shipped ayahs/hadiths/sayings.
-const DISPLAY_REPO = 'alton-masjid-display';
 const FILE_PATH = 'data/overrides.json';
 // Carousel curation. Same repo as the overrides; the Pi syncs both.
 const CONTENT_PATH = 'data/content.json';
@@ -441,6 +495,10 @@ let state = {
   builtins: null,      // { Ayah: [], Hadith: [], Wisdom: [] } read off the Pi
   builtinsErr: null,   // set when the Pi could not be reached
   filter: { q: '', kind: 'all', status: 'all' },  // browsing only, never saved
+  salah: null,         // the annual timetable, data/salah-times.json
+  salahErr: null,      // set when it could not be read
+  config: null,        // data/config.json (Jumu'ah base times); Pi-served only
+  viewDate: todayStr(),  // the day shown in the Salah times card
 };
 
 /* ---------- Helpers ---------- */
@@ -502,6 +560,14 @@ function todayStr() {
   return `${d.getFullYear()}-${m}-${day}`;
 }
 
+function addDays(yyyy_mm_dd, n) {
+  const [y, m, d] = yyyy_mm_dd.split('-').map(Number);
+  const dt = new Date(y, m - 1, d + n);
+  const mm = String(dt.getMonth() + 1).padStart(2, '0');
+  const dd = String(dt.getDate()).padStart(2, '0');
+  return `${dt.getFullYear()}-${mm}-${dd}`;
+}
+
 function nowIsoUtc() {
   return new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
 }
@@ -526,8 +592,6 @@ function base64ToUtf8(b64) {
 /* ---------- GitHub API ---------- */
 
 const GH_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents`;
-// Read-only: where the shipped reminders live, for the hide list.
-const DISPLAY_BASE = `https://api.github.com/repos/${REPO_OWNER}/${DISPLAY_REPO}/contents`;
 
 async function ghGet(path, base = GH_BASE) {
   const url = `${base}/${path}?ref=${encodeURIComponent(BRANCH)}&t=${Date.now()}`;
@@ -640,39 +704,62 @@ async function loadContent() {
   };
 }
 
-// The shipped ayahs/hadiths/sayings live in the display repo, not the website
-// repo this page writes to. Two ways in, depending on how this page was opened:
-//   - Pi-served (plain http): read them straight off the kiosk, same origin,
-//     which is also the copy actually on screen.
-//   - Hosted over https: browsers block a plain-http fetch to the Pi as mixed
-//     content, so go through the GitHub API instead. Needs the token to have
-//     Contents: Read on alton-masjid-display.
-// Either way this only powers the per-item hide list — the category toggles and
-// adding your own reminders work regardless.
+// The shipped ayahs/hadiths/sayings, which the hide and edit lists need.
+//   - Pi-served (plain http): read them off the kiosk, same origin, which is
+//     also the copy actually on screen.
+//   - Anywhere else: read them from the website repo over raw.githubusercontent.
+//     That repo is public, so this needs no token at all — which is the point.
+//     They used to be read from the private display repo through the GitHub
+//     API, and a token scoped to alton-website alone got "Not Found"; granting
+//     it access there would also have granted write to the repo that deploys
+//     code to the Pi, since fine-grained tokens apply one permission set to
+//     every repo they select.
+const BUILTIN_RAW_BASE =
+  `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/data`;
+
 async function loadBuiltins() {
   const files = { Ayah: 'ayahs.json', Hadith: 'hadiths.json', Wisdom: 'sayings.json' };
   const out = { Ayah: [], Hadith: [], Wisdom: [] };
   const fromPi = location.protocol === 'http:';
+  const base = fromPi ? `${PI_URL.replace(/\/+$/, '')}/data` : BUILTIN_RAW_BASE;
   try {
     await Promise.all(Object.entries(files).map(async ([kind, file]) => {
-      if (fromPi) {
-        const res = await fetch(`${PI_URL.replace(/\/+$/, '')}/data/${file}`, { cache: 'no-store' });
-        if (res.ok) out[kind] = await res.json();
-      } else {
-        const data = await ghGet(`data/${file}`, DISPLAY_BASE);
-        out[kind] = JSON.parse(base64ToUtf8(data.content));
-      }
+      const res = await fetch(`${base}/${file}`, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`${file}: HTTP ${res.status}`);
+      out[kind] = await res.json();
     }));
     state.builtinsErr = null;
   } catch (e) {
-    state.builtinsErr = fromPi
-      ? 'Kiosk unreachable — connect to the mosque network or Tailscale to hide '
-        + 'individual reminders. Categories and your own additions still work.'
-      : 'Could not read the shipped reminders from GitHub '
-        + `(${e.message || 'unknown error'}). The token needs Contents: Read on `
-        + 'alton-masjid-display. Categories and your own additions still work.';
+    state.builtinsErr = `Could not load the shipped reminders (${e.message || 'unknown error'}). `
+      + 'Categories and your own additions still work.';
   }
   state.builtins = out;
+}
+
+// The annual timetable, read the same way as the shipped reminders: off the
+// kiosk when it serves this page, otherwise from the public website repo.
+// Read-only here; the Pi syncs the same file, so this is what the screen uses.
+async function loadSalah() {
+  const fromPi = location.protocol === 'http:';
+  const base = fromPi ? `${PI_URL.replace(/\/+$/, '')}/data` : BUILTIN_RAW_BASE;
+  state.salah = null;
+  state.salahErr = null;
+  state.config = null;
+  try {
+    const res = await fetch(`${base}/salah-times.json`, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    state.salah = await res.json();
+  } catch (e) {
+    state.salahErr = `Could not load the timetable (${e.message || 'unknown error'}).`;
+  }
+  // config.json carries the Jumu'ah times and lives in the private display
+  // repo, so it is only readable when the Pi serves this page. Elsewhere the
+  // Jumu'ah row can only show what the overrides say.
+  if (!fromPi) return;
+  try {
+    const res = await fetch(`${base}/config.json`, { cache: 'no-store' });
+    if (res.ok) state.config = await res.json();
+  } catch { /* optional */ }
 }
 
 async function saveContent(next) {
@@ -729,7 +816,10 @@ function allReminders() {
     const edits = content.edits?.[kind] || {};
     const own = (content.items || []).filter(i => i && i.kind === kind);
     for (const item of [...(builtins[kind] || []), ...own]) {
-      const ref = item.reference || '';
+      // Shipped reminders carry a stable id; the imam's own have none and are
+      // keyed by reference. Two shipped sayings share an attribution, so
+      // keying everything by reference hid and edited them in pairs.
+      const ref = item.id || item.reference || '';
       const custom = own.includes(item);
       const edit = custom ? null : edits[ref];
       rows.push({
@@ -804,6 +894,7 @@ function renderAuth(message = '') {
       await loadRules();
       await loadContent();
       await loadBuiltins();
+      await loadSalah();
       localStorage.setItem(AUTH_KEY, v);
       render();
     } catch (e) {
@@ -826,7 +917,8 @@ function signOut() {
   pat = '';
   state = { rules: [], updatedAt: null, fileSha: null, adding: null, editing: null,
             kioskStatus: null, content: null, contentSha: null, builtins: null, builtinsErr: null,
-            filter: { q: '', kind: 'all', status: 'all' } };
+            filter: { q: '', kind: 'all', status: 'all' },
+            salah: null, salahErr: null, config: null, viewDate: todayStr() };
   renderAuth();
 }
 
@@ -957,6 +1049,187 @@ function eidFormHtml(initial, mode) {
     </form>`;
 }
 
+/* ---------- Salah times viewer ---------- */
+
+// Mirrors pickLatestRule() / applyOverrides() in js/app.js, so the card shows
+// the same Jama'ah times the kiosk resolves — including which came from an
+// override — rather than the raw timetable.
+function pickLatestRule(dateKey, prayerKey) {
+  let chosen = null;
+  for (const r of state.rules) {
+    if (r.prayer !== prayerKey) continue;
+    if (dateKey < r.from || dateKey > r.to) continue;
+    if (!chosen || r.from > chosen.from) chosen = r;
+  }
+  return chosen;
+}
+
+const VIEW_PRAYERS = PRAYERS_STD.filter(p => !isJumma(p.key));
+
+function effectiveDay(key) {
+  const raw = state.salah?.[key];
+  if (!raw) return null;
+  const out = { shuruq: raw.shuruq };
+  for (const p of VIEW_PRAYERS) {
+    const base = raw[p.key] || {};
+    const r = pickLatestRule(key, p.key);
+    out[p.key] = { azan: base.azan, iqamah: r ? r.iqamah : base.iqamah, overridden: !!r };
+  }
+  return out;
+}
+
+function weekdayOf(key) {
+  const [y, m, d] = key.split('-').map(Number);
+  return new Date(y, m - 1, d).getDay();
+}
+
+// Same test as isBST() in js/salah.js, for the chosen day rather than now:
+// Europe/London prints "GMT" in winter and "GMT+1" in summer.
+function isBSTOn(key) {
+  const [y, m, d] = key.split('-').map(Number);
+  const tz = state.config?.location?.timezone || 'Europe/London';
+  const fmt = new Intl.DateTimeFormat('en-GB', {
+    timeZone: tz, timeZoneName: 'shortOffset',
+    year: 'numeric', month: '2-digit', day: '2-digit',
+  });
+  const name = fmt.formatToParts(new Date(Date.UTC(y, m - 1, d, 12)))
+    .find(p => p.type === 'timeZoneName')?.value || 'GMT';
+  return name !== 'GMT';
+}
+
+// Jumu'ah rows for a Friday. Mirrors applyJummaOverrides() in js/app.js.
+// Without config.json only overridden slots can be shown.
+function jummaFor(key) {
+  if (weekdayOf(key) !== 5) return [];
+  const cfg = state.config?.jumma;
+  const base = cfg ? (isBSTOn(key) ? cfg.bst : cfg.gmt) || [] : [];
+  const rows = [];
+  for (let i = 1; i <= 2; i++) {
+    const b = base[i - 1];
+    const r = pickLatestRule(key, `jumma${i}`);
+    if (!b && !r) continue;
+    rows.push({
+      label: b?.label || prayerLabel(`jumma${i}`),
+      khutbah: r?.khutbah || b?.khutbah || '',
+      jamaat: r ? r.iqamah : b.jamaat,
+      overridden: !!r,
+    });
+  }
+  return rows;
+}
+
+function longDate(key) {
+  const [y, m, d] = key.split('-').map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString('en-GB', {
+    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+  });
+}
+
+function salahCardHtml() {
+  const key = state.viewDate;
+  const today = todayStr();
+  const tomorrow = addDays(today, 1);
+  return `
+    <div class="day-nav">
+      <button class="ghost arrow" data-act="day-prev" title="Previous day" aria-label="Previous day">&lsaquo;</button>
+      <button class="ghost${key === today ? ' on' : ''}" data-act="day-today">Today</button>
+      <button class="ghost${key === tomorrow ? ' on' : ''}" data-act="day-tomorrow">Tomorrow</button>
+      <button class="ghost arrow" data-act="day-next" title="Next day" aria-label="Next day">&rsaquo;</button>
+      <input type="date" id="day-pick" value="${escapeHtml(key)}" aria-label="Choose a day">
+    </div>
+    ${salahViewHtml()}`;
+}
+
+function salahViewHtml() {
+  const key = state.viewDate;
+  const rel = fmtDate(key);
+  const title = `
+    <div class="day-title">
+      <span class="date">${escapeHtml(longDate(key))}</span>
+      ${rel === 'Today' || rel === 'Tomorrow' ? `<span class="pill">${rel}</span>` : ''}
+    </div>`;
+
+  if (state.salahErr) return title + `<p class="empty">${escapeHtml(state.salahErr)}</p>`;
+  const day = effectiveDay(key);
+  if (!day) return title + `<p class="empty">No timetable for ${escapeHtml(key)}.</p>`;
+  const next = effectiveDay(addDays(key, 1));
+
+  const ovd = '<span class="pill" title="From a prayer override">override</span>';
+  const cell = (v) => escapeHtml(v || '—');
+  let rows = VIEW_PRAYERS.map(p => {
+    const e = day[p.key];
+    const t = next?.[p.key];
+    return `
+      <tr>
+        <td>${p.label}</td>
+        <td>${cell(e.azan)}</td>
+        <td class="jamaah">${cell(e.iqamah)}${e.overridden ? ovd : ''}</td>
+        <td class="nextday">${cell(t?.iqamah)}${t?.overridden ? ovd : ''}</td>
+      </tr>`;
+  }).join('');
+  rows += `
+      <tr class="dim">
+        <td>Sunrise</td>
+        <td>${cell(day.shuruq)}</td>
+        <td class="jamaah">—</td>
+        <td class="nextday">${cell(next?.shuruq)}</td>
+      </tr>`;
+  rows += jummaFor(key).map(j => `
+      <tr class="jumma">
+        <td>${escapeHtml(j.label)}</td>
+        <td>${j.khutbah ? `${escapeHtml(j.khutbah)}<small>Khutbah</small>` : '—'}</td>
+        <td class="jamaah">${escapeHtml(j.jamaat)}${j.overridden ? ovd : ''}</td>
+        <td class="nextday">—</td>
+      </tr>`).join('');
+
+  const eid = groupEid(state.rules).eidEvents.find(e => e.date === key);
+  const eidLine = eid ? `
+    <div class="eid-line">
+      <span>${escapeHtml(eid.note || 'Eid Salah')}</span>
+      ${EID_KEYS.map((k, i) => eid.prayers[k]
+        ? `<span>${EID_LABELS[i]} <b>${escapeHtml(eid.prayers[k])}</b></span>` : '').join('')}
+    </div>` : '';
+
+  const jummaNote = weekdayOf(key) === 5 && !state.config
+    ? `<p class="times-note">Jumu'ah base times are only readable from the kiosk on mosque WiFi; only overrides are shown here.</p>`
+    : '';
+
+  return title + eidLine + `
+    <table class="times">
+      <thead><tr><th>Prayer</th><th>Begins</th><th>Jama'ah</th><th>Next day</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>${jummaNote}`;
+}
+
+function setViewDate(key) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) return;
+  state.viewDate = key;
+  refreshSalahCard();
+}
+
+// Only the card body is re-rendered, so paging through days does not tear
+// down an open editor further down the page.
+function refreshSalahCard() {
+  const el = document.getElementById('salah-card');
+  if (!el) return;
+  el.innerHTML = salahCardHtml();
+  wireSalahCard(el);
+}
+
+function wireSalahCard(scope) {
+  scope.querySelectorAll('[data-act]').forEach(el => {
+    el.addEventListener('click', () => {
+      const act = el.dataset.act;
+      if (act === 'day-prev') setViewDate(addDays(state.viewDate, -1));
+      else if (act === 'day-next') setViewDate(addDays(state.viewDate, 1));
+      else if (act === 'day-today') setViewDate(todayStr());
+      else if (act === 'day-tomorrow') setViewDate(addDays(todayStr(), 1));
+    });
+  });
+  const pick = scope.querySelector('#day-pick');
+  if (pick) pick.addEventListener('change', () => setViewDate(pick.value));
+}
+
 /* ---------- Main render ---------- */
 
 function render() {
@@ -1015,6 +1288,11 @@ function render() {
       </span>
     </div>
     <div class="kiosk-status${state.kioskStatus ? ' ' + state.kioskStatus.kind : ''}" id="kiosk-status">${state.kioskStatus ? `<span>${escapeHtml(state.kioskStatus.text)}</span><span class="ts">${escapeHtml(state.kioskStatus.ts)}</span>` : ''}</div>
+
+    <section class="card">
+      <h2>Salah times <span class="count">as shown on the kiosk</span></h2>
+      <div id="salah-card">${salahCardHtml()}</div>
+    </section>
 
     <section class="card">
       <h2>Prayer overrides <span class="count">${others.length} active</span></h2>
@@ -1248,6 +1526,9 @@ function wireUp() {
       else if (act === 'pull-kiosk') { onPullKiosk(); }
     });
   });
+
+  const salahCard = document.getElementById('salah-card');
+  if (salahCard) wireSalahCard(salahCard);
 
   root.querySelectorAll('form[data-form]').forEach(f => {
     if (f.dataset.form === 'ovd') {
@@ -1521,15 +1802,17 @@ function onSubmitItem(e) {
     toast('Type, English text and reference are all required', true);
     return;
   }
-  // References identify an item for hiding and for editing, so a duplicate
-  // would make the two impossible to tell apart in either list. The row being
-  // edited is matched by kind + shipped reference, not by identity — the list
+  // Only the imam's own reminders are keyed by reference, so only they need a
+  // unique one. Shipped items carry an id and are free to share an attribution
+  // — two of them already do — and blocking a new saying merely because a
+  // shipped one credits the same scholar would be a nonsense restriction.
+  // The row being edited is matched by kind + key, not by identity: the list
   // below is rebuilt, so its objects are never the same ones as `row`.
   const isSelf = r => !!row && r.kind === row.kind && r.ref === row.ref;
   const clash = allReminders().some(r =>
-    !isSelf(r) && r.kind === kind && (r.item.reference || '') === reference);
+    r.custom && !isSelf(r) && r.kind === kind && (r.item.reference || '') === reference);
   if (clash) {
-    toast('A reminder with that reference already exists', true);
+    toast('One of your own reminders already uses that reference', true);
     return;
   }
 
@@ -1581,6 +1864,7 @@ async function init() {
     await loadRules();
     await loadContent();
     await loadBuiltins();
+    await loadSalah();
     render();
   } catch (e) {
     if (e.status === 401 || e.status === 403) {
